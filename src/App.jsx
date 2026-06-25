@@ -162,6 +162,8 @@ const PAGES = [
       { title: "Handwashing", url: "https://www.youtube.com/embed/7xYqa0FRNls" },
       { title: "Sick Employees", url: "https://www.youtube.com/embed/2sCP11oF-AA" },
       { title: "Temperatures", url: "https://www.youtube.com/embed/dQw4w9WgXcQ" },
+      { title: "Cooking", url: "https://www.youtube.com/embed/dQw4w9WgXcQ" },
+      { title: "Cleaning", url: "https://www.youtube.com/embed/dQw4w9WgXcQ" },
     ],
   },
   {

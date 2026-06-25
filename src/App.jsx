@@ -1782,7 +1782,7 @@ function PageContent({ page, isCompleted, onComplete, progress, user }) {
             )}
           </div>
         </div>
-        <p style={{ fontSize: 19, color: "#bbb", lineHeight: 1.75, fontFamily: "Calibri, sans-serif", margin: 0, whiteSpace: "pre-line" }}>{page.description}</p>
+        <p style={{ fontSize: 19, color: "#bbb", lineHeight: 1.75, fontFamily: "Calibri, sans-serif", margin: 0, whiteSpace: "pre-line", textAlign: "justify" }}>{page.description}</p>
       </div>
 
       {/* Divider */}
@@ -1797,7 +1797,7 @@ function PageContent({ page, isCompleted, onComplete, progress, user }) {
               Sterling Restaurants
             </h2>
           </div>
-          <p style={{ fontSize: 19, color: "#bbb", lineHeight: 1.75, fontFamily: "Calibri, sans-serif", margin: 0 }}>
+          <p style={{ fontSize: 19, color: "#bbb", lineHeight: 1.75, fontFamily: "Calibri, sans-serif", margin: 0, textAlign: "justify" }}>
             Sterling Restaurants, LLC is the largest franchisee of Moe's Southwest Grill, operating nearly 90 locations across the Eastern United States. In July 2009, CEO Mark Monroe founded Sterling Restaurants and acquired the very first Moe's location on earth! Peach Tree – store 101 in Atlanta, GA. In 2016 Sterling was named "Franchisee of the Year" by the International Franchise Association. Sterling then embarked on a major acquisition strategy in 2017 and 2018, purchasing over 30 additional locations across Florida, Georgia, and the Carolinas. In 2023, Sterling invested heavily in store modernizations, revamping beverage stations with slushies and lemonades and driving double-digit sales comps. Sterling has been named Franchise of the Year from Go To Food Brands for the last 8 years. Today, Sterling owns and operates nearly 90 Moe's locations across Alabama, Florida, Georgia, New Jersey, New York, North Carolina, and South Carolina.
           </p>
         </section>

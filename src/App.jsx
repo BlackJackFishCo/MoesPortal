@@ -1521,11 +1521,11 @@ function ProgressBar({ progress, activePage, onNavigate }) {
                 </div>
                 {/* label */}
                 <div style={{
-                  fontSize: 11, fontWeight: isActive ? 700 : 500,
+                  fontSize: 33, fontWeight: isActive ? 700 : 500,
                   color: isActive ? MOE.orange : isDone ? MOE.teal : "#888",
                   fontFamily: "Calibri, sans-serif", textAlign: "center",
                   textTransform: "uppercase", letterSpacing: 0.5,
-                  maxWidth: 80, lineHeight: 1.2,
+                  maxWidth: 120, lineHeight: 1.2,
                 }}>
                   {page.label}
                 </div>
@@ -1552,7 +1552,7 @@ function ProgressBar({ progress, activePage, onNavigate }) {
                   ★
                 </div>
                 <div style={{
-                  fontSize: 11, fontWeight: isActive ? 700 : 500,
+                  fontSize: 33, fontWeight: isActive ? 700 : 500,
                   color: isActive ? MOE.orange : "#888",
                   fontFamily: "Calibri, sans-serif", textAlign: "center",
                   textTransform: "uppercase", letterSpacing: 0.5,
@@ -1575,7 +1575,7 @@ function ProgressBar({ progress, activePage, onNavigate }) {
             boxShadow: pct > 0 ? `0 0 8px ${MOE.orange}66` : "none",
           }} />
         </div>
-        <div style={{ fontSize: 14, fontWeight: 700, color: pct === 100 ? MOE.teal : MOE.orange, fontFamily: "Calibri, sans-serif", whiteSpace: "nowrap", minWidth: 80, textAlign: "right" }}>
+        <div style={{ fontSize: 42, fontWeight: 700, color: pct === 100 ? MOE.teal : MOE.orange, fontFamily: "Calibri, sans-serif", whiteSpace: "nowrap", minWidth: 80, textAlign: "right" }}>
           {pct === 100 ? "✓ Complete!" : `${pct}% Done`}
         </div>
       </div>

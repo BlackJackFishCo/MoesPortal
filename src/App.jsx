@@ -379,7 +379,7 @@ const QUIZ_QUESTIONS = [
   {
     id: 15,
     topic: 4,
-    question: "What is the minimum internal temperature for cooking ground meat per FL DOH guidelines?",
+    question: "What is the minimum internal temperature for cooking ground meat per DOH guidelines?",
     options: ["145°F", "150°F", "155°F", "165°F"],
     correct: 2,
   },
@@ -1811,8 +1811,8 @@ function PageContent({ page, isCompleted, onComplete, progress, user }) {
         <PositionTracker user={user} onPositionPass={handlePositionPass} />
       )}
 
-      {/* PDFs - only shown when pdfs exist and not on history or orientation page */}
-      {page.pdfs.length > 0 && page.id !== "history" && page.id !== "orientation" && (
+      {/* PDFs - only shown when pdfs exist and not on history, orientation, or training page */}
+      {page.pdfs.length > 0 && page.id !== "history" && page.id !== "orientation" && page.id !== "training" && (
         <section style={{ marginBottom: 40 }}>
           <h2 style={{ fontSize: 24, fontWeight: 700, color: "#ffffff", fontFamily: "Calibri, sans-serif", marginBottom: 18, display: "flex", alignItems: "center", gap: 8, textTransform: "uppercase", letterSpacing: 1 }}>
             Documents
@@ -1865,7 +1865,7 @@ function PageContent({ page, isCompleted, onComplete, progress, user }) {
         </section>
       )}
 
-      <section style={{ marginBottom: 40 }}>
+      {page.id !== "training" && <section style={{ marginBottom: 40 }}>
         <h2 style={{ fontSize: 24, fontWeight: 700, color: "#ffffff", fontFamily: "Calibri, sans-serif", marginBottom: 18, display: "flex", alignItems: "center", gap: 8, textTransform: "uppercase", letterSpacing: 1 }}>
           {page.id === "orientation" ? "Orientation Videos" : page.id === "food-safety" ? "Food Safety Videos" : page.id === "history" ? "Welcome To Moe's Videos" : "Training Videos"}
         </h2>
@@ -1908,7 +1908,7 @@ function PageContent({ page, isCompleted, onComplete, progress, user }) {
             />
           </div>
         )}
-      </section>
+      </section>}
 
       {/* PDFs for orientation - shown after videos */}
       {page.pdfs.length > 0 && page.id === "orientation" && (

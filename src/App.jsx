@@ -1508,11 +1508,11 @@ function ProgressBar({ progress, activePage, onNavigate }) {
               >
                 {/* circle */}
                 <div style={{
-                  width: 40, height: 40, borderRadius: "50%",
+                  width: "clamp(28px, 6vw, 40px)", height: "clamp(28px, 6vw, 40px)", borderRadius: "50%",
                   background: circleColor,
                   border: `3px solid ${borderColor}`,
                   display: "flex", alignItems: "center", justifyContent: "center",
-                  fontSize: 16, fontWeight: 800, color: "#fff",
+                  fontSize: "clamp(11px, 2.5vw, 16px)", fontWeight: 800, color: "#fff",
                   fontFamily: "Calibri, sans-serif",
                   boxShadow: isActive ? `0 0 14px ${MOE.orange}88` : isDone ? `0 0 10px ${MOE.teal}66` : "none",
                   transition: "all 0.3s",
@@ -1521,7 +1521,7 @@ function ProgressBar({ progress, activePage, onNavigate }) {
                 </div>
                 {/* label */}
                 <div style={{
-                  fontSize: 16, fontWeight: isActive ? 700 : 500,
+                  fontSize: "clamp(9px, 2.5vw, 16px)", fontWeight: isActive ? 700 : 500,
                   color: isActive ? MOE.orange : isDone ? MOE.teal : "#888",
                   fontFamily: "Calibri, sans-serif", textAlign: "center",
                   textTransform: "uppercase", letterSpacing: 0.5,
@@ -1541,18 +1541,18 @@ function ProgressBar({ progress, activePage, onNavigate }) {
                 style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 6, cursor: "pointer", zIndex: 2, flex: 1 }}
               >
                 <div style={{
-                  width: 40, height: 40, borderRadius: "50%",
+                  width: "clamp(28px, 6vw, 40px)", height: "clamp(28px, 6vw, 40px)", borderRadius: "50%",
                   background: isActive ? MOE.orange : "#2a2a2a",
                   border: `3px solid ${isActive ? MOE.orange : "#555"}`,
                   display: "flex", alignItems: "center", justifyContent: "center",
-                  fontSize: 18, color: "#fff",
+                  fontSize: "clamp(12px, 3vw, 18px)", color: "#fff",
                   boxShadow: isActive ? `0 0 14px ${MOE.orange}88` : "none",
                   transition: "all 0.3s",
                 }}>
                   ★
                 </div>
                 <div style={{
-                  fontSize: 16, fontWeight: isActive ? 700 : 500,
+                  fontSize: "clamp(9px, 2.5vw, 16px)", fontWeight: isActive ? 700 : 500,
                   color: isActive ? MOE.orange : "#888",
                   fontFamily: "Calibri, sans-serif", textAlign: "center",
                   textTransform: "uppercase", letterSpacing: 0.5,
@@ -1648,13 +1648,13 @@ function PositionTracker({ user, onPositionPass }) {
             const done = !!posProg[pos.id];
             return (
               <div key={pos.id} onClick={() => setActivePos(activePos === pos.id ? null : pos.id)}
-                style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 6, cursor: "pointer", minWidth: 70 }}>
+                style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 6, cursor: "pointer", minWidth: 50 }}>
                 <div style={{
-                  width: 108, height: 108, borderRadius: "50%",
+                  width: "clamp(64px, 12vw, 108px)", height: "clamp(64px, 12vw, 108px)", borderRadius: "50%",
                   background: done ? `${pos.color}22` : "#111",
                   border: `4px solid ${done ? pos.color : activePos === pos.id ? "#888" : "#333"}`,
                   display: "flex", alignItems: "center", justifyContent: "center",
-                  fontSize: done ? 56 : 48, transition: "all 0.2s",
+                  fontSize: "clamp(28px, 5vw, 48px)", transition: "all 0.2s",
                   boxShadow: done ? `0 0 28px ${pos.color}55` : activePos === pos.id ? "0 0 20px #44444466" : "none",
                 }}>
                   {done ? "⭐" : <span style={{ fontSize: 44 }}>{pos.icon}</span>}
@@ -1761,7 +1761,7 @@ function PageContent({ page, isCompleted, onComplete, progress, user }) {
   }
 
   return (
-    <div style={{ maxWidth: 900, margin: "0 auto", padding: "40px 32px" }}>
+    <div style={{ maxWidth: 900, margin: "0 auto", padding: "24px 16px" }}>
       {/* Header */}
       <div style={{ marginBottom: 36 }}>
         {/* Musicians Outlaws banner - History only */}

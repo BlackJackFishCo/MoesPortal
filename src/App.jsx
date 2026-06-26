@@ -123,7 +123,7 @@ const PAGES = [
     description: "Welcome to Moe's! From the second you walk into a Moe's, you'll notice there's something different. You actually feel welcome. Ever since employees at the first location in Atlanta, GA in 2000 shouted \"Welcome to Moe's!\" – that phrase has embodied our entire culture. Everybody is welcome at Moe's, including garage band superstars. Founded in Atlanta in 2000, Moe's now operates over 500 franchise locations across the country.",
     pdfs: [],
     videos: [
-      { title: "Welcome to Moe's", url: "https://www.youtube.com/embed/dQw4w9WgXcQ" },
+      { title: "Welcome to Moe's", url: "https://www.youtube.com/embed/AxbcC4taAps" },
     ],
   },
   {
@@ -140,7 +140,7 @@ const PAGES = [
     ],
     videos: [
       { title: "Orientation Overview", url: "https://www.youtube.com/embed/dQw4w9WgXcQ" },
-      { title: "Meet Your Team", url: "https://www.youtube.com/embed/dQw4w9WgXcQ" },
+      { title: "Meet CEO Mark Monroe", url: "https://www.youtube.com/embed/DEbbqyHXiJA" },
     ],
   },
   {
@@ -307,7 +307,7 @@ const QUIZ_QUESTIONS = [
     id: 5,
     topic: 1,
     question: "Bare hand contact with ready-to-eat foods is:",
-    options: ["Allowed if hands are clean", "Allowed with a single glove", "Prohibited — gloves, deli tissues, or utensils must be used", "Allowed for brief contact only"],
+    options: ["Allowed if hands are clean", "Allowed with a single glove", "Prohibited - Gloves must be worn", "Allowed for brief contact only"],
     correct: 2,
   },
   {
@@ -1801,7 +1801,7 @@ function PageContent({ page, isCompleted, onComplete, progress, user }) {
             </h2>
           </div>
           <p style={{ fontSize: 19, color: "#bbb", lineHeight: 1.75, fontFamily: "Calibri, sans-serif", margin: 0, textAlign: "justify" }}>
-            Sterling Restaurants, LLC is the largest franchisee of Moe's Southwest Grill, operating nearly 90 locations across the Eastern United States. In July 2009, CEO Mark Monroe founded Sterling Restaurants and acquired the very first Moe's location on earth! Peach Tree – store 101 in Atlanta, GA. In 2016 Sterling was named "Franchisee of the Year" by the International Franchise Association. Sterling then embarked on a major acquisition strategy in 2017 and 2018, purchasing over 30 additional locations across Florida, Georgia, and the Carolinas. In 2023, Sterling invested heavily in store modernizations, revamping beverage stations with slushies and lemonades and driving double-digit sales comps. Sterling has been named Franchise of the Year from Go To Food Brands for the last 8 years. Today, Sterling owns and operates nearly 90 Moe's locations across Alabama, Florida, Georgia, New Jersey, New York, North Carolina, and South Carolina.
+            Sterling Restaurants, LLC is the largest franchisee of Moe's Southwest Grill, operating nearly 90 locations across the Eastern United States. In July 2009, CEO Mark Monroe founded Sterling Restaurants and acquired the very first Moe's location on earth! Peach Tree – store 101 in Atlanta, GA. In 2016 Sterling was named "Franchisee of the Year" by the International Franchise Association. Sterling then embarked on a major acquisition strategy in 2017 and 2018, purchasing over 30 additional locations across Florida, Georgia, and the Carolinas. In 2023, Sterling invested heavily in store modernizations, revamping beverage stations with slushies and lemonades and driving double-digit sales comps. Sterling has been named Franchise of the Year from Go To Food Brands for the last 10 years. Today, Sterling owns and operates nearly 90 Moe's locations across Alabama, Florida, Georgia, New Jersey, New York, North Carolina, and South Carolina.
           </p>
         </section>
       )}

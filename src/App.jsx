@@ -1414,7 +1414,7 @@ function LoginScreen({ onLogin, onAdminClick }) {
           <div style={{ marginBottom: 14, display: "flex", justifyContent: "center" }}>
             <MoesLogo size={70} />
           </div>
-          <div style={{ fontSize: 34, fontWeight: 700, color: "#ffffff", letterSpacing: 2, textTransform: "uppercase", fontFamily: "Calibri, sans-serif" }}>Sterling Portal</div>
+          <div style={{ fontSize: 34, fontWeight: 700, color: "#ffffff", letterSpacing: 2, textTransform: "uppercase", fontFamily: "Calibri, sans-serif" }}>Jason Portal</div>
           <div style={{ fontSize: 18, color: "#aaa", marginTop: 8, fontFamily: "Calibri, sans-serif" }}>Enter your info to get started</div>
         </div>
 

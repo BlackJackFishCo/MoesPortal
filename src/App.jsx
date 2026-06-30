@@ -1932,6 +1932,21 @@ function PageContent({ page, isCompleted, onComplete, progress, user }) {
         </section>
       )}
 
+      {page.id === "orientation" && (
+        <section style={{ marginBottom: 40 }}>
+          <h2 style={{ fontSize: 24, fontWeight: 700, color: "#ffffff", fontFamily: "Calibri, sans-serif", marginBottom: 18, display: "flex", alignItems: "center", gap: 8, textTransform: "uppercase", letterSpacing: 1 }}>
+            Notes
+          </h2>
+          <ol style={{ margin: 0, paddingLeft: 24, display: "flex", flexDirection: "column", gap: 12 }}>
+            {Array.from({ length: 15 }, (_, i) => (
+              <li key={i} style={{ fontFamily: "Calibri, sans-serif", fontSize: 17, color: "#ffffff", lineHeight: 1.6 }}>
+                Text {i + 1}
+              </li>
+            ))}
+          </ol>
+        </section>
+      )}
+
       {page.id === "food-safety" && (
         <section style={{ marginBottom: 40 }}>
           <h2 style={{ fontSize: 24, fontWeight: 700, color: "#ffffff", fontFamily: "Calibri, sans-serif", marginBottom: 18, textTransform: "uppercase", letterSpacing: 1 }}>

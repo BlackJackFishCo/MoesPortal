@@ -123,7 +123,7 @@ const PAGES = [
     description: "Welcome to Moe's! From the second you walk into a Moe's, you'll notice there's something different. You actually feel welcome. Ever since employees at the first location in Atlanta, GA in 2000 shouted \"Welcome to Moe's!\" – that phrase has embodied our entire culture. Everybody is welcome at Moe's, including garage band superstars. Founded in Atlanta in 2000, Moe's now operates over 500 franchise locations across the country.",
     pdfs: [],
     videos: [
-      { title: "Welcome to Moe's", url: "https://www.youtube.com/embed/lkqeztHSwmM" },
+      { title: "Welcome to Moe's", url: "https://www.youtube.com/embed/h519HVEqmx0" },
     ],
   },
   {

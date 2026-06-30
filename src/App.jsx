@@ -171,7 +171,7 @@ const PAGES = [
     icon: "🌮",
     color: MOE.orange,
     alwaysAvailable: false,
-    description: "Station-by-station training covering the Hot, Cold, Swing, Ring Positions, Prep, and Catering. Complete the quiz after each section and have your manager verify you have mastered each position to become Sterling Certified and earn your Blue Nike Certification hat. This training material is always available for reference later.",
+    description: "Station-by-station training covering the Menu, Hot, Cold, Swing, Ring, and Station Prep positions. Complete the quiz after each section and have your manager verify you have mastered each position to become Sterling Certified and earn your Blue Nike Certification hat. This training material is always available for reference later.",
     pdfs: [
       { title: "Line Setup Guide", url: "#" },
       { title: "Recipe & Portion Standards", url: "#" },
@@ -368,6 +368,13 @@ const QUIZ_QUESTIONS = [
   {
     id: 6,
     topic: 2,
+    question: "To prevent cross-contamination, you should:",
+    options: ["Reuse the same cutting board for all items", "Change gloves and wash hands after working with raw proteins", "Rinse cutting boards with water between uses", "Only use one glove when handling raw meat"],
+    correct: 1,
+  },
+  {
+    id: 6,
+    topic: 2,
     question: "When storing raw proteins, where should they be placed relative to ready-to-eat foods?",
     options: ["On the top shelf for easy access", "On lower shelves below ready-to-eat foods", "Side by side on the same shelf", "In a separate cooler only"],
     correct: 1,
@@ -429,17 +436,19 @@ function getAllQuizResults() {
 
 // ─── Position Quiz Data ───────────────────────────────────────────────────────
 const POSITION_QUIZ_QUESTIONS = {
+  menu: [
+    { id: 1, question: "Question 1 — to be edited", options: ["Answer A", "Answer B", "Answer C", "Answer D"], correct: 0 },
+    { id: 2, question: "Question 2 — to be edited", options: ["Answer A", "Answer B", "Answer C", "Answer D"], correct: 0 },
+    { id: 3, question: "Question 3 — to be edited", options: ["Answer A", "Answer B", "Answer C", "Answer D"], correct: 0 },
+    { id: 4, question: "Question 4 — to be edited", options: ["Answer A", "Answer B", "Answer C", "Answer D"], correct: 0 },
+    { id: 5, question: "Question 5 — to be edited", options: ["Answer A", "Answer B", "Answer C", "Answer D"], correct: 0 },
+  ],
   hot: [
     { id: 1, question: "What is the minimum internal temperature for cooked chicken on the hot line?", options: ["145°F", "155°F", "165°F", "175°F"], correct: 2 },
     { id: 2, question: "How often should the hot line temperature be checked?", options: ["Every 4 hours", "Every 2 hours", "Once per shift", "Every hour"], correct: 1 },
     { id: 3, question: "What should you do if an item on the hot line drops below safe holding temperature?", options: ["Leave it and monitor", "Discard immediately", "Reheat to proper temp", "Move to cold station"], correct: 2 },
     { id: 4, question: "Which protein is cooked first thing in the morning on the hot station?", options: ["Steak", "Chicken", "Ground beef", "Tofu"], correct: 1 },
     { id: 5, question: "What is the correct order for building a Moe's burrito starting at the hot station?", options: ["Protein then rice", "Rice then protein", "Tortilla then protein", "Protein only"], correct: 0 },
-    { id: 6, question: "How should tongs be stored between uses on the hot line?", options: ["On the counter", "In a dry container", "In water at 135°F or above", "Hanging on a hook"], correct: 2 },
-    { id: 7, question: "What is the correct portion size for chicken in a burrito?", options: ["3 oz", "4 oz", "5 oz", "6 oz"], correct: 2 },
-    { id: 8, question: "When should you change gloves on the hot station?", options: ["Every 30 minutes", "After handling raw protein", "Only when dirty", "After each customer"], correct: 1 },
-    { id: 9, question: "What does FIFO stand for in food handling?", options: ["First In First Out", "Food In Food Out", "First Item First Order", "Fresh In Fresh Out"], correct: 0 },
-    { id: 10, question: "What should you do if you run low on a protein during a rush?", options: ["Skip it", "Notify the manager immediately", "Substitute another protein", "Close the station"], correct: 1 },
   ],
   cold: [
     { id: 1, question: "What is the maximum safe holding temperature for cold items on the line?", options: ["45°F", "41°F", "38°F", "50°F"], correct: 1 },
@@ -447,11 +456,6 @@ const POSITION_QUIZ_QUESTIONS = {
     { id: 3, question: "What is the correct portion for shredded cheese in a burrito?", options: ["1 oz", "1.5 oz", "2 oz", "2.5 oz"], correct: 1 },
     { id: 4, question: "How often should cold line temps be logged?", options: ["Once per shift", "Every 4 hours", "Every 2 hours", "Every hour"], correct: 2 },
     { id: 5, question: "Which item must be kept separate to prevent cross-contamination?", options: ["Cheese and sour cream", "Guacamole and salsa", "Raw jalapeños and cooked items", "Lettuce and pico"], correct: 2 },
-    { id: 6, question: "What should you do if pico de gallo looks discolored or smells off?", options: ["Continue using it", "Mix in fresh batch", "Discard and notify manager", "Add seasoning"], correct: 2 },
-    { id: 7, question: "How should guacamole be stored to prevent browning?", options: ["Exposed to air", "Covered with plastic wrap touching surface", "In a metal pan only", "No special storage needed"], correct: 1 },
-    { id: 8, question: "What is the correct layering order on the cold line?", options: ["Cheese, lettuce, salsas", "Salsas, cheese, lettuce", "Lettuce, salsas, cheese", "No required order"], correct: 0 },
-    { id: 9, question: "When must cold line items be discarded after preparation?", options: ["After 4 hours", "After 7 days", "Per item shelf life / manager guidelines", "After 24 hours"], correct: 2 },
-    { id: 10, question: "What is the first step when setting up the cold station?", options: ["Fill all containers", "Check and log temperatures", "Restock napkins", "Wipe down counter"], correct: 1 },
   ],
   swing: [
     { id: 1, question: "What is the primary role of the swing position?", options: ["Run the register only", "Support all stations as needed", "Manage dining room only", "Handle drive-through"], correct: 1 },
@@ -459,11 +463,6 @@ const POSITION_QUIZ_QUESTIONS = {
     { id: 3, question: "How should a swing person prioritize tasks during a rush?", options: ["Do one task at a time", "Assist the slowest station first", "Focus on speed, not quality", "Wait for instructions"], correct: 1 },
     { id: 4, question: "What is the swing position responsible for during non-rush periods?", options: ["Resting", "Stocking, cleaning, and prep", "Register only", "Drive-through only"], correct: 1 },
     { id: 5, question: "When the swing person is helping at the hot station, who watches the cold?", options: ["No one", "The manager", "Another designated team member", "The cashier"], correct: 2 },
-    { id: 6, question: "How should a swing person communicate station needs?", options: ["Yell across the line", "Text the manager", "Clearly and calmly notify the team lead", "Wait until break"], correct: 2 },
-    { id: 7, question: "What should a swing person do when dining room tables need bussing during a rush?", options: ["Ignore until rush is over", "Quickly clear and return to the line", "Ask a customer to help", "Stop all line duties"], correct: 1 },
-    { id: 8, question: "Which of the following is NOT a swing responsibility?", options: ["Restocking the line", "Approving timesheets", "Helping with expo", "Filling in on the line"], correct: 1 },
-    { id: 9, question: "How should handoffs between swing shifts be handled?", options: ["No handoff needed", "Verbal summary of station status to next person", "Written report only", "Manager handles it"], correct: 1 },
-    { id: 10, question: "What does 'staying in the weeds' mean on the line?", options: ["Hiding from work", "Being behind and overwhelmed during a rush", "Cleaning the prep area", "Working the cold station"], correct: 1 },
   ],
   ring: [
     { id: 1, question: "What is the first thing you should do when a guest approaches the register?", options: ["Start ringing items", "Greet them with 'Welcome to Moe's!'", "Ask for their name", "Look at the screen"], correct: 1 },
@@ -471,23 +470,6 @@ const POSITION_QUIZ_QUESTIONS = {
     { id: 3, question: "What do you do if the register drawer is short at the end of a shift?", options: ["Ignore it", "Take money from tips", "Report it to the manager immediately", "Add your own money"], correct: 2 },
     { id: 4, question: "Which payment method requires a manager override?", options: ["Cash", "Credit card", "Gift card with zero balance", "Mobile pay"], correct: 2 },
     { id: 5, question: "How do you process a Moe's Rewards transaction?", options: ["Skip it", "Ask for phone number or scan app", "Enter manually in the system", "No special process needed"], correct: 1 },
-    { id: 6, question: "What should you say when giving change back to a guest?", options: ["Nothing", "Count back the change aloud", "Just hand it over quickly", "Tell them the total again"], correct: 1 },
-    { id: 7, question: "When is it appropriate to void a transaction?", options: ["Whenever you want", "Only with manager approval", "When the line is long", "Never"], correct: 1 },
-    { id: 8, question: "What is upselling at the register?", options: ["Charging more than the menu price", "Suggesting add-ons like guacamole or a drink", "Selling merchandise", "Rushing the guest"], correct: 1 },
-    { id: 9, question: "How should the register area be kept during a shift?", options: ["Clean, organized, and free of clutter", "Stocked with personal items", "Messy is fine during a rush", "No requirements"], correct: 0 },
-    { id: 10, question: "What should you do if a guest's credit card is declined?", options: ["Announce it loudly", "Discreetly inform the guest and offer alternatives", "Refuse service", "Try swiping multiple times"], correct: 1 },
-  ],
-  catering: [
-    { id: 1, question: "What is the minimum notice required to accept a catering order?", options: ["Same day", "24 hours", "48 hours", "1 week"], correct: 2 },
-    { id: 2, question: "How should catering orders be stored before pickup?", options: ["On the line", "In labeled, covered containers in a safe temp zone", "On the counter", "No special storage needed"], correct: 1 },
-    { id: 3, question: "What information must be confirmed on every catering order?", options: ["Guest's favorite food", "Order details, pickup time, and contact name", "Payment method only", "Number of napkins"], correct: 1 },
-    { id: 4, question: "Which catering item must always be packaged separately?", options: ["Rice", "Chips", "Hot proteins from cold toppings", "Tortillas"], correct: 2 },
-    { id: 5, question: "How should catering packaging be labeled?", options: ["No labels needed", "Order name, date, and contents", "Just the order number", "Guest phone number only"], correct: 1 },
-    { id: 6, question: "What should you do if a catering order has an error?", options: ["Hope the guest doesn't notice", "Notify the manager immediately and correct it", "Send it anyway", "Remake only if asked"], correct: 1 },
-    { id: 7, question: "What temperature must hot catering items be held at for transport?", options: ["Above 100°F", "Above 135°F", "Above 120°F", "Any temperature"], correct: 1 },
-    { id: 8, question: "How many servings does a standard Moe's catering tray feed?", options: ["5–8", "10–15", "20–25", "30+"], correct: 2 },
-    { id: 9, question: "Who is responsible for confirming a catering order is correct before it leaves?", options: ["The guest", "The manager on duty", "The catering team member who packed it", "No one"], correct: 1 },
-    { id: 10, question: "What is the proper way to handle a last-minute catering addition?", options: ["Refuse it", "Accept without telling anyone", "Notify the manager and accommodate if possible", "Add random items"], correct: 2 },
   ],
   prep: [
     { id: 1, question: "What does 'mise en place' mean in a kitchen context?", options: ["Clean as you go", "Everything in its place / prepped and ready", "First in first out", "Cook to order"], correct: 1 },
@@ -495,11 +477,6 @@ const POSITION_QUIZ_QUESTIONS = {
     { id: 3, question: "How should raw proteins be stored in the walk-in cooler?", options: ["On the top shelf", "Below ready-to-eat foods", "Next to produce", "No specific location"], correct: 1 },
     { id: 4, question: "How often should prep lists be reviewed?", options: ["Weekly", "At the start of every shift", "Monthly", "Only when running low"], correct: 1 },
     { id: 5, question: "What should you do before beginning any food prep?", options: ["Start immediately", "Wash hands and put on gloves", "Check your phone", "Grab a drink"], correct: 1 },
-    { id: 6, question: "Which cutting board color is designated for raw proteins at Moe's?", options: ["Green", "White", "Red", "Yellow"], correct: 2 },
-    { id: 7, question: "What is the correct rice-to-water ratio for Moe's cilantro lime rice?", options: ["1:1", "1:1.5", "1:2", "1:2.5"], correct: 2 },
-    { id: 8, question: "How should prep containers be labeled?", options: ["Item name only", "Item name, date, and time", "No label needed", "Employee initials only"], correct: 1 },
-    { id: 9, question: "What is the maximum time food can sit in the temperature danger zone (41°F–135°F)?", options: ["1 hour", "2 hours", "4 hours", "8 hours"], correct: 2 },
-    { id: 10, question: "When should prep equipment be sanitized?", options: ["At the end of the day only", "Between each different food item and after each use", "Once per shift", "Only when visibly dirty"], correct: 1 },
   ],
 };
 
@@ -607,7 +584,7 @@ function PositionQuiz({ user, posId, posColor, posLabel, onPass }) {
   return (
     <div style={{ marginTop: 16 }}>
       <div style={{ background: "#1A1A1A", border: `2px solid ${posColor}`, borderRadius: 12, padding: "20px 24px", marginBottom: 16 }}>
-        <div style={{ fontSize: 20, fontWeight: 800, color: "#fff", textTransform: "uppercase", letterSpacing: 1, marginBottom: 4 }}>{posId === "catering" ? `${posLabel} Quiz` : `${posLabel} Station Quiz`}</div>
+        <div style={{ fontSize: 20, fontWeight: 800, color: "#fff", textTransform: "uppercase", letterSpacing: 1, marginBottom: 4 }}>{posId === "menu" ? `${posLabel} Quiz` : `${posLabel} Station Quiz`}</div>
         <div style={{ fontSize: 14, color: "#aaa" }}>{questions.length} questions · 70% required to pass · Must pass to earn certification</div>
         <div style={{ height: 2, background: `linear-gradient(90deg, ${posColor}, transparent)`, marginTop: 14 }} />
       </div>
@@ -1740,20 +1717,20 @@ function ProgressBar({ progress, activePage, onNavigate }) {
 
 // ─── Position Training Data ───────────────────────────────────────────────────
 const POSITIONS = [
+  { id: "menu",     label: "Menu",     icon: "🌯", color: "#8B4513" },
   { id: "hot",      label: "Hot",      icon: "🔥", color: "#E8541A" },
   { id: "cold",     label: "Cold",     icon: "❄️",  color: "#3AB8A8" },
   { id: "swing",    label: "Swing",    icon: "🔄",  color: "#9B59B6" },
   { id: "ring",     label: "Ring",     icon: "💵",  color: "#F1C40F" },
-  { id: "prep",     label: "Prep",     icon: "🔪",  color: "#27AE60" },
-  { id: "catering", label: "Catering", icon: "🚐",  color: "#E67E22" },
+  { id: "prep",     label: "Station Prep", icon: "🔪",  color: "#27AE60" },
 ];
 
 const POSITION_VIDEOS = {
+  menu:     [{ title: "Menu Overview",               url: "https://www.youtube.com/embed/dQw4w9WgXcQ" }, { title: "Menu Deep Dive",                url: "https://www.youtube.com/embed/dQw4w9WgXcQ" }],
   hot:      [{ title: "Hot Station Overview",        url: "https://www.youtube.com/embed/dQw4w9WgXcQ" }, { title: "Hot Station Deep Dive",         url: "https://www.youtube.com/embed/dQw4w9WgXcQ" }],
   cold:     [{ title: "Cold Station Overview",       url: "https://www.youtube.com/embed/dQw4w9WgXcQ" }, { title: "Cold Station Deep Dive",        url: "https://www.youtube.com/embed/dQw4w9WgXcQ" }],
   swing:    [{ title: "Swing Position Overview",     url: "https://www.youtube.com/embed/dQw4w9WgXcQ" }, { title: "Swing Position Deep Dive",      url: "https://www.youtube.com/embed/dQw4w9WgXcQ" }],
   ring:     [{ title: "Ring / Cashier Overview",     url: "https://www.youtube.com/embed/4vQev6t8ZmA" }, { title: "Ring / Cashier Deep Dive",      url: "https://www.youtube.com/embed/dQw4w9WgXcQ" }],
-  catering: [{ title: "Catering Overview",   url: "https://www.youtube.com/embed/dQw4w9WgXcQ" }, { title: "Catering Deep Dive",    url: "https://www.youtube.com/embed/dQw4w9WgXcQ" }],
   prep:     [{ title: "Prep Station Overview",       url: "https://www.youtube.com/embed/dQw4w9WgXcQ" }, { title: "Prep Station Deep Dive",        url: "https://www.youtube.com/embed/dQw4w9WgXcQ" }],
 };
 
@@ -1846,7 +1823,7 @@ function PositionTracker({ user, onPositionPass }) {
               <div style={{ fontSize: 28 }}>{pos.icon}</div>
               <div>
                 <div style={{ fontSize: 20, fontWeight: 800, color: pos.color, fontFamily: "Calibri, sans-serif", textTransform: "uppercase", letterSpacing: 1 }}>
-                  {pos.id === "catering" ? pos.label : `${pos.label} Station`}
+                  {pos.id === "menu" ? pos.label : `${pos.label} Station`}
                 </div>
                 <div style={{ fontSize: 14, color: "#888", fontFamily: "Calibri, sans-serif" }}>
                   {done ? "✅ Certified" : "Watch the training videos below, then pass the quiz to earn certification"}
@@ -1906,12 +1883,7 @@ function PageContent({ page, isCompleted, onComplete, progress, user }) {
     setPosPassCount(c => c + 1);
   }
 
-  useEffect(() => {
-    if (page.id === "training" && !isCompleted) {
-      const allPassed = POSITIONS.every(p => getPosQuizResult(user?.id, p.id)?.passed);
-      if (allPassed) onComplete(page.id);
-    }
-  }, [posPassCount]);
+  // Position quizzes are optional — completing all is not required to advance
 
   function handleFoodSafetyPass() {
     setQuizPassed(true);

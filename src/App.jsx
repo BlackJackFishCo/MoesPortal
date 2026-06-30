@@ -1795,7 +1795,7 @@ function PageContent({ page, isCompleted, onComplete, progress, user }) {
       {page.id === "history" && (
         <section style={{ marginBottom: 40 }}>
           <div style={{ display: "flex", alignItems: "center", gap: 18, marginBottom: 16 }}>
-            <img src={STERLING_LOGO} alt="Sterling Restaurants" style={{ height: 72, width: "auto", objectFit: "contain" }} />
+            <img src={STERLING_LOGO} alt="Sterling Restaurants" style={{ width: 72, height: 72, objectFit: "contain", display: "block", borderRadius: 8, background: "#fff", padding: 3 }} />
             <h2 style={{ fontSize: "clamp(22px, 5vw, 42px)", fontWeight: 800, color: "#ffffff", fontFamily: "Calibri, sans-serif", margin: 0, textTransform: "uppercase", letterSpacing: 2 }}>
               Sterling Restaurants
             </h2>

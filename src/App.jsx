@@ -1599,7 +1599,7 @@ const POSITION_VIDEOS = {
   hot:      [{ title: "Hot Station Overview",        url: "https://www.youtube.com/embed/dQw4w9WgXcQ" }, { title: "Hot Station Deep Dive",         url: "https://www.youtube.com/embed/dQw4w9WgXcQ" }],
   cold:     [{ title: "Cold Station Overview",       url: "https://www.youtube.com/embed/dQw4w9WgXcQ" }, { title: "Cold Station Deep Dive",        url: "https://www.youtube.com/embed/dQw4w9WgXcQ" }],
   swing:    [{ title: "Swing Position Overview",     url: "https://www.youtube.com/embed/dQw4w9WgXcQ" }, { title: "Swing Position Deep Dive",      url: "https://www.youtube.com/embed/dQw4w9WgXcQ" }],
-  ring:     [{ title: "Ring / Cashier Overview",     url: "https://www.youtube.com/embed/dQw4w9WgXcQ" }, { title: "Ring / Cashier Deep Dive",      url: "https://www.youtube.com/embed/dQw4w9WgXcQ" }],
+  ring:     [{ title: "Ring / Cashier Overview",     url: "https://www.youtube.com/embed/4vQev6t8ZmA" }, { title: "Ring / Cashier Deep Dive",      url: "https://www.youtube.com/embed/dQw4w9WgXcQ" }],
   catering: [{ title: "Catering Overview",   url: "https://www.youtube.com/embed/dQw4w9WgXcQ" }, { title: "Catering Deep Dive",    url: "https://www.youtube.com/embed/dQw4w9WgXcQ" }],
   prep:     [{ title: "Prep Station Overview",       url: "https://www.youtube.com/embed/dQw4w9WgXcQ" }, { title: "Prep Station Deep Dive",        url: "https://www.youtube.com/embed/dQw4w9WgXcQ" }],
 };

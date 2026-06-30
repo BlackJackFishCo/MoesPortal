@@ -123,7 +123,7 @@ const PAGES = [
     description: "Welcome to Moe's! From the second you walk into a Moe's, you'll notice there's something different. You actually feel welcome. Ever since employees at the first location in Atlanta, GA in 2000 shouted \"Welcome to Moe's!\" – that phrase has embodied our entire culture. Everybody is welcome at Moe's, including garage band superstars. Founded in Atlanta in 2000, Moe's now operates over 500 franchise locations across the country.",
     pdfs: [],
     videos: [
-      { title: "Welcome to Moe's", url: "https://www.youtube.com/embed/AxbcC4taAps" },
+      { title: "Welcome to Moe's", url: "https://www.youtube.com/embed/lkqeztHSwmM" },
     ],
   },
   {
@@ -1774,15 +1774,6 @@ function PageContent({ page, isCompleted, onComplete, progress, user }) {
         {page.id === "history" && (
           <div style={{ textAlign: "center", marginBottom: 20 }}>
             <div style={{ fontSize: "clamp(32px, 6vw, 56px)", fontWeight: 800, color: MOE.orange, fontFamily: "Calibri, sans-serif", textTransform: "uppercase", letterSpacing: 3 }}>Welcome to Moe's!</div>
-            <div style={{ position: "relative", paddingTop: "56.25%", borderRadius: 12, overflow: "hidden", marginTop: 18, boxShadow: "0 4px 24px rgba(0,0,0,0.5)" }}>
-              <iframe
-                src="https://www.youtube.com/embed/lkqeztHSwmM"
-                title="Welcome to Moe's"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowFullScreen
-                style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "100%", border: "none" }}
-              />
-            </div>
           </div>
         )}
         <div style={{ display: "flex", alignItems: "center", gap: 14, marginBottom: 14 }}>

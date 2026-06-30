@@ -1883,7 +1883,12 @@ function PageContent({ page, isCompleted, onComplete, progress, user }) {
     setPosPassCount(c => c + 1);
   }
 
-  // Position quizzes are optional — completing all is not required to advance
+  useEffect(() => {
+    if (page.id === "training" && !isCompleted) {
+      const allPassed = POSITIONS.every(p => getPosQuizResult(user?.id, p.id)?.passed);
+      if (allPassed) onComplete(page.id);
+    }
+  }, [posPassCount]);
 
   function handleFoodSafetyPass() {
     setQuizPassed(true);

@@ -1009,9 +1009,9 @@ function AdminPanel({ onExit }) {
   );
 
   return (
-    <div style={{ minHeight: "100vh", background: "#000", fontFamily: "Calibri, sans-serif" }}>
+    <div style={{ height: "100vh", background: "#000", fontFamily: "Calibri, sans-serif", display: "flex", flexDirection: "column", overflow: "hidden" }}>
       {/* Admin Nav */}
-      <div style={{ background: "#1A1A1A", borderBottom: `3px solid ${MOE.orange}`, padding: "10px 16px" }}>
+      <div style={{ background: "#1A1A1A", borderBottom: `3px solid ${MOE.orange}`, padding: "10px 16px", flexShrink: 0 }}>
         <div style={{ maxWidth: 1100, margin: "0 auto", display: "flex", alignItems: "center", justifyContent: "space-between", flexWrap: "wrap", gap: 8 }}>
           <div style={{ display: "flex", alignItems: "center", gap: 10, flexWrap: "wrap" }}>
             <div style={{ fontSize: 18, fontWeight: 800, color: MOE.orange, textTransform: "uppercase", letterSpacing: 1 }}>⚙ Admin Panel</div>
@@ -1025,7 +1025,7 @@ function AdminPanel({ onExit }) {
       </div>
 
       {/* Tabs */}
-      <div style={{ background: "#111", borderBottom: "1px solid #222", padding: "0 8px", overflowX: "auto", WebkitOverflowScrolling: "touch" }}>
+      <div style={{ background: "#111", borderBottom: "1px solid #222", padding: "0 8px", overflowX: "auto", WebkitOverflowScrolling: "touch", flexShrink: 0 }}>
         <div style={{ maxWidth: 1100, margin: "0 auto", display: "flex", gap: 0, minWidth: "max-content" }}>
           {["users", "reports", "quiz"].map(tab => (
             <button key={tab} onClick={() => setActiveTab(tab)} style={{ background: activeTab === tab ? MOE.orange : "transparent", color: activeTab === tab ? "#fff" : "#888", border: "none", padding: "12px 16px", fontSize: 13, fontWeight: 700, cursor: "pointer", fontFamily: "Calibri, sans-serif", textTransform: "uppercase", letterSpacing: 0.5, borderBottom: activeTab === tab ? `3px solid ${MOE.orange}` : "3px solid transparent", whiteSpace: "nowrap" }}>
@@ -1035,6 +1035,7 @@ function AdminPanel({ onExit }) {
         </div>
       </div>
 
+      <div style={{ flex: 1, overflowY: "auto", overflowX: "hidden" }}>
       <div style={{ maxWidth: 1100, margin: "0 auto", padding: "20px 16px" }}>
         {resetMsg && <div style={{ background: "#0D2B22", border: `1.5px solid ${MOE.teal}`, color: MOE.teal, borderRadius: 8, padding: "12px 18px", fontSize: 16, marginBottom: 20 }}>✓ {resetMsg}</div>}
 
@@ -1373,6 +1374,7 @@ function AdminPanel({ onExit }) {
             )}
           </>);
         })()}
+      </div>
       </div>
     </div>
   );

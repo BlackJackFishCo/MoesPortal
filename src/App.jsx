@@ -1009,9 +1009,9 @@ function AdminPanel({ onExit }) {
   );
 
   return (
-    <div style={{ height: "100vh", background: "#000", fontFamily: "Calibri, sans-serif", display: "flex", flexDirection: "column", overflow: "hidden" }}>
+    <div style={{ minHeight: "100vh", background: "#000", fontFamily: "Calibri, sans-serif" }}>
       {/* Admin Nav */}
-      <div style={{ background: "#1A1A1A", borderBottom: `3px solid ${MOE.orange}`, padding: "10px 16px", flexShrink: 0 }}>
+      <div style={{ background: "#1A1A1A", borderBottom: `3px solid ${MOE.orange}`, padding: "10px 16px" }}>
         <div style={{ maxWidth: 1100, margin: "0 auto", display: "flex", alignItems: "center", justifyContent: "space-between", flexWrap: "wrap", gap: 8 }}>
           <div style={{ display: "flex", alignItems: "center", gap: 10, flexWrap: "wrap" }}>
             <div style={{ fontSize: 18, fontWeight: 800, color: MOE.orange, textTransform: "uppercase", letterSpacing: 1 }}>⚙ Admin Panel</div>
@@ -1025,7 +1025,7 @@ function AdminPanel({ onExit }) {
       </div>
 
       {/* Tabs */}
-      <div style={{ background: "#111", borderBottom: "1px solid #222", padding: "0 8px", overflowX: "auto", WebkitOverflowScrolling: "touch", flexShrink: 0 }}>
+      <div style={{ background: "#111", borderBottom: "1px solid #222", padding: "0 8px", overflowX: "auto", WebkitOverflowScrolling: "touch" }}>
         <div style={{ maxWidth: 1100, margin: "0 auto", display: "flex", gap: 0, minWidth: "max-content" }}>
           {["users", "reports", "quiz"].map(tab => (
             <button key={tab} onClick={() => setActiveTab(tab)} style={{ background: activeTab === tab ? MOE.orange : "transparent", color: activeTab === tab ? "#fff" : "#888", border: "none", padding: "12px 16px", fontSize: 13, fontWeight: 700, cursor: "pointer", fontFamily: "Calibri, sans-serif", textTransform: "uppercase", letterSpacing: 0.5, borderBottom: activeTab === tab ? `3px solid ${MOE.orange}` : "3px solid transparent", whiteSpace: "nowrap" }}>
@@ -1035,7 +1035,6 @@ function AdminPanel({ onExit }) {
         </div>
       </div>
 
-      <div style={{ flex: 1, overflowY: "auto", overflowX: "hidden" }}>
       <div style={{ maxWidth: 1100, margin: "0 auto", padding: "20px 16px" }}>
         {resetMsg && <div style={{ background: "#0D2B22", border: `1.5px solid ${MOE.teal}`, color: MOE.teal, borderRadius: 8, padding: "12px 18px", fontSize: 16, marginBottom: 20 }}>✓ {resetMsg}</div>}
 
@@ -1096,13 +1095,17 @@ function AdminPanel({ onExit }) {
           {filtered.length === 0 ? (
             <div style={{ color: "#555", fontSize: 18, textAlign: "center", padding: "60px 0" }}>No employees found. They appear here after signing in for the first time.</div>
           ) : (
-            <div style={{ overflowX: "auto", WebkitOverflowScrolling: "touch" }}>
-              <table style={{ width: "100%", borderCollapse: "collapse", fontSize: 14, minWidth: 600 }}>
+            <div>
+              <table style={{ width: "100%", borderCollapse: "collapse", fontSize: 13, tableLayout: "fixed" }}>
                 <thead>
                   <tr style={{ background: "#1A1A1A" }}>
-                    {["Employee", "Store", "Email", "Progress", "Modules", "Joined", ...ordered.map(p => p.label), "Actions"].map(h => (
-                      <th key={h} style={{ border: "1px solid #333", padding: "10px 14px", color: "#ccc", fontWeight: 700, textAlign: "left", fontFamily: "Calibri, sans-serif", whiteSpace: "nowrap" }}>{h}</th>
+                    <th style={{ border: "1px solid #333", padding: "8px 10px", color: "#ccc", fontWeight: 700, textAlign: "left", whiteSpace: "nowrap", width: "18%" }}>Employee</th>
+                    <th style={{ border: "1px solid #333", padding: "8px 10px", color: "#ccc", fontWeight: 700, textAlign: "left", whiteSpace: "nowrap", width: "22%" }}>Email</th>
+                    <th style={{ border: "1px solid #333", padding: "8px 10px", color: "#ccc", fontWeight: 700, textAlign: "left", whiteSpace: "nowrap", width: "10%" }}>Progress</th>
+                    {ordered.map(p => (
+                      <th key={p.id} style={{ border: "1px solid #333", padding: "8px 4px", color: "#ccc", fontWeight: 700, textAlign: "center", fontSize: 11, width: `${Math.floor(36 / ordered.length)}%` }}>{p.label}</th>
                     ))}
+                    <th style={{ border: "1px solid #333", padding: "8px 10px", color: "#ccc", fontWeight: 700, textAlign: "center", whiteSpace: "nowrap", width: "14%" }}>Actions</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -1112,27 +1115,27 @@ function AdminPanel({ onExit }) {
                     const pct = Math.round((completed / ordered.length) * 100);
                     return (
                       <tr key={u.id} style={{ background: i % 2 === 0 ? "#0A0A0A" : "#111" }}>
-                        <td style={{ border: "1px solid #222", padding: "10px 14px", color: "#fff", fontWeight: 600 }}>{u.name}</td>
-                        <td style={{ border: "1px solid #222", padding: "10px 14px", color: "#aaa", whiteSpace: "nowrap" }}>{u.store}</td>
-                        <td style={{ border: "1px solid #222", padding: "10px 14px", color: "#aaa" }}>{u.email}</td>
-                        <td style={{ border: "1px solid #222", padding: "10px 14px" }}>
-                          <div style={{ background: "#222", borderRadius: 4, height: 10, width: 100, overflow: "hidden" }}>
+                        <td style={{ border: "1px solid #222", padding: "8px 10px" }}>
+                          <div style={{ color: "#fff", fontWeight: 600, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{u.name}</div>
+                          <div style={{ color: "#666", fontSize: 11, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{u.store}</div>
+                        </td>
+                        <td style={{ border: "1px solid #222", padding: "8px 10px", color: "#aaa", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{u.email}</td>
+                        <td style={{ border: "1px solid #222", padding: "8px 10px" }}>
+                          <div style={{ background: "#222", borderRadius: 4, height: 8, overflow: "hidden" }}>
                             <div style={{ height: "100%", width: `${pct}%`, background: pct === 100 ? MOE.teal : MOE.orange, borderRadius: 4 }} />
                           </div>
-                          <div style={{ color: pct === 100 ? MOE.teal : MOE.orange, fontSize: 13, marginTop: 4, fontWeight: 700 }}>{pct}%</div>
+                          <div style={{ color: pct === 100 ? MOE.teal : MOE.orange, fontSize: 12, marginTop: 3, fontWeight: 700 }}>{pct}%</div>
                         </td>
-                        <td style={{ border: "1px solid #222", padding: "10px 14px", color: "#aaa" }}>{completed}/{ordered.length}</td>
-                        <td style={{ border: "1px solid #222", padding: "10px 14px", color: "#666", fontSize: 13, whiteSpace: "nowrap" }}>{u.joinDate || "—"}</td>
                         {ordered.map(p => (
-                          <td key={p.id} style={{ border: "1px solid #222", padding: "10px 14px", textAlign: "center" }}>
-                            <span style={{ color: prog[p.id] ? MOE.teal : "#444", fontWeight: 700, fontSize: 16 }}>{prog[p.id] ? "✓" : "○"}</span>
+                          <td key={p.id} style={{ border: "1px solid #222", padding: "8px 4px", textAlign: "center" }}>
+                            <span style={{ color: prog[p.id] ? MOE.teal : "#444", fontWeight: 700, fontSize: 15 }}>{prog[p.id] ? "✓" : "○"}</span>
                           </td>
                         ))}
-                        <td style={{ border: "1px solid #222", padding: "10px 14px", whiteSpace: "nowrap" }}>
-                          <div style={{ display: "flex", gap: 8 }}>
-                            <button onClick={() => printReport([u], u.name)} style={{ ...btnS(MOE.teal), padding: "6px 12px", fontSize: 13 }}>🖨️ Print</button>
-                            <button onClick={() => setConfirmReset({ id: u.id, name: u.name })} style={{ ...btnS("#8B1A1A"), padding: "6px 12px", fontSize: 13 }}>⟳ Reset</button>
-                            <button onClick={() => setConfirmRemove({ id: u.id, name: u.name })} style={{ ...btnS("#555"), padding: "6px 12px", fontSize: 13 }}>🗑️ Remove</button>
+                        <td style={{ border: "1px solid #222", padding: "6px 6px", textAlign: "center" }}>
+                          <div style={{ display: "flex", gap: 4, justifyContent: "center" }}>
+                            <button onClick={() => printReport([u], u.name)} style={{ ...btnS(MOE.teal), padding: "4px 8px", fontSize: 11 }}>🖨️</button>
+                            <button onClick={() => setConfirmReset({ id: u.id, name: u.name })} style={{ ...btnS("#8B1A1A"), padding: "4px 8px", fontSize: 11 }}>⟳</button>
+                            <button onClick={() => setConfirmRemove({ id: u.id, name: u.name })} style={{ ...btnS("#555"), padding: "4px 8px", fontSize: 11 }}>🗑️</button>
                           </div>
                         </td>
                       </tr>
@@ -1374,7 +1377,6 @@ function AdminPanel({ onExit }) {
             )}
           </>);
         })()}
-      </div>
       </div>
     </div>
   );

@@ -368,13 +368,6 @@ const QUIZ_QUESTIONS = [
   {
     id: 6,
     topic: 2,
-    question: "To prevent cross-contamination, you should:",
-    options: ["Reuse the same cutting board for all items", "Change gloves and wash hands after working with raw proteins", "Rinse cutting boards with water between uses", "Only use one glove when handling raw meat"],
-    correct: 1,
-  },
-  {
-    id: 6,
-    topic: 2,
     question: "When storing raw proteins, where should they be placed relative to ready-to-eat foods?",
     options: ["On the top shelf for easy access", "On lower shelves below ready-to-eat foods", "Side by side on the same shelf", "In a separate cooler only"],
     correct: 1,

@@ -140,7 +140,6 @@ const PAGES = [
     ],
     videos: [
       { title: "Orientation Overview", url: "https://www.youtube.com/embed/dQw4w9WgXcQ" },
-      { title: "Meet CEO Mark Monroe", url: "https://www.youtube.com/embed/DEbbqyHXiJA" },
     ],
   },
   {
@@ -1873,7 +1872,7 @@ function PageContent({ page, isCompleted, onComplete, progress, user }) {
         <h2 style={{ fontSize: 24, fontWeight: 700, color: "#ffffff", fontFamily: "Calibri, sans-serif", marginBottom: 18, display: "flex", alignItems: "center", gap: 8, textTransform: "uppercase", letterSpacing: 1 }}>
           {page.id === "orientation" ? "Orientation Videos" : page.id === "food-safety" ? "Food Safety Videos" : page.id === "history" ? "Welcome To Moe's Videos" : "Training Videos"}
         </h2>
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))", gap: 16, marginBottom: 20 }}>
+        <div style={{ display: "grid", gridTemplateColumns: page.id === "orientation" ? "minmax(260px, 600px)" : "repeat(auto-fit, minmax(260px, 1fr))", gap: 16, marginBottom: 20, justifyContent: page.id === "orientation" ? "center" : undefined }}>
           {page.videos.map((video, i) => (
             <div
               key={i}

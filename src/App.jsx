@@ -2088,40 +2088,43 @@ function PageContent({ page, isCompleted, onComplete, progress, user }) {
               {page.videos.map((video, i) => (
                 <div
                   key={i}
-                  onClick={() => setActiveVideo(activeVideo === i ? null : i)}
                   style={{
                     borderRadius: 10,
                     overflow: "hidden",
                     border: `2px solid ${activeVideo === i ? page.color : "#333"}`,
-                    cursor: "pointer",
                     transition: "border-color 0.2s",
                     background: "#1A1A1A",
                   }}
                 >
-                  <div style={{ background: "#111", padding: "32px 0", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 36 }}>
-                    {activeVideo === i ? "⏸" : "▶️"}
-                  </div>
-                  <div style={{ padding: "14px 16px" }}>
-                    <div style={{ fontFamily: "Calibri, sans-serif", fontSize: 17, fontWeight: 600, color: "#fff" }}>{video.title}</div>
-                    <div style={{ fontSize: 14, color: MOE.teal, marginTop: 5 }}>{activeVideo === i ? "Now playing — click to collapse" : "Click to watch"}</div>
-                  </div>
+                  {activeVideo === i ? (
+                    <>
+                      <iframe
+                        src={video.url}
+                        title={video.title}
+                        width="100%"
+                        height="220"
+                        frameBorder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowFullScreen
+                        style={{ display: "block" }}
+                      />
+                      <div onClick={() => setActiveVideo(null)} style={{ padding: "12px 16px", cursor: "pointer" }}>
+                        <div style={{ fontFamily: "Calibri, sans-serif", fontSize: 17, fontWeight: 600, color: "#fff" }}>{video.title}</div>
+                        <div style={{ fontSize: 14, color: MOE.teal, marginTop: 5 }}>Now playing — click to collapse</div>
+                      </div>
+                    </>
+                  ) : (
+                    <div onClick={() => setActiveVideo(i)} style={{ cursor: "pointer" }}>
+                      <div style={{ background: "#111", padding: "32px 0", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 36 }}>▶️</div>
+                      <div style={{ padding: "14px 16px" }}>
+                        <div style={{ fontFamily: "Calibri, sans-serif", fontSize: 17, fontWeight: 600, color: "#fff" }}>{video.title}</div>
+                        <div style={{ fontSize: 14, color: MOE.teal, marginTop: 5 }}>Click to watch</div>
+                      </div>
+                    </div>
+                  )}
                 </div>
               ))}
             </div>
-            {activeVideo !== null && (
-              <div style={{ borderRadius: 12, overflow: "hidden", background: "#000", marginBottom: 20 }}>
-                <iframe
-                  src={page.videos[activeVideo].url}
-                  title={page.videos[activeVideo].title}
-                  width="100%"
-                  height="400"
-                  frameBorder="0"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                  allowFullScreen
-                  style={{ display: "block" }}
-                />
-              </div>
-            )}
           </>
         )}
       </section>}

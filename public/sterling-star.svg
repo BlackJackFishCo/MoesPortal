@@ -1,0 +1,74 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+  <defs>
+    <linearGradient id="starGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#D8D8D8;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#C0C0C0;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#A8A8A8;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="starShadow" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#888888;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#555555;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="circleGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#5580C8;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#2E5EA8;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="sGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#B0B0B0;stop-opacity:1" />
+      <stop offset="40%" style="stop-color:#E8E8E8;stop-opacity:1" />
+      <stop offset="60%" style="stop-color:#D0D0D0;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#707070;stop-opacity:1" />
+    </linearGradient>
+    <filter id="dropShadow" x="-15%" y="-15%" width="130%" height="130%">
+      <feDropShadow dx="3" dy="4" stdDeviation="3" flood-color="#555" flood-opacity="0.5"/>
+    </filter>
+  </defs>
+
+  <!-- Shadow star (offset slightly for 3D depth effect) -->
+  <polygon
+    points="100,18 118,70 174,70 128,102 145,155 100,122 55,155 72,102 26,70 82,70"
+    fill="url(#starShadow)"
+    transform="translate(4,5)"
+    opacity="0.6"
+  />
+
+  <!-- Main star body -->
+  <polygon
+    points="100,18 118,70 174,70 128,102 145,155 100,122 55,155 72,102 26,70 82,70"
+    fill="url(#starGrad)"
+    filter="url(#dropShadow)"
+  />
+
+  <!-- Sterling S logo circle -->
+  <circle cx="100" cy="95" r="34" fill="url(#circleGrad)" />
+
+  <!-- Sterling S shape -->
+  <path d="
+    M 100 68
+    C 87 68 78 74 78 83
+    C 78 90 83 94 91 97
+    L 109 103
+    C 117 106 122 110 122 117
+    C 122 126 113 132 100 132
+    C 87 132 78 126 78 117
+  " fill="none" stroke="url(#sGrad)" stroke-width="11" stroke-linecap="round"/>
+  <path d="
+    M 100 68
+    C 113 68 122 74 122 83
+    C 122 90 117 94 109 97
+    L 91 103
+    C 83 106 78 110 78 117
+    C 78 126 87 132 100 132
+    C 113 132 122 126 122 117
+  " fill="none" stroke="#2A2A2A" stroke-width="8" stroke-linecap="round"/>
+  <!-- S highlight -->
+  <path d="
+    M 100 68
+    C 87 68 78 74 78 83
+    C 78 90 83 94 91 97
+    L 109 103
+    C 117 106 122 110 122 117
+    C 122 126 113 132 100 132
+    C 87 132 78 126 78 117
+  " fill="none" stroke="url(#sGrad)" stroke-width="7" stroke-linecap="round"/>
+</svg>

@@ -1340,7 +1340,7 @@ function ProgressBar({ progress, activePage, onNavigate }) {
                   boxShadow: isActive ? `0 0 14px ${MOE.orange}88` : "none",
                   transition: "all 0.3s",
                 }}>
-                  ★
+                  <img src="/sterling-star.svg" alt="Sterling Star" style={{ width: "75%", height: "75%", objectFit: "contain", filter: isActive ? "drop-shadow(0 0 6px #E8601Aaa)" : "drop-shadow(0 0 3px #aaa6)" }} />
                 </div>
                 <div style={{
                   fontSize: 11, fontWeight: isActive ? 700 : 500,

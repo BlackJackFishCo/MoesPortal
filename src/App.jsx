@@ -2071,7 +2071,7 @@ function PageContent({ page, isCompleted, onComplete, progress, user }) {
           <div style={{ display: "flex", justifyContent: "center", marginBottom: 20 }}>
             <div style={{ width: "100%", maxWidth: 600, borderRadius: 12, overflow: "hidden", background: "#000", border: `2px solid ${page.color}` }}>
               <iframe
-                src={`${page.videos[0].url}?enablejsapi=1&origin=${encodeURIComponent(window.location.origin)}`}
+                src={`${page.videos[0].url}?enablejsapi=1&origin=${encodeURIComponent(window.location.origin)}&playsinline=1&rel=0`}
                 title={page.videos[0].title}
                 width="100%"
                 height="340"

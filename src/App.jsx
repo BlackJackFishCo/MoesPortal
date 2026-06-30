@@ -1893,6 +1893,22 @@ function PageContent({ page, isCompleted, onComplete, progress, user }) {
     if (!isCompleted) onComplete(page.id);
   }
 
+  // Auto-complete orientation when the video ends (YouTube postMessage API)
+  useEffect(() => {
+    if (page.id !== "orientation" || isCompleted) return;
+    function onMessage(e) {
+      try {
+        const data = typeof e.data === "string" ? JSON.parse(e.data) : e.data;
+        // YouTube sends {event:"onStateChange", info:0} when video ends
+        if (data?.event === "onStateChange" && data?.info === 0) {
+          onComplete(page.id);
+        }
+      } catch {}
+    }
+    window.addEventListener("message", onMessage);
+    return () => window.removeEventListener("message", onMessage);
+  }, [page.id, isCompleted]);
+
   return (
     <div style={{ maxWidth: 900, margin: "0 auto", padding: "24px 16px" }}>
       {/* Header */}
@@ -2002,44 +2018,63 @@ function PageContent({ page, isCompleted, onComplete, progress, user }) {
         <h2 style={{ fontSize: 24, fontWeight: 700, color: "#ffffff", fontFamily: "Calibri, sans-serif", marginBottom: 18, display: "flex", alignItems: "center", gap: 8, textTransform: "uppercase", letterSpacing: 1 }}>
           {page.id === "orientation" ? "Orientation Videos" : page.id === "food-safety" ? "Food Safety Videos" : page.id === "history" ? "Welcome To Moe's Videos" : "Training Videos"}
         </h2>
-        <div style={{ display: "grid", gridTemplateColumns: page.id === "orientation" ? "minmax(260px, 600px)" : "repeat(auto-fit, minmax(260px, 1fr))", gap: 16, marginBottom: 20, justifyContent: page.id === "orientation" ? "center" : undefined }}>
-          {page.videos.map((video, i) => (
-            <div
-              key={i}
-              onClick={() => setActiveVideo(activeVideo === i ? null : i)}
-              style={{
-                borderRadius: 10,
-                overflow: "hidden",
-                border: `2px solid ${activeVideo === i ? page.color : "#333"}`,
-                cursor: "pointer",
-                transition: "border-color 0.2s",
-                background: "#1A1A1A",
-              }}
-            >
-              <div style={{ background: "#111", padding: "32px 0", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 36 }}>
-                {activeVideo === i ? "⏸" : "▶️"}
-              </div>
-              <div style={{ padding: "14px 16px" }}>
-                <div style={{ fontFamily: "Calibri, sans-serif", fontSize: 17, fontWeight: 600, color: "#fff" }}>{video.title}</div>
-                <div style={{ fontSize: 14, color: MOE.teal, marginTop: 5 }}>{activeVideo === i ? "Now playing — click to collapse" : "Click to watch"}</div>
-              </div>
-            </div>
-          ))}
-        </div>
 
-        {activeVideo !== null && (
-          <div style={{ borderRadius: 12, overflow: "hidden", background: "#000", marginBottom: 20 }}>
-            <iframe
-              src={page.videos[activeVideo].url}
-              title={page.videos[activeVideo].title}
-              width="100%"
-              height="400"
-              frameBorder="0"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowFullScreen
-              style={{ display: "block" }}
-            />
+        {page.id === "orientation" ? (
+          <div style={{ display: "flex", justifyContent: "center", marginBottom: 20 }}>
+            <div style={{ width: "100%", maxWidth: 600, borderRadius: 12, overflow: "hidden", background: "#000", border: `2px solid ${page.color}` }}>
+              <iframe
+                src={`${page.videos[0].url}?enablejsapi=1&origin=${encodeURIComponent(window.location.origin)}`}
+                title={page.videos[0].title}
+                width="100%"
+                height="340"
+                frameBorder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+                style={{ display: "block" }}
+              />
+            </div>
           </div>
+        ) : (
+          <>
+            <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))", gap: 16, marginBottom: 20 }}>
+              {page.videos.map((video, i) => (
+                <div
+                  key={i}
+                  onClick={() => setActiveVideo(activeVideo === i ? null : i)}
+                  style={{
+                    borderRadius: 10,
+                    overflow: "hidden",
+                    border: `2px solid ${activeVideo === i ? page.color : "#333"}`,
+                    cursor: "pointer",
+                    transition: "border-color 0.2s",
+                    background: "#1A1A1A",
+                  }}
+                >
+                  <div style={{ background: "#111", padding: "32px 0", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 36 }}>
+                    {activeVideo === i ? "⏸" : "▶️"}
+                  </div>
+                  <div style={{ padding: "14px 16px" }}>
+                    <div style={{ fontFamily: "Calibri, sans-serif", fontSize: 17, fontWeight: 600, color: "#fff" }}>{video.title}</div>
+                    <div style={{ fontSize: 14, color: MOE.teal, marginTop: 5 }}>{activeVideo === i ? "Now playing — click to collapse" : "Click to watch"}</div>
+                  </div>
+                </div>
+              ))}
+            </div>
+            {activeVideo !== null && (
+              <div style={{ borderRadius: 12, overflow: "hidden", background: "#000", marginBottom: 20 }}>
+                <iframe
+                  src={page.videos[activeVideo].url}
+                  title={page.videos[activeVideo].title}
+                  width="100%"
+                  height="400"
+                  frameBorder="0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                  style={{ display: "block" }}
+                />
+              </div>
+            )}
+          </>
         )}
       </section>}
 
@@ -2116,9 +2151,9 @@ function PageContent({ page, isCompleted, onComplete, progress, user }) {
             </div>
           ) : (
             <div>
-              <div style={{ fontSize: 22, fontWeight: 700, color: MOE.orange, fontFamily: "Calibri, sans-serif", textTransform: "uppercase", letterSpacing: 1, marginBottom: 10 }}>Quiz Required</div>
+              <div style={{ fontSize: 22, fontWeight: 700, color: MOE.orange, fontFamily: "Calibri, sans-serif", textTransform: "uppercase", letterSpacing: 1, marginBottom: 10 }}>Complete to Unlock Food Safety</div>
               <p style={{ color: "#bbb", fontFamily: "Calibri, sans-serif", fontSize: 18, lineHeight: 1.7, margin: 0 }}>
-                You must score 100% on the Orientation Quiz above to complete this module and unlock Food Safety.
+                Watch the Orientation video to completion <strong style={{ color: "#fff" }}>or</strong> score 100% on the Orientation Quiz to complete this module.
               </p>
             </div>
           )}

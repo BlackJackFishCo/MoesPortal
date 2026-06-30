@@ -2137,12 +2137,6 @@ export default function App() {
               {user.name} &nbsp;·&nbsp; {completedCount}/{ordered.length}{allDone && " 🎉"}
             </div>
             <button
-              onClick={() => setShowPrint(true)}
-              style={{ background: MOE.teal, color: "#fff", border: "none", borderRadius: 8, padding: "8px 14px", fontSize: 14, fontWeight: 600, cursor: "pointer", fontFamily: "Calibri, sans-serif" }}
-            >
-              📊 Report
-            </button>
-            <button
               onClick={handleLogout}
               style={{ background: "rgba(255,255,255,0.1)", color: "#fff", border: "none", borderRadius: 8, padding: "8px 14px", fontSize: 14, cursor: "pointer", fontFamily: "Calibri, sans-serif" }}
             >

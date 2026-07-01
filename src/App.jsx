@@ -1913,7 +1913,6 @@ function PageContent({ page, isCompleted, onComplete, progress, user }) {
     return r?.passed || false;
   });
   const [orientationQuizPassed, setOrientationQuizPassed] = useState(false);
-  const [orientationVideoWatched, setOrientationVideoWatched] = useState(false);
   const [notesChecked, setNotesChecked] = useState(() => Array(15).fill(false));
   const allNotesChecked = notesChecked.every(Boolean);
 
@@ -1937,21 +1936,16 @@ function PageContent({ page, isCompleted, onComplete, progress, user }) {
 
   function handleOrientationQuizPass() {
     setOrientationQuizPassed(true);
-    if (!isCompleted && allNotesChecked && orientationVideoWatched) onComplete(page.id);
+    if (!isCompleted && allNotesChecked) onComplete(page.id);
   }
 
-  // Auto-complete orientation and history when the video ends (YouTube postMessage API)
+  // Auto-complete history when the video ends (YouTube postMessage API)
   useEffect(() => {
-    if ((page.id !== "orientation" && page.id !== "history") || isCompleted) return;
+    if (page.id !== "history" || isCompleted) return;
     function onMessage(e) {
       try {
         const data = typeof e.data === "string" ? JSON.parse(e.data) : e.data;
         if (data?.event === "onStateChange" && data?.info === 0) {
-          if (page.id === "orientation") {
-            setOrientationVideoWatched(true);
-            if (allNotesChecked && orientationQuizPassed) onComplete(page.id);
-            return;
-          }
           onComplete(page.id);
         }
       } catch {}
@@ -2232,7 +2226,7 @@ function PageContent({ page, isCompleted, onComplete, progress, user }) {
                 </p>
               ) : (
                 <p style={{ color: "#bbb", fontFamily: "Calibri, sans-serif", fontSize: 18, lineHeight: 1.7, margin: 0 }}>
-                  All notes checked! Watch the Orientation video to completion <strong style={{ color: "#fff" }}>and</strong> score 100% on the Orientation Quiz to complete this module.
+                  All notes checked! Score 100% on the Orientation Quiz above to complete this module.
                 </p>
               )}
             </div>

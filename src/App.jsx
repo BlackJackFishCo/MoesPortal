@@ -1913,7 +1913,21 @@ function PageContent({ page, isCompleted, onComplete, progress, user }) {
     return r?.passed || false;
   });
   const [orientationQuizPassed, setOrientationQuizPassed] = useState(false);
-  const [notesChecked, setNotesChecked] = useState(() => Array(15).fill(false));
+  const ORIENTATION_NOTES = [
+    "Reviewed Sterling Handbook.",
+    "Received Swag Bag and Uniforms.",
+    "Understand Uniform Standards including slip resistant shoe requirement.",
+    "Understand tip share distribution and pay days.",
+    "Understand crew member referral bonus program.",
+    "Reviewed Moe's career progression chart.",
+    "Reviewed Employee meal benefit and location for employee drinks.",
+    "Reviewed Schedule location, how to request days off, process for switching shifts.",
+    "POS log in number.",
+    "Store Safety, Chemicals, Back Door, Cash, and Closing Procedures.",
+    "Assigned to store group chat.",
+    "Restaurant tour with manager.",
+  ];
+  const [notesChecked, setNotesChecked] = useState(() => Array(ORIENTATION_NOTES.length).fill(false));
   const allNotesChecked = notesChecked.every(Boolean);
 
   const [posPassCount, setPosPassCount] = useState(0);
@@ -2151,7 +2165,7 @@ function PageContent({ page, isCompleted, onComplete, progress, user }) {
             Notes
           </h2>
           <p style={{ color: "#aaa", fontFamily: "Calibri, sans-serif", fontSize: 16, marginBottom: 18, marginTop: 0 }}>
-            Check each box as your trainer reviews it with you. All 15 must be checked to complete this module.
+            Check each box as your trainer reviews it with you. All {ORIENTATION_NOTES.length} must be checked to complete this module.
           </p>
           <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
             {notesChecked.map((checked, i) => (
@@ -2167,14 +2181,14 @@ function PageContent({ page, isCompleted, onComplete, progress, user }) {
                   style={{ width: 22, height: 22, accentColor: MOE.teal, flexShrink: 0 }}
                 />
                 <span style={{ fontFamily: "Calibri, sans-serif", fontSize: 17, color: checked ? MOE.teal : "#fff", fontWeight: checked ? 600 : 400 }}>
-                  Note {i + 1}
+                  {ORIENTATION_NOTES[i]}
                 </span>
               </label>
             ))}
           </div>
           {!allNotesChecked && (
             <div style={{ marginTop: 14, color: "#888", fontFamily: "Calibri, sans-serif", fontSize: 15 }}>
-              {notesChecked.filter(Boolean).length} / 15 checked
+              {notesChecked.filter(Boolean).length} / {ORIENTATION_NOTES.length} checked
             </div>
           )}
         </section>
@@ -2222,7 +2236,7 @@ function PageContent({ page, isCompleted, onComplete, progress, user }) {
               <div style={{ fontSize: 22, fontWeight: 700, color: MOE.orange, fontFamily: "Calibri, sans-serif", textTransform: "uppercase", letterSpacing: 1, marginBottom: 10 }}>Complete to Unlock Food Safety</div>
               {!allNotesChecked ? (
                 <p style={{ color: "#bbb", fontFamily: "Calibri, sans-serif", fontSize: 18, lineHeight: 1.7, margin: 0 }}>
-                  You must check all 15 Notes boxes above before completing this module. ({notesChecked.filter(Boolean).length} / 15 checked)
+                  You must check all {ORIENTATION_NOTES.length} Notes boxes above before completing this module. ({notesChecked.filter(Boolean).length} / {ORIENTATION_NOTES.length} checked)
                 </p>
               ) : (
                 <p style={{ color: "#bbb", fontFamily: "Calibri, sans-serif", fontSize: 18, lineHeight: 1.7, margin: 0 }}>

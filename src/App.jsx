@@ -134,7 +134,7 @@ const PAGES = [
     icon: "🎯",
     color: MOE.orange,
     alwaysAvailable: false,
-    description: "Welcome to Moe's! Congratulations! We're excited to have you join our team. The Orientation page will get you oriented to your new role at Moe's. Policies, expectations, dress code, scheduling, and everything you need before your first shift. These resources will always be available here for reference later.",
+    description: "Welcome to Moe's! Congratulations! We're excited to have you join our team. The Orientation page will get you oriented to your new role at Moe's. Policies, expectations, dress code, scheduling, and everything you need before your first shift. These resources will always be available here for reference later. As a company, our PURPOSE is to help people realize and achieve their dreams. Our Mission includes Developing People, Running Great Restaurants, and Acquiring Restaurants. In order to do all three, we must be EXCELLENT at training. We want to help you grow, and this training is the first step.",
     pdfs: [
       { title: "Employee Handbook", url: "/sterling-team-member-handbook.pdf" },
       { title: "Appearance Standards", url: "/moes-uniform-standards.pdf" },

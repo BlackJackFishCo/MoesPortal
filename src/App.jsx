@@ -2143,24 +2143,6 @@ function PageContent({ page, isCompleted, onComplete, progress, user }) {
         )}
       </section>}
 
-      {/* PDFs for orientation - shown after videos */}
-      {page.pdfs.length > 0 && page.id === "orientation" && (
-        <section style={{ marginBottom: 40 }}>
-          <h2 style={{ fontSize: 24, fontWeight: 700, color: "#ffffff", fontFamily: "Calibri, sans-serif", marginBottom: 18, display: "flex", alignItems: "center", gap: 8, textTransform: "uppercase", letterSpacing: 1 }}>
-            Documents
-          </h2>
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(220px, 1fr))", gap: 16 }}>
-            {page.pdfs.map((pdf, i) => (
-              <a key={i} href={pdf.url} target="_blank" rel="noreferrer"
-                style={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", textAlign: "center", gap: 6, background: "#1A1A1A", border: "1.5px solid #333", borderRadius: 10, padding: "18px 20px", textDecoration: "none", color: "#fff", fontFamily: "Calibri, sans-serif", fontSize: 17, fontWeight: 600, cursor: "pointer" }}
-              >
-                <div style={{ fontSize: 17, fontWeight: 700 }}>{pdf.title}</div>
-                <div style={{ fontSize: 14, color: MOE.orange, marginTop: 4 }}>Click to open →</div>
-              </a>
-            ))}
-          </div>
-        </section>
-      )}
 
       {page.id === "orientation" && (
         <section style={{ marginBottom: 40 }}>

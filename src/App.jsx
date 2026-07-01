@@ -139,6 +139,9 @@ const PAGES = [
       { title: "Employee Handbook", url: "/sterling-team-member-handbook.pdf" },
       { title: "Appearance Standards", url: "/moes-uniform-standards.pdf" },
       { title: "ADP Login", url: "/adp-registration.pdf" },
+      { title: "Tip Share & Pay Day", url: "/tip-share-payday.pdf" },
+      { title: "Crew Member Referral Bonus", url: "/crew-member-referral-bonus.pdf" },
+      { title: "Sterling Career Progression", url: "/sterling-career-progression.pdf" },
     ],
     videos: [
       { title: "Orientation Overview", url: "https://www.youtube.com/embed/dQw4w9WgXcQ" },
@@ -2019,8 +2022,8 @@ function PageContent({ page, isCompleted, onComplete, progress, user }) {
         <PositionTracker user={user} onPositionPass={handlePositionPass} />
       )}
 
-      {/* PDFs - only shown when pdfs exist and not on history, orientation, or training page */}
-      {page.pdfs.length > 0 && page.id !== "history" && page.id !== "orientation" && page.id !== "training" && (
+      {/* PDFs - only shown when pdfs exist and not on history or training page */}
+      {page.pdfs.length > 0 && page.id !== "history" && page.id !== "training" && (
         <section style={{ marginBottom: 40 }}>
           <h2 style={{ fontSize: 24, fontWeight: 700, color: "#ffffff", fontFamily: "Calibri, sans-serif", marginBottom: 18, display: "flex", alignItems: "center", gap: 8, textTransform: "uppercase", letterSpacing: 1 }}>
             Documents

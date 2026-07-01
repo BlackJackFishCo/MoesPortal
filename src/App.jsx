@@ -2239,15 +2239,6 @@ function PageContent({ page, isCompleted, onComplete, progress, user }) {
         </div>
       )}
 
-      {page.id === "history" && isCompleted && (
-        <div style={{ background: "#0D2B22", border: `2px solid #2E9898`, borderRadius: 14, padding: "28px 32px", marginBottom: 20 }}>
-          <div style={{ fontSize: 24, fontWeight: 700, color: MOE.teal, fontFamily: "Calibri, sans-serif", textTransform: "uppercase", letterSpacing: 1 }}>Module Complete!</div>
-          <div style={{ fontSize: 18, color: "#aaa", fontFamily: "Calibri, sans-serif", marginTop: 6 }}>
-            You completed this on {progress[page.id + "_date"] || "earlier"}. You can always review this content.
-          </div>
-        </div>
-      )}
-
       {!page.alwaysAvailable && page.id !== "food-safety" && page.id !== "training" && page.id !== "orientation" && (
         <div style={{ background: isCompleted ? "#0D2B22" : "#1A1A1A", border: `2px solid ${isCompleted ? "#2E9898" : MOE.orange}`, borderRadius: 14, padding: "28px 32px" }}>
           {isCompleted ? (

@@ -1747,15 +1747,7 @@ export default function App() {
     saveProgress(user.id, updated);
 
     // Auto-advance to next page
-    function handleRemove(userId, name) {
-    removeUser(userId);
-    setConfirmRemove(null);
-    setResetMsg(`🗑️ ${name} has been removed.`);
-    refreshUsers();
-    setTimeout(() => setResetMsg(""), 3000);
-  }
-
-  const ordered = PAGES.filter(p => !p.alwaysAvailable);
+    const ordered = PAGES.filter(p => !p.alwaysAvailable);
     const idx = ordered.findIndex(p => p.id === pageId);
     if (idx < ordered.length - 1) {
       setTimeout(() => setActivePage(ordered[idx + 1].id), 800);
@@ -1766,15 +1758,7 @@ export default function App() {
     const page = PAGES.find(p => p.id === pageId);
     if (!page) return;
     if (page.alwaysAvailable) { setActivePage(pageId); return; }
-    function handleRemove(userId, name) {
-    removeUser(userId);
-    setConfirmRemove(null);
-    setResetMsg(`🗑️ ${name} has been removed.`);
-    refreshUsers();
-    setTimeout(() => setResetMsg(""), 3000);
-  }
-
-  const ordered = PAGES.filter(p => !p.alwaysAvailable);
+    const ordered = PAGES.filter(p => !p.alwaysAvailable);
     const idx = ordered.indexOf(page);
     if (idx === 0 || progress[ordered[idx - 1]?.id] || progress[page.id]) {
       setActivePage(pageId);

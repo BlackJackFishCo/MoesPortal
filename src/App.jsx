@@ -1719,7 +1719,7 @@ function ProgressBar({ progress, activePage, onNavigate }) {
                   boxShadow: isActive ? `0 0 14px ${MOE.orange}88` : "none",
                   transition: "all 0.3s",
                 }}>
-                  <img src="/sterling-star.svg" alt="Sterling Star" style={{ width: "75%", height: "75%", objectFit: "contain", filter: isActive ? "drop-shadow(0 0 6px #E8601Aaa)" : "drop-shadow(0 0 3px #aaa6)" }} />
+                  <img src="/sterling-star.svg" alt="Sterling Star" style={{ width: "150%", height: "150%", objectFit: "contain", filter: isActive ? "drop-shadow(0 0 6px #E8601Aaa)" : "drop-shadow(0 0 3px #aaa6)" }} />
                 </div>
                 <div style={{
                   fontSize: "clamp(9px, 2.5vw, 16px)", fontWeight: isActive ? 700 : 500,
@@ -1805,7 +1805,7 @@ function PositionTracker({ user, onPositionPass }) {
       {/* Section Header */}
       <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", flexWrap: "wrap", gap: 10, marginBottom: 20 }}>
         <h2 style={{ fontSize: 24, fontWeight: 700, color: "#ffffff", fontFamily: "Calibri, sans-serif", margin: 0, textTransform: "uppercase", letterSpacing: 1 }}>
-          <img src="/sterling-star.svg" alt="Sterling Star" style={{ width: 28, height: 28, verticalAlign: "middle", marginRight: 8, filter: "drop-shadow(0 0 6px #aaa8)" }} /> Position Training
+          <img src="/sterling-star.svg" alt="Sterling Star" style={{ width: 56, height: 56, verticalAlign: "middle", marginRight: 8, filter: "drop-shadow(0 0 6px #aaa8)" }} /> Position Training
         </h2>
         <div style={{ fontSize: 15, color: "#888", fontFamily: "Calibri, sans-serif" }}>
           <span style={{ color: MOE.teal, fontWeight: 700 }}>{completedCount}</span> / {POSITIONS.length} positions certified
@@ -1828,7 +1828,7 @@ function PositionTracker({ user, onPositionPass }) {
                   fontSize: "clamp(28px, 5vw, 48px)", transition: "all 0.2s",
                   boxShadow: done ? `0 0 28px ${pos.color}55` : activePos === pos.id ? "0 0 20px #44444466" : "none",
                 }}>
-                  {done ? <img src="/sterling-star.svg" alt="Sterling Star" style={{ width: "70%", height: "70%", objectFit: "contain", filter: `drop-shadow(0 0 10px ${pos.color}cc)` }} /> : <span style={{ fontSize: 44 }}>{pos.icon}</span>}
+                  {done ? <img src="/sterling-star.svg" alt="Sterling Star" style={{ width: "140%", height: "140%", objectFit: "contain", filter: `drop-shadow(0 0 10px ${pos.color}cc)` }} /> : <span style={{ fontSize: 44 }}>{pos.icon}</span>}
                 </div>
                 <div style={{ fontSize: 14, fontWeight: 700, textTransform: "uppercase", letterSpacing: 0.5, fontFamily: "Calibri, sans-serif", color: done ? pos.color : activePos === pos.id ? "#ccc" : "#666" }}>
                   {pos.label}
@@ -1870,7 +1870,7 @@ function PositionTracker({ user, onPositionPass }) {
                   {done ? "✅ Certified" : "Watch the training videos below, then pass the quiz to earn certification"}
                 </div>
               </div>
-              {done && <div style={{ marginLeft: "auto" }}><img src="/sterling-star.svg" alt="Sterling Star" style={{ width: 48, height: 48, objectFit: "contain", filter: "drop-shadow(0 0 10px #aaaac0)" }} /></div>}
+              {done && <div style={{ marginLeft: "auto" }}><img src="/sterling-star.svg" alt="Sterling Star" style={{ width: 96, height: 96, objectFit: "contain", filter: "drop-shadow(0 0 10px #aaaac0)" }} /></div>}
             </div>
 
             {/* Two training videos */}

@@ -1917,6 +1917,8 @@ function PageContent({ page, isCompleted, onComplete, progress, user }) {
     const r = getOrientationQuizResult(user?.id);
     return r?.passed || false;
   });
+  const [notesChecked, setNotesChecked] = useState(() => Array(15).fill(false));
+  const allNotesChecked = notesChecked.every(Boolean);
 
   const [posPassCount, setPosPassCount] = useState(0);
 
@@ -1938,7 +1940,7 @@ function PageContent({ page, isCompleted, onComplete, progress, user }) {
 
   function handleOrientationQuizPass() {
     setOrientationQuizPassed(true);
-    if (!isCompleted) onComplete(page.id);
+    if (!isCompleted && allNotesChecked) onComplete(page.id);
   }
 
   // Auto-complete orientation and history when the video ends (YouTube postMessage API)
@@ -1948,6 +1950,7 @@ function PageContent({ page, isCompleted, onComplete, progress, user }) {
       try {
         const data = typeof e.data === "string" ? JSON.parse(e.data) : e.data;
         if (data?.event === "onStateChange" && data?.info === 0) {
+          if (page.id === "orientation" && !allNotesChecked) return;
           onComplete(page.id);
         }
       } catch {}
@@ -2149,16 +2152,36 @@ function PageContent({ page, isCompleted, onComplete, progress, user }) {
 
       {page.id === "orientation" && (
         <section style={{ marginBottom: 40 }}>
-          <h2 style={{ fontSize: 24, fontWeight: 700, color: "#ffffff", fontFamily: "Calibri, sans-serif", marginBottom: 18, display: "flex", alignItems: "center", gap: 8, textTransform: "uppercase", letterSpacing: 1 }}>
+          <h2 style={{ fontSize: 24, fontWeight: 700, color: "#ffffff", fontFamily: "Calibri, sans-serif", marginBottom: 8, display: "flex", alignItems: "center", gap: 8, textTransform: "uppercase", letterSpacing: 1 }}>
             Notes
           </h2>
-          <ol style={{ margin: 0, paddingLeft: 24, display: "flex", flexDirection: "column", gap: 12 }}>
-            {Array.from({ length: 15 }, (_, i) => (
-              <li key={i} style={{ fontFamily: "Calibri, sans-serif", fontSize: 17, color: "#ffffff", lineHeight: 1.6 }}>
-                Text {i + 1}
-              </li>
+          <p style={{ color: "#aaa", fontFamily: "Calibri, sans-serif", fontSize: 16, marginBottom: 18, marginTop: 0 }}>
+            Check each box as your trainer reviews it with you. All 15 must be checked to complete this module.
+          </p>
+          <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
+            {notesChecked.map((checked, i) => (
+              <label key={i} style={{ display: "flex", alignItems: "center", gap: 14, background: checked ? "#0D2B22" : "#1A1A1A", border: `1.5px solid ${checked ? MOE.teal : "#333"}`, borderRadius: 10, padding: "14px 18px", cursor: "pointer", transition: "all 0.2s" }}>
+                <input
+                  type="checkbox"
+                  checked={checked}
+                  onChange={e => {
+                    const next = [...notesChecked];
+                    next[i] = e.target.checked;
+                    setNotesChecked(next);
+                  }}
+                  style={{ width: 22, height: 22, accentColor: MOE.teal, flexShrink: 0 }}
+                />
+                <span style={{ fontFamily: "Calibri, sans-serif", fontSize: 17, color: checked ? MOE.teal : "#fff", fontWeight: checked ? 600 : 400 }}>
+                  Note {i + 1}
+                </span>
+              </label>
             ))}
-          </ol>
+          </div>
+          {!allNotesChecked && (
+            <div style={{ marginTop: 14, color: "#888", fontFamily: "Calibri, sans-serif", fontSize: 15 }}>
+              {notesChecked.filter(Boolean).length} / 15 checked
+            </div>
+          )}
         </section>
       )}
 
@@ -2202,9 +2225,15 @@ function PageContent({ page, isCompleted, onComplete, progress, user }) {
           ) : (
             <div>
               <div style={{ fontSize: 22, fontWeight: 700, color: MOE.orange, fontFamily: "Calibri, sans-serif", textTransform: "uppercase", letterSpacing: 1, marginBottom: 10 }}>Complete to Unlock Food Safety</div>
-              <p style={{ color: "#bbb", fontFamily: "Calibri, sans-serif", fontSize: 18, lineHeight: 1.7, margin: 0 }}>
-                Watch the Orientation video to completion <strong style={{ color: "#fff" }}>or</strong> score 100% on the Orientation Quiz to complete this module.
-              </p>
+              {!allNotesChecked ? (
+                <p style={{ color: "#bbb", fontFamily: "Calibri, sans-serif", fontSize: 18, lineHeight: 1.7, margin: 0 }}>
+                  You must check all 15 Notes boxes above before completing this module. ({notesChecked.filter(Boolean).length} / 15 checked)
+                </p>
+              ) : (
+                <p style={{ color: "#bbb", fontFamily: "Calibri, sans-serif", fontSize: 18, lineHeight: 1.7, margin: 0 }}>
+                  ✅ All notes checked! Watch the Orientation video to completion <strong style={{ color: "#fff" }}>or</strong> score 100% on the Orientation Quiz to complete this module.
+                </p>
+              )}
             </div>
           )}
         </div>

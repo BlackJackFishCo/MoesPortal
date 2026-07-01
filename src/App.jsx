@@ -139,7 +139,7 @@ const PAGES = [
       { title: "Employee Handbook", url: "/sterling-team-member-handbook.pdf" },
       { title: "Appearance Standards", url: "/moes-uniform-standards.pdf" },
       { title: "ADP Login", url: "/adp-registration.pdf" },
-      { title: "Tip Share & Pay Day", url: "/tip-share-payday.pdf" },
+      { title: "Tip Share", url: "/tip-share-payday.pdf" },
       { title: "Crew Member Referral Bonus", url: "/crew-member-referral-bonus.pdf" },
       { title: "Sterling Career Progression", url: "/sterling-career-progression.pdf" },
     ],

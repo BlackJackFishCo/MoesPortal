@@ -1765,7 +1765,7 @@ const POSITIONS = [
   { id: "cold",     label: "Cold",     icon: "❄️",  color: "#3AB8A8" },
   { id: "swing",    label: "Swing",    icon: "🔄",  color: "#9B59B6" },
   { id: "ring",     label: "Ring",     icon: "💵",  color: "#F1C40F" },
-  { id: "prep",     label: "Station Prep", icon: "🔪",  color: "#27AE60" },
+  { id: "prep",     label: "Linebacker", icon: "🔪",  color: "#27AE60" },
 ];
 
 const POSITION_VIDEOS = {

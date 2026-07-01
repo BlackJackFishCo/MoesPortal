@@ -2219,7 +2219,7 @@ function PageContent({ page, isCompleted, onComplete, progress, user }) {
         </div>
       )}
 
-      {!page.alwaysAvailable && page.id !== "food-safety" && page.id !== "training" && page.id !== "orientation" && page.id !== "history" && (
+      {!page.alwaysAvailable && page.id !== "food-safety" && page.id !== "training" && page.id !== "orientation" && (
         <div style={{ background: isCompleted ? "#0D2B22" : "#1A1A1A", border: `2px solid ${isCompleted ? "#2E9898" : MOE.orange}`, borderRadius: 14, padding: "28px 32px" }}>
           {isCompleted ? (
             <div style={{ display: "flex", alignItems: "center", gap: 14 }}>

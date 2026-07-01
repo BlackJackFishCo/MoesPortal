@@ -2185,14 +2185,14 @@ function PageContent({ page, isCompleted, onComplete, progress, user }) {
         </section>
       )}
 
-      {page.id === "orientation" && (
+      {page.id === "orientation" && !isCompleted && (
         <section style={{ marginBottom: 40 }}>
           <h2 style={{ fontSize: 24, fontWeight: 700, color: "#ffffff", fontFamily: "Calibri, sans-serif", marginBottom: 18, textTransform: "uppercase", letterSpacing: 1 }}>
             Orientation Quiz
           </h2>
           <OrientationQuiz
             user={user}
-            existingResult={getOrientationQuizResult(user?.id)}
+            existingResult={null}
             onPass={handleOrientationQuizPass}
           />
         </section>

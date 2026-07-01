@@ -1941,13 +1941,12 @@ function PageContent({ page, isCompleted, onComplete, progress, user }) {
     if (!isCompleted) onComplete(page.id);
   }
 
-  // Auto-complete orientation when the video ends (YouTube postMessage API)
+  // Auto-complete orientation and history when the video ends (YouTube postMessage API)
   useEffect(() => {
-    if (page.id !== "orientation" || isCompleted) return;
+    if ((page.id !== "orientation" && page.id !== "history") || isCompleted) return;
     function onMessage(e) {
       try {
         const data = typeof e.data === "string" ? JSON.parse(e.data) : e.data;
-        // YouTube sends {event:"onStateChange", info:0} when video ends
         if (data?.event === "onStateChange" && data?.info === 0) {
           onComplete(page.id);
         }
@@ -2099,7 +2098,7 @@ function PageContent({ page, isCompleted, onComplete, progress, user }) {
                   {activeVideo === i ? (
                     <>
                       <iframe
-                        src={video.url}
+                        src={`${video.url}?enablejsapi=1&origin=${encodeURIComponent(window.location.origin)}&playsinline=1&rel=0`}
                         title={video.title}
                         width="100%"
                         height="220"
@@ -2211,7 +2210,16 @@ function PageContent({ page, isCompleted, onComplete, progress, user }) {
         </div>
       )}
 
-      {!page.alwaysAvailable && page.id !== "food-safety" && page.id !== "training" && page.id !== "orientation" && (
+      {page.id === "history" && isCompleted && (
+        <div style={{ background: "#0D2B22", border: `2px solid #2E9898`, borderRadius: 14, padding: "28px 32px", marginBottom: 20 }}>
+          <div style={{ fontSize: 24, fontWeight: 700, color: MOE.teal, fontFamily: "Calibri, sans-serif", textTransform: "uppercase", letterSpacing: 1 }}>Module Complete!</div>
+          <div style={{ fontSize: 18, color: "#aaa", fontFamily: "Calibri, sans-serif", marginTop: 6 }}>
+            You completed this on {progress[page.id + "_date"] || "earlier"}. You can always review this content.
+          </div>
+        </div>
+      )}
+
+      {!page.alwaysAvailable && page.id !== "food-safety" && page.id !== "training" && page.id !== "orientation" && page.id !== "history" && (
         <div style={{ background: isCompleted ? "#0D2B22" : "#1A1A1A", border: `2px solid ${isCompleted ? "#2E9898" : MOE.orange}`, borderRadius: 14, padding: "28px 32px" }}>
           {isCompleted ? (
             <div style={{ display: "flex", alignItems: "center", gap: 14 }}>

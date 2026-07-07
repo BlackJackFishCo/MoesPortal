@@ -509,6 +509,13 @@ const POSITION_QUIZ_QUESTIONS = {
     { id: 4, question: "How often should prep lists be reviewed?", options: ["Weekly", "At the start of every shift", "Monthly", "Only when running low"], correct: 1 },
     { id: 5, question: "What should you do before beginning any food prep?", options: ["Start immediately", "Wash hands and put on gloves", "Check your phone", "Grab a drink"], correct: 1 },
   ],
+  ambassador: [
+    { id: 1, question: "Question 1 — to be edited", options: ["Answer A", "Answer B", "Answer C", "Answer D"], correct: 0 },
+    { id: 2, question: "Question 2 — to be edited", options: ["Answer A", "Answer B", "Answer C", "Answer D"], correct: 0 },
+    { id: 3, question: "Question 3 — to be edited", options: ["Answer A", "Answer B", "Answer C", "Answer D"], correct: 0 },
+    { id: 4, question: "Question 4 — to be edited", options: ["Answer A", "Answer B", "Answer C", "Answer D"], correct: 0 },
+    { id: 5, question: "Question 5 — to be edited", options: ["Answer A", "Answer B", "Answer C", "Answer D"], correct: 0 },
+  ],
 };
 
 function getPosQuizResult(userId, posId) {
@@ -1766,6 +1773,7 @@ const POSITIONS = [
   { id: "swing",    label: "Swing",    icon: "🔄",  color: "#9B59B6" },
   { id: "ring",     label: "Ring",     icon: "💵",  color: "#F1C40F" },
   { id: "prep",     label: "Linebacker", icon: "🔪",  color: "#27AE60" },
+  { id: "ambassador", label: "Ambassador", icon: "🪑", color: "#2980B9" },
 ];
 
 const POSITION_VIDEOS = {
@@ -1775,6 +1783,7 @@ const POSITION_VIDEOS = {
   swing:    [{ title: "Swing Position Overview",     url: "https://www.youtube.com/embed/dQw4w9WgXcQ" }, { title: "Swing Position Deep Dive",      url: "https://www.youtube.com/embed/dQw4w9WgXcQ" }],
   ring:     [{ title: "Ring / Cashier Overview",     url: "https://www.youtube.com/embed/4vQev6t8ZmA" }, { title: "Ring / Cashier Deep Dive",      url: "https://www.youtube.com/embed/dQw4w9WgXcQ" }],
   prep:     [{ title: "Prep Station Overview",       url: "https://www.youtube.com/embed/dQw4w9WgXcQ" }, { title: "Prep Station Deep Dive",        url: "https://www.youtube.com/embed/dQw4w9WgXcQ" }],
+  ambassador: [{ title: "Ambassador Overview",       url: "https://www.youtube.com/embed/dQw4w9WgXcQ" }, { title: "Ambassador Deep Dive",          url: "https://www.youtube.com/embed/dQw4w9WgXcQ" }],
 };
 
 function getPositionProgress(userId) {

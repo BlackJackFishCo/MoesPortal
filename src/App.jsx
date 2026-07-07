@@ -207,8 +207,8 @@ const PAGES = [
       { title: "Resource Document 6", url: "#" },
     ],
     videos: [
-      { title: "Monthly Team Updates", url: "https://www.youtube.com/embed/dQw4w9WgXcQ" },
-      { title: "Manager Office Hours Recording", url: "https://www.youtube.com/embed/dQw4w9WgXcQ" },
+      { title: "Video 1", url: "https://www.youtube.com/embed/dQw4w9WgXcQ" },
+      { title: "Video 2", url: "https://www.youtube.com/embed/dQw4w9WgXcQ" },
     ],
   },
 ];

@@ -199,12 +199,12 @@ const PAGES = [
     alwaysAvailable: true,
     description: "Quick-access library for reference documents, contact lists, HR forms, and ongoing learning materials. Always available to you.",
     pdfs: [
-      { title: "Quick Reference Card", url: "#" },
-      { title: "Emergency Contacts", url: "#" },
-      { title: "HR Forms Packet", url: "#" },
-      { title: "Benefits Overview", url: "#" },
-      { title: "Resource Document 5", url: "#" },
-      { title: "Resource Document 6", url: "#" },
+      { title: "Doc 1", url: "#" },
+      { title: "Doc 2", url: "#" },
+      { title: "Doc 3", url: "#" },
+      { title: "Doc 4", url: "#" },
+      { title: "Doc 5", url: "#" },
+      { title: "Doc 6", url: "#" },
     ],
     videos: [
       { title: "Video 1", url: "https://www.youtube.com/embed/dQw4w9WgXcQ" },

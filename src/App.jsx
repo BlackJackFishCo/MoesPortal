@@ -1770,7 +1770,7 @@ const POSITIONS = [
 const POSITION_VIDEOS = {
   menu:     [{ title: "Menu Overview",               url: "https://www.youtube.com/embed/ZK5X1SZTFfM" }, { title: "Menu Deep Dive",                url: "https://www.youtube.com/embed/ZK5X1SZTFfM" }],
   hot:      [{ title: "Hot Station Overview",        url: "https://www.youtube.com/embed/ZK5X1SZTFfM" }, { title: "Hot Station Deep Dive",         url: "https://www.youtube.com/embed/ZK5X1SZTFfM" }],
-  cold:     [{ title: "Cold Station Overview",       url: "https://www.youtube.com/embed/ZK5X1SZTFfM" }, { title: "Cold Station Deep Dive",        url: "https://www.youtube.com/embed/ZK5X1SZTFfM" }],
+  cold:     [{ title: "Cold Station Overview",       url: "https://www.youtube.com/embed/l9398Kjy7-4" }, { title: "Cold Station Deep Dive",        url: "https://www.youtube.com/embed/ZK5X1SZTFfM" }],
   swing:    [{ title: "Swing Position Overview",     url: "https://www.youtube.com/embed/ZK5X1SZTFfM" }, { title: "Swing Position Deep Dive",      url: "https://www.youtube.com/embed/ZK5X1SZTFfM" }],
   ring:     [{ title: "Ring / Cashier Overview",     url: "https://www.youtube.com/embed/4vQev6t8ZmA" }, { title: "Ring / Cashier Deep Dive",      url: "https://www.youtube.com/embed/ZK5X1SZTFfM" }],
   prep:     [{ title: "Prep Station Overview",       url: "https://www.youtube.com/embed/ZK5X1SZTFfM" }, { title: "Prep Station Deep Dive",        url: "https://www.youtube.com/embed/ZK5X1SZTFfM" }],

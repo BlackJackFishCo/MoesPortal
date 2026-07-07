@@ -2152,7 +2152,16 @@ function PageContent({ page, isCompleted, onComplete, progress, user }) {
                     </>
                   ) : (
                     <div onClick={() => setActiveVideo(i)} style={{ cursor: "pointer" }}>
-                      <div style={{ background: "#111", padding: "32px 0", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 36 }}>▶️</div>
+                      <div style={{ position: "relative", background: "#111", lineHeight: 0 }}>
+                        <img
+                          src={`https://img.youtube.com/vi/${video.url.split("/embed/")[1]?.split("?")[0]}/hqdefault.jpg`}
+                          alt={video.title}
+                          style={{ width: "100%", display: "block", objectFit: "cover", aspectRatio: "16/9" }}
+                        />
+                        <div style={{ position: "absolute", inset: 0, display: "flex", alignItems: "center", justifyContent: "center", background: "rgba(0,0,0,0.35)" }}>
+                          <div style={{ width: 52, height: 52, borderRadius: "50%", background: "rgba(0,0,0,0.7)", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 22 }}>▶️</div>
+                        </div>
+                      </div>
                       <div style={{ padding: "14px 16px" }}>
                         <div style={{ fontFamily: "Calibri, sans-serif", fontSize: 17, fontWeight: 600, color: "#fff" }}>{video.title}</div>
                         <div style={{ fontSize: 14, color: MOE.teal, marginTop: 5 }}>Click to watch</div>

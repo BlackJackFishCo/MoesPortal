@@ -228,6 +228,51 @@ function saveProgress(userId, progress) {
   setDoc(doc(db, "users", userId), { progress }, { merge: true }).catch(() => {});
 }
 
+// Union-merge two progress-style objects (position/page maps): once a flag is
+// true on any device it stays true everywhere, so partial local data on a
+// fresh device never regresses progress made elsewhere.
+function mergeProgressMaps(local, remote) {
+  const merged = { ...(remote || {}), ...(local || {}) };
+  for (const key of Object.keys(remote || {})) {
+    if (remote[key] === true) merged[key] = true;
+  }
+  return merged;
+}
+
+// Prefer whichever quiz/orientation result passed; otherwise prefer whatever
+// exists locally, falling back to the remote copy.
+function mergeQuizLikeResult(local, remote) {
+  if (local && local.passed) return local;
+  if (remote && remote.passed) return remote;
+  return local || remote || null;
+}
+
+// Pull this user's saved progress down from Firestore and merge it into
+// localStorage so logging in on a new device picks up work done elsewhere.
+async function syncUserFromCloud(userId) {
+  try {
+    const snap = await getDoc(doc(db, "users", userId));
+    if (!snap.exists()) return getProgress(userId);
+    const data = snap.data() || {};
+
+    const mergedProgress = mergeProgressMaps(getProgress(userId), data.progress);
+    try { localStorage.setItem(`moes_progress_${userId}`, JSON.stringify(mergedProgress)); } catch {}
+
+    const mergedQuiz = mergeQuizLikeResult(getQuizResult(userId), data.quizResult);
+    if (mergedQuiz) { try { localStorage.setItem(`moes_quiz_${userId}`, JSON.stringify(mergedQuiz)); } catch {} }
+
+    const mergedOrientation = mergeQuizLikeResult(getOrientationQuizResult(userId), data.orientationQuizResult);
+    if (mergedOrientation) { try { localStorage.setItem(`moes_orientation_quiz_${userId}`, JSON.stringify(mergedOrientation)); } catch {} }
+
+    const mergedPositions = mergeProgressMaps(getPositionProgress(userId), data.positionProgress);
+    try { localStorage.setItem(`moes_positions_${userId}`, JSON.stringify(mergedPositions)); } catch {}
+
+    return mergedProgress;
+  } catch {
+    return getProgress(userId);
+  }
+}
+
 // ─── User Registry (persists across sessions) ─────────────────────────────────
 function getAllUsers() {
   try {
@@ -2344,6 +2389,7 @@ export default function App() {
   useEffect(() => {
     if (user) {
       setProgress(getProgress(user.id));
+      syncUserFromCloud(user.id).then(setProgress);
     }
   }, [user]);
 

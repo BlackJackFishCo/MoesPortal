@@ -198,8 +198,8 @@ const PAGES = [
       { title: "Doc 6", url: "#" },
     ],
     videos: [
-      { title: "Video 1", url: "https://www.youtube.com/embed/dQw4w9WgXcQ" },
-      { title: "Video 2", url: "https://www.youtube.com/embed/dQw4w9WgXcQ" },
+      { title: "Video 1", url: "https://www.youtube.com/embed/ZK5X1SZTFfM" },
+      { title: "Video 2", url: "https://www.youtube.com/embed/ZK5X1SZTFfM" },
     ],
   },
 ];

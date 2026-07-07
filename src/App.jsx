@@ -157,17 +157,8 @@ const PAGES = [
     pdfs: [],
     videos: [
       { title: "Cross Contamination", url: "https://www.youtube.com/embed/0VbbIhEJ_yU" },
-      { title: "Biological Cross Contamination", url: "https://www.youtube.com/embed/NmvPzc_zcNc" },
-      { title: "Chemical Contamination", url: "https://www.youtube.com/embed/BVk0HAoNE4g" },
-      { title: "Physical Contamination", url: "https://www.youtube.com/embed/dMXmPw03Wfw" },
-      { title: "Cross Contamination", url: "https://www.youtube.com/embed/4uTEMTZZR0A" },
-      { title: "Product Holding", url: "https://www.youtube.com/embed/GSR9UpTlJNc" },
-      { title: "Gloves", url: "https://www.youtube.com/embed/2Scm_LJE2F0" },
       { title: "Handwashing", url: "https://www.youtube.com/embed/7xYqa0FRNls" },
-      { title: "Sick Employees", url: "https://www.youtube.com/embed/2sCP11oF-AA" },
-      { title: "Temperatures", url: "https://www.youtube.com/embed/dQw4w9WgXcQ" },
-      { title: "Cooking", url: "https://www.youtube.com/embed/dQw4w9WgXcQ" },
-      { title: "Cleaning", url: "https://www.youtube.com/embed/dQw4w9WgXcQ" },
+      { title: "Gloves", url: "https://www.youtube.com/embed/2Scm_LJE2F0" },
     ],
   },
   {

@@ -144,7 +144,7 @@ const PAGES = [
       { title: "Sterling Career Progression", url: "/sterling-career-progression.pdf" },
     ],
     videos: [
-      { title: "Orientation Overview", url: "https://www.youtube.com/embed/dQw4w9WgXcQ" },
+      { title: "Orientation Overview", url: "https://www.youtube.com/embed/ZK5X1SZTFfM" },
     ],
   },
   {

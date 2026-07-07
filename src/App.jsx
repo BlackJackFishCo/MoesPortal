@@ -2022,6 +2022,29 @@ function PageContent({ page, isCompleted, onComplete, progress, user }) {
         <PositionTracker user={user} onPositionPass={handlePositionPass} />
       )}
 
+      {/* Orientation video - shown above documents */}
+      {page.id === "orientation" && (
+        <section style={{ marginBottom: 40 }}>
+          <h2 style={{ fontSize: 24, fontWeight: 700, color: "#ffffff", fontFamily: "Calibri, sans-serif", marginBottom: 18, display: "flex", alignItems: "center", gap: 8, textTransform: "uppercase", letterSpacing: 1 }}>
+            Orientation Videos
+          </h2>
+          <div style={{ display: "flex", justifyContent: "center", marginBottom: 20 }}>
+            <div style={{ width: "100%", maxWidth: 600, borderRadius: 12, overflow: "hidden", background: "#000", border: `2px solid ${page.color}` }}>
+              <iframe
+                src={`${page.videos[0].url}?enablejsapi=1&origin=${encodeURIComponent(window.location.origin)}&playsinline=1&rel=0`}
+                title={page.videos[0].title}
+                width="100%"
+                height="340"
+                frameBorder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+                style={{ display: "block" }}
+              />
+            </div>
+          </div>
+        </section>
+      )}
+
       {/* PDFs - only shown when pdfs exist and not on history or training page */}
       {page.pdfs.length > 0 && page.id !== "history" && page.id !== "training" && (
         <section style={{ marginBottom: 40 }}>
@@ -2076,7 +2099,7 @@ function PageContent({ page, isCompleted, onComplete, progress, user }) {
         </section>
       )}
 
-      {page.id !== "training" && <section style={{ marginBottom: 40 }}>
+      {page.id !== "training" && page.id !== "orientation" && <section style={{ marginBottom: 40 }}>
         <h2 style={{ fontSize: 24, fontWeight: 700, color: "#ffffff", fontFamily: "Calibri, sans-serif", marginBottom: 18, display: "flex", alignItems: "center", gap: 8, textTransform: "uppercase", letterSpacing: 1 }}>
           {page.id === "orientation" ? "Orientation Videos" : page.id === "food-safety" ? "Food Safety Videos" : page.id === "history" ? "Welcome To Moe's Videos" : "Training Videos"}
         </h2>

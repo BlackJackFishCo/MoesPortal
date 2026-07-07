@@ -1768,7 +1768,7 @@ const POSITIONS = [
 ];
 
 const POSITION_VIDEOS = {
-  menu:     [{ title: "Menu Overview",               url: "https://www.youtube.com/embed/dQw4w9WgXcQ" }, { title: "Menu Deep Dive",                url: "https://www.youtube.com/embed/dQw4w9WgXcQ" }],
+  menu:     [{ title: "Menu Overview",               url: "https://www.youtube.com/embed/ZK5X1SZTFfM" }, { title: "Menu Deep Dive",                url: "https://www.youtube.com/embed/ZK5X1SZTFfM" }],
   hot:      [{ title: "Hot Station Overview",        url: "https://www.youtube.com/embed/dQw4w9WgXcQ" }, { title: "Hot Station Deep Dive",         url: "https://www.youtube.com/embed/dQw4w9WgXcQ" }],
   cold:     [{ title: "Cold Station Overview",       url: "https://www.youtube.com/embed/dQw4w9WgXcQ" }, { title: "Cold Station Deep Dive",        url: "https://www.youtube.com/embed/dQw4w9WgXcQ" }],
   swing:    [{ title: "Swing Position Overview",     url: "https://www.youtube.com/embed/dQw4w9WgXcQ" }, { title: "Swing Position Deep Dive",      url: "https://www.youtube.com/embed/dQw4w9WgXcQ" }],

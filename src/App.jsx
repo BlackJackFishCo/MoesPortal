@@ -176,7 +176,7 @@ const PAGES = [
     icon: "🌮",
     color: MOE.orange,
     alwaysAvailable: false,
-    description: "Station-by-station training covering the Menu, Hot, Cold, Swing, Ring, and Station Prep positions. Complete the quiz after each section and have your manager verify you have mastered each position to become Sterling Certified and earn your Blue Nike Certification hat. This training material is always available for reference later.",
+    description: "Station-by-station training covering the Menu, Hot, Cold, Swing, Ring, and Station Prep positions. Complete the quiz after each section and have your manager verify you have mastered each position to become Sterling Certified and earn your Blue Certification hat. This training material is always available for reference later.",
     pdfs: [
       { title: "Line Setup Guide", url: "#" },
       { title: "Recipe & Portion Standards", url: "#" },

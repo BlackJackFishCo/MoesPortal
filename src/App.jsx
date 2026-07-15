@@ -264,6 +264,9 @@ async function syncUserFromCloud(userId) {
     const mergedOrientation = mergeQuizLikeResult(getOrientationQuizResult(userId), data.orientationQuizResult);
     if (mergedOrientation) { try { localStorage.setItem(`moes_orientation_quiz_${userId}`, JSON.stringify(mergedOrientation)); } catch {} }
 
+    const mergedNotes = mergeProgressMaps(getOrientationNotes(userId), data.orientationNotes);
+    try { localStorage.setItem(`moes_orientation_notes_${userId}`, JSON.stringify(mergedNotes)); } catch {}
+
     const mergedPositions = mergeProgressMaps(getPositionProgress(userId), data.positionProgress);
     try { localStorage.setItem(`moes_positions_${userId}`, JSON.stringify(mergedPositions)); } catch {}
 
@@ -310,7 +313,7 @@ function registerUser(user) {
     if (snap.exists()) {
       updateDoc(doc(db, "users", user.id), { profile }).catch(() => {});
     } else {
-      setDoc(doc(db, "users", user.id), { profile: { ...profile, joinDate: new Date().toLocaleDateString() }, progress: {}, quizResult: null, orientationQuizResult: null, positionProgress: {} }).catch(() => {});
+      setDoc(doc(db, "users", user.id), { profile: { ...profile, joinDate: new Date().toLocaleDateString() }, progress: {}, quizResult: null, orientationQuizResult: null, orientationNotes: {}, positionProgress: {} }).catch(() => {});
     }
   }).catch(() => {});
 }
@@ -320,6 +323,7 @@ function removeUser(userId) {
     localStorage.setItem("moes_user_registry", JSON.stringify(users));
     localStorage.removeItem(`moes_progress_${userId}`);
     localStorage.removeItem(`moes_quiz_${userId}`);
+    localStorage.removeItem(`moes_orientation_notes_${userId}`);
     localStorage.removeItem(`moes_positions_${userId}`);
   } catch {}
   deleteDoc(doc(db, "users", userId)).catch(() => {});
@@ -329,9 +333,10 @@ function resetUserProgress(userId) {
     localStorage.removeItem(`moes_progress_${userId}`);
     localStorage.removeItem(`moes_quiz_${userId}`);
     localStorage.removeItem(`moes_orientation_quiz_${userId}`);
+    localStorage.removeItem(`moes_orientation_notes_${userId}`);
     localStorage.removeItem(`moes_positions_${userId}`);
   } catch {}
-  setDoc(doc(db, "users", userId), { progress: {}, quizResult: null, orientationQuizResult: null, positionProgress: {} }, { merge: true }).catch(() => {});
+  setDoc(doc(db, "users", userId), { progress: {}, quizResult: null, orientationQuizResult: null, orientationNotes: {}, positionProgress: {} }, { merge: true }).catch(() => {});
 }
 function getUserProgress(userId, embeddedProgress) {
   if (embeddedProgress && Object.keys(embeddedProgress).length > 0) return embeddedProgress;
@@ -385,6 +390,16 @@ function saveOrientationQuizResult(userId, result) {
 function resetOrientationQuizResult(userId) {
   try { localStorage.removeItem(`moes_orientation_quiz_${userId}`); } catch {}
   setDoc(doc(db, "users", userId), { orientationQuizResult: null }, { merge: true }).catch(() => {});
+}
+function getOrientationNotes(userId) {
+  try {
+    const raw = localStorage.getItem(`moes_orientation_notes_${userId}`);
+    return raw ? JSON.parse(raw) : {};
+  } catch { return {}; }
+}
+function saveOrientationNotes(userId, notes) {
+  try { localStorage.setItem(`moes_orientation_notes_${userId}`, JSON.stringify(notes)); } catch {}
+  setDoc(doc(db, "users", userId), { orientationNotes: notes }, { merge: true }).catch(() => {});
 }
 
 // ─── Food Safety Quiz ─────────────────────────────────────────────────────────
@@ -1976,8 +1991,18 @@ function PageContent({ page, isCompleted, onComplete, progress, user }) {
     "Assigned to store group chat.",
     "Restaurant tour with manager.",
   ];
-  const [notesChecked, setNotesChecked] = useState(() => Array(ORIENTATION_NOTES.length).fill(false));
+  const [notesChecked, setNotesChecked] = useState(() => {
+    const saved = getOrientationNotes(user?.id);
+    return ORIENTATION_NOTES.map((_, i) => !!saved[i]);
+  });
   const allNotesChecked = notesChecked.every(Boolean);
+
+  function toggleNote(i, value) {
+    const next = [...notesChecked];
+    next[i] = value;
+    setNotesChecked(next);
+    saveOrientationNotes(user?.id, next.reduce((acc, v, idx) => { acc[idx] = v; return acc; }, {}));
+  }
 
   const [posPassCount, setPosPassCount] = useState(0);
 
@@ -2256,11 +2281,7 @@ function PageContent({ page, isCompleted, onComplete, progress, user }) {
                 <input
                   type="checkbox"
                   checked={checked}
-                  onChange={e => {
-                    const next = [...notesChecked];
-                    next[i] = e.target.checked;
-                    setNotesChecked(next);
-                  }}
+                  onChange={e => toggleNote(i, e.target.checked)}
                   style={{ width: 22, height: 22, accentColor: MOE.teal, flexShrink: 0 }}
                 />
                 <span style={{ fontFamily: "Calibri, sans-serif", fontSize: 17, color: checked ? MOE.teal : "#fff", fontWeight: checked ? 600 : 400 }}>

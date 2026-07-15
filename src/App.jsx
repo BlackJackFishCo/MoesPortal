@@ -1886,12 +1886,12 @@ function PositionTracker({ user, onPositionPass }) {
 
       {/* Star Tracker Row */}
       <div style={{ background: "#1A1A1A", border: "1.5px solid #333", borderRadius: 14, padding: "20px 16px", marginBottom: 24 }}>
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", justifyItems: "center", gap: 12 }}>
+        <div className="position-grid">
           {POSITIONS.map(pos => {
             const done = !!posProg[pos.id];
             return (
               <div key={pos.id} onClick={() => setActivePos(activePos === pos.id ? null : pos.id)}
-                style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 6, cursor: "pointer", minWidth: 50 }}>
+                style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 6, cursor: "pointer", minWidth: 0 }}>
                 <div style={{
                   width: "clamp(64px, 12vw, 108px)", height: "clamp(64px, 12vw, 108px)", borderRadius: "50%",
                   background: done ? `${pos.color}22` : "#111",

@@ -47,3 +47,15 @@ iframe {
   background: #444;
   border-radius: 3px;
 }
+
+/* Position training tiles - 4 across on desktop, 2 across on phones */
+.position-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+}
+@media (max-width: 560px) {
+  .position-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}

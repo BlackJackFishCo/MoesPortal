@@ -1886,7 +1886,7 @@ function PositionTracker({ user, onPositionPass }) {
 
       {/* Star Tracker Row */}
       <div style={{ background: "#1A1A1A", border: "1.5px solid #333", borderRadius: 14, padding: "20px 16px", marginBottom: 24 }}>
-        <div style={{ display: "flex", justifyContent: "space-around", flexWrap: "wrap", gap: 12 }}>
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", justifyItems: "center", gap: 12 }}>
           {POSITIONS.map(pos => {
             const done = !!posProg[pos.id];
             return (

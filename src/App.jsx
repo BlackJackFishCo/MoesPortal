@@ -1954,6 +1954,7 @@ function PositionTracker({ user, onPositionPass }) {
 // ─── Page Content ─────────────────────────────────────────────────────────────
 function PageContent({ page, isCompleted, onComplete, progress, user }) {
   const [activeVideo, setActiveVideo] = useState(null);
+  const [activePdf, setActivePdf] = useState(null);
   const [confirmed, setConfirmed] = useState(false);
   const [quizPassed, setQuizPassed] = useState(() => {
     if (page.id !== "food-safety") return false;
@@ -2017,6 +2018,26 @@ function PageContent({ page, isCompleted, onComplete, progress, user }) {
   }, [page.id, isCompleted]);
 
   return (
+    <>
+    {activePdf && (
+      <div style={{ position: "fixed", inset: 0, background: "#000", zIndex: 1000, display: "flex", flexDirection: "column" }}>
+        <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: 12, padding: "12px 16px", background: "#1A1A1A", borderBottom: `2px solid ${page.color}` }}>
+          <button
+            onClick={() => setActivePdf(null)}
+            style={{ display: "flex", alignItems: "center", gap: 8, background: MOE.orange, color: "#fff", border: "none", borderRadius: 8, padding: "10px 18px", fontSize: 16, fontWeight: 700, fontFamily: "Calibri, sans-serif", cursor: "pointer" }}
+          >
+            ← Back to Portal
+          </button>
+          <div style={{ color: "#fff", fontFamily: "Calibri, sans-serif", fontSize: 16, fontWeight: 600, textAlign: "center", flex: 1, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
+            {activePdf.title}
+          </div>
+          <a href={activePdf.url} target="_blank" rel="noreferrer" style={{ color: MOE.teal, fontFamily: "Calibri, sans-serif", fontSize: 14, fontWeight: 600, textDecoration: "none", whiteSpace: "nowrap" }}>
+            Open in new tab ↗
+          </a>
+        </div>
+        <iframe src={activePdf.url} title={activePdf.title} style={{ flex: 1, border: "none", background: "#fff" }} />
+      </div>
+    )}
     <div style={{ maxWidth: 900, margin: "0 auto", padding: "24px 16px" }}>
       {/* Header */}
       <div style={{ marginBottom: 36 }}>
@@ -2098,7 +2119,7 @@ function PageContent({ page, isCompleted, onComplete, progress, user }) {
           </h2>
           <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(220px, 1fr))", gap: 16 }}>
             {page.pdfs.map((pdf, i) => (
-              <a key={i} href={pdf.url} target="_blank" rel="noreferrer"
+              <a key={i} href={pdf.url} onClick={e => { e.preventDefault(); setActivePdf(pdf); }}
                 style={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", textAlign: "center", gap: 6, background: "#1A1A1A", border: "1.5px solid #333", borderRadius: 10, padding: "18px 20px", textDecoration: "none", color: "#fff", fontFamily: "Calibri, sans-serif", fontSize: 17, fontWeight: 600, cursor: "pointer" }}
               >
                 <div style={{ fontSize: 17, fontWeight: 700 }}>{pdf.title}</div>
@@ -2364,6 +2385,7 @@ function PageContent({ page, isCompleted, onComplete, progress, user }) {
         </div>
       )}
     </div>
+    </>
   );
 }
 

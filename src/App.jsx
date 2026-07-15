@@ -567,6 +567,13 @@ const POSITION_QUIZ_QUESTIONS = {
     { id: 4, question: "Question 4 — to be edited", options: ["Answer A", "Answer B", "Answer C", "Answer D"], correct: 0 },
     { id: 5, question: "Question 5 — to be edited", options: ["Answer A", "Answer B", "Answer C", "Answer D"], correct: 0 },
   ],
+  catering: [
+    { id: 1, question: "Question 1 — to be edited", options: ["Answer A", "Answer B", "Answer C", "Answer D"], correct: 0 },
+    { id: 2, question: "Question 2 — to be edited", options: ["Answer A", "Answer B", "Answer C", "Answer D"], correct: 0 },
+    { id: 3, question: "Question 3 — to be edited", options: ["Answer A", "Answer B", "Answer C", "Answer D"], correct: 0 },
+    { id: 4, question: "Question 4 — to be edited", options: ["Answer A", "Answer B", "Answer C", "Answer D"], correct: 0 },
+    { id: 5, question: "Question 5 — to be edited", options: ["Answer A", "Answer B", "Answer C", "Answer D"], correct: 0 },
+  ],
 };
 
 function getPosQuizResult(userId, posId) {
@@ -675,7 +682,7 @@ function PositionQuiz({ user, posId, posColor, posLabel, onPass }) {
   return (
     <div style={{ marginTop: 16 }}>
       <div style={{ background: "#1A1A1A", border: `2px solid ${posColor}`, borderRadius: 12, padding: "20px 24px", marginBottom: 16 }}>
-        <div style={{ fontSize: 20, fontWeight: 800, color: "#fff", textTransform: "uppercase", letterSpacing: 1, marginBottom: 4 }}>{posId === "menu" ? `${posLabel} Quiz` : `${posLabel} Station Quiz`}</div>
+        <div style={{ fontSize: 20, fontWeight: 800, color: "#fff", textTransform: "uppercase", letterSpacing: 1, marginBottom: 4 }}>{posId === "menu" || posId === "catering" ? `${posLabel} Quiz` : `${posLabel} Station Quiz`}</div>
         <div style={{ fontSize: 14, color: "#aaa" }}>{questions.length} questions · 70% required to pass · Must pass to earn certification</div>
         <div style={{ height: 2, background: `linear-gradient(90deg, ${posColor}, transparent)`, marginTop: 14 }} />
       </div>
@@ -1825,6 +1832,7 @@ const POSITIONS = [
   { id: "ring",     label: "Ring",     icon: "💵",  color: "#F1C40F" },
   { id: "prep",     label: "Linebacker", icon: "🔪",  color: "#27AE60" },
   { id: "ambassador", label: "Ambassador", icon: "🪑", color: "#2980B9" },
+  { id: "catering", label: "Catering", icon: "🚐", color: "#C0392B" },
 ];
 
 const POSITION_VIDEOS = {
@@ -1835,6 +1843,7 @@ const POSITION_VIDEOS = {
   ring:     [{ title: "Ring / Cashier Overview",     url: "https://www.youtube.com/embed/4vQev6t8ZmA" }, { title: "Ring / Cashier Deep Dive",      url: "https://www.youtube.com/embed/ZK5X1SZTFfM" }],
   prep:     [{ title: "Prep Station Overview",       url: "https://www.youtube.com/embed/ZK5X1SZTFfM" }, { title: "Prep Station Deep Dive",        url: "https://www.youtube.com/embed/ZK5X1SZTFfM" }],
   ambassador: [{ title: "Ambassador Overview",       url: "https://www.youtube.com/embed/ZK5X1SZTFfM" }, { title: "Ambassador Deep Dive",          url: "https://www.youtube.com/embed/ZK5X1SZTFfM" }],
+  catering: [{ title: "Catering Overview",           url: "https://www.youtube.com/embed/ZK5X1SZTFfM" }, { title: "Catering Deep Dive",            url: "https://www.youtube.com/embed/ZK5X1SZTFfM" }],
 };
 
 function getPositionProgress(userId) {
@@ -1927,7 +1936,7 @@ function PositionTracker({ user, onPositionPass }) {
               <div style={{ fontSize: 28 }}>{pos.icon}</div>
               <div>
                 <div style={{ fontSize: 20, fontWeight: 800, color: pos.color, fontFamily: "Calibri, sans-serif", textTransform: "uppercase", letterSpacing: 1 }}>
-                  {pos.id === "menu" ? pos.label : `${pos.label} Station`}
+                  {pos.id === "menu" || pos.id === "catering" ? pos.label : `${pos.label} Station`}
                 </div>
                 <div style={{ fontSize: 14, color: "#888", fontFamily: "Calibri, sans-serif" }}>
                   {done ? "✅ Certified" : "Watch the training videos below, then pass the quiz to earn certification"}

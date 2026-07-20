@@ -1877,7 +1877,7 @@ const POSITION_DOCS = {
     { title: "Kids Quesadilla",          url: "#" },
     { title: "Kids Taco",                url: "#" },
     { title: "Meal Kits",                url: "#" },
-    { title: "Meal Kits XL",             url: "#" },
+    { title: "Meal Kits XL",             url: "/meal-kits-xl.pdf" },
     { title: "SW Salad",                 url: "#" },
   ],
   catering: [

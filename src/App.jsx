@@ -1849,7 +1849,7 @@ const POSITION_VIDEOS = {
     { title: "MVM Dippers",          url: "https://www.youtube.com/embed/DQdeMaWeuoU" },
     { title: "MVM Jr Burrito",       url: "https://www.youtube.com/embed/ZK5X1SZTFfM" },
     { title: "MVM Tacos",            url: "https://www.youtube.com/embed/8gPENWAkaY0" },
-    { title: "Kids Burrito",         url: "https://www.youtube.com/embed/ZK5X1SZTFfM" },
+    { title: "Kids Burrito",         url: "https://www.youtube.com/embed/7k6LVUzrSLI" },
     { title: "Kids Quesadilla",      url: "https://www.youtube.com/embed/ZK5X1SZTFfM" },
     { title: "Queso & Guac",         url: "https://www.youtube.com/embed/ZK5X1SZTFfM" },
   ],

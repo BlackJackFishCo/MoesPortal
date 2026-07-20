@@ -1862,6 +1862,26 @@ const POSITION_VIDEOS = {
   catering: [{ title: "Catering Overview",           url: "https://www.youtube.com/embed/ZK5X1SZTFfM" }, { title: "Catering Deep Dive",            url: "https://www.youtube.com/embed/ZK5X1SZTFfM" }],
 };
 
+const POSITION_DOCS = {
+  menu: [
+    { title: "Homewrecker",              url: "#" },
+    { title: "Stack",                    url: "#" },
+    { title: "Chicken Club Quesadilla",  url: "#" },
+    { title: "BYO Burrito",              url: "#" },
+    { title: "BYO Tacos",                url: "#" },
+    { title: "BYO Nachos",               url: "#" },
+    { title: "BYO Salads",               url: "#" },
+    { title: "BYO Quesadilla",           url: "#" },
+    { title: "Kids Burrito",             url: "#" },
+    { title: "Kids Quesadilla",          url: "#" },
+    { title: "Kids Taco",                url: "#" },
+    { title: "Document 12",              url: "#" },
+    { title: "Document 13",              url: "#" },
+    { title: "Document 14",              url: "#" },
+    { title: "Document 15",              url: "#" },
+  ],
+};
+
 function getPositionProgress(userId) {
   try {
     const raw = localStorage.getItem(`moes_positions_${userId}`);
@@ -1875,7 +1895,7 @@ function savePositionProgress(userId, data) {
 }
 
 // ─── Position Tracker Component ───────────────────────────────────────────────
-function PositionTracker({ user, onPositionPass }) {
+function PositionTracker({ user, onPositionPass, setActivePdf }) {
   const [posProg, setPosProg] = useState(() => getPositionProgress(user?.id));
   const [activePos, setActivePos] = useState(null);
 
@@ -1944,6 +1964,7 @@ function PositionTracker({ user, onPositionPass }) {
       {activePos && (() => {
         const pos = POSITIONS.find(p => p.id === activePos);
         const videos = POSITION_VIDEOS[activePos];
+        const docs = POSITION_DOCS[activePos] || [];
         const done = !!posProg[activePos];
         return (
           <div style={{ background: "#1A1A1A", border: `2px solid ${pos.color}`, borderRadius: 14, padding: "24px 20px", marginBottom: 12 }}>
@@ -1974,6 +1995,25 @@ function PositionTracker({ user, onPositionPass }) {
                 </div>
               ))}
             </div>
+
+            {/* Documents */}
+            {docs.length > 0 && (
+              <>
+                <h3 style={{ fontSize: 18, fontWeight: 700, color: "#ffffff", fontFamily: "Calibri, sans-serif", marginBottom: 14, textTransform: "uppercase", letterSpacing: 1 }}>
+                  Documents
+                </h3>
+                <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(220px, 1fr))", gap: 16, marginBottom: 24 }}>
+                  {docs.map((pdf, i) => (
+                    <a key={i} href={pdf.url} onClick={e => { e.preventDefault(); setActivePdf(pdf); }}
+                      style={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", textAlign: "center", gap: 6, background: "#111", border: "1.5px solid #333", borderRadius: 10, padding: "18px 20px", textDecoration: "none", color: "#fff", fontFamily: "Calibri, sans-serif", fontSize: 17, fontWeight: 600, cursor: "pointer" }}
+                    >
+                      <div style={{ fontSize: 17, fontWeight: 700 }}>{pdf.title}</div>
+                      <div style={{ fontSize: 14, color: pos.color, marginTop: 4 }}>Click to open →</div>
+                    </a>
+                  ))}
+                </div>
+              </>
+            )}
 
             {/* Quiz */}
             <div style={{ height: 2, background: `linear-gradient(90deg, ${pos.color}, transparent)`, borderRadius: 2, marginBottom: 20 }} />
@@ -2135,7 +2175,7 @@ function PageContent({ page, isCompleted, onComplete, progress, user }) {
 
       {/* Position Tracker - Training page only */}
       {page.id === "training" && (
-        <PositionTracker user={user} onPositionPass={handlePositionPass} />
+        <PositionTracker user={user} onPositionPass={handlePositionPass} setActivePdf={setActivePdf} />
       )}
 
       {/* Orientation video - shown above documents */}

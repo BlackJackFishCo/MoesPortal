@@ -1880,6 +1880,11 @@ const POSITION_DOCS = {
     { title: "Document 14",              url: "#" },
     { title: "Document 15",              url: "#" },
   ],
+  catering: [
+    { title: "Document 1",               url: "#" },
+    { title: "Document 2",               url: "#" },
+    { title: "Document 3",               url: "#" },
+  ],
 };
 
 function getPositionProgress(userId) {

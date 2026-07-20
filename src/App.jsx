@@ -1836,7 +1836,23 @@ const POSITIONS = [
 ];
 
 const POSITION_VIDEOS = {
-  menu:     [{ title: "Menu Overview",               url: "https://www.youtube.com/embed/ZK5X1SZTFfM" }, { title: "Menu Deep Dive",                url: "https://www.youtube.com/embed/ZK5X1SZTFfM" }],
+  menu:     [
+    { title: "Burrito",             url: "https://www.youtube.com/embed/ZK5X1SZTFfM" },
+    { title: "Salad",                url: "https://www.youtube.com/embed/ZK5X1SZTFfM" },
+    { title: "Bowls",                url: "https://www.youtube.com/embed/ZK5X1SZTFfM" },
+    { title: "Nachos",               url: "https://www.youtube.com/embed/ZK5X1SZTFfM" },
+    { title: "Tacos",                url: "https://www.youtube.com/embed/ZK5X1SZTFfM" },
+    { title: "Chicken Club",         url: "https://www.youtube.com/embed/ZK5X1SZTFfM" },
+    { title: "Chicken Club 2",       url: "https://www.youtube.com/embed/ZK5X1SZTFfM" },
+    { title: "Stack",                url: "https://www.youtube.com/embed/ZK5X1SZTFfM" },
+    { title: "Stack 2",              url: "https://www.youtube.com/embed/ZK5X1SZTFfM" },
+    { title: "MVM Dippers",          url: "https://www.youtube.com/embed/ZK5X1SZTFfM" },
+    { title: "MVM Jr Burrito",       url: "https://www.youtube.com/embed/ZK5X1SZTFfM" },
+    { title: "MVM Tacos",            url: "https://www.youtube.com/embed/ZK5X1SZTFfM" },
+    { title: "Kids Burrito",         url: "https://www.youtube.com/embed/ZK5X1SZTFfM" },
+    { title: "Kids Quesadilla",      url: "https://www.youtube.com/embed/ZK5X1SZTFfM" },
+    { title: "Queso & Guac",         url: "https://www.youtube.com/embed/ZK5X1SZTFfM" },
+  ],
   hot:      [{ title: "Hot Station Overview",        url: "https://www.youtube.com/embed/ZK5X1SZTFfM" }, { title: "Hot Station Deep Dive",         url: "https://www.youtube.com/embed/ZK5X1SZTFfM" }],
   cold:     [{ title: "Cold Station Overview",       url: "https://www.youtube.com/embed/l9398Kjy7-4" }, { title: "Cold Station Deep Dive",        url: "https://www.youtube.com/embed/uzaj2vCTMwc" }],
   swing:    [{ title: "Swing Position Overview",     url: "https://www.youtube.com/embed/ZK5X1SZTFfM" }, { title: "Swing Position Deep Dive",      url: "https://www.youtube.com/embed/ZK5X1SZTFfM" }],
@@ -1945,7 +1961,7 @@ function PositionTracker({ user, onPositionPass }) {
               {done && <div style={{ marginLeft: "auto" }}><img src="/sterling-star.svg" alt="Sterling Star" style={{ width: 96, height: 96, objectFit: "contain", filter: "drop-shadow(0 0 10px #aaaac0)" }} /></div>}
             </div>
 
-            {/* Two training videos */}
+            {/* Training videos */}
             <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: 16, marginBottom: 24 }}>
               {videos.map((vid, i) => (
                 <div key={i}>

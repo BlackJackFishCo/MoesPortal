@@ -1870,7 +1870,7 @@ const POSITION_DOCS = {
     { title: "BYO Burrito",              url: "#" },
     { title: "BYO Tacos",                url: "/byo-tacos.pdf" },
     { title: "BYO Nachos",               url: "#" },
-    { title: "BYO Salads",               url: "#" },
+    { title: "BYO Salads",               url: "/byo-salads.pdf" },
     { title: "BYO Quesadilla",           url: "#" },
     { title: "BYO Jr Burrito",           url: "#" },
     { title: "Kids Burrito",             url: "/kids-burrito.pdf" },

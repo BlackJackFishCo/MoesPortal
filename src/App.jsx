@@ -1847,7 +1847,7 @@ const POSITION_VIDEOS = {
     { title: "Stack",                url: "https://www.youtube.com/embed/fEq2fe-6sPo" },
     { title: "Stack 2",              url: "https://www.youtube.com/embed/HRoMY7Ob6ug" },
     { title: "MVM Dippers",          url: "https://www.youtube.com/embed/DQdeMaWeuoU" },
-    { title: "MVM Jr Burrito",       url: "https://www.youtube.com/embed/ZK5X1SZTFfM" },
+    { title: "MVM Jr Burrito",       url: "https://www.youtube.com/embed/RRkzBBthHds" },
     { title: "MVM Tacos",            url: "https://www.youtube.com/embed/8gPENWAkaY0" },
     { title: "Kids Burrito",         url: "https://www.youtube.com/embed/7k6LVUzrSLI" },
     { title: "Kids Quesadilla",      url: "https://www.youtube.com/embed/17NNd5Bdu98" },

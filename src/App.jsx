@@ -1867,7 +1867,7 @@ const POSITION_DOCS = {
     { title: "Homewrecker",              url: "/homewrecker.pdf" },
     { title: "Stack",                    url: "/stack.pdf" },
     { title: "Chicken Club Quesadilla",  url: "#" },
-    { title: "BYO Burrito",              url: "#" },
+    { title: "BYO Burrito",              url: "/byo-burrito.pdf" },
     { title: "BYO Tacos",                url: "/byo-tacos.pdf" },
     { title: "BYO Nachos",               url: "#" },
     { title: "BYO Salads",               url: "/byo-salads.pdf" },

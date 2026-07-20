@@ -1881,7 +1881,7 @@ const POSITION_DOCS = {
     { title: "SW Salad",                 url: "/sw-salad.pdf" },
   ],
   catering: [
-    { title: "Document 1",               url: "#" },
+    { title: "Catering Pan Weights",     url: "/catering-pan-weights.pdf" },
     { title: "Document 2",               url: "#" },
     { title: "Document 3",               url: "#" },
   ],

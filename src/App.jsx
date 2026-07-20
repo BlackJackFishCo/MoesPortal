@@ -1869,7 +1869,7 @@ const POSITION_DOCS = {
     { title: "Chicken Club Quesadilla",  url: "/chicken-club-quesadilla.pdf" },
     { title: "BYO Burrito",              url: "/byo-burrito.pdf" },
     { title: "BYO Tacos",                url: "/byo-tacos.pdf" },
-    { title: "BYO Nachos",               url: "#" },
+    { title: "BYO Nachos",               url: "/byo-nachos.pdf" },
     { title: "BYO Salads",               url: "/byo-salads.pdf" },
     { title: "BYO Quesadilla",           url: "#" },
     { title: "BYO Jr Burrito",           url: "#" },

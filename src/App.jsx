@@ -1850,7 +1850,7 @@ const POSITION_VIDEOS = {
     { title: "MVM Jr Burrito",       url: "https://www.youtube.com/embed/ZK5X1SZTFfM" },
     { title: "MVM Tacos",            url: "https://www.youtube.com/embed/8gPENWAkaY0" },
     { title: "Kids Burrito",         url: "https://www.youtube.com/embed/7k6LVUzrSLI" },
-    { title: "Kids Quesadilla",      url: "https://www.youtube.com/embed/ZK5X1SZTFfM" },
+    { title: "Kids Quesadilla",      url: "https://www.youtube.com/embed/17NNd5Bdu98" },
     { title: "Queso & Guac",         url: "https://www.youtube.com/embed/ZK5X1SZTFfM" },
   ],
   hot:      [{ title: "Hot Station Overview",        url: "https://www.youtube.com/embed/ZK5X1SZTFfM" }, { title: "Hot Station Deep Dive",         url: "https://www.youtube.com/embed/ZK5X1SZTFfM" }],

@@ -1873,7 +1873,7 @@ const POSITION_DOCS = {
     { title: "BYO Salads",               url: "#" },
     { title: "BYO Quesadilla",           url: "#" },
     { title: "BYO Jr Burrito",           url: "#" },
-    { title: "Kids Burrito",             url: "#" },
+    { title: "Kids Burrito",             url: "/kids-burrito.pdf" },
     { title: "Kids Quesadilla",          url: "#" },
     { title: "Kids Taco",                url: "#" },
     { title: "Meal Kits",                url: "/meal-kits.pdf" },

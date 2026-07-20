@@ -1851,7 +1851,7 @@ const POSITION_VIDEOS = {
     { title: "MVM Tacos",            url: "https://www.youtube.com/embed/8gPENWAkaY0" },
     { title: "Kids Burrito",         url: "https://www.youtube.com/embed/7k6LVUzrSLI" },
     { title: "Kids Quesadilla",      url: "https://www.youtube.com/embed/17NNd5Bdu98" },
-    { title: "Queso & Guac",         url: "https://www.youtube.com/embed/ZK5X1SZTFfM" },
+    { title: "Queso & Guac",         url: "https://www.youtube.com/embed/Oj1-58yl6u0" },
   ],
   hot:      [{ title: "Hot Station Overview",        url: "https://www.youtube.com/embed/ZK5X1SZTFfM" }, { title: "Hot Station Deep Dive",         url: "https://www.youtube.com/embed/ZK5X1SZTFfM" }],
   cold:     [{ title: "Cold Station Overview",       url: "https://www.youtube.com/embed/l9398Kjy7-4" }, { title: "Cold Station Deep Dive",        url: "https://www.youtube.com/embed/uzaj2vCTMwc" }],

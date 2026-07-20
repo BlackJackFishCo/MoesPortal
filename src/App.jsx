@@ -1843,7 +1843,7 @@ const POSITION_VIDEOS = {
     { title: "Nachos",               url: "https://www.youtube.com/embed/S5vmtywo72k" },
     { title: "Tacos",                url: "https://www.youtube.com/embed/ZK5X1SZTFfM" },
     { title: "Chicken Club",         url: "https://www.youtube.com/embed/ZK5X1SZTFfM" },
-    { title: "Chicken Club 2",       url: "https://www.youtube.com/embed/ZK5X1SZTFfM" },
+    { title: "Chicken Club 2",       url: "https://www.youtube.com/embed/dsf6bzQ6Vjs" },
     { title: "Stack",                url: "https://www.youtube.com/embed/ZK5X1SZTFfM" },
     { title: "Stack 2",              url: "https://www.youtube.com/embed/ZK5X1SZTFfM" },
     { title: "MVM Dippers",          url: "https://www.youtube.com/embed/ZK5X1SZTFfM" },

@@ -1839,7 +1839,7 @@ const POSITION_VIDEOS = {
   menu:     [
     { title: "Burrito",             url: "https://www.youtube.com/embed/vzNEMlWxpro" },
     { title: "Salad",                url: "https://www.youtube.com/embed/wIoBsuFJxfM" },
-    { title: "Bowls",                url: "https://www.youtube.com/embed/ZK5X1SZTFfM" },
+    { title: "Bowls",                url: "https://www.youtube.com/embed/Y-3aF1DgB1Q" },
     { title: "Nachos",               url: "https://www.youtube.com/embed/ZK5X1SZTFfM" },
     { title: "Tacos",                url: "https://www.youtube.com/embed/ZK5X1SZTFfM" },
     { title: "Chicken Club",         url: "https://www.youtube.com/embed/ZK5X1SZTFfM" },

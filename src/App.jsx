@@ -1846,7 +1846,7 @@ const POSITION_VIDEOS = {
     { title: "Chicken Club 2",       url: "https://www.youtube.com/embed/dsf6bzQ6Vjs" },
     { title: "Stack",                url: "https://www.youtube.com/embed/fEq2fe-6sPo" },
     { title: "Stack 2",              url: "https://www.youtube.com/embed/HRoMY7Ob6ug" },
-    { title: "MVM Dippers",          url: "https://www.youtube.com/embed/ZK5X1SZTFfM" },
+    { title: "MVM Dippers",          url: "https://www.youtube.com/embed/DQdeMaWeuoU" },
     { title: "MVM Jr Burrito",       url: "https://www.youtube.com/embed/ZK5X1SZTFfM" },
     { title: "MVM Tacos",            url: "https://www.youtube.com/embed/ZK5X1SZTFfM" },
     { title: "Kids Burrito",         url: "https://www.youtube.com/embed/ZK5X1SZTFfM" },

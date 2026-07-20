@@ -1864,7 +1864,7 @@ const POSITION_VIDEOS = {
 
 const POSITION_DOCS = {
   menu: [
-    { title: "Homewrecker",              url: "#" },
+    { title: "Homewrecker",              url: "/homewrecker.pdf" },
     { title: "Stack",                    url: "#" },
     { title: "Chicken Club Quesadilla",  url: "#" },
     { title: "BYO Burrito",              url: "#" },

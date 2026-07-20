@@ -1882,7 +1882,7 @@ const POSITION_DOCS = {
   ],
   catering: [
     { title: "Catering Pan Weights",     url: "/catering-pan-weights.pdf" },
-    { title: "Document 2",               url: "#" },
+    { title: "Catering Set Up",          url: "/catering-setup.pdf" },
     { title: "Document 3",               url: "#" },
   ],
 };

@@ -189,14 +189,7 @@ const PAGES = [
     color: MOE.teal,
     alwaysAvailable: true,
     description: "Quick-access library for reference documents, contact lists, HR forms, and ongoing learning materials. Always available to you.",
-    pdfs: [
-      { title: "Doc 1", url: "#" },
-      { title: "Doc 2", url: "#" },
-      { title: "Doc 3", url: "#" },
-      { title: "Doc 4", url: "#" },
-      { title: "Doc 5", url: "#" },
-      { title: "Doc 6", url: "#" },
-    ],
+    pdfs: [],
     videos: [
       { title: "Video 1", url: "https://www.youtube.com/embed/ZK5X1SZTFfM" },
       { title: "Video 2", url: "https://www.youtube.com/embed/ZK5X1SZTFfM" },
@@ -1887,6 +1880,95 @@ const POSITION_DOCS = {
   ],
 };
 
+// ─── Resource categories (Resources page document library) ───────────────────
+// Add real files by dropping them in /public and adding { title, url } entries
+// to the matching category's `docs` array below (pdf, xlsx, docx, etc. all work).
+const RESOURCE_CATEGORIES = [
+  { id: "recipes", title: "Recipes", icon: "🌮", color: MOE.orange, docs: [] },
+  { id: "sterling-focus", title: "Sterling Focus", icon: "🎯", color: MOE.teal, docs: [] },
+  { id: "sterling-contacts", title: "Sterling Contacts", icon: "📇", color: MOE.orange, docs: [] },
+  { id: "hr-payroll", title: "HR/Payroll", icon: "💼", color: MOE.teal, docs: [] },
+  { id: "injury-accidents", title: "Injury/Accidents", icon: "🚑", color: MOE.orange, docs: [] },
+  { id: "admin-docs", title: "Admin Docs", icon: "🗂️", color: MOE.teal, docs: [] },
+];
+
+function openResourceDoc(doc, setActivePdf) {
+  if (doc.url.toLowerCase().endsWith(".pdf")) {
+    setActivePdf(doc);
+  } else {
+    window.open(doc.url, "_blank", "noreferrer");
+  }
+}
+
+function ResourceCategories({ setActivePdf }) {
+  const [activeCategory, setActiveCategory] = useState(null);
+  const activeCat = RESOURCE_CATEGORIES.find(c => c.id === activeCategory);
+
+  return (
+    <section style={{ marginBottom: 40 }}>
+      <h2 style={{ fontSize: 24, fontWeight: 700, color: "#ffffff", fontFamily: "Calibri, sans-serif", marginBottom: 18, textTransform: "uppercase", letterSpacing: 1 }}>
+        Document Library
+      </h2>
+      <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(180px, 1fr))", gap: 16, marginBottom: activeCat ? 20 : 0 }}>
+        {RESOURCE_CATEGORIES.map(cat => {
+          const active = activeCategory === cat.id;
+          return (
+            <button
+              key={cat.id}
+              onClick={() => setActiveCategory(active ? null : cat.id)}
+              style={{
+                display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: 8,
+                background: active ? `${cat.color}22` : "#1A1A1A",
+                border: `2px solid ${active ? cat.color : "#333"}`,
+                borderRadius: 12, padding: "22px 16px", cursor: "pointer",
+                fontFamily: "Calibri, sans-serif", color: "#fff", transition: "all 0.2s",
+              }}
+            >
+              <div style={{ fontSize: 34 }}>{cat.icon}</div>
+              <div style={{ fontSize: 16, fontWeight: 700, textAlign: "center" }}>{cat.title}</div>
+              <div style={{ fontSize: 12, color: cat.color, fontWeight: 600 }}>
+                {cat.docs.length} document{cat.docs.length === 1 ? "" : "s"}
+              </div>
+            </button>
+          );
+        })}
+      </div>
+
+      {activeCat && (
+        <div style={{ background: "#1A1A1A", border: `2px solid ${activeCat.color}`, borderRadius: 14, padding: "22px 20px" }}>
+          <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 16 }}>
+            <div style={{ fontSize: 19, fontWeight: 800, color: activeCat.color, fontFamily: "Calibri, sans-serif", textTransform: "uppercase", letterSpacing: 1 }}>
+              {activeCat.icon} {activeCat.title}
+            </div>
+            <button
+              onClick={() => setActiveCategory(null)}
+              style={{ background: "transparent", border: "none", color: "#888", fontSize: 14, cursor: "pointer", fontFamily: "Calibri, sans-serif" }}
+            >
+              Close ✕
+            </button>
+          </div>
+          {activeCat.docs.length === 0 ? (
+            <p style={{ color: "#888", fontFamily: "Calibri, sans-serif", fontSize: 16, margin: 0 }}>
+              No documents added yet. Check back soon.
+            </p>
+          ) : (
+            <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(220px, 1fr))", gap: 16 }}>
+              {activeCat.docs.map((doc, i) => (
+                <a key={i} href={doc.url} onClick={e => { e.preventDefault(); openResourceDoc(doc, setActivePdf); }}
+                  style={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", textAlign: "center", gap: 6, background: "#111", border: "1.5px solid #333", borderRadius: 10, padding: "18px 20px", textDecoration: "none", color: "#fff", fontFamily: "Calibri, sans-serif", fontSize: 17, fontWeight: 600, cursor: "pointer" }}
+                >
+                  <div style={{ fontSize: 17, fontWeight: 700 }}>{doc.title}</div>
+                  <div style={{ fontSize: 14, color: activeCat.color, marginTop: 4 }}>Click to open →</div>
+                </a>
+              ))}
+            </div>
+          )}
+        </div>
+      )}
+    </section>
+  );
+}
+
 function getPositionProgress(userId) {
   try {
     const raw = localStorage.getItem(`moes_positions_${userId}`);
@@ -2225,40 +2307,8 @@ function PageContent({ page, isCompleted, onComplete, progress, user }) {
         </section>
       )}
 
-      {/* Sterling Focus - Resources page only */}
-      {page.id === "resources" && (
-        <section style={{ marginBottom: 40 }}>
-          <h2 style={{ fontSize: 24, fontWeight: 700, color: "#ffffff", fontFamily: "Calibri, sans-serif", marginBottom: 18, textTransform: "uppercase", letterSpacing: 1 }}>
-            Sterling Focus
-          </h2>
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(180px, 1fr))", gap: 16 }}>
-            {[
-              { title: "Sterling Focus 1", url: "#" },
-              { title: "Sterling Focus 2", url: "#" },
-              { title: "Sterling Focus 3", url: "#" },
-              { title: "Sterling Focus 4", url: "#" },
-              { title: "Sterling Focus 5", url: "#" },
-              { title: "Sterling Focus 6", url: "#" },
-              { title: "Sterling Focus 7", url: "#" },
-              { title: "Sterling Focus 8", url: "#" },
-              { title: "Sterling Focus 9", url: "#" },
-              { title: "Sterling Focus 10", url: "#" },
-              { title: "Sterling Focus 11", url: "#" },
-              { title: "Sterling Focus 12", url: "#" },
-            ].map((pdf, i) => (
-              <a key={i} href={pdf.url} target="_blank" rel="noreferrer"
-                style={{ display: "flex", alignItems: "center", gap: 12, background: "#1A1A1A", border: "1.5px solid #333", borderRadius: 10, padding: "18px 20px", textDecoration: "none", color: "#fff", fontFamily: "Calibri, sans-serif", fontSize: 17, fontWeight: 600, cursor: "pointer" }}
-              >
-                <div style={{ fontSize: 28 }}>📄</div>
-                <div>
-                  <div style={{ fontSize: 16, fontWeight: 700 }}>{pdf.title}</div>
-                  <div style={{ fontSize: 13, color: MOE.teal, marginTop: 4 }}>Click to open PDF →</div>
-                </div>
-              </a>
-            ))}
-          </div>
-        </section>
-      )}
+      {/* Document Library - Resources page only */}
+      {page.id === "resources" && <ResourceCategories setActivePdf={setActivePdf} />}
 
       {page.id !== "training" && page.id !== "orientation" && <section style={{ marginBottom: 40 }}>
         <h2 style={{ fontSize: 24, fontWeight: 700, color: "#ffffff", fontFamily: "Calibri, sans-serif", marginBottom: 18, display: "flex", alignItems: "center", gap: 8, textTransform: "uppercase", letterSpacing: 1 }}>

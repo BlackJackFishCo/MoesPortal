@@ -1884,12 +1884,14 @@ const POSITION_DOCS = {
 // Add real files by dropping them in /public and adding { title, url } entries
 // to the matching category's `docs` array below (pdf, xlsx, docx, etc. all work).
 const RESOURCE_CATEGORIES = [
-  { id: "recipes", title: "Recipes", icon: "🌮", color: MOE.orange, docs: [] },
-  { id: "sterling-focus", title: "Sterling Focus", icon: "🎯", color: MOE.teal, docs: [] },
-  { id: "sterling-contacts", title: "Sterling Contacts", icon: "📇", color: MOE.orange, docs: [] },
-  { id: "hr-payroll", title: "HR/Payroll", icon: "💼", color: MOE.teal, docs: [] },
-  { id: "injury-accidents", title: "Injury/Accidents", icon: "🚑", color: MOE.orange, docs: [] },
-  { id: "admin-docs", title: "Admin Docs", icon: "🗂️", color: MOE.teal, docs: [] },
+  { id: "recipes", title: "Recipes", color: MOE.orange, docs: [] },
+  { id: "sterling-focus", title: "Sterling Focus", color: MOE.teal, docs: [] },
+  { id: "sterling-contacts", title: "Sterling Contacts", color: MOE.orange, docs: [] },
+  { id: "hr-payroll", title: "HR/Payroll", color: MOE.teal, docs: [] },
+  { id: "injury-accidents", title: "Injury/Accidents", color: MOE.orange, docs: [] },
+  { id: "admin-docs", title: "Admin Docs", color: MOE.teal, docs: [] },
+  { id: "doc-1", title: "Doc 1", color: MOE.orange, docs: [] },
+  { id: "doc-2", title: "Doc 2", color: MOE.teal, docs: [] },
 ];
 
 function openResourceDoc(doc, setActivePdf) {
@@ -1924,7 +1926,6 @@ function ResourceCategories({ setActivePdf }) {
                 fontFamily: "Calibri, sans-serif", color: "#fff", transition: "all 0.2s",
               }}
             >
-              <div style={{ fontSize: 34 }}>{cat.icon}</div>
               <div style={{ fontSize: 16, fontWeight: 700, textAlign: "center" }}>{cat.title}</div>
               <div style={{ fontSize: 12, color: cat.color, fontWeight: 600 }}>
                 {cat.docs.length} document{cat.docs.length === 1 ? "" : "s"}
@@ -1938,7 +1939,7 @@ function ResourceCategories({ setActivePdf }) {
         <div style={{ background: "#1A1A1A", border: `2px solid ${activeCat.color}`, borderRadius: 14, padding: "22px 20px" }}>
           <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 16 }}>
             <div style={{ fontSize: 19, fontWeight: 800, color: activeCat.color, fontFamily: "Calibri, sans-serif", textTransform: "uppercase", letterSpacing: 1 }}>
-              {activeCat.icon} {activeCat.title}
+              {activeCat.title}
             </div>
             <button
               onClick={() => setActiveCategory(null)}

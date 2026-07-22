@@ -2316,7 +2316,7 @@ function PageContent({ page, isCompleted, onComplete, progress, user }) {
           {page.id === "orientation" ? "Orientation Videos" : page.id === "food-safety" ? "Food Safety Videos" : page.id === "history" ? "Welcome To Moe's Videos" : "Additional Training Resources"}
         </h2>
 
-        {page.id === "orientation" ? (
+        {page.id === "orientation" || page.id === "history" ? (
           <div style={{ display: "flex", justifyContent: "center", marginBottom: 20 }}>
             <div style={{ width: "100%", maxWidth: 600, borderRadius: 12, overflow: "hidden", background: "#000", border: `2px solid ${page.color}` }}>
               <iframe

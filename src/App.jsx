@@ -511,13 +511,6 @@ function getAllQuizResults() {
 
 // ─── Position Quiz Data ───────────────────────────────────────────────────────
 const POSITION_QUIZ_QUESTIONS = {
-  menu: [
-    { id: 1, question: "Question 1 — to be edited", options: ["Answer A", "Answer B", "Answer C", "Answer D"], correct: 0 },
-    { id: 2, question: "Question 2 — to be edited", options: ["Answer A", "Answer B", "Answer C", "Answer D"], correct: 0 },
-    { id: 3, question: "Question 3 — to be edited", options: ["Answer A", "Answer B", "Answer C", "Answer D"], correct: 0 },
-    { id: 4, question: "Question 4 — to be edited", options: ["Answer A", "Answer B", "Answer C", "Answer D"], correct: 0 },
-    { id: 5, question: "Question 5 — to be edited", options: ["Answer A", "Answer B", "Answer C", "Answer D"], correct: 0 },
-  ],
   hot: [
     { id: 1, question: "Question 1 — to be edited", options: ["Answer A", "Answer B", "Answer C", "Answer D"], correct: 0 },
     { id: 2, question: "Question 2 — to be edited", options: ["Answer A", "Answer B", "Answer C", "Answer D"], correct: 0 },
@@ -1984,7 +1977,7 @@ function savePositionProgress(userId, data) {
 
 // ─── Position Tracker Component ───────────────────────────────────────────────
 function PositionTracker({ user, onPositionPass, setActivePdf }) {
-  const [posProg, setPosProg] = useState(() => getPositionProgress(user?.id));
+  const [posProg, setPosProg] = useState(() => ({ ...getPositionProgress(user?.id), menu: true }));
   const [activePos, setActivePos] = useState(null);
 
   const handleQuizPass = (posId) => {
@@ -2104,14 +2097,18 @@ function PositionTracker({ user, onPositionPass, setActivePdf }) {
             )}
 
             {/* Quiz */}
-            <div style={{ height: 2, background: `linear-gradient(90deg, ${pos.color}, transparent)`, borderRadius: 2, marginBottom: 20 }} />
-            <PositionQuiz
-              user={user}
-              posId={pos.id}
-              posColor={pos.color}
-              posLabel={pos.label}
-              onPass={() => handleQuizPass(pos.id)}
-            />
+            {pos.id !== "menu" && (
+              <>
+                <div style={{ height: 2, background: `linear-gradient(90deg, ${pos.color}, transparent)`, borderRadius: 2, marginBottom: 20 }} />
+                <PositionQuiz
+                  user={user}
+                  posId={pos.id}
+                  posColor={pos.color}
+                  posLabel={pos.label}
+                  onPass={() => handleQuizPass(pos.id)}
+                />
+              </>
+            )}
           </div>
         );
       })()}
@@ -2165,7 +2162,7 @@ function PageContent({ page, isCompleted, onComplete, progress, user }) {
 
   useEffect(() => {
     if (page.id === "training" && !isCompleted) {
-      const allPassed = POSITIONS.every(p => getPosQuizResult(user?.id, p.id)?.passed);
+      const allPassed = POSITIONS.every(p => p.id === "menu" || getPosQuizResult(user?.id, p.id)?.passed);
       if (allPassed) onComplete(page.id);
     }
   }, [posPassCount]);

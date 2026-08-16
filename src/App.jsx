@@ -1972,9 +1972,22 @@ function savePositionProgress(userId, data) {
   setDoc(doc(db, "users", userId), { positionProgress: data }, { merge: true }).catch(() => {});
 }
 
+function getVideoProgress(userId) {
+  try {
+    const raw = localStorage.getItem(`moes_videos_${userId}`);
+    return raw ? JSON.parse(raw) : {};
+  } catch { return {}; }
+}
+
+function saveVideoProgress(userId, data) {
+  try { localStorage.setItem(`moes_videos_${userId}`, JSON.stringify(data)); } catch {}
+  setDoc(doc(db, "users", userId), { videoProgress: data }, { merge: true }).catch(() => {});
+}
+
 // ─── Position Tracker Component ───────────────────────────────────────────────
 function PositionTracker({ user, onPositionPass, setActivePdf }) {
-  const [posProg, setPosProg] = useState(() => ({ ...getPositionProgress(user?.id), menu: true }));
+  const [posProg, setPosProg] = useState(() => getPositionProgress(user?.id));
+  const [videoProg, setVideoProg] = useState(() => getVideoProgress(user?.id));
   const [activePos, setActivePos] = useState(null);
 
   const handleQuizPass = (posId) => {
@@ -1983,6 +1996,23 @@ function PositionTracker({ user, onPositionPass, setActivePdf }) {
     savePositionProgress(user?.id, updated);
     if (onPositionPass) onPositionPass(posId);
   };
+
+  const toggleVideoWatched = (posId, i) => {
+    const key = `${posId}-${i}`;
+    const updated = { ...videoProg, [key]: !videoProg[key] };
+    setVideoProg(updated);
+    saveVideoProgress(user?.id, updated);
+  };
+
+  useEffect(() => {
+    const allMenuVideosWatched = POSITION_VIDEOS.menu.every((_, i) => videoProg[`menu-${i}`]);
+    if (allMenuVideosWatched && !posProg.menu) {
+      const updated = { ...posProg, menu: true };
+      setPosProg(updated);
+      savePositionProgress(user?.id, updated);
+      if (onPositionPass) onPositionPass("menu");
+    }
+  }, [videoProg]);
 
   const completedCount = POSITIONS.filter(p => posProg[p.id]).length;
 
@@ -2054,23 +2084,32 @@ function PositionTracker({ user, onPositionPass, setActivePdf }) {
                   {pos.id === "menu" || pos.id === "catering" ? pos.label : `${pos.label} Station`}
                 </div>
                 <div style={{ fontSize: 14, color: "#888", fontFamily: "Calibri, sans-serif" }}>
-                  {done ? "✅ Certified" : "Watch the training videos below, then pass the quiz to earn certification"}
+                  {done ? "✅ Certified" : pos.id === "menu" ? "Watch and check off all training videos below to earn certification" : "Watch the training videos below, then pass the quiz to earn certification"}
                 </div>
               </div>
             </div>
 
             {/* Training videos */}
             <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: 16, marginBottom: 24 }}>
-              {videos.map((vid, i) => (
-                <div key={i}>
-                  <div style={{ borderRadius: 10, overflow: "hidden", background: "#000", border: "1px solid #333", marginBottom: 8 }}>
-                    <iframe width="100%" height="220" src={vid.url} title={vid.title}
-                      frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                      allowFullScreen style={{ display: "block" }} />
+              {videos.map((vid, i) => {
+                const watched = !!videoProg[`${pos.id}-${i}`];
+                return (
+                  <div key={i}>
+                    <div style={{ borderRadius: 10, overflow: "hidden", background: "#000", border: "1px solid #333", marginBottom: 8 }}>
+                      <iframe width="100%" height="220" src={vid.url} title={vid.title}
+                        frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowFullScreen style={{ display: "block" }} />
+                    </div>
+                    <div style={{ fontSize: 13, color: "#888", fontFamily: "Calibri, sans-serif", textAlign: "center" }}>📹 {vid.title}</div>
+                    {pos.id === "menu" && (
+                      <label style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 6, marginTop: 6, fontSize: 13, fontWeight: 600, color: watched ? MOE.teal : "#888", cursor: "pointer", fontFamily: "Calibri, sans-serif" }}>
+                        <input type="checkbox" checked={watched} onChange={() => toggleVideoWatched(pos.id, i)} />
+                        {watched ? "✓ Watched" : "Mark as watched"}
+                      </label>
+                    )}
                   </div>
-                  <div style={{ fontSize: 13, color: "#888", fontFamily: "Calibri, sans-serif", textAlign: "center" }}>📹 {vid.title}</div>
-                </div>
-              ))}
+                );
+              })}
             </div>
 
             {/* Documents */}
@@ -2158,7 +2197,7 @@ function PageContent({ page, isCompleted, onComplete, progress, user }) {
 
   useEffect(() => {
     if (page.id === "training" && !isCompleted) {
-      const allPassed = POSITIONS.every(p => p.id === "menu" || getPosQuizResult(user?.id, p.id)?.passed);
+      const allPassed = POSITIONS.every(p => p.id === "menu" ? !!getPositionProgress(user?.id).menu : getPosQuizResult(user?.id, p.id)?.passed);
       if (allPassed) onComplete(page.id);
     }
   }, [posPassCount]);

@@ -2017,7 +2017,7 @@ function PositionTracker({ user, onPositionPass, setActivePdf }) {
                   fontSize: "clamp(28px, 5vw, 48px)", transition: "all 0.2s",
                   boxShadow: done ? `0 0 28px ${pos.color}55` : activePos === pos.id ? "0 0 20px #44444466" : "none",
                 }}>
-                  {done ? <img src="/sterling-star.svg" alt="Sterling Star" style={{ width: "140%", height: "140%", objectFit: "contain", filter: `drop-shadow(0 0 10px ${pos.color}cc)` }} /> : <span style={{ fontSize: 44 }}>{pos.icon}</span>}
+                  {done ? <span style={{ fontSize: 44, color: pos.color }}>✓</span> : <span style={{ fontSize: 44 }}>{pos.icon}</span>}
                 </div>
                 <div style={{ fontSize: 14, fontWeight: 700, textTransform: "uppercase", letterSpacing: 0.5, fontFamily: "Calibri, sans-serif", color: done ? pos.color : activePos === pos.id ? "#ccc" : "#666" }}>
                   {pos.label}
@@ -2060,7 +2060,6 @@ function PositionTracker({ user, onPositionPass, setActivePdf }) {
                   {done ? "✅ Certified" : "Watch the training videos below, then pass the quiz to earn certification"}
                 </div>
               </div>
-              {done && <div style={{ marginLeft: "auto" }}><img src="/sterling-star.svg" alt="Sterling Star" style={{ width: 96, height: 96, objectFit: "contain", filter: "drop-shadow(0 0 10px #aaaac0)" }} /></div>}
             </div>
 
             {/* Training videos */}

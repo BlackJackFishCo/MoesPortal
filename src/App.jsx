@@ -1991,7 +1991,7 @@ function PositionTracker({ user, onPositionPass, setActivePdf }) {
       {/* Section Header */}
       <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", flexWrap: "wrap", gap: 10, marginBottom: 20 }}>
         <h2 style={{ fontSize: 24, fontWeight: 700, color: "#ffffff", fontFamily: "Calibri, sans-serif", margin: 0, textTransform: "uppercase", letterSpacing: 1 }}>
-          <img src="/sterling-star.svg" alt="Sterling Star" style={{ width: 56, height: 56, verticalAlign: "middle", marginRight: 8, filter: "drop-shadow(0 0 6px #aaa8)" }} /> Position Training
+          Position Training
         </h2>
         <div style={{ fontSize: 15, color: "#888", fontFamily: "Calibri, sans-serif" }}>
           <span style={{ color: MOE.teal, fontWeight: 700 }}>{completedCount}</span> / {POSITIONS.length} positions certified

@@ -190,10 +190,7 @@ const PAGES = [
     alwaysAvailable: true,
     description: "Quick-access library for reference documents, contact lists, HR forms, and ongoing learning materials. Always available to you.",
     pdfs: [],
-    videos: [
-      { title: "Video 1", url: "https://www.youtube.com/embed/ZK5X1SZTFfM" },
-      { title: "Video 2", url: "https://www.youtube.com/embed/ZK5X1SZTFfM" },
-    ],
+    videos: [],
   },
 ];
 
@@ -1920,7 +1917,7 @@ function ResourceCategories({ setActivePdf }) {
               }}
             >
               <div style={{ fontSize: 16, fontWeight: 700, textAlign: "center" }}>{cat.title}</div>
-              <div style={{ fontSize: 12, color: cat.color, fontWeight: 600 }}>
+              <div style={{ fontSize: 12, color: MOE.teal, fontWeight: 600 }}>
                 {cat.docs.length} document{cat.docs.length === 1 ? "" : "s"}
               </div>
             </button>
@@ -2307,7 +2304,7 @@ function PageContent({ page, isCompleted, onComplete, progress, user }) {
       {/* Document Library - Resources page only */}
       {page.id === "resources" && <ResourceCategories setActivePdf={setActivePdf} />}
 
-      {page.id !== "training" && page.id !== "orientation" && <section style={{ marginBottom: 40 }}>
+      {page.id !== "training" && page.id !== "orientation" && page.videos.length > 0 && <section style={{ marginBottom: 40 }}>
         <h2 style={{ fontSize: 24, fontWeight: 700, color: "#ffffff", fontFamily: "Calibri, sans-serif", marginBottom: 18, display: "flex", alignItems: "center", gap: 8, textTransform: "uppercase", letterSpacing: 1 }}>
           {page.id === "orientation" ? "Orientation Videos" : page.id === "food-safety" ? "Food Safety Videos" : page.id === "history" ? "Welcome To Moe's Videos" : "Additional Training Resources"}
         </h2>

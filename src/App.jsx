@@ -1769,9 +1769,7 @@ function ProgressBar({ progress, activePage, onNavigate }) {
                   fontSize: "clamp(12px, 3vw, 18px)", color: "#fff",
                   boxShadow: isActive ? `0 0 14px ${MOE.orange}88` : "none",
                   transition: "all 0.3s",
-                }}>
-                  {resourcePage.icon}
-                </div>
+                }} />
                 <div style={{
                   fontSize: "clamp(9px, 2.5vw, 16px)", fontWeight: isActive ? 700 : 500,
                   color: isActive ? MOE.orange : "#888",

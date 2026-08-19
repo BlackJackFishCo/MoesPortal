@@ -156,9 +156,9 @@ const PAGES = [
     description: "This section will review food safety / Department of Health food protection practices you will need to know before serving food to guests. Safety of our food, employees and guests is a top priority. Please review the videos before taking the required quiz. You must pass with 70% or higher to complete this Food Safety module.",
     pdfs: [],
     videos: [
-      { title: "Cross Contamination", url: "https://www.youtube.com/embed/0VbbIhEJ_yU" },
       { title: "Handwashing", url: "https://www.youtube.com/embed/7xYqa0FRNls" },
       { title: "Gloves", url: "https://www.youtube.com/embed/2Scm_LJE2F0" },
+      { title: "Cross Contamination", url: "https://www.youtube.com/embed/0VbbIhEJ_yU" },
     ],
   },
   {

@@ -1828,7 +1828,7 @@ const POSITION_VIDEOS = {
     { title: "Kids Meals",           url: "https://www.youtube.com/embed/d-_Rdv8_KU0" },
     { title: "Chicken Club Quesadilla", url: "about:blank" },
     { title: "Quesadilla",           url: "about:blank" },
-    { title: "Stack",                url: "about:blank" },
+    { title: "Stack",                url: "https://www.youtube.com/embed/mBMSEBICh4A" },
   ],
   hot:      [{ title: "Hot Station Overview",        url: "https://www.youtube.com/embed/m8druNKyL8o" }, { title: "Hot Station Deep Dive",         url: "https://www.youtube.com/embed/ZK5X1SZTFfM" }],
   cold:     [{ title: "Cold Station Overview",       url: "https://www.youtube.com/embed/l9398Kjy7-4" }, { title: "Cold Station Deep Dive",        url: "https://www.youtube.com/embed/uzaj2vCTMwc" }],

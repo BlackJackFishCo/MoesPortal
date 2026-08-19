@@ -1826,7 +1826,7 @@ const POSITION_VIDEOS = {
     { title: "Queso & Guac",         url: "https://www.youtube.com/embed/Oj1-58yl6u0" },
     { title: "Moe Vale Meals",       url: "about:blank" },
     { title: "Kids Meals",           url: "https://www.youtube.com/embed/d-_Rdv8_KU0" },
-    { title: "Chicken Club Quesadilla", url: "about:blank" },
+    { title: "Chicken Club Quesadilla", url: "https://www.youtube.com/embed/EBcTRFWfliE" },
     { title: "Quesadilla",           url: "about:blank" },
     { title: "Stack",                url: "https://www.youtube.com/embed/mBMSEBICh4A" },
   ],

@@ -1824,7 +1824,7 @@ const POSITION_VIDEOS = {
     { title: "Nachos",               url: "https://www.youtube.com/embed/S5vmtywo72k" },
     { title: "Chicken Club Quesadilla", url: "https://www.youtube.com/embed/EBcTRFWfliE" },
     { title: "Quesadilla",           url: "about:blank" },
-    { title: "Tacos",                url: "about:blank" },
+    { title: "Tacos",                url: "https://www.youtube.com/embed/OhLC5wwmmdE" },
     { title: "Stack",                url: "https://www.youtube.com/embed/mBMSEBICh4A" },
     { title: "Moe Value Meals",      url: "https://www.youtube.com/embed/SqgfHAFtolc" },
     { title: "Kids Meals",           url: "https://www.youtube.com/embed/d-_Rdv8_KU0" },

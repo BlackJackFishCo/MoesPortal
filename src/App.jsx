@@ -582,7 +582,7 @@ function PositionChecklist({ posId, posColor, posLabel, progress, onToggle }) {
     <div style={{ marginTop: 16 }}>
       <div style={{ background: "#1A1A1A", border: `2px solid ${posColor}`, borderRadius: 12, padding: "20px 24px", marginBottom: 16 }}>
         <div style={{ fontSize: 20, fontWeight: 800, color: "#fff", textTransform: "uppercase", letterSpacing: 1, marginBottom: 4 }}>{posLabel} Checklist</div>
-        <div style={{ fontSize: 14, color: "#aaa" }}>{completedCount}/{items.length} checked off · Check off every item to earn certification</div>
+        <div style={{ fontSize: 14, color: "#aaa" }}>{completedCount}/{items.length} checked off · Check off every item to mark this position complete</div>
         <div style={{ height: 2, background: `linear-gradient(90deg, ${posColor}, transparent)`, marginTop: 14 }} />
       </div>
       {items.map((item, i) => {
@@ -600,7 +600,7 @@ function PositionChecklist({ posId, posColor, posLabel, progress, onToggle }) {
         );
       })}
       {allChecked && (
-        <div style={{ marginTop: 12, fontSize: 15, fontWeight: 700, color: posColor }}>✓ All items checked — {posLabel} certified!</div>
+        <div style={{ marginTop: 12, fontSize: 15, fontWeight: 700, color: posColor }}>✓ All items checked — {posLabel} complete!</div>
       )}
     </div>
   );
@@ -1736,13 +1736,13 @@ const POSITION_VIDEOS = {
     { title: "Kids Meals",           url: "https://www.youtube.com/embed/d-_Rdv8_KU0" },
     { title: "Queso & Guac",         url: "https://www.youtube.com/embed/Oj1-58yl6u0" },
   ],
-  hot:      [{ title: "Hot Station Overview",        url: "https://www.youtube.com/embed/m8druNKyL8o" }, { title: "Hot Station Deep Dive",         url: "https://www.youtube.com/embed/ZK5X1SZTFfM" }],
+  hot:      [{ title: "Hot Station Overview",        url: "https://www.youtube.com/embed/m8druNKyL8o" }],
   cold:     [{ title: "Cold Station Overview",       url: "https://www.youtube.com/embed/l9398Kjy7-4" }, { title: "Cold Station Deep Dive",        url: "https://www.youtube.com/embed/uzaj2vCTMwc" }],
   swing:    [{ title: "Swing Position Overview",     url: "https://www.youtube.com/embed/dN3_JdrYRWE" }, { title: "Swing Position Deep Dive",      url: "https://www.youtube.com/embed/dZdXE48ooq0" }],
-  ring:     [{ title: "Ring / Cashier Overview",     url: "https://www.youtube.com/embed/4vQev6t8ZmA" }, { title: "Ring / Cashier Deep Dive",      url: "https://www.youtube.com/embed/ZK5X1SZTFfM" }],
-  prep:     [{ title: "Prep Station Overview",       url: "https://www.youtube.com/embed/ZK5X1SZTFfM" }, { title: "Prep Station Deep Dive",        url: "https://www.youtube.com/embed/ZK5X1SZTFfM" }],
-  ambassador: [{ title: "Ambassador Overview",       url: "https://www.youtube.com/embed/ZK5X1SZTFfM" }, { title: "Ambassador Deep Dive",          url: "https://www.youtube.com/embed/ZK5X1SZTFfM" }],
-  catering: [{ title: "Catering Overview",           url: "https://www.youtube.com/embed/ZK5X1SZTFfM" }, { title: "Catering Deep Dive",            url: "https://www.youtube.com/embed/ZK5X1SZTFfM" }],
+  ring:     [{ title: "Ring / Cashier Overview",     url: "https://www.youtube.com/embed/4vQev6t8ZmA" }],
+  prep:     [],
+  ambassador: [],
+  catering: [],
 };
 
 const POSITION_DOCS = {
@@ -1934,7 +1934,7 @@ function PositionTracker({ user, onPositionPass, setActivePdf }) {
           Position Training
         </h2>
         <div style={{ fontSize: 15, color: "#888", fontFamily: "Calibri, sans-serif" }}>
-          <span style={{ color: MOE.teal, fontWeight: 700 }}>{completedCount}</span> / {POSITIONS.length} positions certified
+          <span style={{ color: MOE.teal, fontWeight: 700 }}>{completedCount}</span> / {POSITIONS.length} positions completed
         </div>
       </div>
 
@@ -1960,7 +1960,7 @@ function PositionTracker({ user, onPositionPass, setActivePdf }) {
                   {pos.label}
                 </div>
                 <div style={{ fontSize: 12, fontWeight: 600, color: done ? MOE.teal : "#555", fontFamily: "Calibri, sans-serif" }}>
-                  {done ? "✓ CERTIFIED" : "INCOMPLETE"}
+                  {done ? "✓ COMPLETED" : "INCOMPLETE"}
                 </div>
               </div>
             );
@@ -1974,7 +1974,7 @@ function PositionTracker({ user, onPositionPass, setActivePdf }) {
           }} />
         </div>
         <div style={{ textAlign: "center", marginTop: 6, fontSize: 13, color: completedCount === POSITIONS.length ? MOE.teal : "#666", fontFamily: "Calibri, sans-serif", fontWeight: 700 }}>
-          {completedCount === POSITIONS.length ? "🏆 All Positions Certified!" : `${Math.round((completedCount / POSITIONS.length) * 100)}% Complete`}
+          {completedCount === POSITIONS.length ? "🏆 All Positions Completed!" : `${Math.round((completedCount / POSITIONS.length) * 100)}% Complete`}
         </div>
       </div>
 
@@ -1994,7 +1994,13 @@ function PositionTracker({ user, onPositionPass, setActivePdf }) {
                   {pos.id === "menu" || pos.id === "catering" ? pos.label : `${pos.label} Station`}
                 </div>
                 <div style={{ fontSize: 14, color: "#888", fontFamily: "Calibri, sans-serif" }}>
-                  {done ? "✅ Certified" : pos.id === "menu" ? "Watch and check off all training videos below to earn certification" : "Watch the training videos below, then check off every checklist item to earn certification"}
+                  {done
+                    ? "✅ Completed"
+                    : pos.id === "menu"
+                      ? "Watch and check off all training videos below to mark this section complete"
+                      : videos.length > 0
+                        ? "Watch the training videos below, then check off every checklist item to mark this position complete"
+                        : "Check off every checklist item below to mark this position complete"}
                 </div>
               </div>
             </div>

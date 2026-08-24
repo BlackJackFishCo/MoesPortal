@@ -167,7 +167,7 @@ const PAGES = [
     icon: "🌮",
     color: MOE.orange,
     alwaysAvailable: false,
-    description: "Station-by-station training covering the Menu, Hot, Cold, Swing, Ring, and Station Prep positions. Complete the quiz after each section and have your manager verify you have mastered each position to become Sterling Certified and earn your Blue Certification hat. This training material is always available for reference later.",
+    description: "Station-by-station training covering the Menu, Hot, Cold, Swing, Ring, and Station Prep positions. Complete the checklist after each section and have your manager verify you have mastered each position to become Sterling Certified and earn your Blue Certification hat. This training material is always available for reference later.",
     pdfs: [
       { title: "Line Setup Guide", url: "#" },
       { title: "Recipe & Portion Standards", url: "#" },
@@ -315,6 +315,7 @@ function removeUser(userId) {
     localStorage.removeItem(`moes_quiz_${userId}`);
     localStorage.removeItem(`moes_orientation_notes_${userId}`);
     localStorage.removeItem(`moes_positions_${userId}`);
+    localStorage.removeItem(`moes_checklist_${userId}`);
   } catch {}
   deleteDoc(doc(db, "users", userId)).catch(() => {});
 }
@@ -325,8 +326,9 @@ function resetUserProgress(userId) {
     localStorage.removeItem(`moes_orientation_quiz_${userId}`);
     localStorage.removeItem(`moes_orientation_notes_${userId}`);
     localStorage.removeItem(`moes_positions_${userId}`);
+    localStorage.removeItem(`moes_checklist_${userId}`);
   } catch {}
-  setDoc(doc(db, "users", userId), { progress: {}, quizResult: null, orientationQuizResult: null, orientationNotes: {}, positionProgress: {} }, { merge: true }).catch(() => {});
+  setDoc(doc(db, "users", userId), { progress: {}, quizResult: null, orientationQuizResult: null, orientationNotes: {}, positionProgress: {}, checklistProgress: {} }, { merge: true }).catch(() => {});
 }
 function getUserProgress(userId, embeddedProgress) {
   if (embeddedProgress && Object.keys(embeddedProgress).length > 0) return embeddedProgress;
@@ -506,196 +508,100 @@ function getAllQuizResults() {
 }
 
 
-// ─── Position Quiz Data ───────────────────────────────────────────────────────
-const POSITION_QUIZ_QUESTIONS = {
+// ─── Position Checklist Data ───────────────────────────────────────────────────
+const POSITION_CHECKLISTS = {
   hot: [
-    { id: 1, question: "Question 1 — to be edited", options: ["Answer A", "Answer B", "Answer C", "Answer D"], correct: 0 },
-    { id: 2, question: "Question 2 — to be edited", options: ["Answer A", "Answer B", "Answer C", "Answer D"], correct: 0 },
-    { id: 3, question: "Question 3 — to be edited", options: ["Answer A", "Answer B", "Answer C", "Answer D"], correct: 0 },
-    { id: 4, question: "Question 4 — to be edited", options: ["Answer A", "Answer B", "Answer C", "Answer D"], correct: 0 },
-    { id: 5, question: "Question 5 — to be edited", options: ["Answer A", "Answer B", "Answer C", "Answer D"], correct: 0 },
+    "Checklist item 1 — to be edited",
+    "Checklist item 2 — to be edited",
+    "Checklist item 3 — to be edited",
+    "Checklist item 4 — to be edited",
+    "Checklist item 5 — to be edited",
   ],
   cold: [
-    { id: 1, question: "Question 1 — to be edited", options: ["Answer A", "Answer B", "Answer C", "Answer D"], correct: 0 },
-    { id: 2, question: "Question 2 — to be edited", options: ["Answer A", "Answer B", "Answer C", "Answer D"], correct: 0 },
-    { id: 3, question: "Question 3 — to be edited", options: ["Answer A", "Answer B", "Answer C", "Answer D"], correct: 0 },
-    { id: 4, question: "Question 4 — to be edited", options: ["Answer A", "Answer B", "Answer C", "Answer D"], correct: 0 },
-    { id: 5, question: "Question 5 — to be edited", options: ["Answer A", "Answer B", "Answer C", "Answer D"], correct: 0 },
+    "Checklist item 1 — to be edited",
+    "Checklist item 2 — to be edited",
+    "Checklist item 3 — to be edited",
+    "Checklist item 4 — to be edited",
+    "Checklist item 5 — to be edited",
   ],
   swing: [
-    { id: 1, question: "Question 1 — to be edited", options: ["Answer A", "Answer B", "Answer C", "Answer D"], correct: 0 },
-    { id: 2, question: "Question 2 — to be edited", options: ["Answer A", "Answer B", "Answer C", "Answer D"], correct: 0 },
-    { id: 3, question: "Question 3 — to be edited", options: ["Answer A", "Answer B", "Answer C", "Answer D"], correct: 0 },
-    { id: 4, question: "Question 4 — to be edited", options: ["Answer A", "Answer B", "Answer C", "Answer D"], correct: 0 },
-    { id: 5, question: "Question 5 — to be edited", options: ["Answer A", "Answer B", "Answer C", "Answer D"], correct: 0 },
+    "Checklist item 1 — to be edited",
+    "Checklist item 2 — to be edited",
+    "Checklist item 3 — to be edited",
+    "Checklist item 4 — to be edited",
+    "Checklist item 5 — to be edited",
   ],
   ring: [
-    { id: 1, question: "Question 1 — to be edited", options: ["Answer A", "Answer B", "Answer C", "Answer D"], correct: 0 },
-    { id: 2, question: "Question 2 — to be edited", options: ["Answer A", "Answer B", "Answer C", "Answer D"], correct: 0 },
-    { id: 3, question: "Question 3 — to be edited", options: ["Answer A", "Answer B", "Answer C", "Answer D"], correct: 0 },
-    { id: 4, question: "Question 4 — to be edited", options: ["Answer A", "Answer B", "Answer C", "Answer D"], correct: 0 },
-    { id: 5, question: "Question 5 — to be edited", options: ["Answer A", "Answer B", "Answer C", "Answer D"], correct: 0 },
+    "Checklist item 1 — to be edited",
+    "Checklist item 2 — to be edited",
+    "Checklist item 3 — to be edited",
+    "Checklist item 4 — to be edited",
+    "Checklist item 5 — to be edited",
   ],
   prep: [
-    { id: 1, question: "Question 1 — to be edited", options: ["Answer A", "Answer B", "Answer C", "Answer D"], correct: 0 },
-    { id: 2, question: "Question 2 — to be edited", options: ["Answer A", "Answer B", "Answer C", "Answer D"], correct: 0 },
-    { id: 3, question: "Question 3 — to be edited", options: ["Answer A", "Answer B", "Answer C", "Answer D"], correct: 0 },
-    { id: 4, question: "Question 4 — to be edited", options: ["Answer A", "Answer B", "Answer C", "Answer D"], correct: 0 },
-    { id: 5, question: "Question 5 — to be edited", options: ["Answer A", "Answer B", "Answer C", "Answer D"], correct: 0 },
+    "Checklist item 1 — to be edited",
+    "Checklist item 2 — to be edited",
+    "Checklist item 3 — to be edited",
+    "Checklist item 4 — to be edited",
+    "Checklist item 5 — to be edited",
   ],
   ambassador: [
-    { id: 1, question: "Question 1 — to be edited", options: ["Answer A", "Answer B", "Answer C", "Answer D"], correct: 0 },
-    { id: 2, question: "Question 2 — to be edited", options: ["Answer A", "Answer B", "Answer C", "Answer D"], correct: 0 },
-    { id: 3, question: "Question 3 — to be edited", options: ["Answer A", "Answer B", "Answer C", "Answer D"], correct: 0 },
-    { id: 4, question: "Question 4 — to be edited", options: ["Answer A", "Answer B", "Answer C", "Answer D"], correct: 0 },
-    { id: 5, question: "Question 5 — to be edited", options: ["Answer A", "Answer B", "Answer C", "Answer D"], correct: 0 },
+    "Checklist item 1 — to be edited",
+    "Checklist item 2 — to be edited",
+    "Checklist item 3 — to be edited",
+    "Checklist item 4 — to be edited",
+    "Checklist item 5 — to be edited",
   ],
   catering: [
-    { id: 1, question: "Question 1 — to be edited", options: ["Answer A", "Answer B", "Answer C", "Answer D"], correct: 0 },
-    { id: 2, question: "Question 2 — to be edited", options: ["Answer A", "Answer B", "Answer C", "Answer D"], correct: 0 },
-    { id: 3, question: "Question 3 — to be edited", options: ["Answer A", "Answer B", "Answer C", "Answer D"], correct: 0 },
-    { id: 4, question: "Question 4 — to be edited", options: ["Answer A", "Answer B", "Answer C", "Answer D"], correct: 0 },
-    { id: 5, question: "Question 5 — to be edited", options: ["Answer A", "Answer B", "Answer C", "Answer D"], correct: 0 },
+    "Checklist item 1 — to be edited",
+    "Checklist item 2 — to be edited",
+    "Checklist item 3 — to be edited",
+    "Checklist item 4 — to be edited",
+    "Checklist item 5 — to be edited",
   ],
 };
 
-function getPosQuizResult(userId, posId) {
+function getChecklistProgress(userId) {
   try {
-    const raw = localStorage.getItem(`moes_posquiz_${userId}_${posId}`);
-    return raw ? JSON.parse(raw) : null;
-  } catch { return null; }
+    const raw = localStorage.getItem(`moes_checklist_${userId}`);
+    return raw ? JSON.parse(raw) : {};
+  } catch { return {}; }
 }
-function savePosQuizResult(userId, posId, result) {
-  try { localStorage.setItem(`moes_posquiz_${userId}_${posId}`, JSON.stringify(result)); } catch {}
-  setDoc(doc(db, "users", userId), { [`posQuiz_${posId}`]: result }, { merge: true }).catch(() => {});
-}
-function resetPosQuizResult(userId, posId) {
-  try { localStorage.removeItem(`moes_posquiz_${userId}_${posId}`); } catch {}
-  setDoc(doc(db, "users", userId), { [`posQuiz_${posId}`]: null }, { merge: true }).catch(() => {});
+function saveChecklistProgress(userId, data) {
+  try { localStorage.setItem(`moes_checklist_${userId}`, JSON.stringify(data)); } catch {}
+  setDoc(doc(db, "users", userId), { checklistProgress: data }, { merge: true }).catch(() => {});
 }
 
-// ─── Position Quiz Component ──────────────────────────────────────────────────
-function PositionQuiz({ user, posId, posColor, posLabel, onPass }) {
-  const questions = POSITION_QUIZ_QUESTIONS[posId] || [];
-  const existingResult = getPosQuizResult(user?.id, posId);
-  const [answers, setAnswers] = useState({});
-  const [submitted, setSubmitted] = useState(false);
-  const [result, setResult] = useState(existingResult);
-
-  function handleSelect(qId, optIdx) {
-    if (submitted || result?.passed) return;
-    setAnswers(prev => ({ ...prev, [qId]: optIdx }));
-  }
-
-  function handleSubmit() {
-    if (Object.keys(answers).length < questions.length) {
-      alert("Please answer all questions before submitting.");
-      return;
-    }
-    const correct = questions.filter(q => answers[q.id] === q.correct).length;
-    const pct = Math.round((correct / questions.length) * 100);
-    const passed = pct >= 70;
-    const record = { score: pct, correct, total: questions.length, passed, date: new Date().toLocaleDateString(), time: new Date().toLocaleTimeString(), answers };
-    savePosQuizResult(user.id, posId, record);
-    setSubmitted(true);
-    setResult(record);
-    if (passed) onPass();
-  }
-
-  function handleRetake() {
-    resetPosQuizResult(user.id, posId);
-    setAnswers({});
-    setSubmitted(false);
-    setResult(null);
-  }
-
-  const btnS = (bg, disabled) => ({
-    background: disabled ? "#333" : bg, color: disabled ? "#555" : "#fff",
-    border: "none", borderRadius: 8, padding: "12px 26px",
-    fontSize: 16, fontWeight: 700, cursor: disabled ? "not-allowed" : "pointer",
-    fontFamily: "Calibri, sans-serif",
-  });
-
-  if (result) {
-    return (
-      <div style={{ background: result.passed ? "#0D2B22" : "#1A0A0A", border: `2px solid ${result.passed ? MOE.teal : MOE.orange}`, borderRadius: 12, padding: "24px 28px", marginTop: 16 }}>
-        <div style={{ fontSize: 22, fontWeight: 800, color: result.passed ? MOE.teal : MOE.orange, textTransform: "uppercase", letterSpacing: 1, marginBottom: 6 }}>
-          {result.passed ? "Quiz Passed! ✓" : "Quiz Not Passed"}
-        </div>
-        <div style={{ fontSize: 19, color: "#fff", marginBottom: 4 }}>
-          Score: <strong style={{ color: result.passed ? MOE.teal : MOE.orange }}>{result.score}%</strong> &nbsp;({result.correct}/{result.total} correct)
-        </div>
-        <div style={{ fontSize: 14, color: "#888", marginBottom: 20 }}>Completed: {result.date} at {result.time} · Passing score: 70%</div>
-        {result.passed ? (
-          <div style={{ fontSize: 16, color: "#aaa" }}>You have passed the {posLabel} quiz and earned your certification for this station.</div>
-        ) : (
-          <div>
-            <div style={{ fontSize: 16, color: "#aaa", marginBottom: 16 }}>You need 70% to pass. Review the videos above and try again.</div>
-            <button onClick={handleRetake} style={btnS(MOE.orange, false)}>RETAKE QUIZ →</button>
-          </div>
-        )}
-        <div style={{ marginTop: 24 }}>
-          <div style={{ fontSize: 16, fontWeight: 700, color: "#fff", textTransform: "uppercase", letterSpacing: 1, marginBottom: 12 }}>Answer Review</div>
-          {questions.map((q, i) => {
-            const userAns = result.answers[q.id];
-            const correct = userAns === q.correct;
-            return (
-              <div key={q.id} style={{ background: "#111", borderRadius: 8, padding: "14px 18px", marginBottom: 10, border: `1.5px solid ${correct ? "#1A5E40" : "#5E1A1A"}` }}>
-                <div style={{ fontSize: 14, fontWeight: 700, color: "#ccc", marginBottom: 8 }}>Q{i + 1}. {q.question}</div>
-                {q.options.map((opt, oi) => {
-                  const isCorrect = oi === q.correct;
-                  const isUserChoice = oi === userAns;
-                  let bg = "transparent", color = "#666", prefix = "";
-                  if (isCorrect) { bg = "rgba(46,152,152,0.15)"; color = MOE.teal; prefix = "✓ "; }
-                  if (isUserChoice && !isCorrect) { bg = "rgba(232,84,26,0.15)"; color = MOE.orange; prefix = "✗ "; }
-                  return (
-                    <div key={oi} style={{ padding: "5px 10px", borderRadius: 6, background: bg, color, fontSize: 13, fontWeight: isCorrect || isUserChoice ? 700 : 400, marginBottom: 3 }}>
-                      {prefix}{opt}
-                    </div>
-                  );
-                })}
-              </div>
-            );
-          })}
-        </div>
-      </div>
-    );
-  }
+// ─── Position Checklist Component ─────────────────────────────────────────────
+function PositionChecklist({ posId, posColor, posLabel, progress, onToggle }) {
+  const items = POSITION_CHECKLISTS[posId] || [];
+  const completedCount = items.filter((_, i) => progress[`${posId}-${i}`]).length;
+  const allChecked = items.length > 0 && completedCount === items.length;
 
   return (
     <div style={{ marginTop: 16 }}>
       <div style={{ background: "#1A1A1A", border: `2px solid ${posColor}`, borderRadius: 12, padding: "20px 24px", marginBottom: 16 }}>
-        <div style={{ fontSize: 20, fontWeight: 800, color: "#fff", textTransform: "uppercase", letterSpacing: 1, marginBottom: 4 }}>{posId === "menu" || posId === "catering" ? `${posLabel} Quiz` : `${posLabel} Station Quiz`}</div>
-        <div style={{ fontSize: 14, color: "#aaa" }}>{questions.length} questions · 70% required to pass · Must pass to earn certification</div>
+        <div style={{ fontSize: 20, fontWeight: 800, color: "#fff", textTransform: "uppercase", letterSpacing: 1, marginBottom: 4 }}>{posLabel} Checklist</div>
+        <div style={{ fontSize: 14, color: "#aaa" }}>{completedCount}/{items.length} checked off · Check off every item to earn certification</div>
         <div style={{ height: 2, background: `linear-gradient(90deg, ${posColor}, transparent)`, marginTop: 14 }} />
       </div>
-      {questions.map((q, i) => (
-        <div key={q.id} style={{ background: "#1A1A1A", border: `1.5px solid ${answers[q.id] !== undefined ? posColor : "#333"}`, borderRadius: 10, padding: "18px 22px", marginBottom: 12, transition: "border-color 0.2s" }}>
-          <div style={{ fontSize: 15, fontWeight: 700, color: "#fff", marginBottom: 12 }}>
-            <span style={{ color: posColor, marginRight: 8 }}>Q{i + 1}.</span>{q.question}
-          </div>
-          <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
-            {q.options.map((opt, oi) => {
-              const selected = answers[q.id] === oi;
-              return (
-                <div key={oi} onClick={() => handleSelect(q.id, oi)} style={{
-                  padding: "10px 16px", borderRadius: 8, cursor: "pointer",
-                  background: selected ? `${posColor}22` : "#111",
-                  border: `1.5px solid ${selected ? posColor : "#333"}`,
-                  color: selected ? "#fff" : "#aaa",
-                  fontSize: 14, fontWeight: selected ? 700 : 400, transition: "all 0.15s",
-                }}>
-                  <span style={{ color: posColor, fontWeight: 700, marginRight: 8 }}>{String.fromCharCode(65 + oi)}.</span>{opt}
-                </div>
-              );
-            })}
-          </div>
-        </div>
-      ))}
-      <div style={{ marginTop: 8, display: "flex", alignItems: "center", gap: 16 }}>
-        <button onClick={handleSubmit} style={btnS(posColor, false)}>SUBMIT QUIZ →</button>
-        <div style={{ color: "#666", fontSize: 14 }}>{Object.keys(answers).length}/{questions.length} answered</div>
-      </div>
+      {items.map((item, i) => {
+        const isChecked = !!progress[`${posId}-${i}`];
+        return (
+          <label key={i} onClick={() => onToggle(i)} style={{
+            display: "flex", alignItems: "center", gap: 12, cursor: "pointer",
+            background: isChecked ? `${posColor}22` : "#111",
+            border: `1.5px solid ${isChecked ? posColor : "#333"}`,
+            borderRadius: 10, padding: "16px 20px", marginBottom: 10, transition: "all 0.15s",
+          }}>
+            <input type="checkbox" checked={isChecked} onChange={() => onToggle(i)} style={{ width: 18, height: 18, flexShrink: 0, cursor: "pointer" }} />
+            <span style={{ fontSize: 15, fontWeight: isChecked ? 700 : 500, color: isChecked ? "#fff" : "#ccc" }}>{item}</span>
+          </label>
+        );
+      })}
+      {allChecked && (
+        <div style={{ marginTop: 12, fontSize: 15, fontWeight: 700, color: posColor }}>✓ All items checked — {posLabel} certified!</div>
+      )}
     </div>
   );
 }
@@ -1982,13 +1888,23 @@ function saveVideoProgress(userId, data) {
 function PositionTracker({ user, onPositionPass, setActivePdf }) {
   const [posProg, setPosProg] = useState(() => getPositionProgress(user?.id));
   const [videoProg, setVideoProg] = useState(() => getVideoProgress(user?.id));
+  const [checklistProg, setChecklistProg] = useState(() => getChecklistProgress(user?.id));
   const [activePos, setActivePos] = useState(null);
 
-  const handleQuizPass = (posId) => {
-    const updated = { ...posProg, [posId]: true };
-    setPosProg(updated);
-    savePositionProgress(user?.id, updated);
-    if (onPositionPass) onPositionPass(posId);
+  const toggleChecklistItem = (posId, i) => {
+    const key = `${posId}-${i}`;
+    const updatedChecklist = { ...checklistProg, [key]: !checklistProg[key] };
+    setChecklistProg(updatedChecklist);
+    saveChecklistProgress(user?.id, updatedChecklist);
+
+    const items = POSITION_CHECKLISTS[posId] || [];
+    const allChecked = items.length > 0 && items.every((_, idx) => updatedChecklist[`${posId}-${idx}`]);
+    if (allChecked !== !!posProg[posId]) {
+      const updatedPos = { ...posProg, [posId]: allChecked };
+      setPosProg(updatedPos);
+      savePositionProgress(user?.id, updatedPos);
+      if (allChecked && onPositionPass) onPositionPass(posId);
+    }
   };
 
   const toggleVideoWatched = (posId, i) => {
@@ -2078,7 +1994,7 @@ function PositionTracker({ user, onPositionPass, setActivePdf }) {
                   {pos.id === "menu" || pos.id === "catering" ? pos.label : `${pos.label} Station`}
                 </div>
                 <div style={{ fontSize: 14, color: "#888", fontFamily: "Calibri, sans-serif" }}>
-                  {done ? "✅ Certified" : pos.id === "menu" ? "Watch and check off all training videos below to earn certification" : "Watch the training videos below, then pass the quiz to earn certification"}
+                  {done ? "✅ Certified" : pos.id === "menu" ? "Watch and check off all training videos below to earn certification" : "Watch the training videos below, then check off every checklist item to earn certification"}
                 </div>
               </div>
             </div>
@@ -2125,16 +2041,16 @@ function PositionTracker({ user, onPositionPass, setActivePdf }) {
               </>
             )}
 
-            {/* Quiz */}
+            {/* Checklist */}
             {pos.id !== "menu" && (
               <>
                 <div style={{ height: 2, background: `linear-gradient(90deg, ${pos.color}, transparent)`, borderRadius: 2, marginBottom: 20 }} />
-                <PositionQuiz
-                  user={user}
+                <PositionChecklist
                   posId={pos.id}
                   posColor={pos.color}
                   posLabel={pos.label}
-                  onPass={() => handleQuizPass(pos.id)}
+                  progress={checklistProg}
+                  onToggle={(i) => toggleChecklistItem(pos.id, i)}
                 />
               </>
             )}
@@ -2191,7 +2107,7 @@ function PageContent({ page, isCompleted, onComplete, progress, user }) {
 
   useEffect(() => {
     if (page.id === "training" && !isCompleted) {
-      const allPassed = POSITIONS.every(p => p.id === "menu" ? !!getPositionProgress(user?.id).menu : getPosQuizResult(user?.id, p.id)?.passed);
+      const allPassed = POSITIONS.every(p => !!getPositionProgress(user?.id)[p.id]);
       if (allPassed) onComplete(page.id);
     }
   }, [posPassCount]);

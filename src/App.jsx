@@ -1838,12 +1838,12 @@ function PageContent({ page, isCompleted, onComplete, progress, user }) {
       )}
 
       {page.id === "orientation" && (
-        <div style={{ background: isCompleted ? "#0D2B22" : "#1A1A1A", border: `2px solid ${isCompleted ? MOE.teal : MOE.orange}`, borderRadius: 14, padding: "28px 32px", marginTop: 8 }}>
+        <div style={{ background: isCompleted ? MOE.teal : "#1A1A1A", border: `2px solid ${isCompleted ? MOE.teal : MOE.orange}`, borderRadius: 14, padding: "28px 32px", marginTop: 8 }}>
           {isCompleted ? (
             <div style={{ display: "flex", alignItems: "center", gap: 14 }}>
               <div>
-                <div style={{ fontSize: 24, fontWeight: 700, color: MOE.teal, fontFamily: "Calibri, sans-serif", textTransform: "uppercase", letterSpacing: 1 }}>Module Complete!</div>
-                <div style={{ fontSize: 18, color: "#aaa", fontFamily: "Calibri, sans-serif", marginTop: 6 }}>
+                <div style={{ fontSize: 24, fontWeight: 700, color: "#fff", fontFamily: "Calibri, sans-serif", textTransform: "uppercase", letterSpacing: 1 }}>Module Complete!</div>
+                <div style={{ fontSize: 18, color: "#eee", fontFamily: "Calibri, sans-serif", marginTop: 6 }}>
                   You completed this on {progress[page.id + "_date"] || "earlier"}. You can always review this content.
                 </div>
               </div>
@@ -1866,12 +1866,12 @@ function PageContent({ page, isCompleted, onComplete, progress, user }) {
       )}
 
       {!page.alwaysAvailable && page.id !== "training" && page.id !== "orientation" && (
-        <div style={{ background: isCompleted ? "#0D2B22" : "#1A1A1A", border: `2px solid ${isCompleted ? "#2E9898" : MOE.orange}`, borderRadius: 14, padding: "28px 32px" }}>
+        <div style={{ background: isCompleted ? MOE.teal : "#1A1A1A", border: `2px solid ${isCompleted ? MOE.teal : MOE.orange}`, borderRadius: 14, padding: "28px 32px" }}>
           {isCompleted ? (
             <div style={{ display: "flex", alignItems: "center", gap: 14 }}>
               <div>
-                <div style={{ fontSize: 24, fontWeight: 700, color: MOE.teal, fontFamily: "Calibri, sans-serif", textTransform: "uppercase", letterSpacing: 1 }}>Module Complete!</div>
-                <div style={{ fontSize: 18, color: "#aaa", fontFamily: "Calibri, sans-serif", marginTop: 6 }}>
+                <div style={{ fontSize: 24, fontWeight: 700, color: "#fff", fontFamily: "Calibri, sans-serif", textTransform: "uppercase", letterSpacing: 1 }}>Module Complete!</div>
+                <div style={{ fontSize: 18, color: "#eee", fontFamily: "Calibri, sans-serif", marginTop: 6 }}>
                   You completed this on {progress[page.id + "_date"] || "earlier"}. You can always review this content.
                 </div>
               </div>

@@ -329,6 +329,10 @@ function getUserProgress(userId, embeddedProgress) {
   if (embeddedProgress && Object.keys(embeddedProgress).length > 0) return embeddedProgress;
   return getProgress(userId);
 }
+function getUserPositionProgress(userId, embeddedPositionProgress) {
+  if (embeddedPositionProgress && Object.keys(embeddedPositionProgress).length > 0) return embeddedPositionProgress;
+  return getPositionProgress(userId);
+}
 
 // ─── Orientation Notes ───────────────────────────────────────────────────────
 function getOrientationNotes(userId) {
@@ -576,6 +580,14 @@ function AdminPanel({ onExit }) {
 
   const ordered = PAGES.filter(p => !p.alwaysAvailable);
 
+  // Break the single "Training" module column into one column per position
+  // so admins can see exactly which stations each employee has completed.
+  const tableColumns = ordered.flatMap(p =>
+    p.id === "training"
+      ? POSITIONS.map(pos => ({ key: `pos-${pos.id}`, label: pos.label, icon: pos.icon, type: "position", id: pos.id }))
+      : [{ key: `page-${p.id}`, label: p.label, icon: p.icon, type: "page", id: p.id }]
+  );
+
   const filtered = users.filter(u => {
     const matchStore = filterStore ? u.store === filterStore : true;
     const matchSearch = search ? (u.name.toLowerCase().includes(search.toLowerCase()) || u.email.toLowerCase().includes(search.toLowerCase())) : true;
@@ -778,22 +790,23 @@ function AdminPanel({ onExit }) {
           {filtered.length === 0 ? (
             <div style={{ color: "#555", fontSize: 18, textAlign: "center", padding: "60px 0" }}>No employees found. They appear here after signing in for the first time.</div>
           ) : (
-            <div>
-              <table style={{ width: "100%", borderCollapse: "collapse", fontSize: 13, tableLayout: "fixed" }}>
+            <div style={{ overflowX: "auto" }}>
+              <table style={{ width: "100%", minWidth: 1100, borderCollapse: "collapse", fontSize: 13 }}>
                 <thead>
                   <tr style={{ background: "#1A1A1A" }}>
-                    <th style={{ border: "1px solid #333", padding: "8px 10px", color: "#ccc", fontWeight: 700, textAlign: "left", whiteSpace: "nowrap", width: "18%" }}>Employee</th>
-                    <th style={{ border: "1px solid #333", padding: "8px 10px", color: "#ccc", fontWeight: 700, textAlign: "left", whiteSpace: "nowrap", width: "22%" }}>Email</th>
-                    <th style={{ border: "1px solid #333", padding: "8px 10px", color: "#ccc", fontWeight: 700, textAlign: "left", whiteSpace: "nowrap", width: "10%" }}>Progress</th>
-                    {ordered.map(p => (
-                      <th key={p.id} style={{ border: "1px solid #333", padding: "8px 4px", color: "#ccc", fontWeight: 700, textAlign: "center", fontSize: 11, width: `${Math.floor(36 / ordered.length)}%` }}>{p.label}</th>
+                    <th style={{ border: "1px solid #333", padding: "8px 10px", color: "#ccc", fontWeight: 700, textAlign: "left", whiteSpace: "nowrap", width: 170 }}>Employee</th>
+                    <th style={{ border: "1px solid #333", padding: "8px 10px", color: "#ccc", fontWeight: 700, textAlign: "left", whiteSpace: "nowrap", width: 200 }}>Email</th>
+                    <th style={{ border: "1px solid #333", padding: "8px 10px", color: "#ccc", fontWeight: 700, textAlign: "left", whiteSpace: "nowrap", width: 90 }}>Progress</th>
+                    {tableColumns.map(col => (
+                      <th key={col.key} title={col.label} style={{ border: "1px solid #333", padding: "8px 2px", color: "#ccc", fontWeight: 700, textAlign: "center", fontSize: 16, width: 38 }}>{col.icon}</th>
                     ))}
-                    <th style={{ border: "1px solid #333", padding: "8px 10px", color: "#ccc", fontWeight: 700, textAlign: "center", whiteSpace: "nowrap", width: "14%" }}>Actions</th>
+                    <th style={{ border: "1px solid #333", padding: "8px 10px", color: "#ccc", fontWeight: 700, textAlign: "center", whiteSpace: "nowrap", width: 110 }}>Actions</th>
                   </tr>
                 </thead>
                 <tbody>
                   {filtered.map((u, i) => {
                     const prog = getUserProgress(u.id, u.progress);
+                    const posProg = getUserPositionProgress(u.id, u.positionProgress);
                     const completed = ordered.filter(p => prog[p.id]).length;
                     const pct = Math.round((completed / ordered.length) * 100);
                     return (
@@ -809,11 +822,14 @@ function AdminPanel({ onExit }) {
                           </div>
                           <div style={{ color: pct === 100 ? MOE.teal : MOE.orange, fontSize: 12, marginTop: 3, fontWeight: 700 }}>{pct}%</div>
                         </td>
-                        {ordered.map(p => (
-                          <td key={p.id} style={{ border: "1px solid #222", padding: "8px 4px", textAlign: "center" }}>
-                            <span style={{ color: prog[p.id] ? MOE.teal : "#444", fontWeight: 700, fontSize: 15 }}>{prog[p.id] ? "✓" : "○"}</span>
-                          </td>
-                        ))}
+                        {tableColumns.map(col => {
+                          const colDone = col.type === "position" ? !!posProg[col.id] : !!prog[col.id];
+                          return (
+                            <td key={col.key} style={{ border: "1px solid #222", padding: "8px 2px", textAlign: "center" }}>
+                              <span style={{ color: colDone ? MOE.teal : "#444", fontWeight: 700, fontSize: 15 }}>{colDone ? "✓" : "○"}</span>
+                            </td>
+                          );
+                        })}
                         <td style={{ border: "1px solid #222", padding: "6px 6px", textAlign: "center" }}>
                           <div style={{ display: "flex", gap: 4, justifyContent: "center" }}>
                             <button onClick={() => printReport([u], u.name)} style={{ ...btnS(MOE.teal), padding: "4px 8px", fontSize: 11 }}>🖨️</button>
@@ -826,6 +842,11 @@ function AdminPanel({ onExit }) {
                   })}
                 </tbody>
               </table>
+              <div style={{ display: "flex", flexWrap: "wrap", gap: "6px 16px", marginTop: 14, fontSize: 12, color: "#888" }}>
+                {tableColumns.map(col => (
+                  <span key={col.key}>{col.icon} {col.label}</span>
+                ))}
+              </div>
             </div>
           )}
         </>)}

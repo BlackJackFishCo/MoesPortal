@@ -453,32 +453,32 @@ function getAllQuizResults() {
 // ─── Position Checklist Data ───────────────────────────────────────────────────
 const POSITION_CHECKLISTS = {
   hot: [
-    "Checklist item 1 — to be edited",
-    "Checklist item 2 — to be edited",
-    "Checklist item 3 — to be edited",
-    "Checklist item 4 — to be edited",
-    "Checklist item 5 — to be edited",
+    "Each guest that enters gets a cheerful “Welcome to Moe’s” from the HOT position.",
+    "Use Orange Stickers to label all proteins and upcharges. Upcharges include White Meat Chicken, Steak, Queso, Bacon, and Guacamole.",
+    "HOT person offers our Moe Value Meal to everyone.",
+    "HOT person should be able to pass a HOT catch weight test for all proteins.",
+    "Practice Stir, Flip, Wipe any down time when guest are not in line to keep it clean, full, and fresh.",
   ],
   cold: [
-    "Checklist item 1 — to be edited",
-    "Checklist item 2 — to be edited",
-    "Checklist item 3 — to be edited",
-    "Checklist item 4 — to be edited",
-    "Checklist item 5 — to be edited",
+    "Each guest that enters gets a cheerful “Welcome to Moe’s” from the COLD position.",
+    "Start with asking guest if they would like Cheese, Pico, Lettuce to keep the line moving quickly.",
+    "Use Orange Stickers to label upcharges on Queso and Guacamole.",
+    "COLD position put Quesadillas, Stacks, and Dippers on the grill or press.",
+    "Practice Stir, Flip, Wipe any down time when guest are not in line to keep it clean, full, and fresh.",
   ],
   swing: [
-    "Checklist item 1 — to be edited",
-    "Checklist item 2 — to be edited",
-    "Checklist item 3 — to be edited",
-    "Checklist item 4 — to be edited",
-    "Checklist item 5 — to be edited",
+    "Each guest that enters gets a cheerful “Welcome to Moe’s” from the SWING position.",
+    "Upsell Queso. Side=3.5oz, Cup=6oz, Bowl=12oz",
+    "Ask every guest if they would like chips. Dine in orders get 1 scoop, Togo orders get 2 scoops.",
+    "Double check all OLO/Delivery orders for accuracy.",
+    "Bag each menu item separately togo.",
   ],
   ring: [
-    "Checklist item 1 — to be edited",
-    "Checklist item 2 — to be edited",
-    "Checklist item 3 — to be edited",
-    "Checklist item 4 — to be edited",
-    "Checklist item 5 — to be edited",
+    "Each guest that enters gets a cheerful “Welcome to Moe’s” from the SWING position.",
+    "The RING person is responsible for asking every guest for their phone number to be entered into the text database for exclusive discounts and offers.",
+    "Correctly charge for all items including orange sticker upcharges.",
+    "Ensure that the correct OLO and Delivery orders go to the correct people.",
+    "Keep RING area clean and clutter free.",
   ],
   prep: [
     "Checklist item 1 — to be edited",
@@ -1527,6 +1527,13 @@ const POSITIONS = [
   { id: "catering", label: "Catering", icon: "🚐", color: "#C0392B" },
 ];
 
+const POSITION_OVERVIEWS = {
+  hot: "This position is the first position the guest interacts with. The HOT person should have high energy and is the starter for the entire burrito line. They are in charge of the HOT ingredients on the burrito line, cleanliness, organization, and starting the guest experience.",
+  cold: "This position is in charge of all COLD ingredients going down the burrito line, Rolling burritos, cleanliness, organization, and maintaining the guest experience",
+  swing: "This position is in charge of making the line move from HOT/COLD to the register, upselling queso, packaging nicely, and making sure items and stickers are properly accounted for to the RING position.",
+  ring: "This position is the last person the guest interacts with on the burrito line. This position is in charge of ringing up guest correctly in the POS register, collecting money, upselling drinks, organizing and confirming accuracy of OLO and delivery orders.",
+};
+
 const POSITION_VIDEOS = {
   menu:     [
     { title: "Burrito",             url: "https://www.youtube.com/embed/vzNEMlWxpro" },
@@ -1788,6 +1795,7 @@ function PositionTracker({ user, onPositionPass, setActivePdf }) {
         const pos = POSITIONS.find(p => p.id === activePos);
         const videos = POSITION_VIDEOS[activePos];
         const docs = POSITION_DOCS[activePos] || [];
+        const overview = POSITION_OVERVIEWS[activePos];
         const done = !!posProg[activePos];
         return (
           <div style={{ background: "#1A1A1A", border: `2px solid ${pos.color}`, borderRadius: 14, padding: "24px 20px", marginBottom: 12 }}>
@@ -1809,6 +1817,14 @@ function PositionTracker({ user, onPositionPass, setActivePdf }) {
                 </div>
               </div>
             </div>
+
+            {/* Position overview */}
+            {overview && (
+              <div style={{ background: "#111", border: `1.5px solid ${pos.color}55`, borderRadius: 10, padding: "16px 20px", marginBottom: 24 }}>
+                <div style={{ fontSize: 13, fontWeight: 700, color: pos.color, textTransform: "uppercase", letterSpacing: 1, marginBottom: 6, fontFamily: "Calibri, sans-serif" }}>Position Overview</div>
+                <div style={{ fontSize: 15, color: "#ccc", lineHeight: 1.6, fontFamily: "Calibri, sans-serif" }}>{overview}</div>
+              </div>
+            )}
 
             {/* Training videos */}
             <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: 16, marginBottom: 24 }}>

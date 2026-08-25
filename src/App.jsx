@@ -1494,8 +1494,8 @@ function PositionTracker({ user, onPositionPass, setActivePdf }) {
                 <div style={{ height: 2, background: `linear-gradient(90deg, ${pos.color}, transparent)`, borderRadius: 2, marginBottom: 20 }} />
                 <label style={{
                   display: "flex", alignItems: "center", gap: 12, cursor: "pointer",
-                  background: MOE.orange,
-                  border: `1.5px solid ${MOE.orange}`,
+                  background: MOE.teal,
+                  border: `1.5px solid ${MOE.teal}`,
                   borderRadius: 10, padding: "16px 20px",
                 }}>
                   <input type="checkbox" checked={done} onChange={toggleMenuComplete} style={{ width: 18, height: 18, flexShrink: 0, cursor: "pointer" }} />

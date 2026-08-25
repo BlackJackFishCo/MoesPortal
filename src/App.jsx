@@ -1234,7 +1234,7 @@ const RESOURCE_LINK_ROWS = [
     { title: "Recipe Book", url: "https://tylerjohnson7.sharepoint.com/:b:/s/SterlingRestaurants/IQC0glsprOpgTald0QDtBFHCAeMBkOyNrGsjJXnAx-vO8cY?e=OclLrV" },
     { title: "Current Sterling Focus", url: "/sterling-focus-current.pdf" },
     { title: "All Hands on Deck", url: "/all-hands-on-deck.pdf" },
-    { title: "Sterling Focus", url: "#" },
+    { title: "Sterling Focus", url: "/sterling-focus.pdf" },
   ],
   [
     { title: "Line Schematic", url: "#" },

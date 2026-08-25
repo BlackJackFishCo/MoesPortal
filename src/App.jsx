@@ -153,7 +153,7 @@ const PAGES = [
     icon: "🛡️",
     color: "#2E9898",
     alwaysAvailable: false,
-    description: "This section will review food safety / Department of Health food protection practices you will need to know before serving food to guests. Safety of our food, employees and guests is a top priority. Please review the videos before taking the required quiz. You must pass with 70% or higher to complete this Food Safety module.",
+    description: "This section will review food safety / Department of Health food protection practices you will need to know before serving food to guests. Safety of our food, employees and guests is a top priority. Please review the videos before taking the required quiz. You must pass with 90% or higher to complete this Food Safety module.",
     pdfs: [],
     videos: [
       { title: "Handwashing", url: "https://www.youtube.com/embed/7xYqa0FRNls" },
@@ -426,7 +426,7 @@ const QUIZ_QUESTIONS = [
   },
 ];
 
-const PASSING_SCORE = 70; // percent
+const PASSING_SCORE = 90; // percent
 
 function getQuizResult(userId) {
   try {

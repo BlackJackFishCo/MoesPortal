@@ -1222,7 +1222,7 @@ const POSITION_DOCS = {
   catering: [
     { title: "Catering Pan Weights",     url: "/catering-pan-weights.pdf" },
     { title: "Catering Set Up",          url: "/catering-setup.pdf" },
-    { title: "Document 3",               url: "#" },
+    { title: "EZ Cater Delivery Process", url: "#" },
   ],
 };
 

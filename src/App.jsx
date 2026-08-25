@@ -981,7 +981,7 @@ function LoginScreen({ onLogin, onAdminClick }) {
 
   return (
     <div style={{ minHeight: "100vh", background: "#000000", display: "flex", alignItems: "center", justifyContent: "center", fontFamily: "Calibri, sans-serif", padding: 16 }}>
-      <div style={{ background: "#1A1A1A", borderRadius: 16, padding: "52px 48px", maxWidth: 520, width: "100%", boxShadow: "0 8px 40px rgba(0,0,0,0.6)" }}>
+      <div style={{ background: "#1A1A1A", border: `2px solid ${MOE.teal}`, borderRadius: 16, padding: "52px 48px", maxWidth: 520, width: "100%", boxShadow: "0 8px 40px rgba(0,0,0,0.6)" }}>
         {/* Header */}
         <div style={{ textAlign: "center", marginBottom: 36 }}>
           <div style={{ marginBottom: 14, display: "flex", justifyContent: "center" }}>

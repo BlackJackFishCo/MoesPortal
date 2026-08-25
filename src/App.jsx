@@ -251,9 +251,6 @@ async function syncUserFromCloud(userId) {
     const mergedQuiz = mergeQuizLikeResult(getQuizResult(userId), data.quizResult);
     if (mergedQuiz) { try { localStorage.setItem(`moes_quiz_${userId}`, JSON.stringify(mergedQuiz)); } catch {} }
 
-    const mergedOrientation = mergeQuizLikeResult(getOrientationQuizResult(userId), data.orientationQuizResult);
-    if (mergedOrientation) { try { localStorage.setItem(`moes_orientation_quiz_${userId}`, JSON.stringify(mergedOrientation)); } catch {} }
-
     const mergedNotes = mergeProgressMaps(getOrientationNotes(userId), data.orientationNotes);
     try { localStorage.setItem(`moes_orientation_notes_${userId}`, JSON.stringify(mergedNotes)); } catch {}
 
@@ -282,7 +279,6 @@ async function getAllUsersFromFirestore() {
         ...(data.profile || {}),
         progress: data.progress || {},
         quizResult: data.quizResult || null,
-        orientationQuizResult: data.orientationQuizResult || null,
         positionProgress: data.positionProgress || {},
       };
     });
@@ -303,7 +299,7 @@ function registerUser(user) {
     if (snap.exists()) {
       updateDoc(doc(db, "users", user.id), { profile }).catch(() => {});
     } else {
-      setDoc(doc(db, "users", user.id), { profile: { ...profile, joinDate: new Date().toLocaleDateString() }, progress: {}, quizResult: null, orientationQuizResult: null, orientationNotes: {}, positionProgress: {} }).catch(() => {});
+      setDoc(doc(db, "users", user.id), { profile: { ...profile, joinDate: new Date().toLocaleDateString() }, progress: {}, quizResult: null, orientationNotes: {}, positionProgress: {} }).catch(() => {});
     }
   }).catch(() => {});
 }
@@ -323,66 +319,18 @@ function resetUserProgress(userId) {
   try {
     localStorage.removeItem(`moes_progress_${userId}`);
     localStorage.removeItem(`moes_quiz_${userId}`);
-    localStorage.removeItem(`moes_orientation_quiz_${userId}`);
     localStorage.removeItem(`moes_orientation_notes_${userId}`);
     localStorage.removeItem(`moes_positions_${userId}`);
     localStorage.removeItem(`moes_checklist_${userId}`);
   } catch {}
-  setDoc(doc(db, "users", userId), { progress: {}, quizResult: null, orientationQuizResult: null, orientationNotes: {}, positionProgress: {}, checklistProgress: {} }, { merge: true }).catch(() => {});
+  setDoc(doc(db, "users", userId), { progress: {}, quizResult: null, orientationNotes: {}, positionProgress: {}, checklistProgress: {} }, { merge: true }).catch(() => {});
 }
 function getUserProgress(userId, embeddedProgress) {
   if (embeddedProgress && Object.keys(embeddedProgress).length > 0) return embeddedProgress;
   return getProgress(userId);
 }
 
-// ─── Orientation Quiz ────────────────────────────────────────────────────────
-const ORIENTATION_QUIZ_QUESTIONS = [
-  {
-    id: 1,
-    question: "What is the dress code color for Moe's team member uniforms?",
-    options: ["All black", "All white", "Blue and green", "Any color"],
-    correct: 0,
-  },
-  {
-    id: 2,
-    question: "Where do you go to access your schedule and pay stubs?",
-    options: ["The Moe's website", "ADP", "Your manager's office", "A paper bulletin board"],
-    correct: 1,
-  },
-  {
-    id: 3,
-    question: "What should you do if you cannot make your scheduled shift?",
-    options: ["Simply not show up", "Call out the same day with no notice", "Notify your manager as soon as possible", "Ask a customer to cover for you"],
-    correct: 2,
-  },
-  {
-    id: 4,
-    question: "Which of the following best describes Moe's core culture?",
-    options: ["Speed over hospitality", "Everyone is welcome", "Managers only greet guests", "Silence in the kitchen"],
-    correct: 1,
-  },
-  {
-    id: 5,
-    question: "What phrase do team members shout when a guest enters the restaurant?",
-    options: ["\"Hello there!\"", "\"Order up!\"", "\"Welcome to Moe's!\"", "\"Thanks for coming!\""],
-    correct: 2,
-  },
-];
-
-function getOrientationQuizResult(userId) {
-  try {
-    const raw = localStorage.getItem(`moes_orientation_quiz_${userId}`);
-    return raw ? JSON.parse(raw) : null;
-  } catch { return null; }
-}
-function saveOrientationQuizResult(userId, result) {
-  try { localStorage.setItem(`moes_orientation_quiz_${userId}`, JSON.stringify(result)); } catch {}
-  setDoc(doc(db, "users", userId), { orientationQuizResult: result }, { merge: true }).catch(() => {});
-}
-function resetOrientationQuizResult(userId) {
-  try { localStorage.removeItem(`moes_orientation_quiz_${userId}`); } catch {}
-  setDoc(doc(db, "users", userId), { orientationQuizResult: null }, { merge: true }).catch(() => {});
-}
+// ─── Orientation Notes ───────────────────────────────────────────────────────
 function getOrientationNotes(userId) {
   try {
     const raw = localStorage.getItem(`moes_orientation_notes_${userId}`);
@@ -670,143 +618,6 @@ function PrintTracker({ user, progress }) {
         <div>Employee Signature: _______________________</div>
         <div>Manager Signature: _______________________</div>
         <div>Date: ___________</div>
-      </div>
-    </div>
-  );
-}
-
-// ─── Orientation Quiz Component ───────────────────────────────────────────────
-function OrientationQuiz({ user, existingResult, onPass }) {
-  const [answers, setAnswers] = useState({});
-  const [submitted, setSubmitted] = useState(false);
-  const [result, setResult] = useState(existingResult);
-
-  function handleSelect(qId, optIdx) {
-    if (submitted || result) return;
-    setAnswers(prev => ({ ...prev, [qId]: optIdx }));
-  }
-
-  function handleSubmit() {
-    if (Object.keys(answers).length < ORIENTATION_QUIZ_QUESTIONS.length) {
-      alert("Please answer all questions before submitting.");
-      return;
-    }
-    const correct = ORIENTATION_QUIZ_QUESTIONS.filter(q => answers[q.id] === q.correct).length;
-    const pct = Math.round((correct / ORIENTATION_QUIZ_QUESTIONS.length) * 100);
-    const passed = pct === 100;
-    const record = {
-      score: pct,
-      correct,
-      total: ORIENTATION_QUIZ_QUESTIONS.length,
-      passed,
-      date: new Date().toLocaleDateString(),
-      time: new Date().toLocaleTimeString(),
-      answers,
-    };
-    saveOrientationQuizResult(user.id, record);
-    setSubmitted(true);
-    setResult(record);
-    if (passed) onPass();
-  }
-
-  function handleRetake() {
-    resetOrientationQuizResult(user.id);
-    setAnswers({});
-    setSubmitted(false);
-    setResult(null);
-  }
-
-  const btnS = (bg, disabled) => ({
-    background: disabled ? "#333" : bg,
-    color: disabled ? "#555" : "#fff",
-    border: "none", borderRadius: 8, padding: "14px 28px",
-    fontSize: 17, fontWeight: 700, cursor: disabled ? "not-allowed" : "pointer",
-    fontFamily: "Calibri, sans-serif", letterSpacing: 0.5,
-  });
-
-  if (result) {
-    const passed = result.passed;
-    return (
-      <div style={{ background: passed ? "#0D2B22" : "#1A0A0A", border: `2px solid ${passed ? MOE.teal : MOE.orange}`, borderRadius: 14, padding: "32px 36px", marginTop: 8 }}>
-        <div style={{ fontSize: 28, fontWeight: 800, color: passed ? MOE.teal : MOE.orange, textTransform: "uppercase", letterSpacing: 2, marginBottom: 8 }}>
-          {passed ? "Quiz Passed! ✓" : "Quiz Not Passed"}
-        </div>
-        <div style={{ fontSize: 22, color: "#fff", marginBottom: 6 }}>
-          Score: <strong style={{ color: passed ? MOE.teal : MOE.orange }}>{result.score}%</strong> &nbsp;({result.correct}/{result.total} correct)
-        </div>
-        <div style={{ fontSize: 15, color: "#888", marginBottom: 24 }}>
-          Completed: {result.date} at {result.time} &nbsp;·&nbsp; Passing score: 100%
-        </div>
-        {passed ? (
-          <div style={{ fontSize: 17, color: "#aaa" }}>You have successfully completed the Orientation Quiz. You may now proceed to Food Safety.</div>
-        ) : (
-          <div>
-            <div style={{ fontSize: 17, color: "#aaa", marginBottom: 20 }}>You must score 100% to pass. Please review the Notes above and try again.</div>
-            <button onClick={handleRetake} style={btnS(MOE.orange, false)}>RETAKE QUIZ →</button>
-          </div>
-        )}
-        <div style={{ marginTop: 32 }}>
-          <div style={{ fontSize: 18, fontWeight: 700, color: "#fff", textTransform: "uppercase", letterSpacing: 1, marginBottom: 16 }}>Answer Review</div>
-          {ORIENTATION_QUIZ_QUESTIONS.map((q, i) => {
-            const userAns = result.answers[q.id];
-            const correct = userAns === q.correct;
-            return (
-              <div key={q.id} style={{ background: "#111", borderRadius: 10, padding: "16px 20px", marginBottom: 12, border: `1.5px solid ${correct ? "#1A5E40" : "#5E1A1A"}` }}>
-                <div style={{ fontSize: 15, fontWeight: 700, color: "#ccc", marginBottom: 10 }}>Q{i + 1}. {q.question}</div>
-                {q.options.map((opt, oi) => {
-                  const isCorrect = oi === q.correct;
-                  const isUserChoice = oi === userAns;
-                  let bg = "transparent", color = "#666", prefix = "";
-                  if (isCorrect) { bg = "rgba(46,152,152,0.15)"; color = MOE.teal; prefix = "✓ "; }
-                  if (isUserChoice && !isCorrect) { bg = "rgba(232,84,26,0.15)"; color = MOE.orange; prefix = "✗ "; }
-                  return (
-                    <div key={oi} style={{ padding: "6px 12px", borderRadius: 6, background: bg, color, fontSize: 14, fontWeight: isCorrect || isUserChoice ? 700 : 400, marginBottom: 4 }}>
-                      {prefix}{opt}
-                    </div>
-                  );
-                })}
-              </div>
-            );
-          })}
-        </div>
-      </div>
-    );
-  }
-
-  return (
-    <div style={{ marginTop: 8 }}>
-      <div style={{ background: "#1A1A1A", border: `2px solid ${MOE.orange}`, borderRadius: 14, padding: "28px 32px", marginBottom: 20 }}>
-        <div style={{ fontSize: 26, fontWeight: 800, color: "#fff", textTransform: "uppercase", letterSpacing: 2, marginBottom: 6 }}>Orientation Quiz</div>
-        <div style={{ fontSize: 16, color: "#aaa", marginBottom: 4 }}>{ORIENTATION_QUIZ_QUESTIONS.length} questions &nbsp;·&nbsp; 100% required to pass &nbsp;·&nbsp; You must pass to unlock Food Safety</div>
-        <div style={{ height: 2, background: `linear-gradient(90deg, ${MOE.orange}, transparent)`, marginTop: 16 }} />
-      </div>
-      {ORIENTATION_QUIZ_QUESTIONS.map((q, i) => (
-        <div key={q.id} style={{ background: "#1A1A1A", border: `1.5px solid ${answers[q.id] !== undefined ? MOE.orange : "#333"}`, borderRadius: 12, padding: "22px 26px", marginBottom: 16, transition: "border-color 0.2s" }}>
-          <div style={{ fontSize: 17, fontWeight: 700, color: "#fff", marginBottom: 14 }}>
-            <span style={{ color: MOE.orange, marginRight: 8 }}>Q{i + 1}.</span>{q.question}
-          </div>
-          <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
-            {q.options.map((opt, oi) => {
-              const selected = answers[q.id] === oi;
-              return (
-                <div key={oi} onClick={() => handleSelect(q.id, oi)} style={{
-                  padding: "12px 18px", borderRadius: 8, cursor: "pointer",
-                  background: selected ? "rgba(232,84,26,0.2)" : "#111",
-                  border: `1.5px solid ${selected ? MOE.orange : "#333"}`,
-                  color: selected ? "#fff" : "#aaa",
-                  fontSize: 16, fontWeight: selected ? 700 : 400,
-                  transition: "all 0.15s",
-                }}>
-                  <span style={{ color: MOE.orange, fontWeight: 700, marginRight: 10 }}>{String.fromCharCode(65 + oi)}.</span>{opt}
-                </div>
-              );
-            })}
-          </div>
-        </div>
-      ))}
-      <div style={{ marginTop: 8, display: "flex", alignItems: "center", gap: 20 }}>
-        <button onClick={handleSubmit} style={btnS(MOE.orange, false)}>SUBMIT QUIZ →</button>
-        <div style={{ color: "#666", fontSize: 15 }}>{Object.keys(answers).length}/{ORIENTATION_QUIZ_QUESTIONS.length} answered</div>
       </div>
     </div>
   );
@@ -2071,7 +1882,6 @@ function PageContent({ page, isCompleted, onComplete, progress, user }) {
     const r = getQuizResult(user?.id);
     return r?.passed || false;
   });
-  const [orientationQuizPassed, setOrientationQuizPassed] = useState(false);
   const ORIENTATION_NOTES = [
     "Reviewed Sterling Handbook.",
     "Received Swag Bag and Uniforms.",
@@ -2117,10 +1927,9 @@ function PageContent({ page, isCompleted, onComplete, progress, user }) {
     if (!isCompleted) onComplete(page.id);
   }
 
-  function handleOrientationQuizPass() {
-    setOrientationQuizPassed(true);
-    if (!isCompleted && allNotesChecked) onComplete(page.id);
-  }
+  useEffect(() => {
+    if (page.id === "orientation" && !isCompleted && allNotesChecked) onComplete(page.id);
+  }, [notesChecked]);
 
   // Auto-complete history when the video ends (YouTube postMessage API)
   useEffect(() => {
@@ -2361,19 +2170,6 @@ function PageContent({ page, isCompleted, onComplete, progress, user }) {
         </section>
       )}
 
-      {page.id === "orientation" && !isCompleted && (
-        <section style={{ marginBottom: 40 }}>
-          <h2 style={{ fontSize: 24, fontWeight: 700, color: "#ffffff", fontFamily: "Calibri, sans-serif", marginBottom: 18, textTransform: "uppercase", letterSpacing: 1 }}>
-            Orientation Quiz
-          </h2>
-          <OrientationQuiz
-            user={user}
-            existingResult={null}
-            onPass={handleOrientationQuizPass}
-          />
-        </section>
-      )}
-
       {page.id === "food-safety" && (
         <section style={{ marginBottom: 40 }}>
           <h2 style={{ fontSize: 24, fontWeight: 700, color: "#ffffff", fontFamily: "Calibri, sans-serif", marginBottom: 18, textTransform: "uppercase", letterSpacing: 1 }}>
@@ -2407,7 +2203,7 @@ function PageContent({ page, isCompleted, onComplete, progress, user }) {
                 </p>
               ) : (
                 <p style={{ color: "#bbb", fontFamily: "Calibri, sans-serif", fontSize: 18, lineHeight: 1.7, margin: 0 }}>
-                  All notes checked! Score 100% on the Orientation Quiz above to complete this module.
+                  All notes checked! Marking this module complete...
                 </p>
               )}
             </div>

@@ -1115,8 +1115,8 @@ function ProgressBar({ progress, activePage, onNavigate }) {
               >
                 <div style={{
                   width: "clamp(28px, 6vw, 40px)", height: "clamp(28px, 6vw, 40px)", borderRadius: "50%",
-                  background: isActive ? MOE.orange : "#2a2a2a",
-                  border: `3px solid ${isActive ? MOE.orange : "#555"}`,
+                  background: MOE.orange,
+                  border: `3px solid ${MOE.orange}`,
                   display: "flex", alignItems: "center", justifyContent: "center",
                   fontSize: "clamp(12px, 3vw, 18px)", color: "#fff",
                   boxShadow: isActive ? `0 0 14px ${MOE.orange}88` : "none",

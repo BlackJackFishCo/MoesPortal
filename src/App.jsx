@@ -488,18 +488,18 @@ const POSITION_CHECKLISTS = {
     "Checklist item 5 — to be edited",
   ],
   ambassador: [
-    "Checklist item 1 — to be edited",
-    "Checklist item 2 — to be edited",
-    "Checklist item 3 — to be edited",
-    "Checklist item 4 — to be edited",
-    "Checklist item 5 — to be edited",
+    "Each guest that enters gets a cheerful “Welcome to Moe’s” from the SWING position.",
+    "Keeps salsa and beverage bars stocked and clean.",
+    "Keeps restrooms stocked and cleaned.",
+    "Cleans up spills immediately and puts out wet floor signs to eliminate possible guest accidents.",
+    "Thanks, guest, for dining with us and ask if there is anything else they need during their visit.",
   ],
   catering: [
-    "Checklist item 1 — to be edited",
-    "Checklist item 2 — to be edited",
-    "Checklist item 3 — to be edited",
-    "Checklist item 4 — to be edited",
-    "Checklist item 5 — to be edited",
+    "Ensure that they leave the store with all of the items on the catering packlist.",
+    "Safely drives the Moe’s catering van and maintains the van cleanliness.",
+    "Set up each catering order just like the HOT and COLD line in the store for the guest.",
+    "Takes a picture immediately after set up and post in catering group to time stamp delivery items.",
+    "Follows EZ Cater protocols for delivery.",
   ],
 };
 
@@ -1532,6 +1532,8 @@ const POSITION_OVERVIEWS = {
   cold: "This position is in charge of all COLD ingredients going down the burrito line, Rolling burritos, cleanliness, organization, and maintaining the guest experience",
   swing: "This position is in charge of making the line move from HOT/COLD to the register, upselling queso, packaging nicely, and making sure items and stickers are properly accounted for to the RING position.",
   ring: "This position is the last person the guest interacts with on the burrito line. This position is in charge of ringing up guest correctly in the POS register, collecting money, upselling drinks, organizing and confirming accuracy of OLO and delivery orders.",
+  ambassador: "This position is in charge of all the guest areas. (Dining room, Salsa Bar, Beverage Bar, Patio, and Restrooms) Keeping all areas clean, stocked, and free from hazards. This position also interacts with guest to ensure their visit was a great one and has the ability to correct any last things wrong before the guest may leave unhappy.",
+  catering: "This position delivers our catering orders on time and sets them up for the guest to enjoy. This position must have a clean driving record and the ability to problem solve as spaces are sometimes limited to set up in. This position also has to follow specific guidelines for delivering EZ cater orders.",
 };
 
 const POSITION_VIDEOS = {

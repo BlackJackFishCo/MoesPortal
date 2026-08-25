@@ -689,7 +689,7 @@ function AdminPanel({ onExit }) {
 
   if (!authed) return (
     <div style={{ minHeight: "100vh", background: "#000", display: "flex", alignItems: "center", justifyContent: "center", fontFamily: "Calibri, sans-serif" }}>
-      <div style={{ background: "#1A1A1A", borderRadius: 16, padding: "32px 24px", maxWidth: 420, width: "100%", boxShadow: "0 8px 40px rgba(0,0,0,0.6)" }}>
+      <div style={{ background: "#1A1A1A", border: `2px solid ${MOE.teal}`, borderRadius: 16, padding: "32px 24px", maxWidth: 420, width: "100%", boxShadow: "0 8px 40px rgba(0,0,0,0.6)" }}>
         <div style={{ textAlign: "center", marginBottom: 32 }}>
           <div style={{ fontSize: 30, fontWeight: 800, color: MOE.orange, textTransform: "uppercase", letterSpacing: 2 }}>Admin Panel</div>
           <div style={{ fontSize: 16, color: "#888", marginTop: 8 }}>Sterling Restaurants Training Portal</div>

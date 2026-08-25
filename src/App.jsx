@@ -791,16 +791,16 @@ function AdminPanel({ onExit }) {
             <div style={{ color: "#555", fontSize: 18, textAlign: "center", padding: "60px 0" }}>No employees found. They appear here after signing in for the first time.</div>
           ) : (
             <div style={{ overflowX: "auto" }}>
-              <table style={{ width: "100%", minWidth: 1100, borderCollapse: "collapse", fontSize: 13 }}>
+              <table style={{ width: "100%", borderCollapse: "collapse", fontSize: 13 }}>
                 <thead>
                   <tr style={{ background: "#1A1A1A" }}>
-                    <th style={{ border: "1px solid #333", padding: "8px 10px", color: "#ccc", fontWeight: 700, textAlign: "left", whiteSpace: "nowrap", width: 170 }}>Employee</th>
-                    <th style={{ border: "1px solid #333", padding: "8px 10px", color: "#ccc", fontWeight: 700, textAlign: "left", whiteSpace: "nowrap", width: 200 }}>Email</th>
-                    <th style={{ border: "1px solid #333", padding: "8px 10px", color: "#ccc", fontWeight: 700, textAlign: "left", whiteSpace: "nowrap", width: 90 }}>Progress</th>
+                    <th style={{ border: "1px solid #333", padding: "8px 10px", color: "#ccc", fontWeight: 700, textAlign: "left", whiteSpace: "nowrap", width: 150 }}>Employee</th>
+                    <th style={{ border: "1px solid #333", padding: "8px 10px", color: "#ccc", fontWeight: 700, textAlign: "left", whiteSpace: "nowrap", width: 170 }}>Email</th>
+                    <th style={{ border: "1px solid #333", padding: "8px 10px", color: "#ccc", fontWeight: 700, textAlign: "left", whiteSpace: "nowrap", width: 80 }}>Progress</th>
                     {tableColumns.map(col => (
-                      <th key={col.key} title={col.label} style={{ border: "1px solid #333", padding: "8px 2px", color: "#ccc", fontWeight: 700, textAlign: "center", fontSize: 16, width: 38 }}>{col.icon}</th>
+                      <th key={col.key} title={col.label} style={{ border: "1px solid #333", padding: "8px 1px", color: "#ccc", fontWeight: 700, textAlign: "center", fontSize: 15, width: 32 }}>{col.icon}</th>
                     ))}
-                    <th style={{ border: "1px solid #333", padding: "8px 10px", color: "#ccc", fontWeight: 700, textAlign: "center", whiteSpace: "nowrap", width: 110 }}>Actions</th>
+                    <th style={{ border: "1px solid #333", padding: "8px 8px", color: "#ccc", fontWeight: 700, textAlign: "center", whiteSpace: "nowrap", width: 100 }}>Actions</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -825,7 +825,7 @@ function AdminPanel({ onExit }) {
                         {tableColumns.map(col => {
                           const colDone = col.type === "position" ? !!posProg[col.id] : !!prog[col.id];
                           return (
-                            <td key={col.key} style={{ border: "1px solid #222", padding: "8px 2px", textAlign: "center" }}>
+                            <td key={col.key} style={{ border: "1px solid #222", padding: "8px 1px", textAlign: "center" }}>
                               <span style={{ color: colDone ? MOE.teal : "#444", fontWeight: 700, fontSize: 15 }}>{colDone ? "✓" : "○"}</span>
                             </td>
                           );
@@ -2062,6 +2062,7 @@ export default function App() {
       {/* Page Content */}
       <main>
         <PageContent
+          key={currentPage.id}
           page={currentPage}
           isCompleted={!!progress[currentPage.id]}
           onComplete={handleComplete}

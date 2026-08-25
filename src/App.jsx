@@ -1518,7 +1518,7 @@ function LoginScreen({ onLogin, onAdminClick }) {
     }
     setLoading(true);
     setTimeout(() => {
-      const normalized = nameTrimmed.toLowerCase().replace(/\b\w/g, c => c.toUpperCase());
+      const normalized = nameTrimmed.toUpperCase();
       const id = nameTrimmed.toLowerCase().replace(/[^a-z0-9]/g, "_");
       onLogin({ id, name: normalized, store });
     }, 500);

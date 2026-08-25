@@ -1226,18 +1226,46 @@ const POSITION_DOCS = {
   ],
 };
 
-// ─── Resource categories (Resources page document library) ───────────────────
-// Add real files by dropping them in /public and adding { title, url } entries
-// to the matching category's `docs` array below (pdf, xlsx, docx, etc. all work).
-const RESOURCE_CATEGORIES = [
-  { id: "recipes", title: "Recipes", color: MOE.orange, docs: [] },
-  { id: "sterling-focus", title: "Sterling Focus", color: MOE.teal, docs: [] },
-  { id: "sterling-contacts", title: "Sterling Contacts", color: MOE.orange, docs: [] },
-  { id: "hr-payroll", title: "HR/Payroll", color: MOE.teal, docs: [] },
-  { id: "injury-accidents", title: "Injury/Accidents", color: MOE.orange, docs: [] },
-  { id: "admin-docs", title: "Admin Docs", color: MOE.teal, docs: [] },
-  { id: "doc-1", title: "Doc 1", color: MOE.orange, docs: [] },
-  { id: "doc-2", title: "Doc 2", color: MOE.teal, docs: [] },
+// ─── Resource links (Resources page document library) ────────────────────────
+// Placeholder links laid out in the requested row order. Swap `url: "#"` for a
+// real file (drop it in /public) once each document is ready.
+const RESOURCE_LINK_ROWS = [
+  [
+    { title: "Recipe Book", url: "#" },
+    { title: "Current Sterling Focus", url: "#" },
+    { title: "All Hands on Deck", url: "#" },
+    { title: "Sterling Focus", url: "#" },
+  ],
+  [
+    { title: "Line Schematic", url: "#" },
+    { title: "Clipboard File", url: "#" },
+    { title: "Scheduler File", url: "#" },
+    { title: "Date Label Order Guide", url: "#" },
+  ],
+  [
+    { title: "86 Instructions", url: "#" },
+    { title: "Offline Mode Instructions for Qu", url: "#" },
+    { title: "Chicken Log", url: "#" },
+    { title: "Shelf Chart", url: "#" },
+  ],
+  [
+    { title: "Handbook", url: "#" },
+    { title: "Referral Bonus", url: "#" },
+    { title: "Sterling Principles", url: "#" },
+    { title: "Employee Meal Policy", url: "#" },
+  ],
+  [
+    { title: "Appearance Standards", url: "#" },
+    { title: "ADP Login Link", url: "#" },
+    { title: "Tip Share", url: "#" },
+    { title: "Career Progression Chart", url: "#" },
+  ],
+  [
+    { title: "KEF Coloring Sheets", url: "#" },
+    { title: "Holiday Hour Notices", url: "#" },
+    { title: "Current Month Offer Calendar", url: "#" },
+    { title: "Latest MLT Document", url: "#" },
+  ],
 ];
 
 function openResourceDoc(doc, setActivePdf) {
@@ -1248,70 +1276,26 @@ function openResourceDoc(doc, setActivePdf) {
   }
 }
 
-function ResourceCategories({ setActivePdf }) {
-  const [activeCategory, setActiveCategory] = useState(null);
-  const activeCat = RESOURCE_CATEGORIES.find(c => c.id === activeCategory);
-
+function ResourceLinks({ setActivePdf }) {
   return (
     <section style={{ marginBottom: 40 }}>
       <h2 style={{ fontSize: 24, fontWeight: 700, color: "#ffffff", fontFamily: "Calibri, sans-serif", marginBottom: 18, textTransform: "uppercase", letterSpacing: 1 }}>
         Document Library
       </h2>
-      <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(180px, 1fr))", gap: 16, marginBottom: activeCat ? 20 : 0 }}>
-        {RESOURCE_CATEGORIES.map(cat => {
-          const active = activeCategory === cat.id;
-          return (
-            <button
-              key={cat.id}
-              onClick={() => setActiveCategory(active ? null : cat.id)}
-              style={{
-                display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: 8,
-                background: active ? `${cat.color}22` : "#1A1A1A",
-                border: `2px solid ${active ? cat.color : "#333"}`,
-                borderRadius: 12, padding: "22px 16px", cursor: "pointer",
-                fontFamily: "Calibri, sans-serif", color: "#fff", transition: "all 0.2s",
-              }}
-            >
-              <div style={{ fontSize: 16, fontWeight: 700, textAlign: "center" }}>{cat.title}</div>
-              <div style={{ fontSize: 12, color: MOE.teal, fontWeight: 600 }}>
-                {cat.docs.length} document{cat.docs.length === 1 ? "" : "s"}
-              </div>
-            </button>
-          );
-        })}
-      </div>
-
-      {activeCat && (
-        <div style={{ background: "#1A1A1A", border: `2px solid ${activeCat.color}`, borderRadius: 14, padding: "22px 20px" }}>
-          <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 16 }}>
-            <div style={{ fontSize: 19, fontWeight: 800, color: activeCat.color, fontFamily: "Calibri, sans-serif", textTransform: "uppercase", letterSpacing: 1 }}>
-              {activeCat.title}
-            </div>
-            <button
-              onClick={() => setActiveCategory(null)}
-              style={{ background: "transparent", border: "none", color: "#888", fontSize: 14, cursor: "pointer", fontFamily: "Calibri, sans-serif" }}
-            >
-              Close ✕
-            </button>
+      <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
+        {RESOURCE_LINK_ROWS.map((row, r) => (
+          <div key={r} style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(180px, 1fr))", gap: 16 }}>
+            {row.map((link, i) => (
+              <a key={i} href={link.url} onClick={e => { e.preventDefault(); openResourceDoc(link, setActivePdf); }}
+                style={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", textAlign: "center", gap: 6, background: "#1A1A1A", border: "1.5px solid #333", borderRadius: 10, padding: "18px 20px", textDecoration: "none", color: "#fff", fontFamily: "Calibri, sans-serif", fontSize: 17, fontWeight: 600, cursor: "pointer" }}
+              >
+                <div style={{ fontSize: 17, fontWeight: 700 }}>{link.title}</div>
+                <div style={{ fontSize: 14, color: r % 2 === 0 ? MOE.orange : MOE.teal, marginTop: 4 }}>Click to open →</div>
+              </a>
+            ))}
           </div>
-          {activeCat.docs.length === 0 ? (
-            <p style={{ color: "#888", fontFamily: "Calibri, sans-serif", fontSize: 16, margin: 0 }}>
-              No documents added yet. Check back soon.
-            </p>
-          ) : (
-            <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(220px, 1fr))", gap: 16 }}>
-              {activeCat.docs.map((doc, i) => (
-                <a key={i} href={doc.url} onClick={e => { e.preventDefault(); openResourceDoc(doc, setActivePdf); }}
-                  style={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", textAlign: "center", gap: 6, background: "#111", border: "1.5px solid #333", borderRadius: 10, padding: "18px 20px", textDecoration: "none", color: "#fff", fontFamily: "Calibri, sans-serif", fontSize: 17, fontWeight: 600, cursor: "pointer" }}
-                >
-                  <div style={{ fontSize: 17, fontWeight: 700 }}>{doc.title}</div>
-                  <div style={{ fontSize: 14, color: activeCat.color, marginTop: 4 }}>Click to open →</div>
-                </a>
-              ))}
-            </div>
-          )}
-        </div>
-      )}
+        ))}
+      </div>
     </section>
   );
 }
@@ -1735,7 +1719,7 @@ function PageContent({ page, isCompleted, onComplete, progress, user }) {
       )}
 
       {/* Document Library - Resources page only */}
-      {page.id === "resources" && <ResourceCategories setActivePdf={setActivePdf} />}
+      {page.id === "resources" && <ResourceLinks setActivePdf={setActivePdf} />}
 
       {page.id !== "training" && page.id !== "orientation" && page.videos.length > 0 && <section style={{ marginBottom: 40 }}>
         <h2 style={{ fontSize: 24, fontWeight: 700, color: "#ffffff", fontFamily: "Calibri, sans-serif", marginBottom: 18, display: "flex", alignItems: "center", gap: 8, textTransform: "uppercase", letterSpacing: 1 }}>

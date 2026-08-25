@@ -1364,7 +1364,7 @@ function PositionTracker({ user, onPositionPass, setActivePdf }) {
       </div>
 
       {/* Star Tracker Row */}
-      <div style={{ background: MOE.teal, border: `1.5px solid ${MOE.teal}`, borderRadius: 14, padding: "20px 16px", marginBottom: 24 }}>
+      <div style={{ background: "#000000", border: `1.5px solid ${MOE.teal}`, borderRadius: 14, padding: "20px 16px", marginBottom: 24 }}>
         <div className="position-grid">
           {POSITIONS.map(pos => {
             const done = !!posProg[pos.id];

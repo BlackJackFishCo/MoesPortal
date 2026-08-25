@@ -1268,14 +1268,6 @@ const RESOURCE_LINK_ROWS = [
   ],
 ];
 
-function openResourceDoc(doc, setActivePdf) {
-  if (doc.url.toLowerCase().endsWith(".pdf")) {
-    setActivePdf(doc);
-  } else {
-    window.open(doc.url, "_blank", "noreferrer");
-  }
-}
-
 function ResourceLinks({ setActivePdf }) {
   return (
     <section style={{ marginBottom: 40 }}>
@@ -1286,7 +1278,7 @@ function ResourceLinks({ setActivePdf }) {
         {RESOURCE_LINK_ROWS.map((row, r) => (
           <div key={r} style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(180px, 1fr))", gap: 16 }}>
             {row.map((link, i) => (
-              <a key={i} href={link.url} onClick={e => { e.preventDefault(); openResourceDoc(link, setActivePdf); }}
+              <a key={i} href={link.url} onClick={e => { e.preventDefault(); setActivePdf(link); }}
                 style={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", textAlign: "center", gap: 6, background: MOE.teal, border: `1.5px solid ${MOE.teal}`, borderRadius: 10, padding: "18px 20px", textDecoration: "none", color: "#fff", fontFamily: "Calibri, sans-serif", fontSize: 17, fontWeight: 600, cursor: "pointer" }}
               >
                 <div style={{ fontSize: 17, fontWeight: 700 }}>{link.title}</div>
@@ -1298,7 +1290,7 @@ function ResourceLinks({ setActivePdf }) {
       </div>
 
       <div style={{ display: "flex", justifyContent: "center", marginTop: 28 }}>
-        <a href="#" onClick={e => { e.preventDefault(); openResourceDoc({ title: "Payroll", url: "#" }, setActivePdf); }}
+        <a href="#" onClick={e => { e.preventDefault(); setActivePdf({ title: "Payroll", url: "#" }); }}
           style={{ display: "inline-block", background: MOE.orange, border: `1.5px solid ${MOE.orange}`, borderRadius: 10, padding: "16px 40px", textDecoration: "none", color: "#fff", fontFamily: "Calibri, sans-serif", fontSize: 18, fontWeight: 800, textTransform: "uppercase", letterSpacing: 1, cursor: "pointer" }}
         >
           Click here for PAYROLL
@@ -1587,14 +1579,35 @@ function PageContent({ page, isCompleted, onComplete, progress, user }) {
           >
             ← Back to Portal
           </button>
-          <a href={activePdf.url} target="_blank" rel="noreferrer" style={{ color: MOE.teal, fontFamily: "Calibri, sans-serif", fontSize: 14, fontWeight: 600, textDecoration: "none", whiteSpace: "nowrap", order: 2, marginLeft: "auto" }}>
-            Open in new tab ↗
-          </a>
+          {activePdf.url !== "#" && (
+            <a href={activePdf.url} target="_blank" rel="noreferrer" style={{ color: MOE.teal, fontFamily: "Calibri, sans-serif", fontSize: 14, fontWeight: 600, textDecoration: "none", whiteSpace: "nowrap", order: 2, marginLeft: "auto" }}>
+              Open in new tab ↗
+            </a>
+          )}
           <div style={{ color: "#fff", fontFamily: "Calibri, sans-serif", fontSize: 16, fontWeight: 600, textAlign: "center", flexBasis: "100%", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap", order: 3 }}>
             {activePdf.title}
           </div>
         </div>
-        <iframe src={activePdf.url} title={activePdf.title} style={{ flex: 1, border: "none", background: "#fff" }} />
+        {activePdf.url === "#" ? (
+          <div style={{ flex: 1, display: "flex", alignItems: "center", justifyContent: "center", padding: 24 }}>
+            <p style={{ color: "#888", fontFamily: "Calibri, sans-serif", fontSize: 18, textAlign: "center" }}>
+              This document hasn't been added yet. Check back soon.
+            </p>
+          </div>
+        ) : activePdf.url.toLowerCase().endsWith(".pdf") ? (
+          <iframe src={activePdf.url} title={activePdf.title} style={{ flex: 1, border: "none", background: "#fff" }} />
+        ) : (
+          <div style={{ flex: 1, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: 20, padding: 24 }}>
+            <p style={{ color: "#ccc", fontFamily: "Calibri, sans-serif", fontSize: 18, textAlign: "center", maxWidth: 420 }}>
+              This document opens on an outside site and can't be shown here directly.
+            </p>
+            <a href={activePdf.url} target="_blank" rel="noreferrer"
+              style={{ background: MOE.teal, color: "#fff", border: "none", borderRadius: 10, padding: "16px 32px", fontSize: 18, fontWeight: 700, fontFamily: "Calibri, sans-serif", textDecoration: "none" }}
+            >
+              Open Document ↗
+            </a>
+          </div>
+        )}
       </div>
     )}
     <div style={{ maxWidth: 900, margin: "0 auto", padding: "24px 16px" }}>

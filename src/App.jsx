@@ -1158,14 +1158,14 @@ function ProgressBar({ progress, activePage, onNavigate }) {
 
 // ─── Position Training Data ───────────────────────────────────────────────────
 const POSITIONS = [
-  { id: "menu",     label: "Menu",     icon: "🌯", color: "#8B4513" },
+  { id: "menu",     label: "Menu",     icon: "🌯", color: "#E8541A" },
   { id: "hot",      label: "Hot",      icon: "🔥", color: "#E8541A" },
-  { id: "cold",     label: "Cold",     icon: "❄️",  color: "#3AB8A8" },
-  { id: "swing",    label: "Swing",    icon: "🔄",  color: "#9B59B6" },
-  { id: "ring",     label: "Ring",     icon: "💵",  color: "#F1C40F" },
-  { id: "prep",     label: "Linebacker", icon: "🔪",  color: "#27AE60" },
-  { id: "ambassador", label: "Ambassador", icon: "🪑", color: "#2980B9" },
-  { id: "catering", label: "Catering", icon: "🚐", color: "#C0392B" },
+  { id: "cold",     label: "Cold",     icon: "❄️",  color: "#E8541A" },
+  { id: "swing",    label: "Swing",    icon: "🔄",  color: "#E8541A" },
+  { id: "ring",     label: "Ring",     icon: "💵",  color: "#E8541A" },
+  { id: "prep",     label: "Linebacker", icon: "🔪",  color: "#E8541A" },
+  { id: "ambassador", label: "Ambassador", icon: "🪑", color: "#E8541A" },
+  { id: "catering", label: "Catering", icon: "🚐", color: "#E8541A" },
 ];
 
 const POSITION_OVERVIEWS = {

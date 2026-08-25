@@ -456,7 +456,7 @@ const POSITION_CHECKLISTS = {
     "Start with asking guest if they would like Cheese, Pico, Lettuce to keep the line moving quickly.",
     "Use Orange Stickers to label upcharges on Queso and Guacamole.",
     "COLD position puts Quesadillas, Stacks, Dippers on the grill or press.",
-    "Practice Stir, Flip, Wipe any down time when guest are not in line to keep it clean, full, and fresh.",
+    "Practice Stir, Flip, Wipe during down time to keep the COLD line clean, stocked, and looking fresh.",
   ],
   swing: [
     "Each guest that enters gets a cheerful “Welcome to Moe’s” from the SWING position.",

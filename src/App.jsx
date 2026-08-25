@@ -1569,6 +1569,13 @@ function PositionTracker({ user, onPositionPass, setActivePdf }) {
     }
   };
 
+  const toggleMenuComplete = () => {
+    const updated = { ...posProg, menu: !posProg.menu };
+    setPosProg(updated);
+    savePositionProgress(user?.id, updated);
+    if (updated.menu && onPositionPass) onPositionPass("menu");
+  };
+
   const toggleVideoWatched = (posId, i) => {
     const key = `${posId}-${i}`;
     const updated = { ...videoProg, [key]: !videoProg[key] };
@@ -1729,6 +1736,24 @@ function PositionTracker({ user, onPositionPass, setActivePdf }) {
                   progress={checklistProg}
                   onToggle={(i) => toggleChecklistItem(pos.id, i)}
                 />
+              </>
+            )}
+
+            {/* Completed checkbox */}
+            {pos.id === "menu" && (
+              <>
+                <div style={{ height: 2, background: `linear-gradient(90deg, ${pos.color}, transparent)`, borderRadius: 2, marginBottom: 20 }} />
+                <label style={{
+                  display: "flex", alignItems: "center", gap: 12, cursor: "pointer",
+                  background: done ? `${pos.color}22` : "#111",
+                  border: `1.5px solid ${done ? pos.color : "#333"}`,
+                  borderRadius: 10, padding: "16px 20px",
+                }}>
+                  <input type="checkbox" checked={done} onChange={toggleMenuComplete} style={{ width: 18, height: 18, flexShrink: 0, cursor: "pointer" }} />
+                  <span style={{ fontSize: 15, fontWeight: done ? 700 : 500, color: done ? "#fff" : "#ccc", fontFamily: "Calibri, sans-serif" }}>
+                    I have watched all Menu training videos and completed this section.
+                  </span>
+                </label>
               </>
             )}
           </div>

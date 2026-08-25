@@ -1580,19 +1580,19 @@ function PageContent({ page, isCompleted, onComplete, progress, user }) {
     <>
     {activePdf && (
       <div style={{ position: "fixed", inset: 0, background: "#000", zIndex: 1000, display: "flex", flexDirection: "column" }}>
-        <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: 12, padding: "12px 16px", background: "#1A1A1A", borderBottom: `2px solid ${page.color}` }}>
+        <div style={{ display: "flex", flexWrap: "wrap", alignItems: "center", gap: 12, padding: "12px 16px", background: "#1A1A1A", borderBottom: `2px solid ${page.color}` }}>
           <button
             onClick={() => setActivePdf(null)}
-            style={{ display: "flex", alignItems: "center", gap: 8, background: MOE.orange, color: "#fff", border: "none", borderRadius: 8, padding: "10px 18px", fontSize: 16, fontWeight: 700, fontFamily: "Calibri, sans-serif", cursor: "pointer" }}
+            style={{ display: "flex", alignItems: "center", gap: 8, background: MOE.orange, color: "#fff", border: "none", borderRadius: 8, padding: "10px 18px", fontSize: 16, fontWeight: 700, fontFamily: "Calibri, sans-serif", cursor: "pointer", order: 1 }}
           >
             ← Back to Portal
           </button>
-          <div style={{ color: "#fff", fontFamily: "Calibri, sans-serif", fontSize: 16, fontWeight: 600, textAlign: "center", flex: 1, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
-            {activePdf.title}
-          </div>
-          <a href={activePdf.url} target="_blank" rel="noreferrer" style={{ color: MOE.teal, fontFamily: "Calibri, sans-serif", fontSize: 14, fontWeight: 600, textDecoration: "none", whiteSpace: "nowrap" }}>
+          <a href={activePdf.url} target="_blank" rel="noreferrer" style={{ color: MOE.teal, fontFamily: "Calibri, sans-serif", fontSize: 14, fontWeight: 600, textDecoration: "none", whiteSpace: "nowrap", order: 2, marginLeft: "auto" }}>
             Open in new tab ↗
           </a>
+          <div style={{ color: "#fff", fontFamily: "Calibri, sans-serif", fontSize: 16, fontWeight: 600, textAlign: "center", flexBasis: "100%", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap", order: 3 }}>
+            {activePdf.title}
+          </div>
         </div>
         <iframe src={activePdf.url} title={activePdf.title} style={{ flex: 1, border: "none", background: "#fff" }} />
       </div>

@@ -1482,7 +1482,7 @@ function PositionTracker({ user, onPositionPass, setActivePdf }) {
                     </div>
                     <div style={{ fontSize: 13, color: "#888", fontFamily: "Calibri, sans-serif", textAlign: "center" }}>📹 {vid.title}</div>
                     {pos.id === "menu" && (
-                      <label style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 6, marginTop: 6, fontSize: 13, fontWeight: 600, color: watched ? MOE.teal : "#888", cursor: "pointer", fontFamily: "Calibri, sans-serif" }}>
+                      <label style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 6, marginTop: 6, fontSize: 13, fontWeight: 700, color: "#fff", background: MOE.orange, border: `1.5px solid ${MOE.orange}`, borderRadius: 8, padding: "8px 14px", cursor: "pointer", fontFamily: "Calibri, sans-serif" }}>
                         <input type="checkbox" checked={watched} onChange={() => toggleVideoWatched(pos.id, i)} />
                         {watched ? "✓ Watched" : "Mark as watched"}
                       </label>
@@ -1531,12 +1531,12 @@ function PositionTracker({ user, onPositionPass, setActivePdf }) {
                 <div style={{ height: 2, background: `linear-gradient(90deg, ${pos.color}, transparent)`, borderRadius: 2, marginBottom: 20 }} />
                 <label style={{
                   display: "flex", alignItems: "center", gap: 12, cursor: "pointer",
-                  background: done ? `${pos.color}22` : "#111",
-                  border: `1.5px solid ${done ? pos.color : "#333"}`,
+                  background: MOE.orange,
+                  border: `1.5px solid ${MOE.orange}`,
                   borderRadius: 10, padding: "16px 20px",
                 }}>
                   <input type="checkbox" checked={done} onChange={toggleMenuComplete} style={{ width: 18, height: 18, flexShrink: 0, cursor: "pointer" }} />
-                  <span style={{ fontSize: 15, fontWeight: done ? 700 : 500, color: done ? "#fff" : "#ccc", fontFamily: "Calibri, sans-serif" }}>
+                  <span style={{ fontSize: 15, fontWeight: done ? 700 : 500, color: "#fff", fontFamily: "Calibri, sans-serif" }}>
                     I have watched all Menu training videos and completed this section.
                   </span>
                 </label>

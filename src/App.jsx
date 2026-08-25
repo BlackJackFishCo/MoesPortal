@@ -1287,14 +1287,22 @@ function ResourceLinks({ setActivePdf }) {
           <div key={r} style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(180px, 1fr))", gap: 16 }}>
             {row.map((link, i) => (
               <a key={i} href={link.url} onClick={e => { e.preventDefault(); openResourceDoc(link, setActivePdf); }}
-                style={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", textAlign: "center", gap: 6, background: "#1A1A1A", border: "1.5px solid #333", borderRadius: 10, padding: "18px 20px", textDecoration: "none", color: "#fff", fontFamily: "Calibri, sans-serif", fontSize: 17, fontWeight: 600, cursor: "pointer" }}
+                style={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", textAlign: "center", gap: 6, background: "#1A1A1A", border: `1.5px solid ${MOE.teal}`, borderRadius: 10, padding: "18px 20px", textDecoration: "none", color: "#fff", fontFamily: "Calibri, sans-serif", fontSize: 17, fontWeight: 600, cursor: "pointer" }}
               >
                 <div style={{ fontSize: 17, fontWeight: 700 }}>{link.title}</div>
-                <div style={{ fontSize: 14, color: r % 2 === 0 ? MOE.orange : MOE.teal, marginTop: 4 }}>Click to open →</div>
+                <div style={{ fontSize: 14, color: MOE.teal, marginTop: 4 }}>Click to open →</div>
               </a>
             ))}
           </div>
         ))}
+      </div>
+
+      <div style={{ display: "flex", justifyContent: "center", marginTop: 28 }}>
+        <a href="#" onClick={e => { e.preventDefault(); openResourceDoc({ title: "Payroll", url: "#" }, setActivePdf); }}
+          style={{ display: "inline-block", background: MOE.orange, border: `1.5px solid ${MOE.orange}`, borderRadius: 10, padding: "16px 40px", textDecoration: "none", color: "#fff", fontFamily: "Calibri, sans-serif", fontSize: 18, fontWeight: 800, textTransform: "uppercase", letterSpacing: 1, cursor: "pointer" }}
+        >
+          Click here for PAYROLL
+        </a>
       </div>
     </section>
   );

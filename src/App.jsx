@@ -1320,22 +1320,9 @@ function savePositionProgress(userId, data) {
   setDoc(doc(db, "users", userId), { positionProgress: data }, { merge: true }).catch(() => {});
 }
 
-function getVideoProgress(userId) {
-  try {
-    const raw = localStorage.getItem(`moes_videos_${userId}`);
-    return raw ? JSON.parse(raw) : {};
-  } catch { return {}; }
-}
-
-function saveVideoProgress(userId, data) {
-  try { localStorage.setItem(`moes_videos_${userId}`, JSON.stringify(data)); } catch {}
-  setDoc(doc(db, "users", userId), { videoProgress: data }, { merge: true }).catch(() => {});
-}
-
 // ─── Position Tracker Component ───────────────────────────────────────────────
 function PositionTracker({ user, onPositionPass, setActivePdf }) {
   const [posProg, setPosProg] = useState(() => getPositionProgress(user?.id));
-  const [videoProg, setVideoProg] = useState(() => getVideoProgress(user?.id));
   const [checklistProg, setChecklistProg] = useState(() => getChecklistProgress(user?.id));
   const [activePos, setActivePos] = useState(null);
 
@@ -1361,23 +1348,6 @@ function PositionTracker({ user, onPositionPass, setActivePdf }) {
     savePositionProgress(user?.id, updated);
     if (updated.menu && onPositionPass) onPositionPass("menu");
   };
-
-  const toggleVideoWatched = (posId, i) => {
-    const key = `${posId}-${i}`;
-    const updated = { ...videoProg, [key]: !videoProg[key] };
-    setVideoProg(updated);
-    saveVideoProgress(user?.id, updated);
-  };
-
-  useEffect(() => {
-    const allMenuVideosWatched = POSITION_VIDEOS.menu.every((_, i) => videoProg[`menu-${i}`]);
-    if (allMenuVideosWatched && !posProg.menu) {
-      const updated = { ...posProg, menu: true };
-      setPosProg(updated);
-      savePositionProgress(user?.id, updated);
-      if (onPositionPass) onPositionPass("menu");
-    }
-  }, [videoProg]);
 
   const completedCount = POSITIONS.filter(p => posProg[p.id]).length;
 
@@ -1471,25 +1441,16 @@ function PositionTracker({ user, onPositionPass, setActivePdf }) {
 
             {/* Training videos */}
             <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: 16, marginBottom: 24 }}>
-              {videos.map((vid, i) => {
-                const watched = !!videoProg[`${pos.id}-${i}`];
-                return (
-                  <div key={i}>
-                    <div style={{ borderRadius: 10, overflow: "hidden", background: "#000", border: "1px solid #333", marginBottom: 8 }}>
-                      <iframe width="100%" height="220" src={vid.url} title={vid.title}
-                        frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                        allowFullScreen style={{ display: "block" }} />
-                    </div>
-                    <div style={{ fontSize: 13, color: "#888", fontFamily: "Calibri, sans-serif", textAlign: "center" }}>📹 {vid.title}</div>
-                    {pos.id === "menu" && (
-                      <label style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 6, marginTop: 6, fontSize: 13, fontWeight: 700, color: "#fff", background: MOE.orange, border: `1.5px solid ${MOE.orange}`, borderRadius: 8, padding: "8px 14px", cursor: "pointer", fontFamily: "Calibri, sans-serif" }}>
-                        <input type="checkbox" checked={watched} onChange={() => toggleVideoWatched(pos.id, i)} />
-                        {watched ? "✓ Watched" : "Mark as watched"}
-                      </label>
-                    )}
+              {videos.map((vid, i) => (
+                <div key={i}>
+                  <div style={{ borderRadius: 10, overflow: "hidden", background: "#000", border: "1px solid #333", marginBottom: 8 }}>
+                    <iframe width="100%" height="220" src={vid.url} title={vid.title}
+                      frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                      allowFullScreen style={{ display: "block" }} />
                   </div>
-                );
-              })}
+                  <div style={{ fontSize: 13, color: "#888", fontFamily: "Calibri, sans-serif", textAlign: "center" }}>📹 {vid.title}</div>
+                </div>
+              ))}
             </div>
 
             {/* Documents */}
@@ -1501,10 +1462,12 @@ function PositionTracker({ user, onPositionPass, setActivePdf }) {
                 <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(220px, 1fr))", gap: 16, marginBottom: 24 }}>
                   {docs.map((pdf, i) => (
                     <a key={i} href={pdf.url} onClick={e => { e.preventDefault(); setActivePdf(pdf); }}
-                      style={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", textAlign: "center", gap: 6, background: "#111", border: "1.5px solid #333", borderRadius: 10, padding: "18px 20px", textDecoration: "none", color: "#fff", fontFamily: "Calibri, sans-serif", fontSize: 17, fontWeight: 600, cursor: "pointer" }}
+                      style={pos.id === "menu"
+                        ? { display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", textAlign: "center", gap: 6, background: MOE.orange, border: `1.5px solid ${MOE.orange}`, borderRadius: 10, padding: "18px 20px", textDecoration: "none", color: "#fff", fontFamily: "Calibri, sans-serif", fontSize: 17, fontWeight: 600, cursor: "pointer" }
+                        : { display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", textAlign: "center", gap: 6, background: "#111", border: "1.5px solid #333", borderRadius: 10, padding: "18px 20px", textDecoration: "none", color: "#fff", fontFamily: "Calibri, sans-serif", fontSize: 17, fontWeight: 600, cursor: "pointer" }}
                     >
                       <div style={{ fontSize: 17, fontWeight: 700 }}>{pdf.title}</div>
-                      <div style={{ fontSize: 14, color: pos.color, marginTop: 4 }}>Click to open →</div>
+                      <div style={{ fontSize: 14, color: pos.id === "menu" ? "#fff" : pos.color, marginTop: 4 }}>Click to open →</div>
                     </a>
                   ))}
                 </div>

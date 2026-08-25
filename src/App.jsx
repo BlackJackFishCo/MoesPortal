@@ -480,7 +480,7 @@ const POSITION_CHECKLISTS = {
     "Checklist item 5 — to be edited",
   ],
   ambassador: [
-    "Each guest that enters gets a cheerful “Welcome to Moe’s” from the SWING position.",
+    "Each guest that enters gets a cheerful “Welcome to Moe’s” from the AMBASSADOR position.",
     "Keeps salsa and beverage bars stocked and clean.",
     "Keeps restrooms stocked and cleaned.",
     "Cleans up spills immediately and puts out wet floor signs to eliminate possible guest accidents.",

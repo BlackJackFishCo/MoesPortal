@@ -395,92 +395,86 @@ function saveOrientationNotes(userId, notes) {
 }
 
 // ─── Food Safety Quiz ─────────────────────────────────────────────────────────
-// Topics match the 6 red-highlighted headings from the FL DOH document
+// Topics match the 3 Food Safety training videos (Handwashing, Gloves, Cross Contamination)
 const QUIZ_TOPICS = [
-  "Basic Public Health Food Protection Practices",
-  "Personal Duties & Hygiene",
-  "Food Safety Practices",
-  "Cleaning & Sanitizing",
-  '"Big 6" Food Borne Illness Prevention',
-  "Proper Insect and Pest Control",
+  "Handwashing",
+  "Gloves",
+  "Cross Contamination",
 ];
 
 const QUIZ_QUESTIONS = [
-  // Topic 1 – Basic Public Health Food Protection Practices
+  // Topic 1 – Handwashing
   {
     id: 1,
     topic: 0,
-    question: "What is the required cold holding temperature for food safety?",
-    options: ["45°F or below", "41°F or below", "50°F or below", "38°F or below"],
-    correct: 1,
-  },
-  // Topic 2 – Personal Duties & Hygiene
-  {
-    id: 2,
-    topic: 1,
     question: "How long must employees wash their hands?",
     options: ["10 seconds", "15 seconds", "20 seconds", "30 seconds"],
     correct: 2,
   },
   {
-    id: 3,
-    topic: 1,
+    id: 2,
+    topic: 0,
     question: "Which of the following requires mandatory handwashing?",
     options: ["After drinking water", "Before handling food and after using the restroom", "Only at the start of a shift", "When switching from one food item to another"],
     correct: 1,
   },
   {
-    id: 4,
-    topic: 1,
-    question: "Bare hand contact with ready-to-eat foods is:",
-    options: ["Allowed if hands are clean", "Allowed with a single glove", "Prohibited - Gloves must be worn", "Allowed for brief contact only"],
+    id: 3,
+    topic: 0,
+    question: "What should you dry your hands with after washing?",
+    options: ["Your apron", "A shared cloth towel", "A single-use paper towel or air dryer", "Your pants"],
     correct: 2,
   },
+  {
+    id: 4,
+    topic: 0,
+    question: "Proper handwashing includes which of these steps?",
+    options: ["Rinsing with water only, no soap", "Wetting hands, applying soap, scrubbing for the required time, rinsing, and drying", "Using hand sanitizer instead of soap and water", "Washing hands only at the end of a shift"],
+    correct: 1,
+  },
+  // Topic 2 – Gloves
   {
     id: 5,
     topic: 1,
-    question: "An employee with a communicable disease such as Salmonella or E. coli must:",
-    options: ["Wear gloves and continue working", "Work in a non-food prep area", "Be excluded from work entirely", "Notify a coworker and take breaks often"],
+    question: "Bare hand contact with ready-to-eat foods is:",
+    options: ["Allowed if hands are clean", "Allowed with a single glove", "Prohibited - gloves must be worn", "Allowed for brief contact only"],
     correct: 2,
   },
-  // Topic 3 – Food Safety Practices
   {
     id: 6,
+    topic: 1,
+    question: "Gloves must be changed:",
+    options: ["Only when they rip", "After handling raw meat, using the restroom, or switching tasks", "Once every hour regardless of activity", "Never - one pair lasts a full shift"],
+    correct: 1,
+  },
+  {
+    id: 7,
+    topic: 1,
+    question: "Wearing gloves means you:",
+    options: ["Never need to wash your hands", "Still need to wash your hands before putting gloves on and whenever you change them", "Can touch raw and ready-to-eat food with the same pair", "Can skip handwashing after using the restroom"],
+    correct: 1,
+  },
+  // Topic 3 – Cross Contamination
+  {
+    id: 8,
     topic: 2,
     question: "When storing raw proteins, where should they be placed relative to ready-to-eat foods?",
     options: ["On the top shelf for easy access", "On lower shelves below ready-to-eat foods", "Side by side on the same shelf", "In a separate cooler only"],
     correct: 1,
   },
   {
-    id: 7,
-    topic: 2,
-    question: "What internal temperature does chicken need to be cooked to?",
-    options: ["145°F", "155°F", "160°F", "165°F"],
-    correct: 3,
-  },
-  // Topic 4 – Cleaning & Sanitizing
-  {
-    id: 8,
-    topic: 3,
-    question: "How often must food contact surfaces be sanitized when using TCS (time/temperature control for safety) foods?",
-    options: ["Once per shift", "Every 2 hours", "Every 4 hours", "Once per day"],
-    correct: 2,
-  },
-  // Topic 5 – "Big 6" Food Borne Illness Prevention
-  {
     id: 9,
-    topic: 4,
-    question: "A food worker must report to their manager if they experience:",
-    options: ["A minor headache", "Vomiting, diarrhea, or jaundice", "Feeling tired", "A mild cough"],
+    topic: 2,
+    question: "Cross contamination occurs when:",
+    options: ["Food is cooked to the wrong temperature", "Harmful bacteria are transferred from one food or surface to another", "Food is stored at the wrong temperature", "A food item passes its expiration date"],
     correct: 1,
   },
-  // Topic 6 – Proper Insect and Pest Control
   {
     id: 10,
-    topic: 5,
-    question: "To prevent pest entry, food must be stored at least how far off the ground?",
-    options: ["2 inches", "4 inches", "6 inches", "12 inches"],
-    correct: 2,
+    topic: 2,
+    question: "What should be used separately for raw meat and ready-to-eat foods to prevent cross contamination?",
+    options: ["The same cutting board is fine if rinsed with water", "Separate cutting boards and utensils for each", "One set of tongs for everything", "It doesn't matter as long as hands are washed"],
+    correct: 1,
   },
 ];
 
@@ -1395,7 +1389,7 @@ function AdminPanel({ onExit }) {
                   </td>
                 </tr>
                 <tr style="background:#f0f0f0">
-                  <td style="border:1px solid #ccc;padding:6px 12px;padding-left:28px;font-size:12px;font-weight:700;color:#555">TOPIC (FL DOH Red Headings)</td>
+                  <td style="border:1px solid #ccc;padding:6px 12px;padding-left:28px;font-size:12px;font-weight:700;color:#555">TOPIC (Training Video)</td>
                   <td style="border:1px solid #ccc;padding:6px 12px;text-align:center;font-size:12px;font-weight:700;color:#555">CORRECT</td>
                   <td style="border:1px solid #ccc;padding:6px 12px;text-align:center;font-size:12px;font-weight:700;color:#555">SCORE</td>
                 </tr>
@@ -1418,12 +1412,12 @@ function AdminPanel({ onExit }) {
                 <h2>${title} · Generated: ${new Date().toLocaleDateString()} · Passing Score: ${PASSING_SCORE}%</h2>
               </div>
               <div class="legend">
-                <strong>Topics in red</strong> correspond to the FL Department of Health highlighted sections:
+                <strong>Topics in red</strong> correspond to the Food Safety training videos:
                 ${QUIZ_TOPICS.map(t => `<span style="color:#c00000;font-weight:600">${t}</span>`).join(" &nbsp;·&nbsp; ")}
               </div>
               <table>
                 <thead><tr>
-                  <th>Employee / FL DOH Topic</th>
+                  <th>Employee / Video Topic</th>
                   <th style="width:100px;text-align:center">Correct</th>
                   <th style="width:120px;text-align:center">Score</th>
                 </tr></thead>

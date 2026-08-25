@@ -342,103 +342,12 @@ function saveOrientationNotes(userId, notes) {
   setDoc(doc(db, "users", userId), { orientationNotes: notes }, { merge: true }).catch(() => {});
 }
 
-// ─── Food Safety Quiz ─────────────────────────────────────────────────────────
-// Topics match the 3 Food Safety training videos (Handwashing, Gloves, Cross Contamination)
-const QUIZ_TOPICS = [
-  "Handwashing",
-  "Gloves",
-  "Cross Contamination",
-];
-
-const QUIZ_QUESTIONS = [
-  // Topic 1 – Handwashing
-  {
-    id: 1,
-    topic: 0,
-    question: "How long must employees wash their hands?",
-    options: ["10 seconds", "15 seconds", "20 seconds", "30 seconds"],
-    correct: 2,
-  },
-  {
-    id: 2,
-    topic: 0,
-    question: "Which of the following requires mandatory handwashing?",
-    options: ["After drinking water", "Before handling food and after using the restroom", "Only at the start of a shift", "When switching from one food item to another"],
-    correct: 1,
-  },
-  {
-    id: 3,
-    topic: 0,
-    question: "What should you dry your hands with after washing?",
-    options: ["Your apron", "A shared cloth towel", "A single-use paper towel or air dryer", "Your pants"],
-    correct: 2,
-  },
-  {
-    id: 4,
-    topic: 0,
-    question: "Proper handwashing includes which of these steps?",
-    options: ["Rinsing with water only, no soap", "Wetting hands, applying soap, scrubbing for the required time, rinsing, and drying", "Using hand sanitizer instead of soap and water", "Washing hands only at the end of a shift"],
-    correct: 1,
-  },
-  // Topic 2 – Gloves
-  {
-    id: 5,
-    topic: 1,
-    question: "Bare hand contact with ready-to-eat foods is:",
-    options: ["Allowed if hands are clean", "Allowed with a single glove", "Prohibited - gloves must be worn", "Allowed for brief contact only"],
-    correct: 2,
-  },
-  {
-    id: 6,
-    topic: 1,
-    question: "Gloves must be changed:",
-    options: ["Only when they rip", "After handling raw meat, using the restroom, or switching tasks", "Once every hour regardless of activity", "Never - one pair lasts a full shift"],
-    correct: 1,
-  },
-  {
-    id: 7,
-    topic: 1,
-    question: "Wearing gloves means you:",
-    options: ["Never need to wash your hands", "Still need to wash your hands before putting gloves on and whenever you change them", "Can touch raw and ready-to-eat food with the same pair", "Can skip handwashing after using the restroom"],
-    correct: 1,
-  },
-  // Topic 3 – Cross Contamination
-  {
-    id: 8,
-    topic: 2,
-    question: "When storing raw proteins, where should they be placed relative to ready-to-eat foods?",
-    options: ["On the top shelf for easy access", "On lower shelves below ready-to-eat foods", "Side by side on the same shelf", "In a separate cooler only"],
-    correct: 1,
-  },
-  {
-    id: 9,
-    topic: 2,
-    question: "Cross contamination occurs when:",
-    options: ["Food is cooked to the wrong temperature", "Harmful bacteria are transferred from one food or surface to another", "Food is stored at the wrong temperature", "A food item passes its expiration date"],
-    correct: 1,
-  },
-  {
-    id: 10,
-    topic: 2,
-    question: "What should be used separately for raw meat and ready-to-eat foods to prevent cross contamination?",
-    options: ["The same cutting board is fine if rinsed with water", "Separate cutting boards and utensils for each", "One set of tongs for everything", "It doesn't matter as long as hands are washed"],
-    correct: 1,
-  },
-];
-
-const PASSING_SCORE = 90; // percent
-
+// ─── Food Safety Quiz (legacy results kept for sync) ─────────────────────────
 function getQuizResult(userId) {
   try {
     const raw = localStorage.getItem(`moes_quiz_${userId}`);
     return raw ? JSON.parse(raw) : null;
   } catch { return null; }
-}
-function getAllQuizResults() {
-  try {
-    const users = getAllUsers();
-    return users.map(u => ({ ...u, quiz: getQuizResult(u.id) })).filter(u => u.quiz);
-  } catch { return []; }
 }
 
 
@@ -629,7 +538,6 @@ function AdminPanel({ onExit }) {
   const [confirmReset, setConfirmReset] = useState(null); // { id, name } of user pending reset
   const [confirmRemove, setConfirmRemove] = useState(null); // { id, name } of user pending removal
   const [indSearch, setIndSearch] = useState(""); // search within Individual Employee Report
-  const [quizFilterStore, setQuizFilterStore] = useState(""); // filter for quiz results tab
   const [printPreview, setPrintPreview] = useState(null); // { html, title } for print modal
   const [reportError, setReportError] = useState(""); // inline error instead of alert()
 
@@ -802,9 +710,9 @@ function AdminPanel({ onExit }) {
       {/* Tabs */}
       <div style={{ background: "#111", borderBottom: "1px solid #222", padding: "0 8px", overflowX: "auto", WebkitOverflowScrolling: "touch" }}>
         <div style={{ maxWidth: 1100, margin: "0 auto", display: "flex", gap: 0, minWidth: "max-content" }}>
-          {["users", "reports", "quiz"].map(tab => (
+          {["users", "reports"].map(tab => (
             <button key={tab} onClick={() => setActiveTab(tab)} style={{ background: activeTab === tab ? MOE.orange : "transparent", color: activeTab === tab ? "#fff" : "#888", border: "none", padding: "12px 16px", fontSize: 13, fontWeight: 700, cursor: "pointer", fontFamily: "Calibri, sans-serif", textTransform: "uppercase", letterSpacing: 0.5, borderBottom: activeTab === tab ? `3px solid ${MOE.orange}` : "3px solid transparent", whiteSpace: "nowrap" }}>
-              {tab === "users" ? "👥 Users & Progress" : tab === "reports" ? "📊 Reports" : "🧪 Quiz Results"}
+              {tab === "users" ? "👥 Users & Progress" : "📊 Reports"}
             </button>
           ))}
         </div>
@@ -1017,141 +925,6 @@ function AdminPanel({ onExit }) {
         </>)}
 
         {/* ── QUIZ TAB ── */}
-        {activeTab === "quiz" && (() => {
-          const quizUsers = users.length > 0 ? users.map(u => ({ ...u, quiz: u.quizResult || getQuizResult(u.id) })).filter(u => u.quiz) : getAllQuizResults();
-
-          function printQuizReport(userList, title) {
-            const rows = userList.map(u => {
-              const q = u.quiz;
-              // Calculate per-topic scores
-              const topicResults = QUIZ_TOPICS.map((topicName, ti) => {
-                const topicQs = QUIZ_QUESTIONS.filter(qq => qq.topic === ti);
-                const correct = topicQs.filter(qq => q.answers?.[qq.id] === qq.correct).length;
-                const pct = topicQs.length > 0 ? Math.round((correct / topicQs.length) * 100) : 0;
-                return { topicName, correct, total: topicQs.length, pct };
-              });
-              const topicRows = topicResults.map(t => {
-                const pass = t.pct >= 70;
-                return `<tr>
-                  <td style="border:1px solid #ccc;padding:7px 12px;padding-left:28px;font-size:13px;font-weight:600;color:#c00000">${t.topicName}</td>
-                  <td style="border:1px solid #ccc;padding:7px 12px;text-align:center;font-size:13px">${t.correct}/${t.total}</td>
-                  <td style="border:1px solid #ccc;padding:7px 12px;text-align:center;font-size:13px;font-weight:700;color:${pass?"green":"#c44"}">${t.pct}% ${pass?"✓":"✗"}</td>
-                </tr>`;
-              }).join("");
-              return `
-                <tr style="background:#2C2C2C;color:#fff">
-                  <td colspan="3" style="border:1px solid #999;padding:10px 14px;font-size:15px;font-weight:700">
-                    ${u.name} &nbsp;|&nbsp; ${u.store} &nbsp;|&nbsp;
-                    Overall: <span style="color:${q.passed?"#4DBFBF":"#E8541A"}">${q.score}% — ${q.passed?"PASSED":"FAILED"}</span>
-                    &nbsp;|&nbsp; Date: ${q.date} ${q.time}
-                  </td>
-                </tr>
-                <tr style="background:#f0f0f0">
-                  <td style="border:1px solid #ccc;padding:6px 12px;padding-left:28px;font-size:12px;font-weight:700;color:#555">TOPIC (Training Video)</td>
-                  <td style="border:1px solid #ccc;padding:6px 12px;text-align:center;font-size:12px;font-weight:700;color:#555">CORRECT</td>
-                  <td style="border:1px solid #ccc;padding:6px 12px;text-align:center;font-size:12px;font-weight:700;color:#555">SCORE</td>
-                </tr>
-                ${topicRows}
-                <tr><td colspan="3" style="padding:8px"></td></tr>`;
-            }).join("");
-            const html = `<!DOCTYPE html><html><head><title>${title}</title>
-              <style>
-                body{font-family:Calibri,sans-serif;padding:32px;color:#000}
-                h1{font-size:22px;text-transform:uppercase;letter-spacing:2px;margin-bottom:4px}
-                h2{font-size:15px;color:#555;margin-top:4px;font-weight:normal;margin-bottom:20px}
-                table{width:100%;border-collapse:collapse;font-size:13px;margin-top:20px}
-                thead tr{background:#E8541A;color:#fff}
-                thead th{border:1px solid #ccc;padding:10px 14px;text-align:left}
-                .legend{background:#fff8f0;border:1px solid #E8541A;border-radius:6px;padding:12px 16px;margin-top:20px;font-size:13px}
-                @media print{.no-print{display:none}}
-              </style></head><body>
-              <div style="margin-bottom:8px">
-                <h1>Sterling Restaurants — Food Safety Quiz Report</h1>
-                <h2>${title} · Generated: ${new Date().toLocaleDateString()} · Passing Score: ${PASSING_SCORE}%</h2>
-              </div>
-              <div class="legend">
-                <strong>Topics in red</strong> correspond to the Food Safety training videos:
-                ${QUIZ_TOPICS.map(t => `<span style="color:#c00000;font-weight:600">${t}</span>`).join(" &nbsp;·&nbsp; ")}
-              </div>
-              <table>
-                <thead><tr>
-                  <th>Employee / Video Topic</th>
-                  <th style="width:100px;text-align:center">Correct</th>
-                  <th style="width:120px;text-align:center">Score</th>
-                </tr></thead>
-                <tbody>${rows}</tbody>
-              </table>
-              <div style="margin-top:40px;border-top:2px solid #2C2C2C;padding-top:16px;display:flex;justify-content:space-between;font-size:12px">
-                <span>Manager Signature: _______________________</span>
-                <span>Date: ___________</span>
-              </div>
-              </body></html>`;
-            setPrintPreview({ html, title });
-          }
-
-          const filteredQuiz = quizFilterStore ? quizUsers.filter(u => u.store === quizFilterStore) : quizUsers;
-          const passCount = filteredQuiz.filter(u => u.quiz.passed).length;
-
-          return (<>
-            <div style={{ fontSize: 22, fontWeight: 700, color: "#fff", textTransform: "uppercase", letterSpacing: 1, marginBottom: 8 }}>Food Safety Quiz Results</div>
-            <div style={{ color: "#888", fontSize: 16, marginBottom: 24 }}>
-              {filteredQuiz.length} employee{filteredQuiz.length !== 1 ? "s" : ""} have taken the quiz &nbsp;·&nbsp;
-              <span style={{ color: MOE.teal }}>{passCount} passed</span> &nbsp;·&nbsp;
-              <span style={{ color: MOE.orange }}>{filteredQuiz.length - passCount} failed</span>
-            </div>
-            <div style={{ display: "flex", gap: 14, marginBottom: 24, flexWrap: "wrap", alignItems: "flex-end" }}>
-              <select value={quizFilterStore} onChange={e => setQuizFilterStore(e.target.value)} style={{ padding: "12px 14px", fontSize: 15, borderRadius: 8, border: "1.5px solid #444", background: "#1A1A1A", color: "#fff", fontFamily: "Calibri, sans-serif", flex: 1, minWidth: 0, cursor: "pointer" }}>
-                <option value="">All Stores</option>
-                {STORES.map(s => <option key={s} value={s}>{s}</option>)}
-              </select>
-              <button onClick={() => { if (filteredQuiz.length === 0) { setReportError("No quiz results to print."); return; } setReportError(""); printQuizReport(filteredQuiz, quizFilterStore || "All Stores"); }} style={{ background: MOE.orange, color: "#fff", border: "none", borderRadius: 8, padding: "12px 20px", fontSize: 16, fontWeight: 700, cursor: "pointer", fontFamily: "Calibri, sans-serif" }}>🖨️ Print Report</button>
-            </div>
-            {filteredQuiz.length === 0 ? (
-              <div style={{ color: "#555", fontSize: 18, textAlign: "center", padding: "60px 0" }}>No quiz results yet. Employees must complete the Food Safety Quiz first.</div>
-            ) : (
-              <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
-                {filteredQuiz.map(u => {
-                  const q = u.quiz;
-                  return (
-                    <div key={u.id} style={{ background: "#1A1A1A", border: `1.5px solid ${q.passed ? "#1A5E40" : "#5E1A1A"}`, borderRadius: 10, padding: "16px 22px", marginBottom: 4 }}>
-                      <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", flexWrap: "wrap", gap: 12 }}>
-                        <div>
-                          <div style={{ color: "#fff", fontWeight: 700, fontSize: 17 }}>{u.name}</div>
-                          <div style={{ color: "#888", fontSize: 14, marginTop: 2 }}>{u.store} · {u.email}</div>
-                          <div style={{ color: "#666", fontSize: 13, marginTop: 2 }}>Taken: {q.date} at {q.time}</div>
-                        </div>
-                        <div style={{ display: "flex", alignItems: "center", gap: 12, flexShrink: 0, flexWrap: "wrap" }}>
-                          <div style={{ textAlign: "center" }}>
-                            <div style={{ fontSize: 26, fontWeight: 800, color: q.passed ? MOE.teal : MOE.orange }}>{q.score}%</div>
-                            <div style={{ fontSize: 12, color: "#888" }}>{q.correct}/{q.total}</div>
-                          </div>
-                          <div style={{ padding: "5px 12px", borderRadius: 20, background: q.passed ? "rgba(46,152,152,0.2)" : "rgba(232,84,26,0.2)", color: q.passed ? MOE.teal : MOE.orange, fontWeight: 700, fontSize: 14 }}>
-                            {q.passed ? "PASSED" : "FAILED"}
-                          </div>
-                          <button onClick={() => printQuizReport([u], u.name)} style={{ background: MOE.teal, color: "#fff", border: "none", borderRadius: 8, padding: "7px 12px", fontSize: 13, fontWeight: 700, cursor: "pointer", fontFamily: "Calibri, sans-serif" }}>🖨️ Print</button>
-                        </div>
-                      </div>
-                      {/* Topic breakdown */}
-                      <div style={{ marginTop: 14, display: "flex", flexWrap: "wrap", gap: 8 }}>
-                        {QUIZ_TOPICS.map((topicName, ti) => {
-                          const topicQs = QUIZ_QUESTIONS.filter(qq => qq.topic === ti);
-                          const correct = topicQs.filter(qq => q.answers?.[qq.id] === qq.correct).length;
-                          const pct = Math.round((correct / topicQs.length) * 100);
-                          const pass = pct >= 70;
-                          return (
-                            <div key={ti} style={{ background: pass ? "rgba(46,152,152,0.1)" : "rgba(232,84,26,0.1)", border: `1px solid ${pass ? "#1A5E40" : "#5E1A1A"}`, borderRadius: 6, padding: "4px 10px", fontSize: 12, color: pass ? MOE.teal : MOE.orange, fontWeight: 600 }}>
-                              {topicName}: {pct}%
-                            </div>
-                          );
-                        })}
-                      </div>
-                    </div>
-                  );
-                })}
-              </div>
-            )}
-          </>);
-        })()}
       </div>
     </div>
   );

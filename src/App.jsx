@@ -1287,10 +1287,10 @@ function ResourceLinks({ setActivePdf }) {
           <div key={r} style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(180px, 1fr))", gap: 16 }}>
             {row.map((link, i) => (
               <a key={i} href={link.url} onClick={e => { e.preventDefault(); openResourceDoc(link, setActivePdf); }}
-                style={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", textAlign: "center", gap: 6, background: "#1A1A1A", border: `1.5px solid ${MOE.teal}`, borderRadius: 10, padding: "18px 20px", textDecoration: "none", color: "#fff", fontFamily: "Calibri, sans-serif", fontSize: 17, fontWeight: 600, cursor: "pointer" }}
+                style={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", textAlign: "center", gap: 6, background: MOE.teal, border: `1.5px solid ${MOE.teal}`, borderRadius: 10, padding: "18px 20px", textDecoration: "none", color: "#fff", fontFamily: "Calibri, sans-serif", fontSize: 17, fontWeight: 600, cursor: "pointer" }}
               >
                 <div style={{ fontSize: 17, fontWeight: 700 }}>{link.title}</div>
-                <div style={{ fontSize: 14, color: MOE.teal, marginTop: 4 }}>Click to open →</div>
+                <div style={{ fontSize: 14, color: "#fff", marginTop: 4 }}>Click to open →</div>
               </a>
             ))}
           </div>

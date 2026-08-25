@@ -449,7 +449,7 @@ const POSITION_CHECKLISTS = {
     "Use Orange Stickers to label all proteins and upcharges. Upcharges include White Meat Chicken, Steak, Queso, Bacon, and Guacamole.",
     "HOT person offers our Moe Value Meal to everyone.",
     "HOT person should be able to pass a HOT catch weight test for all proteins.",
-    "Practice Stir, Flip, Wipe any down time when guest are not in line to keep it clean, full, and fresh.",
+    "Practice Stir, Flip, Wipe during down time to keep the hot line clean, stocked, and looking fresh.",
   ],
   cold: [
     "Each guest that enters gets a cheerful “Welcome to Moe’s” from the COLD position.",

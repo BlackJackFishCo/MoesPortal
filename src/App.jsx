@@ -473,11 +473,11 @@ const POSITION_CHECKLISTS = {
     "Keep RING area clean and clutter free.",
   ],
   prep: [
-    "Checklist item 1 — to be edited",
-    "Checklist item 2 — to be edited",
-    "Checklist item 3 — to be edited",
-    "Checklist item 4 — to be edited",
-    "Checklist item 5 — to be edited",
+    "Each guest that enters gets a cheerful “Welcome to Moe’s” from the LINEBACKER position.",
+    "Cooks chicken to 165 degrees and logs into chicken log.",
+    "Cuts proteins to ½” by ½” cubes.",
+    "Restocks all items on HOT and COLD lines before they are empty.",
+    "Assist the HOT and COLD line with Stir, Flip, Wipe during the rush times.",
   ],
   ambassador: [
     "Each guest that enters gets a cheerful “Welcome to Moe’s” from the AMBASSADOR position.",
@@ -1379,6 +1379,7 @@ const POSITION_OVERVIEWS = {
   cold: "This position is in charge of all COLD ingredients going down the burrito line, Rolling burritos, cleanliness, organization, and maintaining the guest experience",
   swing: "This position is in charge of making the line move from HOT/COLD to the register, upselling queso, packaging nicely, and making sure items and stickers are properly accounted for to the RING position.",
   ring: "This position is the last person the guest interacts with on the burrito line. This position is in charge of ringing up guest correctly in the POS register, collecting money, upselling drinks, organizing and confirming accuracy of OLO and delivery orders.",
+  prep: "This position keeps the line stocked during the rush. Being proactive and aware of all items getting low and items that need to be cooked before they run out. This position prepares proteins on the grill and cuts to the correct size. This position makes sure the hot box items are all labeled correctly and keeps pans flipped and full on HOT and COLD when needed.",
   ambassador: "This position is in charge of all the guest areas. (Dining room, Salsa Bar, Beverage Bar, Patio, and Restrooms) Keeping all areas clean, stocked, and free from hazards. This position also interacts with guest to ensure their visit was a great one and has the ability to correct any last things wrong before the guest may leave unhappy.",
   catering: "This position delivers our catering orders on time and sets them up for the guest to enjoy. This position must have a clean driving record and the ability to problem solve as spaces are sometimes limited to set up in. This position also has to follow specific guidelines for delivering EZ cater orders.",
 };

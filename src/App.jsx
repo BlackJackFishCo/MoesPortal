@@ -1245,7 +1245,7 @@ const RESOURCE_LINK_ROWS = [
   [
     { title: "86 Instructions", url: "#" },
     { title: "Offline Mode Instructions for Qu", url: "#" },
-    { title: "Chicken Log", url: "#" },
+    { title: "Chicken Log", url: "https://tylerjohnson7.sharepoint.com/:b:/s/SterlingRestaurants/IQA-b4kiUU2aT6czc22nfYvhASikkyCqEz5zpAzlV3lfWFw?e=OK7FG8" },
     { title: "Shelf Chart", url: "#" },
   ],
   [

@@ -455,7 +455,7 @@ const POSITION_CHECKLISTS = {
     "Each guest that enters gets a cheerful “Welcome to Moe’s” from the COLD position.",
     "Start with asking guest if they would like Cheese, Pico, Lettuce to keep the line moving quickly.",
     "Use Orange Stickers to label upcharges on Queso and Guacamole.",
-    "COLD position put Quesadillas, Stacks, and Dippers on the grill or press.",
+    "COLD position puts Quesadillas, Stacks, Dippers on the grill or press.",
     "Practice Stir, Flip, Wipe any down time when guest are not in line to keep it clean, full, and fresh.",
   ],
   swing: [

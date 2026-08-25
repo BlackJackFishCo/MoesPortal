@@ -153,7 +153,7 @@ const PAGES = [
     icon: "🛡️",
     color: "#2E9898",
     alwaysAvailable: false,
-    description: "This section will review food safety practices you will need to know before serving food to guests. Safety of our food, employees and guests is a top priority. Please review the videos before taking the required quiz. You must pass with 90% or higher to complete this Food Safety module.",
+    description: "This section will review food safety practices you will need to know before serving food to guests. Safety of our food, employees and guests is a top priority. Please review the videos below to complete this Food Safety module.",
     pdfs: [],
     videos: [
       { title: "Handwashing", url: "https://www.youtube.com/embed/7xYqa0FRNls" },
@@ -434,14 +434,6 @@ function getQuizResult(userId) {
     return raw ? JSON.parse(raw) : null;
   } catch { return null; }
 }
-function saveQuizResult(userId, result) {
-  try { localStorage.setItem(`moes_quiz_${userId}`, JSON.stringify(result)); } catch {}
-  setDoc(doc(db, "users", userId), { quizResult: result }, { merge: true }).catch(() => {});
-}
-function resetQuizResult(userId) {
-  try { localStorage.removeItem(`moes_quiz_${userId}`); } catch {}
-  setDoc(doc(db, "users", userId), { quizResult: null }, { merge: true }).catch(() => {});
-}
 function getAllQuizResults() {
   try {
     const users = getAllUsers();
@@ -623,151 +615,6 @@ function PrintTracker({ user, progress }) {
   );
 }
 
-// ─── Food Safety Quiz Component ───────────────────────────────────────────────
-function FoodSafetyQuiz({ user, existingResult, onPass }) {
-  const [answers, setAnswers] = useState({});
-  const [submitted, setSubmitted] = useState(false);
-  const [score, setScore] = useState(0);
-  const [result, setResult] = useState(existingResult);
-
-  function handleSelect(qId, optIdx) {
-    if (submitted || result) return;
-    setAnswers(prev => ({ ...prev, [qId]: optIdx }));
-  }
-
-  function handleSubmit() {
-    if (Object.keys(answers).length < QUIZ_QUESTIONS.length) {
-      alert("Please answer all questions before submitting.");
-      return;
-    }
-    const correct = QUIZ_QUESTIONS.filter(q => answers[q.id] === q.correct).length;
-    const pct = Math.round((correct / QUIZ_QUESTIONS.length) * 100);
-    const passed = pct >= PASSING_SCORE;
-    const record = {
-      score: pct,
-      correct,
-      total: QUIZ_QUESTIONS.length,
-      passed,
-      date: new Date().toLocaleDateString(),
-      time: new Date().toLocaleTimeString(),
-      answers,
-    };
-    saveQuizResult(user.id, record);
-    setScore(pct);
-    setSubmitted(true);
-    setResult(record);
-    if (passed) onPass();
-  }
-
-  function handleRetake() {
-    resetQuizResult(user.id);
-    setAnswers({});
-    setSubmitted(false);
-    setScore(0);
-    setResult(null);
-  }
-
-  const btnS = (bg, disabled) => ({
-    background: disabled ? "#333" : bg,
-    color: disabled ? "#555" : "#fff",
-    border: "none", borderRadius: 8, padding: "14px 28px",
-    fontSize: 17, fontWeight: 700, cursor: disabled ? "not-allowed" : "pointer",
-    fontFamily: "Calibri, sans-serif", letterSpacing: 0.5,
-  });
-
-  // Show result summary if already passed or just submitted
-  if (result) {
-    const passed = result.passed;
-    return (
-      <div style={{ background: passed ? "#0D2B22" : "#1A0A0A", border: `2px solid ${passed ? MOE.teal : MOE.orange}`, borderRadius: 14, padding: "32px 36px", marginTop: 8 }}>
-        <div style={{ fontSize: 28, fontWeight: 800, color: passed ? MOE.teal : MOE.orange, textTransform: "uppercase", letterSpacing: 2, marginBottom: 8 }}>
-          {passed ? "Quiz Passed! ✓" : "Quiz Not Passed"}
-        </div>
-        <div style={{ fontSize: 22, color: "#fff", marginBottom: 6 }}>
-          Score: <strong style={{ color: passed ? MOE.teal : MOE.orange }}>{result.score}%</strong> &nbsp;({result.correct}/{result.total} correct)
-        </div>
-        <div style={{ fontSize: 15, color: "#888", marginBottom: 24 }}>
-          Completed: {result.date} at {result.time} &nbsp;·&nbsp; Passing score: {PASSING_SCORE}%
-        </div>
-        {passed ? (
-          <div style={{ fontSize: 17, color: "#aaa" }}>You have successfully completed the Food Safety Quiz. This module is now unlocked.</div>
-        ) : (
-          <div>
-            <div style={{ fontSize: 17, color: "#aaa", marginBottom: 20 }}>You need {PASSING_SCORE}% to pass. Please review the materials and try again.</div>
-            <button onClick={handleRetake} style={btnS(MOE.orange, false)}>RETAKE QUIZ →</button>
-          </div>
-        )}
-
-        {/* Answer Review */}
-        <div style={{ marginTop: 32 }}>
-          <div style={{ fontSize: 18, fontWeight: 700, color: "#fff", textTransform: "uppercase", letterSpacing: 1, marginBottom: 16 }}>Answer Review</div>
-          {QUIZ_QUESTIONS.map((q, i) => {
-            const userAns = result.answers[q.id];
-            const correct = userAns === q.correct;
-            return (
-              <div key={q.id} style={{ background: "#111", borderRadius: 10, padding: "16px 20px", marginBottom: 12, border: `1.5px solid ${correct ? "#1A5E40" : "#5E1A1A"}` }}>
-                <div style={{ fontSize: 15, fontWeight: 700, color: "#ccc", marginBottom: 10 }}>Q{i + 1}. {q.question}</div>
-                {q.options.map((opt, oi) => {
-                  const isCorrect = oi === q.correct;
-                  const isUserChoice = oi === userAns;
-                  let bg = "transparent", color = "#666", prefix = "";
-                  if (isCorrect) { bg = "rgba(46,152,152,0.15)"; color = MOE.teal; prefix = "✓ "; }
-                  if (isUserChoice && !isCorrect) { bg = "rgba(232,84,26,0.15)"; color = MOE.orange; prefix = "✗ "; }
-                  return (
-                    <div key={oi} style={{ padding: "6px 12px", borderRadius: 6, background: bg, color, fontSize: 14, fontWeight: isCorrect || isUserChoice ? 700 : 400, marginBottom: 4 }}>
-                      {prefix}{opt}
-                    </div>
-                  );
-                })}
-              </div>
-            );
-          })}
-        </div>
-      </div>
-    );
-  }
-
-  // Quiz form
-  return (
-    <div style={{ marginTop: 8 }}>
-      <div style={{ background: "#1A1A1A", border: `2px solid ${MOE.teal}`, borderRadius: 14, padding: "28px 32px", marginBottom: 20 }}>
-        <div style={{ fontSize: 26, fontWeight: 800, color: "#fff", textTransform: "uppercase", letterSpacing: 2, marginBottom: 6 }}>Food Safety Quiz</div>
-        <div style={{ fontSize: 16, color: "#aaa", marginBottom: 4 }}>{QUIZ_QUESTIONS.length} questions &nbsp;·&nbsp; {PASSING_SCORE}% required to pass &nbsp;·&nbsp; You must pass to complete this module</div>
-        <div style={{ height: 2, background: `linear-gradient(90deg, ${MOE.teal}, transparent)`, marginTop: 16 }} />
-      </div>
-
-      {QUIZ_QUESTIONS.map((q, i) => (
-        <div key={q.id} style={{ background: "#1A1A1A", border: `1.5px solid ${answers[q.id] !== undefined ? MOE.teal : "#333"}`, borderRadius: 12, padding: "22px 26px", marginBottom: 16, transition: "border-color 0.2s" }}>
-          <div style={{ fontSize: 17, fontWeight: 700, color: "#fff", marginBottom: 14 }}>
-            <span style={{ color: MOE.orange, marginRight: 8 }}>Q{i + 1}.</span>{q.question}
-          </div>
-          <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
-            {q.options.map((opt, oi) => {
-              const selected = answers[q.id] === oi;
-              return (
-                <div key={oi} onClick={() => handleSelect(q.id, oi)} style={{
-                  padding: "12px 18px", borderRadius: 8, cursor: "pointer",
-                  background: selected ? "rgba(232,84,26,0.2)" : "#111",
-                  border: `1.5px solid ${selected ? MOE.orange : "#333"}`,
-                  color: selected ? "#fff" : "#aaa",
-                  fontSize: 16, fontWeight: selected ? 700 : 400,
-                  transition: "all 0.15s",
-                }}>
-                  <span style={{ color: MOE.orange, fontWeight: 700, marginRight: 10 }}>{String.fromCharCode(65 + oi)}.</span>{opt}
-                </div>
-              );
-            })}
-          </div>
-        </div>
-      ))}
-
-      <div style={{ marginTop: 8, display: "flex", alignItems: "center", gap: 20 }}>
-        <button onClick={handleSubmit} style={btnS(MOE.orange, false)}>SUBMIT QUIZ →</button>
-        <div style={{ color: "#666", fontSize: 15 }}>{Object.keys(answers).length}/{QUIZ_QUESTIONS.length} answered</div>
-      </div>
-    </div>
-  );
-}
 
 // ─── Admin Panel ──────────────────────────────────────────────────────────────
 function AdminPanel({ onExit }) {
@@ -1895,11 +1742,6 @@ function PageContent({ page, isCompleted, onComplete, progress, user }) {
   const [activeVideo, setActiveVideo] = useState(null);
   const [activePdf, setActivePdf] = useState(null);
   const [confirmed, setConfirmed] = useState(false);
-  const [quizPassed, setQuizPassed] = useState(() => {
-    if (page.id !== "food-safety") return false;
-    const r = getQuizResult(user?.id);
-    return r?.passed || false;
-  });
   const ORIENTATION_NOTES = [
     "Reviewed Sterling Handbook.",
     "Received Swag Bag and Uniforms.",
@@ -1939,11 +1781,6 @@ function PageContent({ page, isCompleted, onComplete, progress, user }) {
       if (allPassed) onComplete(page.id);
     }
   }, [posPassCount]);
-
-  function handleFoodSafetyPass() {
-    setQuizPassed(true);
-    if (!isCompleted) onComplete(page.id);
-  }
 
   useEffect(() => {
     if (page.id === "orientation" && !isCompleted && allNotesChecked) onComplete(page.id);
@@ -2188,19 +2025,6 @@ function PageContent({ page, isCompleted, onComplete, progress, user }) {
         </section>
       )}
 
-      {page.id === "food-safety" && (
-        <section style={{ marginBottom: 40 }}>
-          <h2 style={{ fontSize: 24, fontWeight: 700, color: "#ffffff", fontFamily: "Calibri, sans-serif", marginBottom: 18, textTransform: "uppercase", letterSpacing: 1 }}>
-            Food Safety Quiz
-          </h2>
-          <FoodSafetyQuiz
-            user={user}
-            existingResult={getQuizResult(user?.id)}
-            onPass={handleFoodSafetyPass}
-          />
-        </section>
-      )}
-
       {page.id === "orientation" && (
         <div style={{ background: isCompleted ? "#0D2B22" : "#1A1A1A", border: `2px solid ${isCompleted ? MOE.teal : MOE.orange}`, borderRadius: 14, padding: "28px 32px", marginTop: 8 }}>
           {isCompleted ? (
@@ -2229,7 +2053,7 @@ function PageContent({ page, isCompleted, onComplete, progress, user }) {
         </div>
       )}
 
-      {!page.alwaysAvailable && page.id !== "food-safety" && page.id !== "training" && page.id !== "orientation" && (
+      {!page.alwaysAvailable && page.id !== "training" && page.id !== "orientation" && (
         <div style={{ background: isCompleted ? "#0D2B22" : "#1A1A1A", border: `2px solid ${isCompleted ? "#2E9898" : MOE.orange}`, borderRadius: 14, padding: "28px 32px" }}>
           {isCompleted ? (
             <div style={{ display: "flex", alignItems: "center", gap: 14 }}>

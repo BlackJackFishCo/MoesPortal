@@ -1193,7 +1193,7 @@ const POSITION_VIDEOS = {
     { title: "Queso & Guac",         url: "https://www.youtube.com/embed/Oj1-58yl6u0" },
   ],
   hot:      [{ title: "Hot Station Overview",        url: "https://www.youtube.com/embed/m8druNKyL8o" }],
-  cold:     [{ title: "Cold Station Overview",       url: "https://www.youtube.com/embed/l9398Kjy7-4" }, { title: "Cold Station Deep Dive",        url: "https://www.youtube.com/embed/uzaj2vCTMwc" }],
+  cold:     [{ title: "Cold Station Deep Dive",        url: "https://www.youtube.com/embed/uzaj2vCTMwc" }, { title: "Cold Station Overview",       url: "https://www.youtube.com/embed/l9398Kjy7-4" }],
   swing:    [{ title: "Swing Position Overview",     url: "https://www.youtube.com/embed/dN3_JdrYRWE" }, { title: "Swing Position Deep Dive",      url: "https://www.youtube.com/embed/dZdXE48ooq0" }],
   ring:     [{ title: "Ring / Cashier Overview",     url: "https://www.youtube.com/embed/4vQev6t8ZmA" }],
   prep:     [],

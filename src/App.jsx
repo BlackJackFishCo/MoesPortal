@@ -1202,14 +1202,14 @@ const POSITION_VIDEOS = {
 
 const POSITION_DOCS = {
   menu: [
-    { title: "Homewrecker",              url: "/homewrecker.pdf" },
-    { title: "Stack",                    url: "/stack.pdf" },
-    { title: "Chicken Club Quesadilla",  url: "/chicken-club-quesadilla.pdf" },
     { title: "BYO Burrito",              url: "/byo-burrito.pdf" },
-    { title: "BYO Tacos",                url: "/byo-tacos.pdf" },
-    { title: "BYO Nachos",               url: "/byo-nachos.pdf" },
+    { title: "Homewrecker",              url: "/homewrecker.pdf" },
     { title: "BYO Salads",               url: "/byo-salads.pdf" },
+    { title: "BYO Nachos",               url: "/byo-nachos.pdf" },
     { title: "BYO Quesadilla",           url: "/byo-quesadilla.pdf" },
+    { title: "Chicken Club Quesadilla",  url: "/chicken-club-quesadilla.pdf" },
+    { title: "BYO Tacos",                url: "/byo-tacos.pdf" },
+    { title: "Stack",                    url: "/stack.pdf" },
     { title: "BYO Jr Burrito",           url: "/byo-jr-burrito.pdf" },
     { title: "Kids Burrito",             url: "/kids-burrito.pdf" },
     { title: "Kids Quesadilla",          url: "/kids-quesadilla.pdf" },

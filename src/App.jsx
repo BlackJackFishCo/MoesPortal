@@ -1297,11 +1297,11 @@ function ResourceLinks({ setActivePdf }) {
         <Tortilla style={{ bottom: -45, left: -45, opacity: 0.35, transform: "rotate(-8deg)" }} />
         <Tortilla style={{ top: -45, right: -45, opacity: 0.35, transform: "rotate(12deg)" }} />
         <div style={{ position: "relative", zIndex: 1 }}>
-          <h2 style={{ fontSize: 24, fontWeight: 700, color: "#fff", fontFamily: "Calibri, sans-serif", textTransform: "uppercase", letterSpacing: 1, marginBottom: 12 }}>
+          <h2 style={{ fontSize: 24, fontWeight: 700, color: "#fff", fontFamily: "Calibri, sans-serif", textTransform: "uppercase", letterSpacing: 1, marginBottom: 12, textAlign: "center" }}>
             Hot off the Tortilla Press
           </h2>
-          <div style={{ fontSize: 16, color: "#fff", fontFamily: "Calibri, sans-serif", lineHeight: 1.6, marginBottom: 20 }}>
-            08.26.26 — Fresh Jalapenos are back. Please start ordering and revert back to OG recipes including fresh jalapenos.
+          <div style={{ fontSize: 16, color: "#fff", fontFamily: "Calibri, sans-serif", lineHeight: 1.6, marginBottom: 20, textAlign: "center" }}>
+            08.24.26 - Fresh Jalapenos are back. Please start ordering again and revert to OG recipes.
           </div>
           <div style={{ display: "flex", justifyContent: "center" }}>
             <a href="/sterling-focus.pdf" onClick={e => { e.preventDefault(); setActivePdf({ title: "Sterling Focus", url: "/sterling-focus.pdf" }); }}

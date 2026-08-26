@@ -1267,9 +1267,31 @@ const RESOURCE_LINK_ROWS = [
   ],
 ];
 
+const HOT_OFF_THE_TORTILLA_PRESS_DOCS = [
+  { title: "DOC 1", url: "#" },
+  { title: "DOC 2", url: "#" },
+  { title: "Sterling Focus", url: "/sterling-focus.pdf" },
+];
+
 function ResourceLinks({ setActivePdf }) {
   return (
     <section style={{ marginBottom: 40 }}>
+      <div style={{ background: MOE.orange, borderRadius: 14, padding: "20px 24px", marginBottom: 28 }}>
+        <h2 style={{ fontSize: 24, fontWeight: 700, color: "#fff", fontFamily: "Calibri, sans-serif", marginBottom: 18, textTransform: "uppercase", letterSpacing: 1 }}>
+          Hot off the Tortilla Press
+        </h2>
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(180px, 1fr))", gap: 16 }}>
+          {HOT_OFF_THE_TORTILLA_PRESS_DOCS.map((doc, i) => (
+            <a key={i} href={doc.url} onClick={e => { e.preventDefault(); setActivePdf(doc); }}
+              style={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", textAlign: "center", gap: 6, background: "#fff", border: "1.5px solid #fff", borderRadius: 10, padding: "18px 20px", textDecoration: "none", color: MOE.orange, fontFamily: "Calibri, sans-serif", fontSize: 17, fontWeight: 700, cursor: "pointer" }}
+            >
+              <div style={{ fontSize: 17, fontWeight: 800 }}>{doc.title}</div>
+              <div style={{ fontSize: 14, color: MOE.orange, marginTop: 4 }}>Click to open →</div>
+            </a>
+          ))}
+        </div>
+      </div>
+
       <h2 style={{ fontSize: 24, fontWeight: 700, color: "#ffffff", fontFamily: "Calibri, sans-serif", marginBottom: 18, textTransform: "uppercase", letterSpacing: 1 }}>
         Document Library
       </h2>

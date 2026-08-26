@@ -1,4 +1,4 @@
-﻿import { useState, useEffect } from "react";
+﻿import { useState, useEffect, Fragment } from "react";
 import * as XLSX from "xlsx";
 import { db } from "./firebase";
 import { doc, setDoc, getDoc, getDocs, deleteDoc, collection, updateDoc } from "firebase/firestore";
@@ -1267,6 +1267,13 @@ const RESOURCE_LINK_ROWS = [
   ],
 ];
 
+// Row indexes (0-based) where a section heading appears above the row.
+const RESOURCE_ROW_SECTION_LABELS = {
+  0: "Operations",
+  3: "New Hires",
+  5: "Marketing",
+};
+
 function Tortilla({ style }) {
   return (
     <svg viewBox="0 0 200 200" style={{ position: "absolute", width: 150, height: 150, pointerEvents: "none", ...style }}>
@@ -1318,16 +1325,23 @@ function ResourceLinks({ setActivePdf }) {
       </h2>
       <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
         {RESOURCE_LINK_ROWS.map((row, r) => (
-          <div key={r} style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(180px, 1fr))", gap: 16 }}>
-            {row.map((link, i) => (
-              <a key={i} href={link.url} onClick={e => { e.preventDefault(); setActivePdf(link); }}
-                style={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", textAlign: "center", gap: 6, background: MOE.teal, border: `1.5px solid ${MOE.teal}`, borderRadius: 10, padding: "18px 20px", textDecoration: "none", color: "#fff", fontFamily: "Calibri, sans-serif", fontSize: 17, fontWeight: 600, cursor: "pointer" }}
-              >
-                <div style={{ fontSize: 17, fontWeight: 700 }}>{link.title}</div>
-                <div style={{ fontSize: 14, color: "#fff", marginTop: 4 }}>Click to open →</div>
-              </a>
-            ))}
-          </div>
+          <Fragment key={r}>
+            {RESOURCE_ROW_SECTION_LABELS[r] && (
+              <h3 style={{ fontSize: 18, fontWeight: 700, color: MOE.orange, fontFamily: "Calibri, sans-serif", textTransform: "uppercase", letterSpacing: 1, margin: r === 0 ? "0 0 -4px" : "12px 0 -4px" }}>
+                {RESOURCE_ROW_SECTION_LABELS[r]}
+              </h3>
+            )}
+            <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(180px, 1fr))", gap: 16 }}>
+              {row.map((link, i) => (
+                <a key={i} href={link.url} onClick={e => { e.preventDefault(); setActivePdf(link); }}
+                  style={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", textAlign: "center", gap: 6, background: MOE.teal, border: `1.5px solid ${MOE.teal}`, borderRadius: 10, padding: "18px 20px", textDecoration: "none", color: "#fff", fontFamily: "Calibri, sans-serif", fontSize: 17, fontWeight: 600, cursor: "pointer" }}
+                >
+                  <div style={{ fontSize: 17, fontWeight: 700 }}>{link.title}</div>
+                  <div style={{ fontSize: 14, color: "#fff", marginTop: 4 }}>Click to open →</div>
+                </a>
+              ))}
+            </div>
+          </Fragment>
         ))}
       </div>
 

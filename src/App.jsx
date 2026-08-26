@@ -1271,9 +1271,12 @@ function ResourceLinks({ setActivePdf }) {
   return (
     <section style={{ marginBottom: 40 }}>
       <div style={{ background: "#000", border: `2px solid ${MOE.orange}`, borderRadius: 14, padding: "20px 24px", marginBottom: 28 }}>
-        <h2 style={{ fontSize: 24, fontWeight: 700, color: "#fff", fontFamily: "Calibri, sans-serif", textTransform: "uppercase", letterSpacing: 1 }}>
+        <h2 style={{ fontSize: 24, fontWeight: 700, color: "#fff", fontFamily: "Calibri, sans-serif", textTransform: "uppercase", letterSpacing: 1, marginBottom: 12 }}>
           Hot off the Tortilla Press
         </h2>
+        <div style={{ fontSize: 16, color: "#fff", fontFamily: "Calibri, sans-serif", lineHeight: 1.6 }}>
+          Fresh Jalapenos are back. Please start ordering and revert back to OG recipes including fresh jalapenos.
+        </div>
       </div>
 
       <h2 style={{ fontSize: 24, fontWeight: 700, color: "#ffffff", fontFamily: "Calibri, sans-serif", marginBottom: 18, textTransform: "uppercase", letterSpacing: 1 }}>

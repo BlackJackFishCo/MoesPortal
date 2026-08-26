@@ -1267,15 +1267,42 @@ const RESOURCE_LINK_ROWS = [
   ],
 ];
 
+function Tortilla({ style }) {
+  return (
+    <svg viewBox="0 0 200 200" style={{ position: "absolute", width: 150, height: 150, pointerEvents: "none", ...style }}>
+      <defs>
+        <radialGradient id="tortillaGrad" cx="42%" cy="38%" r="65%">
+          <stop offset="0%" stopColor="#F3DFA8" />
+          <stop offset="70%" stopColor="#E7C077" />
+          <stop offset="100%" stopColor="#CC9A4D" />
+        </radialGradient>
+      </defs>
+      <circle cx="100" cy="100" r="92" fill="url(#tortillaGrad)" />
+      <g fill="#A9702C" opacity="0.55">
+        <ellipse cx="65" cy="55" rx="10" ry="6" transform="rotate(-20 65 55)" />
+        <ellipse cx="130" cy="70" rx="8" ry="5" transform="rotate(15 130 70)" />
+        <ellipse cx="150" cy="130" rx="11" ry="6" transform="rotate(35 150 130)" />
+        <ellipse cx="80" cy="140" rx="9" ry="5" transform="rotate(-10 80 140)" />
+        <ellipse cx="110" cy="105" rx="7" ry="4" transform="rotate(50 110 105)" />
+        <ellipse cx="45" cy="110" rx="8" ry="5" transform="rotate(5 45 110)" />
+      </g>
+    </svg>
+  );
+}
+
 function ResourceLinks({ setActivePdf }) {
   return (
     <section style={{ marginBottom: 40 }}>
-      <div style={{ background: "#000", border: `2px solid ${MOE.orange}`, borderRadius: 14, padding: "20px 24px", marginBottom: 28 }}>
-        <h2 style={{ fontSize: 24, fontWeight: 700, color: "#fff", fontFamily: "Calibri, sans-serif", textTransform: "uppercase", letterSpacing: 1, marginBottom: 12 }}>
-          Hot off the Tortilla Press
-        </h2>
-        <div style={{ fontSize: 16, color: "#fff", fontFamily: "Calibri, sans-serif", lineHeight: 1.6 }}>
-          Fresh Jalapenos are back. Please start ordering and revert back to OG recipes including fresh jalapenos.
+      <div style={{ position: "relative", overflow: "hidden", background: "#000", border: `2px solid ${MOE.orange}`, borderRadius: 14, padding: "20px 24px", marginBottom: 28 }}>
+        <Tortilla style={{ bottom: -45, left: -45, opacity: 0.35, transform: "rotate(-8deg)" }} />
+        <Tortilla style={{ top: -45, right: -45, opacity: 0.35, transform: "rotate(12deg)" }} />
+        <div style={{ position: "relative", zIndex: 1 }}>
+          <h2 style={{ fontSize: 24, fontWeight: 700, color: "#fff", fontFamily: "Calibri, sans-serif", textTransform: "uppercase", letterSpacing: 1, marginBottom: 12 }}>
+            Hot off the Tortilla Press
+          </h2>
+          <div style={{ fontSize: 16, color: "#fff", fontFamily: "Calibri, sans-serif", lineHeight: 1.6 }}>
+            Fresh Jalapenos are back. Please start ordering and revert back to OG recipes including fresh jalapenos.
+          </div>
         </div>
       </div>
 

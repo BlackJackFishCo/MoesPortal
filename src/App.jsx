@@ -1301,7 +1301,7 @@ function ResourceLinks({ setActivePdf }) {
             Hot off the Tortilla Press
           </h2>
           <div style={{ fontSize: 16, color: "#fff", fontFamily: "Calibri, sans-serif", lineHeight: 1.6, marginBottom: 20 }}>
-            Fresh Jalapenos are back. Please start ordering and revert back to OG recipes including fresh jalapenos.
+            08.26.26 — Fresh Jalapenos are back. Please start ordering and revert back to OG recipes including fresh jalapenos.
           </div>
           <div style={{ display: "flex", justifyContent: "center" }}>
             <a href="/sterling-focus.pdf" onClick={e => { e.preventDefault(); setActivePdf({ title: "Sterling Focus", url: "/sterling-focus.pdf" }); }}

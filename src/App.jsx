@@ -1300,8 +1300,15 @@ function ResourceLinks({ setActivePdf }) {
           <h2 style={{ fontSize: 24, fontWeight: 700, color: "#fff", fontFamily: "Calibri, sans-serif", textTransform: "uppercase", letterSpacing: 1, marginBottom: 12 }}>
             Hot off the Tortilla Press
           </h2>
-          <div style={{ fontSize: 16, color: "#fff", fontFamily: "Calibri, sans-serif", lineHeight: 1.6 }}>
+          <div style={{ fontSize: 16, color: "#fff", fontFamily: "Calibri, sans-serif", lineHeight: 1.6, marginBottom: 20 }}>
             Fresh Jalapenos are back. Please start ordering and revert back to OG recipes including fresh jalapenos.
+          </div>
+          <div style={{ display: "flex", justifyContent: "center" }}>
+            <a href="/sterling-focus.pdf" onClick={e => { e.preventDefault(); setActivePdf({ title: "Sterling Focus", url: "/sterling-focus.pdf" }); }}
+              style={{ display: "inline-block", background: MOE.orange, border: `1.5px solid ${MOE.orange}`, borderRadius: 10, padding: "14px 36px", textDecoration: "none", color: "#fff", fontFamily: "Calibri, sans-serif", fontSize: 16, fontWeight: 800, textTransform: "uppercase", letterSpacing: 1, cursor: "pointer" }}
+            >
+              Sterling Focus
+            </a>
           </div>
         </div>
       </div>

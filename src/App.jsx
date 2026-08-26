@@ -1184,7 +1184,6 @@ const POSITION_VIDEOS = {
     { title: "Bowls",                url: "https://www.youtube.com/embed/Y-3aF1DgB1Q" },
     { title: "Salad",                url: "https://www.youtube.com/embed/wIoBsuFJxfM" },
     { title: "Nachos",               url: "https://www.youtube.com/embed/S5vmtywo72k" },
-    { title: "Chicken Club Quesadilla", url: "https://www.youtube.com/embed/EBcTRFWfliE" },
     { title: "Quesadilla",           url: "https://www.youtube.com/embed/O1ncA6XxOqQ" },
     { title: "Tacos",                url: "https://www.youtube.com/embed/OhLC5wwmmdE" },
     { title: "Stack",                url: "https://www.youtube.com/embed/mBMSEBICh4A" },

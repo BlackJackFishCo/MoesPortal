@@ -48,6 +48,14 @@ iframe {
   border-radius: 3px;
 }
 
+.resource-doc-card {
+  background: #000;
+  transition: background 0.2s ease;
+}
+.resource-doc-card:hover {
+  background: #4DBFBF;
+}
+
 /* Position training tiles - 4 across on desktop, 2 across on phones */
 .position-grid {
   display: grid;

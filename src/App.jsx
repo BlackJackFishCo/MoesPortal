@@ -125,7 +125,7 @@ const PAGES = [
     description: "Welcome to Moe's! From the second you walk into a Moe's, you'll notice there's something different. You actually feel welcome. Ever since employees at the first location in Atlanta, GA in 2000 shouted \"Welcome to Moe's!\" – that phrase has embodied our entire culture. Everybody is welcome at Moe's, including garage band superstars. Founded in Atlanta in 2000, Moe's now operates over 500 franchise locations across the country.",
     pdfs: [],
     videos: [
-      { title: "Welcome to Moe's", url: "https://www.youtube.com/embed/5xPn5Hlb8bY" },
+      { title: "Welcome to Moe's", url: "https://www.youtube-nocookie.com/embed/5xPn5Hlb8bY" },
     ],
   },
   {
@@ -144,7 +144,7 @@ const PAGES = [
       { title: "Sterling Career Progression", url: "/sterling-career-progression.pdf" },
     ],
     videos: [
-      { title: "Orientation Overview", url: "https://www.youtube.com/embed/NbzCHSZIlHw" },
+      { title: "Orientation Overview", url: "https://www.youtube-nocookie.com/embed/NbzCHSZIlHw" },
     ],
   },
   {
@@ -156,9 +156,9 @@ const PAGES = [
     description: "This section will review food safety practices you will need to know before serving food to guests. Safety of our food, employees and guests is a top priority. Please review the videos below to complete this Food Safety module.",
     pdfs: [],
     videos: [
-      { title: "Handwashing", url: "https://www.youtube.com/embed/7xYqa0FRNls" },
-      { title: "Gloves", url: "https://www.youtube.com/embed/2Scm_LJE2F0" },
-      { title: "Cross Contamination", url: "https://www.youtube.com/embed/0VbbIhEJ_yU" },
+      { title: "Handwashing", url: "https://www.youtube-nocookie.com/embed/7xYqa0FRNls" },
+      { title: "Gloves", url: "https://www.youtube-nocookie.com/embed/2Scm_LJE2F0" },
+      { title: "Cross Contamination", url: "https://www.youtube-nocookie.com/embed/0VbbIhEJ_yU" },
     ],
   },
   {
@@ -177,9 +177,9 @@ const PAGES = [
       { title: "Training Document 6", url: "#" },
     ],
     videos: [
-      { title: "Grill Station Training", url: "https://www.youtube.com/embed/dQw4w9WgXcQ" },
-      { title: "Burrito Build Sequence", url: "https://www.youtube.com/embed/dQw4w9WgXcQ" },
-      { title: "Cashier & Customer Service", url: "https://www.youtube.com/embed/dQw4w9WgXcQ" },
+      { title: "Grill Station Training", url: "https://www.youtube-nocookie.com/embed/dQw4w9WgXcQ" },
+      { title: "Burrito Build Sequence", url: "https://www.youtube-nocookie.com/embed/dQw4w9WgXcQ" },
+      { title: "Cashier & Customer Service", url: "https://www.youtube-nocookie.com/embed/dQw4w9WgXcQ" },
     ],
   },
   {
@@ -1180,21 +1180,21 @@ const POSITION_OVERVIEWS = {
 
 const POSITION_VIDEOS = {
   menu:     [
-    { title: "Burrito",             url: "https://www.youtube.com/embed/vzNEMlWxpro" },
-    { title: "Bowls",                url: "https://www.youtube.com/embed/Y-3aF1DgB1Q" },
-    { title: "Salad",                url: "https://www.youtube.com/embed/wIoBsuFJxfM" },
-    { title: "Nachos",               url: "https://www.youtube.com/embed/S5vmtywo72k" },
-    { title: "Quesadilla",           url: "https://www.youtube.com/embed/O1ncA6XxOqQ" },
-    { title: "Tacos",                url: "https://www.youtube.com/embed/OhLC5wwmmdE" },
-    { title: "Stack",                url: "https://www.youtube.com/embed/mBMSEBICh4A" },
-    { title: "Moe Value Meals",      url: "https://www.youtube.com/embed/SqgfHAFtolc" },
-    { title: "Kids Meals",           url: "https://www.youtube.com/embed/d-_Rdv8_KU0" },
-    { title: "Queso & Guac",         url: "https://www.youtube.com/embed/Oj1-58yl6u0" },
+    { title: "Burrito",             url: "https://www.youtube-nocookie.com/embed/vzNEMlWxpro" },
+    { title: "Bowls",                url: "https://www.youtube-nocookie.com/embed/Y-3aF1DgB1Q" },
+    { title: "Salad",                url: "https://www.youtube-nocookie.com/embed/wIoBsuFJxfM" },
+    { title: "Nachos",               url: "https://www.youtube-nocookie.com/embed/S5vmtywo72k" },
+    { title: "Quesadilla",           url: "https://www.youtube-nocookie.com/embed/O1ncA6XxOqQ" },
+    { title: "Tacos",                url: "https://www.youtube-nocookie.com/embed/OhLC5wwmmdE" },
+    { title: "Stack",                url: "https://www.youtube-nocookie.com/embed/mBMSEBICh4A" },
+    { title: "Moe Value Meals",      url: "https://www.youtube-nocookie.com/embed/SqgfHAFtolc" },
+    { title: "Kids Meals",           url: "https://www.youtube-nocookie.com/embed/d-_Rdv8_KU0" },
+    { title: "Queso & Guac",         url: "https://www.youtube-nocookie.com/embed/Oj1-58yl6u0" },
   ],
-  hot:      [{ title: "Hot Station Overview",        url: "https://www.youtube.com/embed/m8druNKyL8o" }],
-  cold:     [{ title: "Cold Station Deep Dive",        url: "https://www.youtube.com/embed/uzaj2vCTMwc" }, { title: "Cold Station Overview",       url: "https://www.youtube.com/embed/l9398Kjy7-4" }],
-  swing:    [{ title: "Swing Position Overview",     url: "https://www.youtube.com/embed/dN3_JdrYRWE" }, { title: "Swing Position Deep Dive",      url: "https://www.youtube.com/embed/dZdXE48ooq0" }],
-  ring:     [{ title: "Ring / Cashier Overview",     url: "https://www.youtube.com/embed/4vQev6t8ZmA" }],
+  hot:      [{ title: "Hot Station Overview",        url: "https://www.youtube-nocookie.com/embed/m8druNKyL8o" }],
+  cold:     [{ title: "Cold Station Deep Dive",        url: "https://www.youtube-nocookie.com/embed/uzaj2vCTMwc" }, { title: "Cold Station Overview",       url: "https://www.youtube-nocookie.com/embed/l9398Kjy7-4" }],
+  swing:    [{ title: "Swing Position Overview",     url: "https://www.youtube-nocookie.com/embed/dN3_JdrYRWE" }, { title: "Swing Position Deep Dive",      url: "https://www.youtube-nocookie.com/embed/dZdXE48ooq0" }],
+  ring:     [{ title: "Ring / Cashier Overview",     url: "https://www.youtube-nocookie.com/embed/4vQev6t8ZmA" }],
   prep:     [],
   ambassador: [],
   catering: [],

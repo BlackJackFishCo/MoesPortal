@@ -1168,10 +1168,10 @@ const POSITIONS = [
   { id: "catering", label: "Catering", icon: "🚐", color: "#E8541A" },
 ];
 
-// Star Tracker layout: Menu/Ambassador, then Hot/Cold/Swing/Ring, then Linebacker/Catering
+// Star Tracker layout: 3 per row, same order as before (Menu, Guest Line of Sight, Hot, Cold, Swing, Ring, Linebacker, Catering)
 const POSITION_ROWS = [
-  ["menu", "ambassador"],
-  ["hot", "cold", "swing", "ring"],
+  ["menu", "ambassador", "hot"],
+  ["cold", "swing", "ring"],
   ["prep", "catering"],
 ];
 

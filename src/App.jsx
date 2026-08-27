@@ -1168,6 +1168,13 @@ const POSITIONS = [
   { id: "catering", label: "Catering", icon: "🚐", color: "#E8541A" },
 ];
 
+// Star Tracker layout: Menu/Ambassador, then Hot/Cold/Swing/Ring, then Linebacker/Catering
+const POSITION_ROWS = [
+  ["menu", "ambassador"],
+  ["hot", "cold", "swing", "ring"],
+  ["prep", "catering"],
+];
+
 const POSITION_OVERVIEWS = {
   hot: "This position is the first position the guest interacts with. The HOT person should have high energy and is the starter for the entire burrito line. They are in charge of the HOT ingredients on the burrito line, cleanliness, organization, and starting the guest experience.",
   cold: "This position is in charge of all COLD ingredients going down the burrito line, Rolling burritos, cleanliness, organization, and maintaining the guest experience",
@@ -1399,31 +1406,36 @@ function PositionTracker({ user, onPositionPass, setActivePdf }) {
 
       {/* Star Tracker Row */}
       <div style={{ background: "#000000", border: `1.5px solid ${MOE.teal}`, borderRadius: 14, padding: "20px 16px", marginBottom: 24 }}>
-        <div className="position-grid">
-          {POSITIONS.map(pos => {
-            const done = !!posProg[pos.id];
-            return (
-              <div key={pos.id} onClick={() => setActivePos(activePos === pos.id ? null : pos.id)}
-                style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 6, cursor: "pointer", minWidth: 0 }}>
-                <div style={{
-                  width: "clamp(64px, 12vw, 108px)", height: "clamp(64px, 12vw, 108px)", borderRadius: "50%",
-                  background: done ? `${pos.color}22` : "#111",
-                  border: `4px solid ${done ? pos.color : activePos === pos.id ? "#888" : "#333"}`,
-                  display: "flex", alignItems: "center", justifyContent: "center",
-                  fontSize: "clamp(28px, 5vw, 48px)", transition: "all 0.2s",
-                  boxShadow: done ? `0 0 28px ${pos.color}55` : activePos === pos.id ? "0 0 20px #44444466" : "none",
-                }}>
-                  {done ? <span style={{ fontSize: 44, color: pos.color }}>✓</span> : <span style={{ fontSize: 44 }}>{pos.icon}</span>}
-                </div>
-                <div style={{ fontSize: 14, fontWeight: 700, textTransform: "uppercase", letterSpacing: 0.5, fontFamily: "Calibri, sans-serif", color: done ? pos.color : activePos === pos.id ? "#ccc" : "#666" }}>
-                  {pos.label}
-                </div>
-                <div style={{ fontSize: 12, fontWeight: 600, color: done ? MOE.teal : "#555", fontFamily: "Calibri, sans-serif" }}>
-                  {done ? "✓ COMPLETED" : "INCOMPLETE"}
-                </div>
-              </div>
-            );
-          })}
+        <div style={{ display: "flex", flexDirection: "column", gap: 20 }}>
+          {POSITION_ROWS.map((row, r) => (
+            <div key={r} className="position-row">
+              {row.map(id => {
+                const pos = POSITIONS.find(p => p.id === id);
+                const done = !!posProg[pos.id];
+                return (
+                  <div key={pos.id} onClick={() => setActivePos(activePos === pos.id ? null : pos.id)}
+                    style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 6, cursor: "pointer", minWidth: 0 }}>
+                    <div style={{
+                      width: "clamp(64px, 12vw, 108px)", height: "clamp(64px, 12vw, 108px)", borderRadius: "50%",
+                      background: done ? `${pos.color}22` : "#111",
+                      border: `4px solid ${done ? pos.color : activePos === pos.id ? "#888" : "#333"}`,
+                      display: "flex", alignItems: "center", justifyContent: "center",
+                      fontSize: "clamp(28px, 5vw, 48px)", transition: "all 0.2s",
+                      boxShadow: done ? `0 0 28px ${pos.color}55` : activePos === pos.id ? "0 0 20px #44444466" : "none",
+                    }}>
+                      {done ? <span style={{ fontSize: 44, color: pos.color }}>✓</span> : <span style={{ fontSize: 44 }}>{pos.icon}</span>}
+                    </div>
+                    <div style={{ fontSize: 14, fontWeight: 700, textTransform: "uppercase", letterSpacing: 0.5, fontFamily: "Calibri, sans-serif", color: done ? pos.color : activePos === pos.id ? "#ccc" : "#666" }}>
+                      {pos.label}
+                    </div>
+                    <div style={{ fontSize: 12, fontWeight: 600, color: done ? MOE.teal : "#555", fontFamily: "Calibri, sans-serif" }}>
+                      {done ? "✓ COMPLETED" : "INCOMPLETE"}
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          ))}
         </div>
         <div style={{ marginTop: 18, background: "#111", borderRadius: 8, height: 8, overflow: "hidden" }}>
           <div style={{

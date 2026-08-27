@@ -1235,43 +1235,58 @@ const POSITION_DOCS = {
 // ─── Resource links (Resources page document library) ────────────────────────
 // Placeholder links laid out in the requested row order. Swap `url: "#"` for a
 // real file (drop it in /public) once each document is ready.
-const RESOURCE_LINK_ROWS = [
-  [
-    { title: "Recipe Book", url: "https://tylerjohnson7.sharepoint.com/:b:/s/SterlingRestaurants/IQC0glsprOpgTald0QDtBFHCAeMBkOyNrGsjJXnAx-vO8cY?e=OclLrV" },
-    { title: "Current Sterling Focus", url: "/sterling-focus-current.pdf" },
-    { title: "All Hands on Deck", url: "/all-hands-on-deck.pdf" },
-    { title: "Sterling Focus", url: "/sterling-focus.pdf" },
-  ],
-  [
-    { title: "Line Schematic", url: "#" },
-    { title: "Clipboard File", url: "#" },
-    { title: "Scheduler File", url: "#" },
-    { title: "Date Label Order Guide", url: "#" },
-  ],
-  [
-    { title: "86 Instructions", url: "#" },
-    { title: "Offline Mode Instructions for Qu", url: "#" },
-    { title: "Chicken Log", url: "https://tylerjohnson7.sharepoint.com/:b:/s/SterlingRestaurants/IQA-b4kiUU2aT6czc22nfYvhASikkyCqEz5zpAzlV3lfWFw?e=OK7FG8" },
-    { title: "Shelf Chart", url: "#" },
-  ],
-  [
-    { title: "Handbook", url: "#" },
-    { title: "Referral Bonus", url: "#" },
-    { title: "Sterling Principles", url: "#" },
-    { title: "Employee Meal Policy", url: "#" },
-  ],
-  [
-    { title: "Appearance Standards", url: "#" },
-    { title: "ADP Login Link", url: "#" },
-    { title: "Tip Share", url: "#" },
-    { title: "Career Progression Chart", url: "#" },
-  ],
-  [
-    { title: "KEF Coloring Sheets", url: "#" },
-    { title: "Holiday Hour Notices", url: "#" },
-    { title: "Current Month Offer Calendar", url: "#" },
-    { title: "Latest MLT Document", url: "#" },
-  ],
+const RESOURCE_LINK_SECTIONS = [
+  {
+    label: "Operations",
+    rows: [
+      [
+        { title: "Recipe Book", url: "https://tylerjohnson7.sharepoint.com/:b:/s/SterlingRestaurants/IQC0glsprOpgTald0QDtBFHCAeMBkOyNrGsjJXnAx-vO8cY?e=OclLrV" },
+        { title: "Current Sterling Focus", url: "/sterling-focus-current.pdf" },
+        { title: "All Hands on Deck", url: "/all-hands-on-deck.pdf" },
+        { title: "Sterling Focus", url: "/sterling-focus.pdf" },
+      ],
+      [
+        { title: "Line Schematic", url: "#" },
+        { title: "Clipboard File", url: "#" },
+        { title: "Scheduler File", url: "#" },
+        { title: "Date Label Order Guide", url: "#" },
+      ],
+      [
+        { title: "86 Instructions", url: "#" },
+        { title: "Offline Mode Instructions for Qu", url: "#" },
+        { title: "Chicken Log", url: "https://tylerjohnson7.sharepoint.com/:b:/s/SterlingRestaurants/IQA-b4kiUU2aT6czc22nfYvhASikkyCqEz5zpAzlV3lfWFw?e=OK7FG8" },
+        { title: "Shelf Chart", url: "#" },
+      ],
+    ],
+  },
+  {
+    label: "New Hires",
+    rows: [
+      [
+        { title: "Handbook", url: "#" },
+        { title: "Referral Bonus", url: "#" },
+        { title: "Sterling Principles", url: "#" },
+        { title: "Employee Meal Policy", url: "#" },
+      ],
+      [
+        { title: "Appearance Standards", url: "#" },
+        { title: "ADP Login Link", url: "#" },
+        { title: "Tip Share", url: "#" },
+        { title: "Career Progression Chart", url: "#" },
+      ],
+    ],
+  },
+  {
+    label: "Marketing",
+    rows: [
+      [
+        { title: "KEF Coloring Sheets", url: "#" },
+        { title: "Holiday Hour Notices", url: "#" },
+        { title: "Current Month Offer Calendar", url: "#" },
+        { title: "Latest MLT Document", url: "#" },
+      ],
+    ],
+  },
 ];
 
 function Tortilla({ style }) {
@@ -1323,17 +1338,26 @@ function ResourceLinks({ setActivePdf }) {
       <h2 style={{ fontSize: 24, fontWeight: 700, color: "#ffffff", fontFamily: "Calibri, sans-serif", marginBottom: 18, textTransform: "uppercase", letterSpacing: 1 }}>
         Document Library
       </h2>
-      <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
-        {RESOURCE_LINK_ROWS.map((row, r) => (
-          <div key={r} style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(180px, 1fr))", gap: 16 }}>
-            {row.map((link, i) => (
-              <a key={i} href={link.url} onClick={e => { e.preventDefault(); setActivePdf(link); }}
-                style={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", textAlign: "center", gap: 6, background: "#000", border: `2px solid ${MOE.teal}`, borderRadius: 10, padding: "18px 20px", textDecoration: "none", color: "#fff", fontFamily: "Calibri, sans-serif", fontSize: 17, fontWeight: 600, cursor: "pointer" }}
-              >
-                <div style={{ fontSize: 17, fontWeight: 700 }}>{link.title}</div>
-                <div style={{ fontSize: 14, color: MOE.teal, marginTop: 4 }}>Click to open →</div>
-              </a>
-            ))}
+      <div style={{ display: "flex", flexDirection: "column", gap: 28 }}>
+        {RESOURCE_LINK_SECTIONS.map((section, s) => (
+          <div key={s}>
+            <h3 style={{ fontSize: 17, fontWeight: 700, color: MOE.teal, fontFamily: "Calibri, sans-serif", marginBottom: 12, textTransform: "uppercase", letterSpacing: 1 }}>
+              {section.label}
+            </h3>
+            <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
+              {section.rows.map((row, r) => (
+                <div key={r} style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(180px, 1fr))", gap: 16 }}>
+                  {row.map((link, i) => (
+                    <a key={i} href={link.url} onClick={e => { e.preventDefault(); setActivePdf(link); }}
+                      style={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", textAlign: "center", gap: 6, background: "#000", border: `2px solid ${MOE.teal}`, borderRadius: 10, padding: "18px 20px", textDecoration: "none", color: "#fff", fontFamily: "Calibri, sans-serif", fontSize: 17, fontWeight: 600, cursor: "pointer" }}
+                    >
+                      <div style={{ fontSize: 17, fontWeight: 700 }}>{link.title}</div>
+                      <div style={{ fontSize: 14, color: MOE.teal, marginTop: 4 }}>Click to open →</div>
+                    </a>
+                  ))}
+                </div>
+              ))}
+            </div>
           </div>
         ))}
       </div>

@@ -1335,7 +1335,7 @@ function ResourceLinks({ setActivePdf }) {
         <a href="#" onClick={e => { e.preventDefault(); setActivePdf({ title: "Payroll", url: "#" }); }}
           style={{ display: "inline-block", background: MOE.orange, border: `1.5px solid ${MOE.orange}`, borderRadius: 10, padding: "16px 40px", textDecoration: "none", color: "#fff", fontFamily: "Calibri, sans-serif", fontSize: 18, fontWeight: 800, textTransform: "uppercase", letterSpacing: 1, cursor: "pointer" }}
         >
-          Click here for PAYROLL
+          Click here for PAYROLL DOCS
         </a>
       </div>
     </section>

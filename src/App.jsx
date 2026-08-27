@@ -1238,6 +1238,7 @@ const POSITION_DOCS = {
 const RESOURCE_LINK_SECTIONS = [
   {
     label: "Operations",
+    color: MOE.teal,
     rows: [
       [
         { title: "Recipe Book", url: "https://tylerjohnson7.sharepoint.com/:b:/s/SterlingRestaurants/IQC0glsprOpgTald0QDtBFHCAeMBkOyNrGsjJXnAx-vO8cY?e=OclLrV" },
@@ -1261,6 +1262,7 @@ const RESOURCE_LINK_SECTIONS = [
   },
   {
     label: "New Hires",
+    color: MOE.orange,
     rows: [
       [
         { title: "Handbook", url: "#" },
@@ -1278,6 +1280,7 @@ const RESOURCE_LINK_SECTIONS = [
   },
   {
     label: "Marketing",
+    color: "#ffffff",
     rows: [
       [
         { title: "KEF Coloring Sheets", url: "#" },
@@ -1341,7 +1344,7 @@ function ResourceLinks({ setActivePdf }) {
       <div style={{ display: "flex", flexDirection: "column", gap: 28 }}>
         {RESOURCE_LINK_SECTIONS.map((section, s) => (
           <div key={s}>
-            <h3 style={{ fontSize: 17, fontWeight: 700, color: MOE.teal, fontFamily: "Calibri, sans-serif", marginBottom: 12, textTransform: "uppercase", letterSpacing: 1 }}>
+            <h3 style={{ fontSize: 17, fontWeight: 700, color: section.color, fontFamily: "Calibri, sans-serif", marginBottom: 12, textTransform: "uppercase", letterSpacing: 1 }}>
               {section.label}
             </h3>
             <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
@@ -1349,10 +1352,10 @@ function ResourceLinks({ setActivePdf }) {
                 <div key={r} style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(180px, 1fr))", gap: 16 }}>
                   {row.map((link, i) => (
                     <a key={i} href={link.url} onClick={e => { e.preventDefault(); setActivePdf(link); }}
-                      style={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", textAlign: "center", gap: 6, background: "#000", border: `2px solid ${MOE.teal}`, borderRadius: 10, padding: "18px 20px", textDecoration: "none", color: "#fff", fontFamily: "Calibri, sans-serif", fontSize: 17, fontWeight: 600, cursor: "pointer" }}
+                      style={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", textAlign: "center", gap: 6, background: "#000", border: `2px solid ${section.color}`, borderRadius: 10, padding: "18px 20px", textDecoration: "none", color: "#fff", fontFamily: "Calibri, sans-serif", fontSize: 17, fontWeight: 600, cursor: "pointer" }}
                     >
                       <div style={{ fontSize: 17, fontWeight: 700 }}>{link.title}</div>
-                      <div style={{ fontSize: 14, color: MOE.teal, marginTop: 4 }}>Click to open →</div>
+                      <div style={{ fontSize: 14, color: section.color, marginTop: 4 }}>Click to open →</div>
                     </a>
                   ))}
                 </div>

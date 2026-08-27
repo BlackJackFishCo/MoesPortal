@@ -393,7 +393,7 @@ const POSITION_CHECKLISTS = {
     "Assist the HOT and COLD line with Stir, Flip, Wipe during the rush times.",
   ],
   ambassador: [
-    "Each guest that enters gets a cheerful “Welcome to Moe’s” from the AMBASSADOR position.",
+    "Each guest that enters gets a cheerful “Welcome to Moe’s” from the GUEST LINE OF SIGHT position.",
     "Keeps salsa and beverage bars stocked and clean.",
     "Keeps restrooms stocked and cleaned.",
     "Cleans up spills immediately and puts out wet floor signs to eliminate possible guest accidents.",
@@ -1164,7 +1164,7 @@ const POSITIONS = [
   { id: "swing",    label: "Swing",    icon: "🔄",  color: "#E8541A" },
   { id: "ring",     label: "Ring",     icon: "💵",  color: "#E8541A" },
   { id: "prep",     label: "Linebacker", icon: "🔪",  color: "#E8541A" },
-  { id: "ambassador", label: "Ambassador", icon: "🪑", color: "#E8541A" },
+  { id: "ambassador", label: "Guest Line of Sight", icon: "🪑", color: "#E8541A" },
   { id: "catering", label: "Catering", icon: "🚐", color: "#E8541A" },
 ];
 

@@ -48,14 +48,10 @@ iframe {
   border-radius: 3px;
 }
 
-/* Position training tiles - 4 across on desktop, 2 across on phones */
-.position-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
+/* Position training tiles - grouped rows: Menu/Ambassador, Hot/Cold/Swing/Ring, Linebacker/Catering */
+.position-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
   gap: 12px;
-}
-@media (max-width: 560px) {
-  .position-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
 }

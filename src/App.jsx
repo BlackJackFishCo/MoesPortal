@@ -1168,11 +1168,10 @@ const POSITIONS = [
   { id: "catering", label: "Catering", icon: "🚐", color: "#E8541A" },
 ];
 
-// Star Tracker layout: 3 per row, same order as before (Menu, Guest Line of Sight, Hot, Cold, Swing, Ring, Linebacker, Catering)
+// Star Tracker layout: 4 per row, same order as before (Menu, Guest Line of Sight, Hot, Cold, Swing, Ring, Linebacker, Catering)
 const POSITION_ROWS = [
-  ["menu", "ambassador", "hot"],
-  ["cold", "swing", "ring"],
-  ["prep", "catering"],
+  ["menu", "ambassador", "hot", "cold"],
+  ["swing", "ring", "prep", "catering"],
 ];
 
 const POSITION_OVERVIEWS = {
@@ -1443,14 +1442,14 @@ function PositionTracker({ user, onPositionPass, setActivePdf }) {
                   <div key={pos.id} onClick={() => setActivePos(activePos === pos.id ? null : pos.id)}
                     style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 6, cursor: "pointer", minWidth: 0 }}>
                     <div style={{
-                      width: "clamp(64px, 12vw, 108px)", height: "clamp(64px, 12vw, 108px)", borderRadius: "50%",
+                      width: "clamp(72px, 14vw, 124px)", height: "clamp(72px, 14vw, 124px)", borderRadius: "50%",
                       background: done ? `${pos.color}22` : "#111",
                       border: `4px solid ${done ? pos.color : activePos === pos.id ? "#888" : "#333"}`,
                       display: "flex", alignItems: "center", justifyContent: "center",
-                      fontSize: "clamp(28px, 5vw, 48px)", transition: "all 0.2s",
+                      fontSize: "clamp(32px, 6vw, 54px)", transition: "all 0.2s",
                       boxShadow: done ? `0 0 28px ${pos.color}55` : activePos === pos.id ? "0 0 20px #44444466" : "none",
                     }}>
-                      {done ? <span style={{ fontSize: 44, color: pos.color }}>✓</span> : <span style={{ fontSize: 44 }}>{pos.icon}</span>}
+                      {done ? <span style={{ fontSize: 50, color: pos.color }}>✓</span> : <span style={{ fontSize: 50 }}>{pos.icon}</span>}
                     </div>
                     <div style={{ fontSize: 14, fontWeight: 700, textTransform: "uppercase", letterSpacing: 0.5, fontFamily: "Calibri, sans-serif", color: done ? pos.color : activePos === pos.id ? "#ccc" : "#666" }}>
                       {pos.label}

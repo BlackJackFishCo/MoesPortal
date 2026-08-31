@@ -1299,6 +1299,24 @@ const RESOURCE_LINK_SECTIONS = [
     ],
   },
   {
+    label: "Onboarding & Termination",
+    color: "#FFD23F",
+    rows: [
+      [
+        { title: "TR Onboard Checklist", url: "#" },
+        { title: "Re-Hire & Term Checklist", url: "#" },
+        { title: "Wage Election Form", url: "#" },
+        { title: "PAY Adjustment, REHIRE, TERM Forms", url: "/hr-master.xls" },
+      ],
+      [
+        { title: "5", url: "#" },
+        { title: "6", url: "#" },
+        { title: "7", url: "#" },
+        { title: "8", url: "#" },
+      ],
+    ],
+  },
+  {
     label: "Marketing",
     color: "#ffffff",
     rows: [
@@ -1319,24 +1337,6 @@ const RESOURCE_LINK_SECTIONS = [
         { title: "Holiday Hour Notices", url: "#" },
         { title: "Current Month Offer Calendar", url: "#" },
         { title: "Latest MLT Document", url: "#" },
-      ],
-    ],
-  },
-  {
-    label: "Onboarding & Termination",
-    color: "#FFD23F",
-    rows: [
-      [
-        { title: "TR Onboard Checklist", url: "#" },
-        { title: "Re-Hire & Term Checklist", url: "#" },
-        { title: "Wage Election Form", url: "#" },
-        { title: "PAY Adjustment, REHIRE, TERM Forms", url: "/hr-master.xls" },
-      ],
-      [
-        { title: "5", url: "#" },
-        { title: "6", url: "#" },
-        { title: "7", url: "#" },
-        { title: "8", url: "#" },
       ],
     ],
   },

@@ -1424,7 +1424,7 @@ function ResourceLinks({ setActivePdf }) {
                     THIS MONTH'S STERLING FOCUS
                   </textPath>
                 </text>
-                <circle cx="100" cy="100" r="58" fill={MOE.teal} stroke="#fff" strokeWidth="2" />
+                <circle cx="100" cy="100" r="58" fill="#000" stroke="#fff" strokeWidth="2" />
                 {focusWords.map((word, i) => (
                   <text key={i} x="100" y={100 - ((focusWords.length - 1) / 2) * focusLineHeight + i * focusLineHeight}
                     textAnchor="middle" dominantBaseline="central" fill="#fff" fontFamily="Calibri, sans-serif" fontWeight="800" fontSize={focusFontSize} letterSpacing="1"

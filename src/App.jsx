@@ -1341,6 +1341,18 @@ const RESOURCE_LINK_SECTIONS = [
     ],
   },
   {
+    label: "Accidents & Injuries",
+    color: "#E74C3C",
+    rows: [
+      [
+        { title: "Accident & Injury Claim Form", url: "#" },
+        { title: "Workers Comp Reporting", url: "#" },
+        { title: "Workers Comp Form", url: "#" },
+        { title: "Workers Comp Locations", url: "#" },
+      ],
+    ],
+  },
+  {
     label: "Payroll",
     color: "#3B82F6",
     rows: [

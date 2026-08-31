@@ -1,4 +1,4 @@
-﻿import { useState, useEffect } from "react";
+﻿import { useState, useEffect, useId } from "react";
 import * as XLSX from "xlsx";
 import { db } from "./firebase";
 import { doc, setDoc, getDoc, getDocs, deleteDoc, collection, updateDoc } from "firebase/firestore";
@@ -1248,8 +1248,8 @@ const AMBASSADOR_VISUAL_CHECKS = [
 ].map(section => ({ ...section, wrongImg: "", rightImg: "" }));
 
 // ─── Current Sterling Focus (update monthly) ──────────────────────────────────
-// Drives both the "Current Sterling Focus" resource tile title and the badge
-// in the Hot off the Tortilla Press box. Change the words here each month.
+// Drives both the "Current Sterling Focus" resource tile title and the
+// Sterling Focus badge on the Resources page. Change the words here each month.
 const CURRENT_STERLING_FOCUS_WORDS = ["STIR", "FLIP", "WIPE"];
 
 // ─── Resource links (Resources page document library) ────────────────────────
@@ -1366,75 +1366,42 @@ const RESOURCE_LINK_SECTIONS = [
   },
 ];
 
-// One curling flame "tongue" — a rounded base that tapers to a leaning,
-// slightly S-curved tip, the way a real flame licks upward and flickers
-// to one side rather than coming to a plain symmetric point.
-function flameTongue(cx, baseY, w, h, lean) {
-  const hw = w / 2;
-  const tipX = cx + lean;
-  const tipY = baseY - h;
-  const waistY = baseY - h * 0.55;
-  return `M${cx - hw},${baseY}
-    C${cx - hw * 1.15},${baseY - h * 0.32} ${cx - hw * 0.5},${waistY} ${cx - hw * 0.15 + lean * 0.4},${baseY - h * 0.8}
-    C${cx - hw * 0.05 + lean * 0.7},${baseY - h * 0.92} ${tipX - 2},${tipY + 6} ${tipX},${tipY}
-    C${tipX + 3},${tipY + 8} ${cx + hw * 0.2 + lean * 0.6},${baseY - h * 0.85} ${cx + hw * 0.3 + lean * 0.3},${waistY}
-    C${cx + hw * 0.55},${baseY - h * 0.4} ${cx + hw * 1.1},${baseY - h * 0.25} ${cx + hw},${baseY}
-    Z`;
-}
-
-// A row of flame tongues along one baseline, with per-flame height/lean
-// jitter (seeded, not random, so the layout is stable across renders).
-function flameRow(count, width, baseY, minH, maxH, widthScale, seed) {
-  const step = width / count;
-  let paths = [];
-  for (let i = 0; i < count; i++) {
-    const cx = i * step + step / 2;
-    const jitter = ((i * 37 + seed * 13) % 10) / 10;
-    const h = minH + jitter * (maxH - minH);
-    const lean = ((((i * 17 + seed * 5) % 7) - 3)) * (h / 18);
-    const w = step * widthScale;
-    paths.push(flameTongue(cx, baseY, w, h, lean));
-  }
-  return paths.join(" ");
-}
-
-function Flames() {
+// Round badge: an orange outer ring with curved rim text, and a solid
+// inner circle carrying a short word list (one word per line).
+function FocusBadge({ rimText, innerLines, innerFill, innerTextColor, title, onOpen }) {
+  const rimId = useId();
+  const fontSize = innerLines.length <= 2 ? 24 : innerLines.length === 3 ? 21 : innerLines.length === 4 ? 17 : 14;
+  const lineHeight = fontSize + 3;
   return (
-    <svg viewBox="0 0 400 130" preserveAspectRatio="none" style={{ position: "absolute", inset: 0, width: "100%", height: "100%", pointerEvents: "none" }}>
-      <defs>
-        <linearGradient id="flameBack" x1="0%" y1="100%" x2="0%" y2="0%">
-          <stop offset="0%" stopColor="#8A1604" />
-          <stop offset="60%" stopColor="#C22A08" />
-          <stop offset="100%" stopColor="#E8541A" />
-        </linearGradient>
-        <linearGradient id="flameMid" x1="0%" y1="100%" x2="0%" y2="0%">
-          <stop offset="0%" stopColor={MOE.orange} />
-          <stop offset="55%" stopColor="#F47B1F" />
-          <stop offset="100%" stopColor="#FFC93C" />
-        </linearGradient>
-        <linearGradient id="flameFront" x1="0%" y1="100%" x2="0%" y2="0%">
-          <stop offset="0%" stopColor="#FFC93C" />
-          <stop offset="60%" stopColor="#FFE27A" />
-          <stop offset="100%" stopColor="#FFF6D6" />
-        </linearGradient>
-        <radialGradient id="flameGlow" cx="50%" cy="100%" r="75%">
-          <stop offset="0%" stopColor="#FF9130" stopOpacity="0.9" />
-          <stop offset="60%" stopColor="#E8541A" stopOpacity="0.35" />
-          <stop offset="100%" stopColor="#E8541A" stopOpacity="0" />
-        </radialGradient>
-      </defs>
-      <rect x="0" y="90" width="400" height="40" fill="url(#flameGlow)" />
-      <path d={flameRow(11, 400, 130, 40, 78, 1.55, 1)} fill="url(#flameBack)" opacity={0.75} />
-      <path d={flameRow(14, 400, 130, 30, 60, 1.25, 2)} fill="url(#flameMid)" opacity={0.9} />
-      <path d={flameRow(16, 400, 130, 16, 34, 0.8, 3)} fill="url(#flameFront)" opacity={0.95} />
-    </svg>
+    <a href="#" onClick={e => { e.preventDefault(); onOpen(); }}
+      title={title}
+      style={{ display: "flex", alignItems: "center", justifyContent: "center", width: 185, height: 185, borderRadius: "50%", boxShadow: `0 0 40px ${MOE.orange}99`, cursor: "pointer", flexShrink: 0, textDecoration: "none" }}
+    >
+      <svg viewBox="0 0 200 200" width="185" height="185">
+        <defs>
+          <path id={rimId} d="M22,100 A78,78 0 1,1 178,100" fill="none" />
+        </defs>
+        <circle cx="100" cy="100" r="98" fill={MOE.orange} />
+        <text fill="#fff" fontFamily="Calibri, sans-serif" fontWeight="800" fontSize="15" letterSpacing="0.3">
+          <textPath href={`#${rimId}`} startOffset="50%" textAnchor="middle">
+            {rimText}
+          </textPath>
+        </text>
+        <circle cx="100" cy="100" r="58" fill={innerFill} stroke="#fff" strokeWidth="2" />
+        {innerLines.map((word, i) => (
+          <text key={i} x="100" y={100 - ((innerLines.length - 1) / 2) * lineHeight + i * lineHeight}
+            textAnchor="middle" dominantBaseline="central" fill={innerTextColor} fontFamily="Calibri, sans-serif" fontWeight="800" fontSize={fontSize} letterSpacing="1"
+          >
+            {word}
+          </text>
+        ))}
+      </svg>
+    </a>
   );
 }
 
 function ResourceLinks({ setActivePdf }) {
   const focusWords = CURRENT_STERLING_FOCUS_WORDS;
-  const focusFontSize = focusWords.length <= 3 ? 21 : focusWords.length === 4 ? 17 : 14;
-  const focusLineHeight = focusFontSize + 3;
   const [activeGallery, setActiveGallery] = useState(null);
   return (
     <section style={{ marginBottom: 40 }}>
@@ -1465,43 +1432,31 @@ function ResourceLinks({ setActivePdf }) {
           </div>
         </div>
       )}
-      <div style={{ position: "relative", overflow: "hidden", background: "#000", border: `2px solid ${MOE.orange}`, borderRadius: 14, padding: "20px 24px", marginBottom: 28 }}>
-        <Flames />
-        <div style={{ position: "absolute", inset: 0, background: "linear-gradient(180deg, rgba(0,0,0,0.15) 0%, rgba(0,0,0,0.4) 55%, rgba(0,0,0,0.8) 100%)" }} />
-        <div style={{ position: "relative", zIndex: 1 }}>
-          <h2 style={{ fontSize: 24, fontWeight: 700, color: "#fff", fontFamily: "Calibri, sans-serif", textTransform: "uppercase", letterSpacing: 1, marginBottom: 12, textAlign: "center" }}>
-            Hot off the Tortilla Press
-          </h2>
-          <div style={{ fontSize: 16, color: "#fff", fontFamily: "Calibri, sans-serif", lineHeight: 1.6, marginBottom: 20, textAlign: "center" }}>
-            08.24.26 - Fresh Jalapenos are back. Please start ordering again and revert to OG recipes.
-          </div>
-          <div style={{ display: "flex", justifyContent: "flex-end" }}>
-            <a href="/sterling-focus.pdf" onClick={e => { e.preventDefault(); setActivePdf({ title: "Sterling Focus", url: "/sterling-focus.pdf" }); }}
-              title={`This Month's Sterling Focus: ${focusWords.join(", ")}`}
-              style={{ display: "flex", alignItems: "center", justifyContent: "center", width: 185, height: 185, borderRadius: "50%", boxShadow: `0 0 40px ${MOE.orange}99`, cursor: "pointer", flexShrink: 0, textDecoration: "none" }}
-            >
-              <svg viewBox="0 0 200 200" width="185" height="185">
-                <defs>
-                  <path id="focusRimPath" d="M22,100 A78,78 0 1,1 178,100" fill="none" />
-                </defs>
-                <circle cx="100" cy="100" r="98" fill={MOE.orange} />
-                <text fill="#fff" fontFamily="Calibri, sans-serif" fontWeight="800" fontSize="15" letterSpacing="0.3">
-                  <textPath href="#focusRimPath" startOffset="50%" textAnchor="middle">
-                    THIS MONTH'S STERLING FOCUS
-                  </textPath>
-                </text>
-                <circle cx="100" cy="100" r="58" fill="#000" stroke="#fff" strokeWidth="2" />
-                {focusWords.map((word, i) => (
-                  <text key={i} x="100" y={100 - ((focusWords.length - 1) / 2) * focusLineHeight + i * focusLineHeight}
-                    textAnchor="middle" dominantBaseline="central" fill="#fff" fontFamily="Calibri, sans-serif" fontWeight="800" fontSize={focusFontSize} letterSpacing="1"
-                  >
-                    {word}
-                  </text>
-                ))}
-              </svg>
-            </a>
-          </div>
-        </div>
+      <div style={{ display: "flex", flexWrap: "wrap", justifyContent: "center", gap: 32, marginBottom: 36 }}>
+        <FocusBadge
+          rimText="THIS MONTH'S STERLING FOCUS"
+          innerLines={focusWords}
+          innerFill="#000"
+          innerTextColor="#fff"
+          title={`This Month's Sterling Focus: ${focusWords.join(", ")}`}
+          onOpen={() => setActivePdf({ title: "Sterling Focus", url: "/sterling-focus.pdf" })}
+        />
+        <FocusBadge
+          rimText="THIS MONTH'S STERLING"
+          innerLines={["MLT", "DOC"]}
+          innerFill={MOE.teal}
+          innerTextColor="#fff"
+          title="This Month's Sterling: MLT Doc"
+          onOpen={() => setActivePdf({ title: "Latest MLT Document", url: "#" })}
+        />
+        <FocusBadge
+          rimText="THIS MONTH'S STERLING"
+          innerLines={["MARKETING", "CALENDAR"]}
+          innerFill="#fff"
+          innerTextColor="#000"
+          title="This Month's Sterling: Marketing Calendar"
+          onOpen={() => setActivePdf({ title: "Current Month Offer Calendar", url: "#" })}
+        />
       </div>
 
       <h2 style={{ fontSize: 24, fontWeight: 700, color: "#ffffff", fontFamily: "Calibri, sans-serif", marginBottom: 18, textTransform: "uppercase", letterSpacing: 1 }}>

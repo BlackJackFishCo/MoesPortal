@@ -1327,8 +1327,8 @@ const RESOURCE_LINK_SECTIONS = [
     color: "#FFD23F",
     rows: [
       [
-        { title: "TR Onboard Checklist", url: "#" },
-        { title: "Re-Hire & Term Checklist", url: "#" },
+        { title: "TR Onboard Checklist", url: "/tr-onboarding-checklist.docx" },
+        { title: "Re-Hire & Term Checklist", url: "/rehire-and-termination-checklist.docx" },
         { title: "Wage Election Form", url: "#" },
         { title: "PAY Adjustment, REHIRE, TERM Forms", url: "#" },
       ],

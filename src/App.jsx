@@ -1247,6 +1247,11 @@ const AMBASSADOR_VISUAL_CHECKS = [
   { heading: "Patio", rightNotes: ["All tables wiped down and clean", "Floors swept", "Chairs pushed in and tables aligned neat looking", "Umbrellas up"] },
 ].map(section => ({ ...section, wrongImg: "", rightImg: "" }));
 
+// ─── Current Sterling Focus (update monthly) ──────────────────────────────────
+// Drives both the "Current Sterling Focus" resource tile title and the badge
+// in the Hot off the Tortilla Press box. Change the words here each month.
+const CURRENT_STERLING_FOCUS_WORDS = ["STIR", "FLIP", "WIPE"];
+
 // ─── Resource links (Resources page document library) ────────────────────────
 // Placeholder links laid out in the requested row order. Swap `url: "#"` for a
 // real file (drop it in /public) once each document is ready.
@@ -1257,7 +1262,7 @@ const RESOURCE_LINK_SECTIONS = [
     rows: [
       [
         { title: "Recipe Book", url: "https://tylerjohnson7.sharepoint.com/:b:/s/SterlingRestaurants/IQC0glsprOpgTald0QDtBFHCAeMBkOyNrGsjJXnAx-vO8cY?e=OclLrV" },
-        { title: "Current Sterling Focus", url: "/sterling-focus-current.pdf" },
+        { title: CURRENT_STERLING_FOCUS_WORDS.join("-"), url: "/sterling-focus-current.pdf" },
         { title: "All Hands on Deck", url: "/all-hands-on-deck.pdf" },
         { title: "Sterling Focus", url: "/sterling-focus.pdf" },
       ],
@@ -1389,6 +1394,9 @@ function Flames() {
 }
 
 function ResourceLinks({ setActivePdf }) {
+  const focusWords = CURRENT_STERLING_FOCUS_WORDS;
+  const focusFontSize = focusWords.length <= 3 ? 21 : focusWords.length === 4 ? 17 : 14;
+  const focusLineHeight = focusFontSize + 3;
   return (
     <section style={{ marginBottom: 40 }}>
       <div style={{ position: "relative", overflow: "hidden", background: "#000", border: `2px solid ${MOE.orange}`, borderRadius: 14, padding: "20px 24px", marginBottom: 28 }}>
@@ -1403,7 +1411,7 @@ function ResourceLinks({ setActivePdf }) {
           </div>
           <div style={{ display: "flex", justifyContent: "flex-end" }}>
             <a href="/sterling-focus.pdf" onClick={e => { e.preventDefault(); setActivePdf({ title: "Sterling Focus", url: "/sterling-focus.pdf" }); }}
-              title="This Month's Sterling Focus: Stir, Flip, Wipe"
+              title={`This Month's Sterling Focus: ${focusWords.join(", ")}`}
               style={{ display: "flex", alignItems: "center", justifyContent: "center", width: 185, height: 185, borderRadius: "50%", boxShadow: `0 0 40px ${MOE.orange}99`, cursor: "pointer", flexShrink: 0, textDecoration: "none" }}
             >
               <svg viewBox="0 0 200 200" width="185" height="185">
@@ -1417,9 +1425,13 @@ function ResourceLinks({ setActivePdf }) {
                   </textPath>
                 </text>
                 <circle cx="100" cy="100" r="58" fill={MOE.teal} stroke="#fff" strokeWidth="2" />
-                <text x="100" y="90" textAnchor="middle" fill="#fff" fontFamily="Calibri, sans-serif" fontWeight="800" fontSize="21" letterSpacing="1">STIR</text>
-                <text x="100" y="112" textAnchor="middle" fill="#fff" fontFamily="Calibri, sans-serif" fontWeight="800" fontSize="21" letterSpacing="1">FLIP</text>
-                <text x="100" y="134" textAnchor="middle" fill="#fff" fontFamily="Calibri, sans-serif" fontWeight="800" fontSize="21" letterSpacing="1">WIPE</text>
+                {focusWords.map((word, i) => (
+                  <text key={i} x="100" y={100 - ((focusWords.length - 1) / 2) * focusLineHeight + i * focusLineHeight}
+                    textAnchor="middle" dominantBaseline="central" fill="#fff" fontFamily="Calibri, sans-serif" fontWeight="800" fontSize={focusFontSize} letterSpacing="1"
+                  >
+                    {word}
+                  </text>
+                ))}
               </svg>
             </a>
           </div>

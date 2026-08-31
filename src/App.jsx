@@ -1237,9 +1237,9 @@ const POSITION_DOCS = {
 // each photo.
 const AMBASSADOR_VISUAL_CHECKS = [
   {
-    heading: "Parking Lot",
-    wrongText: "Trash, cups, and debris are scattered across the parking lot and sidewalks, giving guests a bad first impression before they even reach the door.",
-    rightText: "The parking lot is free of trash and debris, and the sidewalks are swept clean so guests have a safe, welcoming walk into the restaurant.",
+    heading: "Parking Lot & Exterior",
+    wrongText: "Trash is scattered across the parking lot, sidewalks, or entrance, the marketing signs are crooked or full of bubbles, the exterior windows and sills are dirty, or the exterior sign isn't lit correctly at night. If any of this is wrong, correct what you can or let a manager know right away so we can get it fixed.",
+    rightText: "Each employee entering the building checks for trash on the way in to make sure the sidewalks and entrance look clean. The marketing signs are straight and not full of bubbles, the exterior windows and sills are clean, and at night the exterior sign is lit correctly — this is our first impression from the guest!",
   },
   {
     heading: "Front Door",

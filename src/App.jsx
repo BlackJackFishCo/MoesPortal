@@ -1351,8 +1351,6 @@ const RESOURCE_LINK_SECTIONS = [
       [
         { title: "1", url: "#" },
         { title: "2", url: "#" },
-        { title: "3", url: "#" },
-        { title: "4", url: "#" },
       ],
     ],
   },

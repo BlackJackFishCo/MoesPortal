@@ -1419,7 +1419,7 @@ function ResourceLinks({ setActivePdf }) {
                   <path id="focusRimPath" d="M22,100 A78,78 0 1,1 178,100" fill="none" />
                 </defs>
                 <circle cx="100" cy="100" r="98" fill={MOE.orange} />
-                <text fill="#fff" fontFamily="Calibri, sans-serif" fontWeight="800" fontSize="12.5" letterSpacing="1">
+                <text fill="#fff" fontFamily="Calibri, sans-serif" fontWeight="800" fontSize="15" letterSpacing="0.3">
                   <textPath href="#focusRimPath" startOffset="50%" textAnchor="middle">
                     THIS MONTH'S STERLING FOCUS
                   </textPath>

@@ -1232,19 +1232,62 @@ const POSITION_DOCS = {
 };
 
 // ─── Guest Line of Sight (Ambassador) — Wrong vs. Right visual checklist ──────
-// Photos are placeholders — drop actual wrong/right photos in once they're
-// ready. rightNotes are the standards called out under each "Right" photo.
+// Photos are placeholders for the areas not yet shot — drop actual wrong/right
+// photos in once they're ready. wrongText/rightText explain what's shown under
+// each photo.
 const AMBASSADOR_VISUAL_CHECKS = [
-  { heading: "Parking Lot", rightNotes: ["Free from trash", "Sidewalks clean"] },
-  { heading: "Front Door", rightNotes: ["Door glass clean", "Floor mats clean"] },
-  { heading: "Down the Line", rightNotes: ["Sneeze guard clean", "Clutter free", "Stir, Flip, Wipe"] },
-  { heading: "Register Area", rightNotes: ["Clutter free", "Not overstocked for shift"] },
-  { heading: "Salsa Bar", rightNotes: ["Sneeze guard clean", "Clean from spills", "Stocked", "Clean spoodles", "Stocked souffle cups and lids"] },
-  { heading: "Beverage Bar", rightNotes: ["Clean from spills", "Stocked bubblers", "Teas full", "Icee stocked", "All BIBs working", "Ice not overflowing in soda drain", "Beverage dispensers wiped down", "All paper products stocked (lids, straws, forks, knives, napkins, etc.)"], wrongImg: "/beverage-bar-wrong.jpg", rightImg: "/beverage-bar-right.jpg" },
-  { heading: "Trash Cans", rightNotes: ["Not overflowing", "Tops wiped down from spills", "Trays stacked neatly and not overflowing"], wrongImg: "/trash-cans-wrong.jpg", rightImg: "/trash-cans-right.jpg" },
-  { heading: "Dining Room & Tables", rightNotes: ["All tables wiped down and clean", "Floors swept", "Chairs pushed in and tables aligned neat looking"] },
-  { heading: "Restrooms", rightNotes: ["All restrooms clean and stocked with paper products (toilet paper, paper towels, soap)", "Trash not overflowing", "Toilets flushed and in working order"] },
-  { heading: "Patio", rightNotes: ["All tables wiped down and clean", "Floors swept", "Chairs pushed in and tables aligned neat looking", "Umbrellas up"] },
+  {
+    heading: "Parking Lot",
+    wrongText: "Trash, cups, and debris are scattered across the parking lot and sidewalks, giving guests a bad first impression before they even reach the door.",
+    rightText: "The parking lot is free of trash and debris, and the sidewalks are swept clean so guests have a safe, welcoming walk into the restaurant.",
+  },
+  {
+    heading: "Front Door",
+    wrongText: "The door glass is smudged with fingerprints and dirt, and the floor mats are stained, worn, or covered in mud and debris tracked in from outside.",
+    rightText: "The door glass is streak-free and clear, and the floor mats are clean and laying flat, giving guests a bright, welcoming entrance.",
+  },
+  {
+    heading: "Down the Line",
+    wrongText: "The sneeze guards are smudged and splattered, the line is cluttered with extra pans and tools, and Stir, Flip, Wipe isn't being practiced during down time.",
+    rightText: "The sneeze guards are spotless, the line is free of clutter, and the team is actively practicing Stir, Flip, Wipe to keep everything looking fresh for guests.",
+  },
+  {
+    heading: "Register Area",
+    wrongText: "The register area is cluttered with extra cups, bags, and supplies piled up, and it's overstocked well beyond what's needed for the shift.",
+    rightText: "The register area is clutter-free and stocked only with what's needed for the shift, keeping the space organized and easy for the team to work in.",
+  },
+  {
+    heading: "Salsa Bar",
+    wrongText: "The sneeze guard is dirty, salsa spills are left uncleaned, the bar is running low, spoodles are crusted with old salsa, and souffle cups or lids are out of stock.",
+    rightText: "The sneeze guard is clean, the bar is free of spills and fully stocked, the spoodles are clean, and souffle cups and lids are stocked and ready for guests.",
+  },
+  {
+    heading: "Beverage Bar",
+    wrongText: "The beverage bar has spills that haven't been cleaned up, the bubblers or teas are running low or empty, the Icee machine is out, a BIB isn't working, ice is overflowing in the soda drain, the dispensers are sticky, and paper products like lids, straws, or napkins are missing.",
+    rightText: "The beverage bar is free of spills, the bubblers and teas are fully stocked, the Icee machine is stocked, all BIBs are working, the soda drain isn't overflowing with ice, the dispensers are wiped down, and all paper products (lids, straws, forks, knives, napkins, etc.) are stocked.",
+    wrongImg: "/beverage-bar-wrong.jpg", rightImg: "/beverage-bar-right.jpg",
+  },
+  {
+    heading: "Trash Cans",
+    wrongText: "The trash can is overflowing with trash spilling onto the counter, the top is dirty from spills, and the trays are stacked messily or overflowing off the top.",
+    rightText: "The trash can is not overflowing, the top is wiped down from any spills, and the trays are stacked neatly without overflowing.",
+    wrongImg: "/trash-cans-wrong.jpg", rightImg: "/trash-cans-right.jpg",
+  },
+  {
+    heading: "Dining Room & Tables",
+    wrongText: "Tables are left dirty with crumbs or spills, the floors haven't been swept, and chairs are pulled out with tables sitting crooked and unaligned.",
+    rightText: "All tables are wiped down and clean, the floors are swept, and the chairs are pushed in with tables aligned neatly for a tidy dining room.",
+  },
+  {
+    heading: "Restrooms",
+    wrongText: "The restrooms are dirty and out of paper products like toilet paper, paper towels, or soap, the trash is overflowing, and a toilet is unflushed or not working properly.",
+    rightText: "The restrooms are clean and fully stocked with paper products (toilet paper, paper towels, and soap), the trash is not overflowing, and the toilets are flushed and in working order.",
+  },
+  {
+    heading: "Patio",
+    wrongText: "Patio tables are left dirty, the floor is littered with trash or debris, chairs are scattered with tables misaligned, and the umbrellas are left down.",
+    rightText: "All patio tables are wiped down and clean, the floors are swept, chairs are pushed in with tables aligned neatly, and the umbrellas are up.",
+  },
 ].map(section => ({ wrongImg: "", rightImg: "", ...section }));
 
 // ─── Current Sterling Focus (update monthly) ──────────────────────────────────
@@ -1646,6 +1689,9 @@ function PositionTracker({ user, onPositionPass, setActivePdf }) {
                             <div style={{ fontSize: 13 }}>Photo placeholder</div>
                           </div>
                         )}
+                        {section.wrongText && (
+                          <p style={{ margin: "10px 0 0", fontSize: 13, color: "#ccc", lineHeight: 1.5, fontFamily: "Calibri, sans-serif" }}>{section.wrongText}</p>
+                        )}
                       </div>
                       <div>
                         <div style={{ fontSize: 13, fontWeight: 700, color: MOE.teal, textTransform: "uppercase", letterSpacing: 1, marginBottom: 6, fontFamily: "Calibri, sans-serif" }}>✓ Right</div>
@@ -1657,12 +1703,8 @@ function PositionTracker({ user, onPositionPass, setActivePdf }) {
                             <div style={{ fontSize: 13 }}>Photo placeholder</div>
                           </div>
                         )}
-                        {section.rightNotes?.length > 0 && (
-                          <ul style={{ margin: "10px 0 0", padding: "0 0 0 18px", listStyle: "disc" }}>
-                            {section.rightNotes.map((note, ni) => (
-                              <li key={ni} style={{ fontSize: 13, color: "#ccc", lineHeight: 1.5, fontFamily: "Calibri, sans-serif", marginBottom: 2 }}>{note}</li>
-                            ))}
-                          </ul>
+                        {section.rightText && (
+                          <p style={{ margin: "10px 0 0", fontSize: 13, color: "#ccc", lineHeight: 1.5, fontFamily: "Calibri, sans-serif" }}>{section.rightText}</p>
                         )}
                       </div>
                     </div>

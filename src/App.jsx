@@ -1303,26 +1303,22 @@ const RESOURCE_LINK_SECTIONS = [
     color: "#ffffff",
     rows: [
       [
+        {
+          title: "KEF Coloring Sheets",
+          url: "#",
+          gallery: [
+            { title: "Beach", url: "/kef-coloring-beach.pdf" },
+            { title: "Tropical", url: "/kef-coloring-tropical.pdf" },
+            { title: "Christmas", url: "/kef-coloring-christmas.pdf" },
+            { title: "Shark", url: "/kef-coloring-shark.pdf" },
+            { title: "Fall", url: "/kef-coloring-fall.pdf" },
+            { title: "Safari", url: "/kef-coloring-safari.pdf" },
+            { title: "Sports Coloring Book", url: "/kef-coloring-sports.pdf" },
+          ],
+        },
         { title: "Holiday Hour Notices", url: "#" },
         { title: "Current Month Offer Calendar", url: "#" },
         { title: "Latest MLT Document", url: "#" },
-      ],
-    ],
-  },
-  {
-    label: "KEF Coloring Sheets",
-    color: "#ffffff",
-    rows: [
-      [
-        { title: "Beach", url: "/kef-coloring-beach.pdf" },
-        { title: "Tropical", url: "/kef-coloring-tropical.pdf" },
-        { title: "Christmas", url: "/kef-coloring-christmas.pdf" },
-        { title: "Shark", url: "/kef-coloring-shark.pdf" },
-      ],
-      [
-        { title: "Fall", url: "/kef-coloring-fall.pdf" },
-        { title: "Safari", url: "/kef-coloring-safari.pdf" },
-        { title: "Sports Coloring Book", url: "/kef-coloring-sports.pdf" },
       ],
     ],
   },
@@ -1397,8 +1393,36 @@ function ResourceLinks({ setActivePdf }) {
   const focusWords = CURRENT_STERLING_FOCUS_WORDS;
   const focusFontSize = focusWords.length <= 3 ? 21 : focusWords.length === 4 ? 17 : 14;
   const focusLineHeight = focusFontSize + 3;
+  const [activeGallery, setActiveGallery] = useState(null);
   return (
     <section style={{ marginBottom: 40 }}>
+      {activeGallery && (
+        <div style={{ position: "fixed", inset: 0, background: "#000", zIndex: 1000, display: "flex", flexDirection: "column" }}>
+          <div style={{ display: "flex", alignItems: "center", gap: 12, padding: "12px 16px", background: "#1A1A1A", borderBottom: `2px solid ${MOE.orange}` }}>
+            <button
+              onClick={() => setActiveGallery(null)}
+              style={{ display: "flex", alignItems: "center", gap: 8, background: MOE.orange, color: "#fff", border: "none", borderRadius: 8, padding: "10px 18px", fontSize: 16, fontWeight: 700, fontFamily: "Calibri, sans-serif", cursor: "pointer" }}
+            >
+              ← Back to Portal
+            </button>
+            <div style={{ color: "#fff", fontFamily: "Calibri, sans-serif", fontSize: 16, fontWeight: 600, textAlign: "center", flex: 1 }}>
+              {activeGallery.title}
+            </div>
+          </div>
+          <div style={{ flex: 1, overflowY: "auto", padding: 24 }}>
+            <div style={{ maxWidth: 700, margin: "0 auto", display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(180px, 1fr))", gap: 16 }}>
+              {activeGallery.gallery.map((item, i) => (
+                <a key={i} href={item.url} onClick={e => { e.preventDefault(); setActiveGallery(null); setActivePdf(item); }}
+                  style={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", textAlign: "center", gap: 6, background: "#111", border: "1.5px solid #333", borderRadius: 10, padding: "18px 20px", textDecoration: "none", color: "#fff", fontFamily: "Calibri, sans-serif", fontSize: 17, fontWeight: 600, cursor: "pointer" }}
+                >
+                  <div style={{ fontSize: 17, fontWeight: 700 }}>{item.title}</div>
+                  <div style={{ fontSize: 14, color: MOE.teal, marginTop: 4 }}>Click to open →</div>
+                </a>
+              ))}
+            </div>
+          </div>
+        </div>
+      )}
       <div style={{ position: "relative", overflow: "hidden", background: "#000", border: `2px solid ${MOE.orange}`, borderRadius: 14, padding: "20px 24px", marginBottom: 28 }}>
         <Flames />
         <div style={{ position: "absolute", inset: 0, background: "linear-gradient(180deg, rgba(0,0,0,0.15) 0%, rgba(0,0,0,0.4) 55%, rgba(0,0,0,0.8) 100%)" }} />
@@ -1451,11 +1475,11 @@ function ResourceLinks({ setActivePdf }) {
               {section.rows.map((row, r) => (
                 <div key={r} style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(180px, 1fr))", gap: 16 }}>
                   {row.map((link, i) => (
-                    <a key={i} href={link.url} onClick={e => { e.preventDefault(); setActivePdf(link); }}
+                    <a key={i} href={link.url} onClick={e => { e.preventDefault(); link.gallery ? setActiveGallery(link) : setActivePdf(link); }}
                       style={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", textAlign: "center", gap: 6, background: "#000", border: `2px solid ${section.color}`, borderRadius: 10, padding: "18px 20px", textDecoration: "none", color: "#fff", fontFamily: "Calibri, sans-serif", fontSize: 17, fontWeight: 600, cursor: "pointer" }}
                     >
                       <div style={{ fontSize: 17, fontWeight: 700 }}>{link.title}</div>
-                      <div style={{ fontSize: 14, color: section.color, marginTop: 4 }}>Click to open →</div>
+                      <div style={{ fontSize: 14, color: section.color, marginTop: 4 }}>{link.gallery ? `${link.gallery.length} sheets →` : "Click to open →"}</div>
                     </a>
                   ))}
                 </div>

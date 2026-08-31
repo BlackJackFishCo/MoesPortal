@@ -1403,10 +1403,24 @@ function ResourceLinks({ setActivePdf }) {
           </div>
           <div style={{ display: "flex", justifyContent: "flex-end" }}>
             <a href="/sterling-focus.pdf" onClick={e => { e.preventDefault(); setActivePdf({ title: "Sterling Focus", url: "/sterling-focus.pdf" }); }}
-              title="This Month's Sterling Focus"
-              style={{ display: "flex", alignItems: "center", justifyContent: "center", width: 185, height: 185, borderRadius: "50%", background: MOE.orange, boxShadow: `0 0 40px ${MOE.orange}99`, textDecoration: "none", color: "#fff", fontFamily: "Calibri, sans-serif", fontSize: 18, fontWeight: 800, textTransform: "uppercase", letterSpacing: 0.5, lineHeight: 1.2, textAlign: "center", padding: "0 22px", cursor: "pointer", flexShrink: 0 }}
+              title="This Month's Sterling Focus: Stir, Flip, Wipe"
+              style={{ display: "flex", alignItems: "center", justifyContent: "center", width: 185, height: 185, borderRadius: "50%", boxShadow: `0 0 40px ${MOE.orange}99`, cursor: "pointer", flexShrink: 0, textDecoration: "none" }}
             >
-              This Month's Sterling Focus
+              <svg viewBox="0 0 200 200" width="185" height="185">
+                <defs>
+                  <path id="focusRimPath" d="M22,100 A78,78 0 1,1 178,100" fill="none" />
+                </defs>
+                <circle cx="100" cy="100" r="98" fill={MOE.orange} />
+                <text fill="#fff" fontFamily="Calibri, sans-serif" fontWeight="800" fontSize="12.5" letterSpacing="1">
+                  <textPath href="#focusRimPath" startOffset="50%" textAnchor="middle">
+                    THIS MONTH'S STERLING FOCUS
+                  </textPath>
+                </text>
+                <circle cx="100" cy="100" r="58" fill={MOE.teal} stroke="#fff" strokeWidth="2" />
+                <text x="100" y="90" textAnchor="middle" fill="#fff" fontFamily="Calibri, sans-serif" fontWeight="800" fontSize="21" letterSpacing="1">STIR</text>
+                <text x="100" y="112" textAnchor="middle" fill="#fff" fontFamily="Calibri, sans-serif" fontWeight="800" fontSize="21" letterSpacing="1">FLIP</text>
+                <text x="100" y="134" textAnchor="middle" fill="#fff" fontFamily="Calibri, sans-serif" fontWeight="800" fontSize="21" letterSpacing="1">WIPE</text>
+              </svg>
             </a>
           </div>
         </div>

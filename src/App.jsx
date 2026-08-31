@@ -1335,8 +1335,6 @@ const RESOURCE_LINK_SECTIONS = [
           ],
         },
         { title: "Holiday Hour Notices", url: "#" },
-        { title: "Current Month Offer Calendar", url: "#" },
-        { title: "Latest MLT Document", url: "#" },
       ],
     ],
   },

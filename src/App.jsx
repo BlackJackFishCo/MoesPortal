@@ -1298,10 +1298,26 @@ const RESOURCE_LINK_SECTIONS = [
     color: "#ffffff",
     rows: [
       [
-        { title: "KEF Coloring Sheets", url: "#" },
         { title: "Holiday Hour Notices", url: "#" },
         { title: "Current Month Offer Calendar", url: "#" },
         { title: "Latest MLT Document", url: "#" },
+      ],
+    ],
+  },
+  {
+    label: "KEF Coloring Sheets",
+    color: "#ffffff",
+    rows: [
+      [
+        { title: "Beach", url: "/kef-coloring-beach.pdf" },
+        { title: "Tropical", url: "/kef-coloring-tropical.pdf" },
+        { title: "Christmas", url: "/kef-coloring-christmas.pdf" },
+        { title: "Shark", url: "/kef-coloring-shark.pdf" },
+      ],
+      [
+        { title: "Fall", url: "/kef-coloring-fall.pdf" },
+        { title: "Safari", url: "/kef-coloring-safari.pdf" },
+        { title: "Sports Coloring Book", url: "/kef-coloring-sports.pdf" },
       ],
     ],
   },

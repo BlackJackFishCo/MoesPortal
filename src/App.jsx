@@ -1263,7 +1263,7 @@ const RESOURCE_LINK_SECTIONS = [
       ],
       [
         { title: "Line Schematic", url: "#" },
-        { title: "Clipboard File", url: "#" },
+        { title: "Clipboard File", url: "/clipboard-file.xlsx" },
         { title: "Scheduler File", url: "#" },
         { title: "Date Label Order Guide", url: "#" },
       ],

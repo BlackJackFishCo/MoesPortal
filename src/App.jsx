@@ -1308,12 +1308,6 @@ const RESOURCE_LINK_SECTIONS = [
         { title: "Wage Election Form", url: "#" },
         { title: "PAY Adjustment, REHIRE, TERM Forms", url: "/hr-master.xls" },
       ],
-      [
-        { title: "5", url: "#" },
-        { title: "6", url: "#" },
-        { title: "7", url: "#" },
-        { title: "8", url: "#" },
-      ],
     ],
   },
   {

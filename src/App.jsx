@@ -1240,12 +1240,12 @@ const AMBASSADOR_VISUAL_CHECKS = [
   { heading: "Down the Line", rightNotes: ["Sneeze guard clean", "Clutter free", "Stir, Flip, Wipe"] },
   { heading: "Register Area", rightNotes: ["Clutter free", "Not overstocked for shift"] },
   { heading: "Salsa Bar", rightNotes: ["Sneeze guard clean", "Clean from spills", "Stocked", "Clean spoodles", "Stocked souffle cups and lids"] },
-  { heading: "Beverage Bar", rightNotes: ["Clean from spills", "Stocked bubblers", "Teas full", "Icee stocked", "All BIBs working", "Ice not overflowing in soda drain", "Beverage dispensers wiped down", "All paper products stocked (lids, straws, forks, knives, napkins, etc.)"] },
-  { heading: "Trash Cans", rightNotes: ["Not overflowing", "Tops wiped down from spills", "Trays stacked neatly and not overflowing"] },
+  { heading: "Beverage Bar", rightNotes: ["Clean from spills", "Stocked bubblers", "Teas full", "Icee stocked", "All BIBs working", "Ice not overflowing in soda drain", "Beverage dispensers wiped down", "All paper products stocked (lids, straws, forks, knives, napkins, etc.)"], wrongImg: "/beverage-bar-wrong.jpg", rightImg: "/beverage-bar-right.jpg" },
+  { heading: "Trash Cans", rightNotes: ["Not overflowing", "Tops wiped down from spills", "Trays stacked neatly and not overflowing"], wrongImg: "/trash-cans-wrong.jpg", rightImg: "/trash-cans-right.jpg" },
   { heading: "Dining Room & Tables", rightNotes: ["All tables wiped down and clean", "Floors swept", "Chairs pushed in and tables aligned neat looking"] },
   { heading: "Restrooms", rightNotes: ["All restrooms clean and stocked with paper products (toilet paper, paper towels, soap)", "Trash not overflowing", "Toilets flushed and in working order"] },
   { heading: "Patio", rightNotes: ["All tables wiped down and clean", "Floors swept", "Chairs pushed in and tables aligned neat looking", "Umbrellas up"] },
-].map(section => ({ ...section, wrongImg: "", rightImg: "" }));
+].map(section => ({ wrongImg: "", rightImg: "", ...section }));
 
 // ─── Current Sterling Focus (update monthly) ──────────────────────────────────
 // Drives both the "Current Sterling Focus" resource tile title and the

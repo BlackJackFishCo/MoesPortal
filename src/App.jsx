@@ -1323,31 +1323,67 @@ const RESOURCE_LINK_SECTIONS = [
   },
 ];
 
-// Jagged flame silhouette rising from the bottom edge of a box.
-function flamesPath(n, width, baseY) {
-  let d = `M0,${baseY}`;
-  const stepX = width / n;
-  for (let i = 0; i < n; i++) {
-    const midX = i * stepX + stepX / 2;
-    const nextX = (i + 1) * stepX;
-    const peak = baseY - (26 + ((i % 4) * 12) + (((i * 7) % 5) * 3));
-    d += ` Q${midX},${peak} ${nextX},${baseY}`;
+// One curling flame "tongue" — a rounded base that tapers to a leaning,
+// slightly S-curved tip, the way a real flame licks upward and flickers
+// to one side rather than coming to a plain symmetric point.
+function flameTongue(cx, baseY, w, h, lean) {
+  const hw = w / 2;
+  const tipX = cx + lean;
+  const tipY = baseY - h;
+  const waistY = baseY - h * 0.55;
+  return `M${cx - hw},${baseY}
+    C${cx - hw * 1.15},${baseY - h * 0.32} ${cx - hw * 0.5},${waistY} ${cx - hw * 0.15 + lean * 0.4},${baseY - h * 0.8}
+    C${cx - hw * 0.05 + lean * 0.7},${baseY - h * 0.92} ${tipX - 2},${tipY + 6} ${tipX},${tipY}
+    C${tipX + 3},${tipY + 8} ${cx + hw * 0.2 + lean * 0.6},${baseY - h * 0.85} ${cx + hw * 0.3 + lean * 0.3},${waistY}
+    C${cx + hw * 0.55},${baseY - h * 0.4} ${cx + hw * 1.1},${baseY - h * 0.25} ${cx + hw},${baseY}
+    Z`;
+}
+
+// A row of flame tongues along one baseline, with per-flame height/lean
+// jitter (seeded, not random, so the layout is stable across renders).
+function flameRow(count, width, baseY, minH, maxH, widthScale, seed) {
+  const step = width / count;
+  let paths = [];
+  for (let i = 0; i < count; i++) {
+    const cx = i * step + step / 2;
+    const jitter = ((i * 37 + seed * 13) % 10) / 10;
+    const h = minH + jitter * (maxH - minH);
+    const lean = ((((i * 17 + seed * 5) % 7) - 3)) * (h / 18);
+    const w = step * widthScale;
+    paths.push(flameTongue(cx, baseY, w, h, lean));
   }
-  d += ` L${width},${baseY + 30} L0,${baseY + 30} Z`;
-  return d;
+  return paths.join(" ");
 }
 
 function Flames() {
   return (
-    <svg viewBox="0 0 400 120" preserveAspectRatio="none" style={{ position: "absolute", inset: 0, width: "100%", height: "100%", pointerEvents: "none" }}>
+    <svg viewBox="0 0 400 130" preserveAspectRatio="none" style={{ position: "absolute", inset: 0, width: "100%", height: "100%", pointerEvents: "none" }}>
       <defs>
-        <linearGradient id="flameGrad" x1="0%" y1="100%" x2="0%" y2="0%">
-          <stop offset="0%" stopColor="#FFD23F" />
-          <stop offset="40%" stopColor={MOE.orange} />
-          <stop offset="100%" stopColor="#7A1204" />
+        <linearGradient id="flameBack" x1="0%" y1="100%" x2="0%" y2="0%">
+          <stop offset="0%" stopColor="#8A1604" />
+          <stop offset="60%" stopColor="#C22A08" />
+          <stop offset="100%" stopColor="#E8541A" />
         </linearGradient>
+        <linearGradient id="flameMid" x1="0%" y1="100%" x2="0%" y2="0%">
+          <stop offset="0%" stopColor={MOE.orange} />
+          <stop offset="55%" stopColor="#F47B1F" />
+          <stop offset="100%" stopColor="#FFC93C" />
+        </linearGradient>
+        <linearGradient id="flameFront" x1="0%" y1="100%" x2="0%" y2="0%">
+          <stop offset="0%" stopColor="#FFC93C" />
+          <stop offset="60%" stopColor="#FFE27A" />
+          <stop offset="100%" stopColor="#FFF6D6" />
+        </linearGradient>
+        <radialGradient id="flameGlow" cx="50%" cy="100%" r="75%">
+          <stop offset="0%" stopColor="#FF9130" stopOpacity="0.9" />
+          <stop offset="60%" stopColor="#E8541A" stopOpacity="0.35" />
+          <stop offset="100%" stopColor="#E8541A" stopOpacity="0" />
+        </radialGradient>
       </defs>
-      <path d={flamesPath(18, 400, 96)} fill="url(#flameGrad)" opacity={0.85} />
+      <rect x="0" y="70" width="400" height="60" fill="url(#flameGlow)" />
+      <path d={flameRow(11, 400, 110, 40, 78, 1.55, 1)} fill="url(#flameBack)" opacity={0.75} />
+      <path d={flameRow(14, 400, 106, 30, 60, 1.25, 2)} fill="url(#flameMid)" opacity={0.9} />
+      <path d={flameRow(16, 400, 102, 16, 34, 0.8, 3)} fill="url(#flameFront)" opacity={0.95} />
     </svg>
   );
 }

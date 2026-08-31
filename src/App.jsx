@@ -1727,6 +1727,16 @@ function PositionTracker({ user, onPositionPass, setActivePdf }) {
               ))}
             </div>
 
+            {/* Example catering set up photo */}
+            {pos.id === "catering" && (
+              <div style={{ marginBottom: 24 }}>
+                <h3 style={{ fontSize: 18, fontWeight: 700, color: "#ffffff", fontFamily: "Calibri, sans-serif", marginBottom: 14, textTransform: "uppercase", letterSpacing: 1 }}>
+                  Example Catering Set Up
+                </h3>
+                <img src="/catering-setup-example.jpg" alt="Example catering set up" style={{ width: "100%", borderRadius: 10, border: `1.5px solid ${pos.color}`, display: "block" }} />
+              </div>
+            )}
+
             {/* Documents */}
             {docs.length > 0 && (
               <>

@@ -1366,23 +1366,26 @@ const RESOURCE_LINK_SECTIONS = [
   },
 ];
 
-// Round badge: an orange outer ring with curved rim text, and a solid
-// inner circle carrying a short word list (one word per line).
-function FocusBadge({ rimText, innerLines, innerFill, innerTextColor, title, onOpen }) {
+// Round badge: an outer ring with curved rim text, and a solid inner
+// circle carrying a short word list (one word per line).
+function FocusBadge({ rimText, innerLines, outerFill, rimTextColor, innerFill, innerTextColor, title, onOpen }) {
   const rimId = useId();
-  const fontSize = innerLines.length <= 2 ? 24 : innerLines.length === 3 ? 21 : innerLines.length === 4 ? 17 : 14;
+  const byLineCount = innerLines.length <= 2 ? 24 : innerLines.length === 3 ? 21 : innerLines.length === 4 ? 17 : 14;
+  const maxWordLen = Math.max(...innerLines.map(w => w.length));
+  const byWordWidth = Math.floor(150 / maxWordLen);
+  const fontSize = Math.max(11, Math.min(byLineCount, byWordWidth));
   const lineHeight = fontSize + 3;
   return (
     <a href="#" onClick={e => { e.preventDefault(); onOpen(); }}
       title={title}
-      style={{ display: "flex", alignItems: "center", justifyContent: "center", width: 185, height: 185, borderRadius: "50%", boxShadow: `0 0 40px ${MOE.orange}99`, cursor: "pointer", flexShrink: 0, textDecoration: "none" }}
+      style={{ display: "flex", alignItems: "center", justifyContent: "center", width: 185, height: 185, borderRadius: "50%", boxShadow: `0 0 40px ${outerFill}99`, cursor: "pointer", flexShrink: 0, textDecoration: "none" }}
     >
       <svg viewBox="0 0 200 200" width="185" height="185">
         <defs>
           <path id={rimId} d="M22,100 A78,78 0 1,1 178,100" fill="none" />
         </defs>
-        <circle cx="100" cy="100" r="98" fill={MOE.orange} />
-        <text fill="#fff" fontFamily="Calibri, sans-serif" fontWeight="800" fontSize="15" letterSpacing="0.3">
+        <circle cx="100" cy="100" r="98" fill={outerFill} stroke={outerFill === "#fff" ? "#ccc" : "none"} strokeWidth="1" />
+        <text fill={rimTextColor} fontFamily="Calibri, sans-serif" fontWeight="800" fontSize="15" letterSpacing="0.3">
           <textPath href={`#${rimId}`} startOffset="50%" textAnchor="middle">
             {rimText}
           </textPath>
@@ -1436,6 +1439,8 @@ function ResourceLinks({ setActivePdf }) {
         <FocusBadge
           rimText="THIS MONTH'S STERLING FOCUS"
           innerLines={focusWords}
+          outerFill={MOE.orange}
+          rimTextColor="#fff"
           innerFill="#000"
           innerTextColor="#fff"
           title={`This Month's Sterling Focus: ${focusWords.join(", ")}`}
@@ -1444,7 +1449,9 @@ function ResourceLinks({ setActivePdf }) {
         <FocusBadge
           rimText="THIS MONTH'S STERLING"
           innerLines={["MLT", "DOC"]}
-          innerFill={MOE.teal}
+          outerFill={MOE.teal}
+          rimTextColor="#fff"
+          innerFill="#000"
           innerTextColor="#fff"
           title="This Month's Sterling: MLT Doc"
           onOpen={() => setActivePdf({ title: "Latest MLT Document", url: "#" })}
@@ -1452,8 +1459,10 @@ function ResourceLinks({ setActivePdf }) {
         <FocusBadge
           rimText="THIS MONTH'S STERLING"
           innerLines={["MARKETING", "CALENDAR"]}
-          innerFill="#fff"
-          innerTextColor="#000"
+          outerFill="#fff"
+          rimTextColor="#000"
+          innerFill="#000"
+          innerTextColor="#fff"
           title="This Month's Sterling: Marketing Calendar"
           onOpen={() => setActivePdf({ title: "Current Month Offer Calendar", url: "#" })}
         />

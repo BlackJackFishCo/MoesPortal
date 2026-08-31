@@ -1323,7 +1323,7 @@ const RESOURCE_LINK_SECTIONS = [
     ],
   },
   {
-    label: "Payroll",
+    label: "Onboarding & Termination",
     color: "#FFD23F",
     rows: [
       [

@@ -1403,10 +1403,10 @@ function ResourceLinks({ setActivePdf }) {
           </div>
           <div style={{ display: "flex", justifyContent: "flex-end" }}>
             <a href="/sterling-focus.pdf" onClick={e => { e.preventDefault(); setActivePdf({ title: "Sterling Focus", url: "/sterling-focus.pdf" }); }}
-              title="Sterling Focus"
-              style={{ display: "flex", alignItems: "center", justifyContent: "center", width: 185, height: 185, borderRadius: "50%", background: MOE.orange, boxShadow: `0 0 40px ${MOE.orange}99`, textDecoration: "none", color: "#fff", fontFamily: "Calibri, sans-serif", fontSize: 22, fontWeight: 800, textTransform: "uppercase", letterSpacing: 0.5, lineHeight: 1.2, textAlign: "center", padding: "0 22px", cursor: "pointer", flexShrink: 0 }}
+              title="This Month's Sterling Focus"
+              style={{ display: "flex", alignItems: "center", justifyContent: "center", width: 185, height: 185, borderRadius: "50%", background: MOE.orange, boxShadow: `0 0 40px ${MOE.orange}99`, textDecoration: "none", color: "#fff", fontFamily: "Calibri, sans-serif", fontSize: 18, fontWeight: 800, textTransform: "uppercase", letterSpacing: 0.5, lineHeight: 1.2, textAlign: "center", padding: "0 22px", cursor: "pointer", flexShrink: 0 }}
             >
-              Sterling Focus
+              This Month's Sterling Focus
             </a>
           </div>
         </div>

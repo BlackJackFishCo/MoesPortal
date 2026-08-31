@@ -1329,8 +1329,8 @@ const RESOURCE_LINK_SECTIONS = [
       [
         { title: "TR Onboard Checklist", url: "#" },
         { title: "Re-Hire & Term Checklist", url: "#" },
-        { title: "Re-Hire Form", url: "#" },
         { title: "Wage Election Form", url: "#" },
+        { title: "Re-Hire Form", url: "#" },
       ],
       [
         { title: "Pay Adjustment Form", url: "#" },

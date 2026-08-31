@@ -1380,10 +1380,10 @@ function Flames() {
           <stop offset="100%" stopColor="#E8541A" stopOpacity="0" />
         </radialGradient>
       </defs>
-      <rect x="0" y="70" width="400" height="60" fill="url(#flameGlow)" />
-      <path d={flameRow(11, 400, 110, 40, 78, 1.55, 1)} fill="url(#flameBack)" opacity={0.75} />
-      <path d={flameRow(14, 400, 106, 30, 60, 1.25, 2)} fill="url(#flameMid)" opacity={0.9} />
-      <path d={flameRow(16, 400, 102, 16, 34, 0.8, 3)} fill="url(#flameFront)" opacity={0.95} />
+      <rect x="0" y="90" width="400" height="40" fill="url(#flameGlow)" />
+      <path d={flameRow(11, 400, 130, 40, 78, 1.55, 1)} fill="url(#flameBack)" opacity={0.75} />
+      <path d={flameRow(14, 400, 130, 30, 60, 1.25, 2)} fill="url(#flameMid)" opacity={0.9} />
+      <path d={flameRow(16, 400, 130, 16, 34, 0.8, 3)} fill="url(#flameFront)" opacity={0.95} />
     </svg>
   );
 }
@@ -1404,9 +1404,9 @@ function ResourceLinks({ setActivePdf }) {
           <div style={{ display: "flex", justifyContent: "flex-end" }}>
             <a href="/sterling-focus.pdf" onClick={e => { e.preventDefault(); setActivePdf({ title: "Sterling Focus", url: "/sterling-focus.pdf" }); }}
               title="Sterling Focus"
-              style={{ display: "flex", alignItems: "center", justifyContent: "center", width: 64, height: 64, borderRadius: "50%", background: MOE.orange, boxShadow: `0 0 18px ${MOE.orange}88`, textDecoration: "none", color: "#fff", fontFamily: "Calibri, sans-serif", fontSize: 26, fontWeight: 800, cursor: "pointer", flexShrink: 0 }}
+              style={{ display: "flex", alignItems: "center", justifyContent: "center", width: 185, height: 185, borderRadius: "50%", background: MOE.orange, boxShadow: `0 0 40px ${MOE.orange}99`, textDecoration: "none", color: "#fff", fontFamily: "Calibri, sans-serif", fontSize: 22, fontWeight: 800, textTransform: "uppercase", letterSpacing: 0.5, lineHeight: 1.2, textAlign: "center", padding: "0 22px", cursor: "pointer", flexShrink: 0 }}
             >
-              →
+              Sterling Focus
             </a>
           </div>
         </div>

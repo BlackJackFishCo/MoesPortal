@@ -1340,6 +1340,18 @@ const RESOURCE_LINK_SECTIONS = [
       ],
     ],
   },
+  {
+    label: "Payroll",
+    color: "#3B82F6",
+    rows: [
+      [
+        { title: "1", url: "#" },
+        { title: "2", url: "#" },
+        { title: "3", url: "#" },
+        { title: "4", url: "#" },
+      ],
+    ],
+  },
 ];
 
 // One curling flame "tongue" — a rounded base that tapers to a leaning,

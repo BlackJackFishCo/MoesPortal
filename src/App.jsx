@@ -1231,6 +1231,15 @@ const POSITION_DOCS = {
   ],
 };
 
+// ─── Guest Line of Sight (Ambassador) — Wrong vs. Right visual checklist ──────
+// Placeholder headings and photos. Swap each `heading` for the real area name
+// and drop actual wrong/right photos in once they're ready.
+const AMBASSADOR_VISUAL_CHECKS = Array.from({ length: 10 }, (_, i) => ({
+  heading: `Section ${i + 1} — [Add Heading]`,
+  wrongImg: "",
+  rightImg: "",
+}));
+
 // ─── Resource links (Resources page document library) ────────────────────────
 // Placeholder links laid out in the requested row order. Swap `url: "#"` for a
 // real file (drop it in /public) once each document is ready.
@@ -1508,6 +1517,46 @@ function PositionTracker({ user, onPositionPass, setActivePdf }) {
               <div style={{ background: "#111", border: `1.5px solid ${pos.color}55`, borderRadius: 10, padding: "16px 20px", marginBottom: 24 }}>
                 <div style={{ fontSize: 13, fontWeight: 700, color: pos.color, textTransform: "uppercase", letterSpacing: 1, marginBottom: 6, fontFamily: "Calibri, sans-serif" }}>Position Overview</div>
                 <div style={{ fontSize: 15, color: "#ccc", lineHeight: 1.6, fontFamily: "Calibri, sans-serif" }}>{overview}</div>
+              </div>
+            )}
+
+            {/* Wrong vs. Right guest area visuals (Guest Line of Sight only) */}
+            {pos.id === "ambassador" && (
+              <div style={{ marginBottom: 24 }}>
+                <h3 style={{ fontSize: 18, fontWeight: 700, color: "#ffffff", fontFamily: "Calibri, sans-serif", marginBottom: 14, textTransform: "uppercase", letterSpacing: 1 }}>
+                  Wrong vs. Right — Guest Area Visuals
+                </h3>
+                {AMBASSADOR_VISUAL_CHECKS.map((section, i) => (
+                  <div key={i} style={{ background: "#111", border: "1.5px solid #333", borderRadius: 10, padding: "18px 20px", marginBottom: 16 }}>
+                    <div style={{ fontSize: 15, fontWeight: 700, color: "#fff", fontFamily: "Calibri, sans-serif", marginBottom: 12 }}>
+                      {i + 1}. {section.heading}
+                    </div>
+                    <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))", gap: 16 }}>
+                      <div>
+                        <div style={{ fontSize: 13, fontWeight: 700, color: "#D9342B", textTransform: "uppercase", letterSpacing: 1, marginBottom: 6, fontFamily: "Calibri, sans-serif" }}>✕ Wrong</div>
+                        {section.wrongImg ? (
+                          <img src={section.wrongImg} alt={`${section.heading} — wrong`} style={{ width: "100%", height: 180, objectFit: "cover", borderRadius: 10, border: "2px solid #D9342B", display: "block" }} />
+                        ) : (
+                          <div style={{ height: 180, background: "#000", border: "2px dashed #D9342B", borderRadius: 10, display: "flex", alignItems: "center", justifyContent: "center", flexDirection: "column", gap: 6, color: "#666", fontFamily: "Calibri, sans-serif" }}>
+                            <div style={{ fontSize: 28 }}>📷</div>
+                            <div style={{ fontSize: 13 }}>Photo placeholder</div>
+                          </div>
+                        )}
+                      </div>
+                      <div>
+                        <div style={{ fontSize: 13, fontWeight: 700, color: MOE.teal, textTransform: "uppercase", letterSpacing: 1, marginBottom: 6, fontFamily: "Calibri, sans-serif" }}>✓ Right</div>
+                        {section.rightImg ? (
+                          <img src={section.rightImg} alt={`${section.heading} — right`} style={{ width: "100%", height: 180, objectFit: "cover", borderRadius: 10, border: `2px solid ${MOE.teal}`, display: "block" }} />
+                        ) : (
+                          <div style={{ height: 180, background: "#000", border: `2px dashed ${MOE.teal}`, borderRadius: 10, display: "flex", alignItems: "center", justifyContent: "center", flexDirection: "column", gap: 6, color: "#666", fontFamily: "Calibri, sans-serif" }}>
+                            <div style={{ fontSize: 28 }}>📷</div>
+                            <div style={{ fontSize: 13 }}>Photo placeholder</div>
+                          </div>
+                        )}
+                      </div>
+                    </div>
+                  </div>
+                ))}
               </div>
             )}
 

@@ -1313,7 +1313,7 @@ const RESOURCE_LINK_SECTIONS = [
             { title: "Shark", url: "/kef-coloring-shark.pdf" },
             { title: "Fall", url: "/kef-coloring-fall.pdf" },
             { title: "Safari", url: "/kef-coloring-safari.pdf" },
-            { title: "Sports Coloring Book", url: "/kef-coloring-sports.pdf" },
+            { title: "Sports", url: "/kef-coloring-sports.pdf" },
           ],
         },
         { title: "Holiday Hour Notices", url: "#" },

@@ -1323,25 +1323,31 @@ const RESOURCE_LINK_SECTIONS = [
   },
 ];
 
-function Tortilla({ style }) {
+// Jagged flame silhouette rising from the bottom edge of a box.
+function flamesPath(n, width, baseY) {
+  let d = `M0,${baseY}`;
+  const stepX = width / n;
+  for (let i = 0; i < n; i++) {
+    const midX = i * stepX + stepX / 2;
+    const nextX = (i + 1) * stepX;
+    const peak = baseY - (26 + ((i % 4) * 12) + (((i * 7) % 5) * 3));
+    d += ` Q${midX},${peak} ${nextX},${baseY}`;
+  }
+  d += ` L${width},${baseY + 30} L0,${baseY + 30} Z`;
+  return d;
+}
+
+function Flames() {
   return (
-    <svg viewBox="0 0 200 200" style={{ position: "absolute", width: 150, height: 150, pointerEvents: "none", ...style }}>
+    <svg viewBox="0 0 400 120" preserveAspectRatio="none" style={{ position: "absolute", inset: 0, width: "100%", height: "100%", pointerEvents: "none" }}>
       <defs>
-        <radialGradient id="tortillaGrad" cx="42%" cy="38%" r="65%">
-          <stop offset="0%" stopColor="#F3DFA8" />
-          <stop offset="70%" stopColor="#E7C077" />
-          <stop offset="100%" stopColor="#CC9A4D" />
-        </radialGradient>
+        <linearGradient id="flameGrad" x1="0%" y1="100%" x2="0%" y2="0%">
+          <stop offset="0%" stopColor="#FFD23F" />
+          <stop offset="40%" stopColor={MOE.orange} />
+          <stop offset="100%" stopColor="#7A1204" />
+        </linearGradient>
       </defs>
-      <circle cx="100" cy="100" r="92" fill="url(#tortillaGrad)" />
-      <g fill="#A9702C" opacity="0.55">
-        <ellipse cx="65" cy="55" rx="10" ry="6" transform="rotate(-20 65 55)" />
-        <ellipse cx="130" cy="70" rx="8" ry="5" transform="rotate(15 130 70)" />
-        <ellipse cx="150" cy="130" rx="11" ry="6" transform="rotate(35 150 130)" />
-        <ellipse cx="80" cy="140" rx="9" ry="5" transform="rotate(-10 80 140)" />
-        <ellipse cx="110" cy="105" rx="7" ry="4" transform="rotate(50 110 105)" />
-        <ellipse cx="45" cy="110" rx="8" ry="5" transform="rotate(5 45 110)" />
-      </g>
+      <path d={flamesPath(18, 400, 96)} fill="url(#flameGrad)" opacity={0.85} />
     </svg>
   );
 }
@@ -1350,8 +1356,8 @@ function ResourceLinks({ setActivePdf }) {
   return (
     <section style={{ marginBottom: 40 }}>
       <div style={{ position: "relative", overflow: "hidden", background: "#000", border: `2px solid ${MOE.orange}`, borderRadius: 14, padding: "20px 24px", marginBottom: 28 }}>
-        <Tortilla style={{ bottom: -45, left: -45, opacity: 0.35, transform: "rotate(-8deg)" }} />
-        <Tortilla style={{ top: -45, right: -45, opacity: 0.35, transform: "rotate(12deg)" }} />
+        <Flames />
+        <div style={{ position: "absolute", inset: 0, background: "linear-gradient(180deg, rgba(0,0,0,0.15) 0%, rgba(0,0,0,0.4) 55%, rgba(0,0,0,0.8) 100%)" }} />
         <div style={{ position: "relative", zIndex: 1 }}>
           <h2 style={{ fontSize: 24, fontWeight: 700, color: "#fff", fontFamily: "Calibri, sans-serif", textTransform: "uppercase", letterSpacing: 1, marginBottom: 12, textAlign: "center" }}>
             Hot off the Tortilla Press
@@ -1359,11 +1365,12 @@ function ResourceLinks({ setActivePdf }) {
           <div style={{ fontSize: 16, color: "#fff", fontFamily: "Calibri, sans-serif", lineHeight: 1.6, marginBottom: 20, textAlign: "center" }}>
             08.24.26 - Fresh Jalapenos are back. Please start ordering again and revert to OG recipes.
           </div>
-          <div style={{ display: "flex", justifyContent: "center" }}>
+          <div style={{ display: "flex", justifyContent: "flex-end" }}>
             <a href="/sterling-focus.pdf" onClick={e => { e.preventDefault(); setActivePdf({ title: "Sterling Focus", url: "/sterling-focus.pdf" }); }}
-              style={{ display: "inline-block", background: "#000", border: `2px solid ${MOE.teal}`, borderRadius: 10, padding: "14px 36px", textDecoration: "none", color: "#fff", fontFamily: "Calibri, sans-serif", fontSize: 16, fontWeight: 800, textTransform: "uppercase", letterSpacing: 1, cursor: "pointer" }}
+              title="Sterling Focus"
+              style={{ display: "flex", alignItems: "center", justifyContent: "center", width: 64, height: 64, borderRadius: "50%", background: MOE.orange, boxShadow: `0 0 18px ${MOE.orange}88`, textDecoration: "none", color: "#fff", fontFamily: "Calibri, sans-serif", fontSize: 26, fontWeight: 800, cursor: "pointer", flexShrink: 0 }}
             >
-              Sterling Focus
+              →
             </a>
           </div>
         </div>

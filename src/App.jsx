@@ -1347,7 +1347,7 @@ const RESOURCE_LINK_SECTIONS = [
       [
         { title: "Accident & Injury Claim Form", url: "/sterling-claims-packet.pdf" },
         { title: "Workers Comp Reporting", url: "/workers-comp-claim-reporting.pdf" },
-        { title: "Workers Comp Form", url: "#" },
+        { title: "Workers Comp Form", url: "/workers-comp-form.pdf" },
         { title: "Workers Comp Locations", url: "#" },
       ],
     ],

@@ -1232,20 +1232,20 @@ const POSITION_DOCS = {
 };
 
 // ─── Guest Line of Sight (Ambassador) — Wrong vs. Right visual checklist ──────
-// Placeholder headings and photos. Swap each `heading` for the real area name
-// and drop actual wrong/right photos in once they're ready.
+// Photos are placeholders — drop actual wrong/right photos in once they're
+// ready. rightNotes are the standards called out under each "Right" photo.
 const AMBASSADOR_VISUAL_CHECKS = [
-  "Parking Lot",
-  "Front Door",
-  "Down the Line",
-  "Register Area",
-  "Salsa Bar",
-  "Beverage Bar",
-  "Trash Cans",
-  "Dining Room & Tables",
-  "Restrooms",
-  "Patio",
-].map(heading => ({ heading, wrongImg: "", rightImg: "" }));
+  { heading: "Parking Lot", rightNotes: ["Free from trash", "Sidewalks clean"] },
+  { heading: "Front Door", rightNotes: ["Door glass clean", "Floor mats clean"] },
+  { heading: "Down the Line", rightNotes: ["Sneeze guard clean", "Clutter free", "Stir, Flip, Wipe"] },
+  { heading: "Register Area", rightNotes: ["Clutter free", "Not overstocked for shift"] },
+  { heading: "Salsa Bar", rightNotes: ["Sneeze guard clean", "Clean from spills", "Stocked", "Clean spoodles", "Stocked souffle cups and lids"] },
+  { heading: "Beverage Bar", rightNotes: ["Clean from spills", "Stocked bubblers", "Teas full", "Icee stocked", "All BIBs working", "Ice not overflowing in soda drain", "Beverage dispensers wiped down", "All paper products stocked (lids, straws, forks, knives, napkins, etc.)"] },
+  { heading: "Trash Cans", rightNotes: ["Not overflowing", "Tops wiped down from spills", "Trays stacked neatly and not overflowing"] },
+  { heading: "Dining Room & Tables", rightNotes: ["All tables wiped down and clean", "Floors swept", "Chairs pushed in and tables aligned neat looking"] },
+  { heading: "Restrooms", rightNotes: ["All restrooms clean and stocked with paper products (toilet paper, paper towels, soap)", "Trash not overflowing", "Toilets flushed and in working order"] },
+  { heading: "Patio", rightNotes: ["All tables wiped down and clean", "Floors swept", "Chairs pushed in and tables aligned neat looking", "Umbrellas up"] },
+].map(section => ({ ...section, wrongImg: "", rightImg: "" }));
 
 // ─── Resource links (Resources page document library) ────────────────────────
 // Placeholder links laid out in the requested row order. Swap `url: "#"` for a
@@ -1559,6 +1559,13 @@ function PositionTracker({ user, onPositionPass, setActivePdf }) {
                             <div style={{ fontSize: 28 }}>📷</div>
                             <div style={{ fontSize: 13 }}>Photo placeholder</div>
                           </div>
+                        )}
+                        {section.rightNotes?.length > 0 && (
+                          <ul style={{ margin: "10px 0 0", padding: "0 0 0 18px", listStyle: "disc" }}>
+                            {section.rightNotes.map((note, ni) => (
+                              <li key={ni} style={{ fontSize: 13, color: "#ccc", lineHeight: 1.5, fontFamily: "Calibri, sans-serif", marginBottom: 2 }}>{note}</li>
+                            ))}
+                          </ul>
                         )}
                       </div>
                     </div>

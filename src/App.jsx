@@ -1264,7 +1264,7 @@ const RESOURCE_LINK_SECTIONS = [
         { title: "Recipe Book", url: "https://tylerjohnson7.sharepoint.com/:b:/s/SterlingRestaurants/IQC0glsprOpgTald0QDtBFHCAeMBkOyNrGsjJXnAx-vO8cY?e=OclLrV" },
         { title: CURRENT_STERLING_FOCUS_WORDS.join("-"), url: "/sterling-focus-current.pdf" },
         { title: "All Hands on Deck", url: "/all-hands-on-deck.pdf" },
-        { title: "Sterling Focus", url: "/sterling-focus.pdf" },
+        { title: "Sterling Focus List", url: "/sterling-focus.pdf" },
       ],
       [
         { title: "Line Schematic", url: "#" },
@@ -1276,7 +1276,7 @@ const RESOURCE_LINK_SECTIONS = [
         { title: "86 Instructions", url: "#" },
         { title: "Offline Mode Instructions for Qu", url: "#" },
         { title: "Chicken Log", url: "/haccp-chicken-log.pdf" },
-        { title: "Shelf Chart", url: "#" },
+        { title: "Shelf Life Chart", url: "#" },
       ],
     ],
   },

@@ -1281,7 +1281,7 @@ const RESOURCE_LINK_SECTIONS = [
     ],
   },
   {
-    label: "New Hires",
+    label: "Orientation",
     color: MOE.orange,
     rows: [
       [

@@ -393,7 +393,7 @@ const POSITION_CHECKLISTS = {
     "Assist the HOT and COLD line with Stir, Flip, Wipe during the rush times.",
   ],
   ambassador: [
-    "Each guest that enters gets a cheerful “Welcome to Moe’s” from the GUEST LINE OF SIGHT position.",
+    "Each guest that enters gets a cheerful “Welcome to Moe’s”.",
     "Keeps salsa and beverage bars stocked and clean.",
     "Keeps restrooms stocked and cleaned.",
     "Cleans up spills immediately and puts out wet floor signs to eliminate possible guest accidents.",

@@ -1234,11 +1234,18 @@ const POSITION_DOCS = {
 // ─── Guest Line of Sight (Ambassador) — Wrong vs. Right visual checklist ──────
 // Placeholder headings and photos. Swap each `heading` for the real area name
 // and drop actual wrong/right photos in once they're ready.
-const AMBASSADOR_VISUAL_CHECKS = Array.from({ length: 10 }, (_, i) => ({
-  heading: `Section ${i + 1} — [Add Heading]`,
-  wrongImg: "",
-  rightImg: "",
-}));
+const AMBASSADOR_VISUAL_CHECKS = [
+  "Parking Lot",
+  "Front Door",
+  "Down the Line",
+  "Register Area",
+  "Salsa Bar",
+  "Beverage Bar",
+  "Trash Cans",
+  "Dining Room & Tables",
+  "Restrooms",
+  "Patio",
+].map(heading => ({ heading, wrongImg: "", rightImg: "" }));
 
 // ─── Resource links (Resources page document library) ────────────────────────
 // Placeholder links laid out in the requested row order. Swap `url: "#"` for a

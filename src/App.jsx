@@ -1312,7 +1312,7 @@ const RESOURCE_LINK_SECTIONS = [
       [
         { title: "Line Schematic", url: "#" },
         { title: "Clipboard File", url: "/clipboard-file.xlsx" },
-        { title: "Scheduler File", url: "#" },
+        { title: "Scheduler File", url: "https://tylerjohnson7.sharepoint.com/:x:/s/SterlingRestaurants/IQCyGS3m2z1IQ7knMvjOpV6WAb1VW8aEfT0idWpdc0w20iw?e=9PMqnc" },
         { title: "Date Label Order Guide", url: "#" },
       ],
       [

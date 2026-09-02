@@ -1318,7 +1318,14 @@ const RESOURCE_LINK_SECTIONS = [
       [
         { title: "86 Instructions", url: "#" },
         { title: "Offline Mode Instructions for Qu", url: "#" },
-        { title: "HACCP, Chicken and Cooler Logs", url: "/haccp-chicken-log.pdf" },
+        {
+          title: "HACCP, Chicken and Cooler Logs",
+          url: "#",
+          gallery: [
+            { title: "HACCP & Chicken Log", url: "/haccp-chicken-log.pdf" },
+            { title: "Cooler Temp Log", url: "/cooler-temp-log.pdf" },
+          ],
+        },
         { title: "Shelf Life Chart", url: "#" },
       ],
       [

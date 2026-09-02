@@ -390,7 +390,7 @@ const POSITION_CHECKLISTS = {
     "LINEBACKER position ensures chicken is cooked to 165 degrees and logs into the Chicken Log Book.",
     "LINEBACKER position cuts proteins into consistent ½” by ½” inch cubes.",
     "LINEBACKER position keeps an eye on the HOT and COLD line to restock low items before they run out.",
-    "Assist the HOT and COLD line with Stir, Flip, Wipe during the rush times.",
+    "LINEBACKER position assists HOT and COLD position with STIR, FLIP, WIPE during down time to keep the lines clean, stocked, and looking fresh.",
   ],
   ambassador: [
     "Each guest that enters gets a cheerful “Welcome to Moe’s”.",

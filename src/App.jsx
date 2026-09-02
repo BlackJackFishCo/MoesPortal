@@ -1320,7 +1320,14 @@ const RESOURCE_LINK_SECTIONS = [
         },
         { title: "Shelf Life Chart", url: "/moes-shelf-life-chart.pdf" },
         { title: "Allergen Chart", url: "/allergen-chart.pdf" },
-        { title: "4", url: "#" },
+        {
+          title: "HACCP, Chicken and Cooler Logs",
+          url: "#",
+          gallery: [
+            { title: "HACCP & Chicken Log", url: "/haccp-chicken-log.pdf" },
+            { title: "Cooler Temp Log", url: "/cooler-temp-log.pdf" },
+          ],
+        },
       ],
       [
         { title: "Clipboard File", url: "/clipboard-file.xlsx" },
@@ -1339,14 +1346,6 @@ const RESOURCE_LINK_SECTIONS = [
         { title: "86 Instructions", url: "#" },
         { title: "Offline Mode Instructions for Qu", url: "#" },
         { title: "Gift Card Process", url: "/gift-card-process.pdf" },
-        {
-          title: "HACCP, Chicken and Cooler Logs",
-          url: "#",
-          gallery: [
-            { title: "HACCP & Chicken Log", url: "/haccp-chicken-log.pdf" },
-            { title: "Cooler Temp Log", url: "/cooler-temp-log.pdf" },
-          ],
-        },
       ],
     ],
   },

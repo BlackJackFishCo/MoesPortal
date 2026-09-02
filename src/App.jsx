@@ -1497,7 +1497,7 @@ function ResourceLinks({ setActivePdf }) {
           innerFill="#000"
           innerTextColor="#fff"
           title="This Month's Sterling: Marketing Calendar"
-          onOpen={() => setActivePdf({ title: "Current Month Offer Calendar", url: "/marketing-calendar-september-2026.pdf" })}
+          onOpen={() => setActivePdf({ title: "Current Month Offer Calendar", url: "/marketing-calendar-sept-dec-2026.pdf" })}
         />
       </div>
 

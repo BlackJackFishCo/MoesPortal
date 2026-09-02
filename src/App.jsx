@@ -403,7 +403,7 @@ const POSITION_CHECKLISTS = {
     "CATERING DRIVERS make sure they leave the store with all of the items on the pack list and on time.",
     "CATERING drivers represent Moe’s and drive safely to and from all caterings as well as keeping the catering van clean and gassed up for the next delivery.",
     "CATERING drivers set up each catering in the same order as the instore HOT and COLD line for the guest.",
-    "Takes a picture immediately after set up and post in catering group to time stamp delivery items.",
+    "CATERING drivers must take a picture immediately after catering is set up and post in the store's catering group. This time stamps the delivery setup and also gives us a record of what was delivered.",
     "Follows EZ Cater protocols for delivery.",
   ],
 };

@@ -1544,7 +1544,7 @@ function ResourceLinks({ setActivePdf }) {
             </h3>
             <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
               {section.rows.map((row, r) => (
-                <div key={r} style={{ display: "grid", gridTemplateColumns: "repeat(4, minmax(180px, 220px))", justifyContent: "start", gap: 16 }}>
+                <div key={r} className="resource-doc-grid" style={{ display: "grid", gap: 16 }}>
                   {row.map((link, i) => {
                     // Buttons with no real file yet (url still "#") get a solid
                     // "fill" so they stand out as needing a document. As soon as

@@ -1526,14 +1526,23 @@ function ResourceLinks({ setActivePdf }) {
             <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
               {section.rows.map((row, r) => (
                 <div key={r} style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(180px, 1fr))", gap: 16 }}>
-                  {row.map((link, i) => (
-                    <a key={i} href={link.url} onClick={e => { e.preventDefault(); link.gallery ? setActiveGallery(link) : setActivePdf(link); }}
-                      style={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", textAlign: "center", gap: 6, background: "#000", border: `2px solid ${section.color}`, borderRadius: 10, padding: "18px 20px", textDecoration: "none", color: "#fff", fontFamily: "Calibri, sans-serif", fontSize: 17, fontWeight: 600, cursor: "pointer" }}
-                    >
-                      <div style={{ fontSize: 17, fontWeight: 700 }}>{link.title}</div>
-                      <div style={{ fontSize: 14, color: section.color, marginTop: 4 }}>{link.gallery ? `${link.gallery.length} sheets →` : "Click to open →"}</div>
-                    </a>
-                  ))}
+                  {row.map((link, i) => {
+                    // Buttons with no real file yet (url still "#") get a solid
+                    // "fill" so they stand out as needing a document. As soon as
+                    // url is pointed at a real file above, this automatically
+                    // reverts to the normal outline look — no flag to unset.
+                    const isMissing = !link.gallery && link.url === "#";
+                    return (
+                      <a key={i} href={link.url} onClick={e => { e.preventDefault(); link.gallery ? setActiveGallery(link) : setActivePdf(link); }}
+                        style={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", textAlign: "center", gap: 6, background: isMissing ? section.color : "#000", border: `2px solid ${section.color}`, borderRadius: 10, padding: "18px 20px", textDecoration: "none", color: isMissing ? "#000" : "#fff", fontFamily: "Calibri, sans-serif", fontSize: 17, fontWeight: 600, cursor: "pointer" }}
+                      >
+                        <div style={{ fontSize: 17, fontWeight: 700 }}>{link.title}</div>
+                        <div style={{ fontSize: 14, color: isMissing ? "#000" : section.color, marginTop: 4, opacity: isMissing ? 0.7 : 1 }}>
+                          {link.gallery ? `${link.gallery.length} sheets →` : isMissing ? "Document needed" : "Click to open →"}
+                        </div>
+                      </a>
+                    );
+                  })}
                 </div>
               ))}
             </div>

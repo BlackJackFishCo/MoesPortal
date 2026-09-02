@@ -1364,6 +1364,12 @@ const RESOURCE_LINK_SECTIONS = [
         { title: "Wage Election Form", url: "/wage-payment-election-consent.pdf" },
         { title: "PAY Adjustment, REHIRE, TERM Forms", url: "/hr-master.xls" },
       ],
+      [
+        { title: "TR Background Check", url: "#" },
+        { title: "TR Manual Background Check", url: "#" },
+        { title: "3", url: "#" },
+        { title: "4", url: "#" },
+      ],
     ],
   },
   {

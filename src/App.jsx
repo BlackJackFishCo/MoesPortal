@@ -1347,7 +1347,7 @@ const RESOURCE_LINK_SECTIONS = [
         { title: "Employee Meal Policy", url: "/employee-meal-policy.pdf" },
       ],
       [
-        { title: "Appearance Standards", url: "#" },
+        { title: "Appearance Standards", url: "/moes-uniform-standards.pdf" },
         { title: "ADP Login Link", url: "/adp-registration.pdf" },
         { title: "Tip Share", url: "/sterling-tip-wage-sheet.pdf" },
         { title: "Career Progression Chart", url: "/sterling-keep-career-rolling.pdf" },

@@ -1341,7 +1341,7 @@ const RESOURCE_LINK_SECTIONS = [
     color: MOE.orange,
     rows: [
       [
-        { title: "Handbook", url: "#" },
+        { title: "Handbook", url: "/sterling-team-member-handbook.pdf" },
         { title: "Referral Bonus", url: "/sterling-referral-bonus-flyer.pdf" },
         { title: "Sterling Principles", url: "#" },
         { title: "Employee Meal Policy", url: "/employee-meal-policy.pdf" },

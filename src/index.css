@@ -74,3 +74,16 @@ iframe {
     height: clamp(96px, 22vw, 140px);
   }
 }
+
+/* Resources page document buttons - fixed 4 columns on desktop */
+.resource-doc-grid {
+  grid-template-columns: repeat(4, minmax(180px, 220px));
+  justify-content: start;
+}
+
+/* On mobile, show document buttons in 2 columns */
+@media (max-width: 640px) {
+  .resource-doc-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}

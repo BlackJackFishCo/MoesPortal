@@ -1311,6 +1311,11 @@ const RESOURCE_LINK_SECTIONS = [
       ],
       [
         { title: "Line Schematic", url: "#" },
+        { title: "Shelf Life Chart", url: "/moes-shelf-life-chart.pdf" },
+        { title: "Allergen Chart", url: "/allergen-chart.pdf" },
+        { title: "4", url: "#" },
+      ],
+      [
         { title: "Clipboard File", url: "/clipboard-file.xlsx" },
         { title: "Scheduler File", url: "https://tylerjohnson7.sharepoint.com/:x:/s/SterlingRestaurants/IQCyGS3m2z1IQ7knMvjOpV6WAb1VW8aEfT0idWpdc0w20iw?e=9PMqnc" },
         {
@@ -1321,10 +1326,12 @@ const RESOURCE_LINK_SECTIONS = [
             { title: "Orange Stickers", url: "/orange-stickers.pdf" },
           ],
         },
+        { title: "Tea Urn Parts", url: "/tea-urn-parts.pdf" },
       ],
       [
         { title: "86 Instructions", url: "#" },
         { title: "Offline Mode Instructions for Qu", url: "#" },
+        { title: "Gift Card Process", url: "/gift-card-process.pdf" },
         {
           title: "HACCP, Chicken and Cooler Logs",
           url: "#",
@@ -1333,13 +1340,6 @@ const RESOURCE_LINK_SECTIONS = [
             { title: "Cooler Temp Log", url: "/cooler-temp-log.pdf" },
           ],
         },
-        { title: "Shelf Life Chart", url: "/moes-shelf-life-chart.pdf" },
-      ],
-      [
-        { title: "Gift Card Process", url: "/gift-card-process.pdf" },
-        { title: "Allergen Chart", url: "/allergen-chart.pdf" },
-        { title: "3", url: "#" },
-        { title: "Tea Urn Parts", url: "/tea-urn-parts.pdf" },
       ],
     ],
   },

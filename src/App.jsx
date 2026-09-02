@@ -1310,7 +1310,14 @@ const RESOURCE_LINK_SECTIONS = [
         { title: "Sterling Focus List", url: "/sterling-focus.pdf" },
       ],
       [
-        { title: "Line Schematic", url: "/line-schematic.pdf" },
+        {
+          title: "Line Schematic",
+          url: "#",
+          gallery: [
+            { title: "Line Schematic", url: "/line-schematic.pdf" },
+            { title: "Salsa Bar Schematic", url: "/salsa-bar-schematic.pdf" },
+          ],
+        },
         { title: "Shelf Life Chart", url: "/moes-shelf-life-chart.pdf" },
         { title: "Allergen Chart", url: "/allergen-chart.pdf" },
         { title: "4", url: "#" },

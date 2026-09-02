@@ -387,7 +387,7 @@ const POSITION_CHECKLISTS = {
   ],
   prep: [
     "Each guest that enters gets a cheerful “Welcome to Moe’s” from the LINEBACKER position.",
-    "Cooks chicken to 165 degrees and logs into chicken log.",
+    "LINEBACKER position ensures chicken is cooked to 165 degrees and logs into the Chicken Log Book.",
     "Cuts proteins to ½” by ½” cubes.",
     "Restocks all items on HOT and COLD lines before they are empty.",
     "Assist the HOT and COLD line with Stir, Flip, Wipe during the rush times.",

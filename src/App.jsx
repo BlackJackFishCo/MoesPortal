@@ -392,13 +392,6 @@ const POSITION_CHECKLISTS = {
     "LINEBACKER position keeps an eye on the HOT and COLD line to restock low items before they run out.",
     "LINEBACKER position assists HOT and COLD position with STIR, FLIP, WIPE during down time to keep the lines clean, stocked, and looking fresh.",
   ],
-  ambassador: [
-    "Each guest that enters gets a cheerful “Welcome to Moe’s”.",
-    "Keeps salsa and beverage bars stocked and clean.",
-    "Keeps restrooms stocked and cleaned.",
-    "Cleans up spills immediately and puts out wet floor signs to eliminate possible guest accidents.",
-    "Thanks, guest, for dining with us and ask if there is anything else they need during their visit.",
-  ],
   catering: [
     "CATERING DRIVERS make sure they leave the store with all of the items on the pack list and on time.",
     "CATERING drivers represent Moe’s and drive safely to and from all caterings as well as keeping the catering van clean and gassed up for the next delivery.",
@@ -1164,7 +1157,7 @@ const POSITIONS = [
   { id: "swing",    label: "Swing",    icon: "🔄",  color: "#E8541A" },
   { id: "ring",     label: "Ring",     icon: "💵",  color: "#E8541A" },
   { id: "prep",     label: "Linebacker", icon: "🔪",  color: "#E8541A" },
-  { id: "ambassador", label: "Guest Line of Sight", icon: "🪑", color: "#E8541A" },
+  { id: "ambassador", label: "Guest Line of Sight", icon: "👀", color: "#E8541A" },
   { id: "catering", label: "Catering", icon: "🚐", color: "#E8541A" },
 ];
 
@@ -1610,11 +1603,11 @@ function PositionTracker({ user, onPositionPass, setActivePdf }) {
     }
   };
 
-  const toggleMenuComplete = () => {
-    const updated = { ...posProg, menu: !posProg.menu };
+  const toggleSingleComplete = (posId) => {
+    const updated = { ...posProg, [posId]: !posProg[posId] };
     setPosProg(updated);
     savePositionProgress(user?.id, updated);
-    if (updated.menu && onPositionPass) onPositionPass("menu");
+    if (updated[posId] && onPositionPass) onPositionPass(posId);
   };
 
   const completedCount = POSITIONS.filter(p => posProg[p.id]).length;
@@ -1804,7 +1797,7 @@ function PositionTracker({ user, onPositionPass, setActivePdf }) {
             )}
 
             {/* Checklist */}
-            {pos.id !== "menu" && (
+            {pos.id !== "menu" && pos.id !== "ambassador" && (
               <>
                 <div style={{ height: 2, background: `linear-gradient(90deg, ${pos.color}, transparent)`, borderRadius: 2, marginBottom: 20 }} />
                 <PositionChecklist
@@ -1827,9 +1820,26 @@ function PositionTracker({ user, onPositionPass, setActivePdf }) {
                   border: `1.5px solid ${MOE.teal}`,
                   borderRadius: 10, padding: "16px 20px",
                 }}>
-                  <input type="checkbox" checked={done} onChange={toggleMenuComplete} style={{ width: 18, height: 18, flexShrink: 0, cursor: "pointer" }} />
+                  <input type="checkbox" checked={done} onChange={() => toggleSingleComplete("menu")} style={{ width: 18, height: 18, flexShrink: 0, cursor: "pointer" }} />
                   <span style={{ fontSize: 15, fontWeight: done ? 700 : 500, color: "#fff", fontFamily: "Calibri, sans-serif" }}>
                     I have watched all Menu training videos and completed this section.
+                  </span>
+                </label>
+              </>
+            )}
+
+            {pos.id === "ambassador" && (
+              <>
+                <div style={{ height: 2, background: `linear-gradient(90deg, ${pos.color}, transparent)`, borderRadius: 2, marginBottom: 20 }} />
+                <label style={{
+                  display: "flex", alignItems: "center", gap: 12, cursor: "pointer",
+                  background: MOE.teal,
+                  border: `1.5px solid ${MOE.teal}`,
+                  borderRadius: 10, padding: "16px 20px",
+                }}>
+                  <input type="checkbox" checked={done} onChange={() => toggleSingleComplete("ambassador")} style={{ width: 18, height: 18, flexShrink: 0, cursor: "pointer" }} />
+                  <span style={{ fontSize: 15, fontWeight: done ? 700 : 500, color: "#fff", fontFamily: "Calibri, sans-serif" }}>
+                    I have reviewed the Guest Line of Sight guidelines and completed this section.
                   </span>
                 </label>
               </>

@@ -369,7 +369,7 @@ const POSITION_CHECKLISTS = {
     "COLD position starts by asking each guest if they would like Lettuce, Pico, and Cheese. These are the three main ingredients in all items and helps keep the line moving quickly.",
     "COLD position uses the ORANGE stickers to label all upcharges for Queso and Guac.",
     "COLD position puts Quesadillas, Stacks, Dippers on the grill or press.",
-    "Practice Stir, Flip, Wipe during down time to keep the COLD line clean, stocked, and looking fresh.",
+    "COLD position practices STIR, FLIP, WIPE during all down times to keep the COLD line clean, stocked, and looking fresh.",
   ],
   swing: [
     "Each guest that enters gets a cheerful “Welcome to Moe’s” from the SWING position.",

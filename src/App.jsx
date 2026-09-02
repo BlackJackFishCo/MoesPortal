@@ -1420,7 +1420,7 @@ const RESOURCE_LINK_SECTIONS = [
           url: "#",
           gallery: [
             { title: "Claims Packet", url: "/sterling-claims-packet.pdf" },
-            { title: "Sterling North Claims Packet (NY/NJ Only)", url: "/sterling-north-claims-packet-ny-nj.pdf" },
+            { title: "Sterling Claims Packet (NY/NJ Only)", url: "/sterling-north-claims-packet-ny-nj.pdf" },
           ],
         },
         { title: "Workers Comp Reporting", url: "/workers-comp-claim-reporting.pdf" },

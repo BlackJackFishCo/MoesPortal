@@ -360,7 +360,7 @@ const POSITION_CHECKLISTS = {
   hot: [
     "Each guest that enters gets a cheerful “Welcome to Moe’s” from the HOT position.",
     "HOT position uses ORANGE stickers to correctly label all proteins and upcharges. Upcharges include White Meat Chicken, Steak, LTO Proteins, Queso, Bacon, and Guacamole.",
-    "HOT person offers our Moe Value Meal to everyone.",
+    "HOT position is knowledgeable of our menu and suggestively sells the Moe Value Meal.",
     "HOT person should be able to pass a HOT catch weight test for all proteins.",
     "Practice Stir, Flip, Wipe during down time to keep the hot line clean, stocked, and looking fresh.",
   ],

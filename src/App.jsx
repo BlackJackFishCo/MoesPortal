@@ -1366,7 +1366,7 @@ const RESOURCE_LINK_SECTIONS = [
       ],
       [
         { title: "TR Background Check", url: "#" },
-        { title: "TR Manual Background Check", url: "#" },
+        { title: "TR Manual Background Check", url: "/tr-manual-background-check.pdf" },
         { title: "3", url: "#" },
         { title: "4", url: "#" },
       ],

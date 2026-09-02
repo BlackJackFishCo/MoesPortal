@@ -1341,7 +1341,7 @@ const RESOURCE_LINK_SECTIONS = [
       ],
       [
         { title: "Appearance Standards", url: "#" },
-        { title: "ADP Login Link", url: "#" },
+        { title: "ADP Login Link", url: "/adp-registration.pdf" },
         { title: "Tip Share", url: "#" },
         { title: "Career Progression Chart", url: "#" },
       ],

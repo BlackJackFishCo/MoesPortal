@@ -55,3 +55,22 @@ iframe {
   justify-content: space-evenly;
   gap: 12px;
 }
+
+.position-circle {
+  width: clamp(72px, 14vw, 124px);
+  height: clamp(72px, 14vw, 124px);
+}
+
+/* On mobile, show exactly 2 training tiles per row with larger circles */
+@media (max-width: 640px) {
+  .position-row {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    justify-items: center;
+  }
+
+  .position-circle {
+    width: clamp(96px, 22vw, 140px);
+    height: clamp(96px, 22vw, 140px);
+  }
+}

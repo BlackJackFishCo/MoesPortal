@@ -1637,9 +1637,10 @@ function PositionTracker({ user, onPositionPass, setActivePdf }) {
                 const done = !!posProg[pos.id];
                 return (
                   <div key={pos.id} onClick={() => setActivePos(activePos === pos.id ? null : pos.id)}
+                    className="position-tile"
                     style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 6, cursor: "pointer", minWidth: 0 }}>
-                    <div style={{
-                      width: "clamp(72px, 14vw, 124px)", height: "clamp(72px, 14vw, 124px)", borderRadius: "50%",
+                    <div className="position-circle" style={{
+                      borderRadius: "50%",
                       background: done ? `${pos.color}22` : "#111",
                       border: `4px solid ${done ? pos.color : activePos === pos.id ? "#888" : "#333"}`,
                       display: "flex", alignItems: "center", justifyContent: "center",

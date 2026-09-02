@@ -374,7 +374,7 @@ const POSITION_CHECKLISTS = {
   swing: [
     "Each guest that enters gets a cheerful “Welcome to Moe’s” from the SWING position.",
     "SWING position is always upselling Queso. You can get a Side = 3.5oz, Cup = 6oz, or Bowl = 12oz.",
-    "Swing position asks every guest if they would like chips. Dine in orders get 1 scoop, Togo orders get two scoops per entree. Chips are always free and we will give a refill happily.",
+    "SWING position asks every guest if they would like chips. Dine in orders get 1 scoop, Togo orders get two scoops per entree. Chips are always free and we will give a refill happily.",
     "Double check all OLO/Delivery orders for accuracy.",
     "Bag each menu item separately togo.",
   ],

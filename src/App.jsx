@@ -1111,10 +1111,13 @@ function ProgressBar({ progress, activePage, onNavigate }) {
                   background: MOE.orange,
                   border: `3px solid ${MOE.orange}`,
                   display: "flex", alignItems: "center", justifyContent: "center",
-                  fontSize: "clamp(12px, 3vw, 18px)", color: "#fff",
+                  fontSize: "clamp(11px, 2.5vw, 16px)", fontWeight: 800, color: "#fff",
+                  fontFamily: "Calibri, sans-serif",
                   boxShadow: isActive ? `0 0 14px ${MOE.orange}88` : "none",
                   transition: "all 0.3s",
-                }} />
+                }}>
+                  ✓
+                </div>
                 <div style={{
                   fontSize: "clamp(9px, 2.5vw, 16px)", fontWeight: isActive ? 700 : 500,
                   color: isActive ? MOE.orange : "#888",

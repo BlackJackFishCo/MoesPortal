@@ -1326,7 +1326,7 @@ const RESOURCE_LINK_SECTIONS = [
             { title: "Cooler Temp Log", url: "/cooler-temp-log.pdf" },
           ],
         },
-        { title: "Shelf Life Chart", url: "#" },
+        { title: "Shelf Life Chart", url: "/moes-shelf-life-chart.pdf" },
       ],
       [
         { title: "Gift Card Process", url: "/gift-card-process.pdf" },

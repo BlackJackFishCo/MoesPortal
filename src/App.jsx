@@ -1344,7 +1344,7 @@ const RESOURCE_LINK_SECTIONS = [
         { title: "Handbook", url: "#" },
         { title: "Referral Bonus", url: "#" },
         { title: "Sterling Principles", url: "#" },
-        { title: "Employee Meal Policy", url: "#" },
+        { title: "Employee Meal Policy", url: "/employee-meal-policy.pdf" },
       ],
       [
         { title: "Appearance Standards", url: "#" },

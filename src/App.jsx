@@ -1343,8 +1343,6 @@ const RESOURCE_LINK_SECTIONS = [
         { title: "Tea Urn Parts", url: "/tea-urn-parts.pdf" },
       ],
       [
-        { title: "86 Instructions", url: "#" },
-        { title: "Offline Mode Instructions for Qu", url: "#" },
         { title: "Gift Card Process", url: "/gift-card-process.pdf" },
       ],
     ],
@@ -1380,8 +1378,6 @@ const RESOURCE_LINK_SECTIONS = [
       [
         { title: "TR Background Check", url: "/tr-background-check.pdf" },
         { title: "TR Manual Background Check", url: "/tr-manual-background-check.pdf" },
-        { title: "3", url: "#" },
-        { title: "4", url: "#" },
       ],
     ],
   },
@@ -1404,8 +1400,6 @@ const RESOURCE_LINK_SECTIONS = [
           ],
         },
         { title: "Holiday Hour Notices", url: "#" },
-        { title: "3", url: "#" },
-        { title: "4", url: "#" },
       ],
     ],
   },

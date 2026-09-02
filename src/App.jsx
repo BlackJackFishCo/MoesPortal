@@ -1365,7 +1365,7 @@ const RESOURCE_LINK_SECTIONS = [
         { title: "PAY Adjustment, REHIRE, TERM Forms", url: "/hr-master.xls" },
       ],
       [
-        { title: "TR Background Check", url: "#" },
+        { title: "TR Background Check", url: "/tr-background-check.pdf" },
         { title: "TR Manual Background Check", url: "/tr-manual-background-check.pdf" },
         { title: "3", url: "#" },
         { title: "4", url: "#" },

@@ -1342,15 +1342,15 @@ const RESOURCE_LINK_SECTIONS = [
     rows: [
       [
         { title: "Handbook", url: "#" },
-        { title: "Referral Bonus", url: "#" },
+        { title: "Referral Bonus", url: "/sterling-referral-bonus-flyer.pdf" },
         { title: "Sterling Principles", url: "#" },
         { title: "Employee Meal Policy", url: "/employee-meal-policy.pdf" },
       ],
       [
         { title: "Appearance Standards", url: "#" },
         { title: "ADP Login Link", url: "/adp-registration.pdf" },
-        { title: "Tip Share", url: "#" },
-        { title: "Career Progression Chart", url: "#" },
+        { title: "Tip Share", url: "/sterling-tip-wage-sheet.pdf" },
+        { title: "Career Progression Chart", url: "/sterling-keep-career-rolling.pdf" },
       ],
     ],
   },

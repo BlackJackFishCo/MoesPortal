@@ -383,7 +383,7 @@ const POSITION_CHECKLISTS = {
     "The RING person is responsible for asking every guest for their phone number to be entered into the text database for exclusive discounts and offers.",
     "RING position correctly charges each guest including all ORANGE sticker add ons and upcharges.",
     "RING position ensures OLOs / 3rd party orders go to the correct people by checking names on phones.",
-    "Keep RING area clean and clutter free.",
+    "RING position is responsible for keeping the POS area neat and clutter free.",
   ],
   prep: [
     "Each guest that enters gets a cheerful “Welcome to Moe’s” from the LINEBACKER position.",

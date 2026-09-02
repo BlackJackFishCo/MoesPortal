@@ -381,7 +381,7 @@ const POSITION_CHECKLISTS = {
   ring: [
     "Each guest that enters gets a cheerful “Welcome to Moe’s” from the RING position.",
     "The RING person is responsible for asking every guest for their phone number to be entered into the text database for exclusive discounts and offers.",
-    "Correctly charge for all items including orange sticker upcharges.",
+    "RING position correctly charges each guest including all ORANGE sticker add ons and upcharges.",
     "Ensure that the correct OLO and Delivery orders go to the correct people.",
     "Keep RING area clean and clutter free.",
   ],

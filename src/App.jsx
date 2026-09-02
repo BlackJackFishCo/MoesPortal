@@ -1415,7 +1415,14 @@ const RESOURCE_LINK_SECTIONS = [
     color: "#E74C3C",
     rows: [
       [
-        { title: "Accident & Injury Claim Form", url: "/sterling-claims-packet.pdf" },
+        {
+          title: "Accident & Injury Claim Form",
+          url: "#",
+          gallery: [
+            { title: "Claims Packet", url: "/sterling-claims-packet.pdf" },
+            { title: "Sterling North Claims Packet (NY/NJ Only)", url: "/sterling-north-claims-packet-ny-nj.pdf" },
+          ],
+        },
         { title: "Workers Comp Reporting", url: "/workers-comp-claim-reporting.pdf" },
         { title: "Workers Comp Form", url: "/workers-comp-form.pdf" },
         { title: "Workers Comp Locations", url: "#" },

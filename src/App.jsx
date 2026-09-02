@@ -400,7 +400,7 @@ const POSITION_CHECKLISTS = {
     "Thanks, guest, for dining with us and ask if there is anything else they need during their visit.",
   ],
   catering: [
-    "Ensure that the driver leaves the store with all of the items on the catering packlist.",
+    "CATERING DRIVERS make sure they leave the store with all of the items on the pack list and on time.",
     "Safely drives the Moe’s catering van and maintains the van cleanliness.",
     "Set up each catering order just like the HOT and COLD line in the store for the guest.",
     "Takes a picture immediately after set up and post in catering group to time stamp delivery items.",

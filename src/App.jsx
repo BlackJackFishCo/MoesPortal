@@ -1434,10 +1434,7 @@ const RESOURCE_LINK_SECTIONS = [
     color: "#3B82F6",
     rows: [
       [
-        { title: "1", url: "#" },
-        { title: "2", url: "#" },
-        { title: "3", url: "#" },
-        { title: "4", url: "#" },
+        { title: "Sterling TIP Worksheet", url: "/sterling-tip-worksheet.xlsb" },
       ],
     ],
   },

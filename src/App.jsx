@@ -1391,6 +1391,8 @@ const RESOURCE_LINK_SECTIONS = [
           ],
         },
         { title: "Holiday Hour Notices", url: "#" },
+        { title: "3", url: "#" },
+        { title: "4", url: "#" },
       ],
     ],
   },
@@ -1413,6 +1415,8 @@ const RESOURCE_LINK_SECTIONS = [
       [
         { title: "1", url: "#" },
         { title: "2", url: "#" },
+        { title: "3", url: "#" },
+        { title: "4", url: "#" },
       ],
     ],
   },

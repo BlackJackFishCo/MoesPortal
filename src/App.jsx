@@ -1350,7 +1350,7 @@ const RESOURCE_LINK_SECTIONS = [
       [
         { title: "Handbook", url: "/sterling-team-member-handbook.pdf" },
         { title: "Referral Bonus", url: "/sterling-referral-bonus-flyer.pdf" },
-        { title: "Sterling Principles", url: "#" },
+        { title: "Sterling Principles", url: "/sterling-principles.pdf" },
         { title: "Employee Meal Policy", url: "/employee-meal-policy.pdf" },
       ],
       [

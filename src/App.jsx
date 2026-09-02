@@ -1418,7 +1418,6 @@ const RESOURCE_LINK_SECTIONS = [
         },
         { title: "Workers Comp Reporting", url: "/workers-comp-claim-reporting.pdf" },
         { title: "Workers Comp Form", url: "/workers-comp-form.pdf" },
-        { title: "Workers Comp Locations", url: "#" },
       ],
     ],
   },
@@ -1549,7 +1548,7 @@ function ResourceLinks({ setActivePdf }) {
             </h3>
             <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
               {section.rows.map((row, r) => (
-                <div key={r} style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(180px, 1fr))", gap: 16 }}>
+                <div key={r} style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(180px, 220px))", gap: 16 }}>
                   {row.map((link, i) => {
                     // Buttons with no real file yet (url still "#") get a solid
                     // "fill" so they stand out as needing a document. As soon as

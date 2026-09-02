@@ -1321,6 +1321,12 @@ const RESOURCE_LINK_SECTIONS = [
         { title: "HACCP, Chicken and Cooler Logs", url: "/haccp-chicken-log.pdf" },
         { title: "Shelf Life Chart", url: "#" },
       ],
+      [
+        { title: "Gift Card Process", url: "/gift-card-process.pdf" },
+        { title: "2", url: "#" },
+        { title: "3", url: "#" },
+        { title: "4", url: "#" },
+      ],
     ],
   },
   {

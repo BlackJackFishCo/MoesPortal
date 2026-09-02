@@ -1337,7 +1337,7 @@ const RESOURCE_LINK_SECTIONS = [
       ],
       [
         { title: "Gift Card Process", url: "/gift-card-process.pdf" },
-        { title: "2", url: "#" },
+        { title: "Allergen Chart", url: "/allergen-chart.pdf" },
         { title: "3", url: "#" },
         { title: "Tea Urn Parts", url: "/tea-urn-parts.pdf" },
       ],

@@ -87,3 +87,16 @@ iframe {
     grid-template-columns: repeat(2, 1fr);
   }
 }
+
+/* Wrong vs. Right guest area visuals - fixed 2 columns so photos stay full size and stack (2x2, etc.) instead of shrinking to fit extra photos */
+.wrong-right-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+
+@media (max-width: 640px) {
+  .wrong-right-grid {
+    grid-template-columns: 1fr;
+  }
+}

@@ -1249,7 +1249,7 @@ const AMBASSADOR_VISUAL_CHECKS = [
     wrongText: "The sneeze guards are smudged and splattered, the line is cluttered with extra pans and tools, and Stir, Flip, Wipe isn't being practiced during down time.",
     rightText: "The sneeze guards are spotless, the line is free of clutter and not over stocked with paper products or excessive tortillas.",
     rightImg: "/down-the-line-right.jpg",
-    extraRightImgs: ["/down-the-line-right-2.jpg"],
+    extraRightImgs: [{ img: "/down-the-line-right-2.jpg", text: "The line is stocked and clean. Team is actively practicing STIR, FLIP, WIPE to keep food fresh and hot!" }],
   },
   {
     heading: "Register Area",
@@ -1755,12 +1755,19 @@ function PositionTracker({ user, onPositionPass, setActivePdf }) {
                           <p style={{ margin: "10px 0 0", fontSize: 13, color: "#ccc", lineHeight: 1.5, fontFamily: "Calibri, sans-serif" }}>{section.rightText}</p>
                         )}
                       </div>
-                      {section.extraRightImgs.map((img, j) => (
-                        <div key={j}>
-                          <div style={{ fontSize: 13, fontWeight: 700, color: MOE.teal, textTransform: "uppercase", letterSpacing: 1, marginBottom: 6, fontFamily: "Calibri, sans-serif" }}>✓ Right</div>
-                          <img src={img} alt={`${section.heading} — right`} onClick={() => setLightboxImg(img)} style={{ width: "100%", height: 180, objectFit: "cover", borderRadius: 10, border: `2px solid ${MOE.teal}`, display: "block", cursor: "zoom-in" }} />
-                        </div>
-                      ))}
+                      {section.extraRightImgs.map((entry, j) => {
+                        const img = typeof entry === "string" ? entry : entry.img;
+                        const text = typeof entry === "string" ? null : entry.text;
+                        return (
+                          <div key={j}>
+                            <div style={{ fontSize: 13, fontWeight: 700, color: MOE.teal, textTransform: "uppercase", letterSpacing: 1, marginBottom: 6, fontFamily: "Calibri, sans-serif" }}>✓ Right</div>
+                            <img src={img} alt={`${section.heading} — right`} onClick={() => setLightboxImg(img)} style={{ width: "100%", height: 180, objectFit: "cover", borderRadius: 10, border: `2px solid ${MOE.teal}`, display: "block", cursor: "zoom-in" }} />
+                            {text && (
+                              <p style={{ margin: "10px 0 0", fontSize: 13, color: "#ccc", lineHeight: 1.5, fontFamily: "Calibri, sans-serif" }}>{text}</p>
+                            )}
+                          </div>
+                        );
+                      })}
                     </div>
                   </div>
                 ))}

@@ -1266,9 +1266,9 @@ const AMBASSADOR_VISUAL_CHECKS = [
   {
     heading: "Beverage Bar",
     wrongText: "Utensils are almost out and storage crates are dirty and full of crumbs.",
-    rightText: "The beverage bar is free of spills, the bubblers and teas are fully stocked, the Icee machine is stocked, all BIBs are working, the soda drain isn't overflowing with ice, the dispensers are wiped down, and all paper products (lids, straws, forks, knives, napkins, etc.) are stocked.",
     wrongImg: "/beverage-bar-wrong.jpg", rightImg: "/beverage-bar-right.jpg",
     extraRightImgs: ["/beverage-bar-right-2.jpg", "/beverage-bar-right-3.jpg"],
+    extraRightText: "The beverage bar is free of spills, the bubblers and teas are fully stocked, the Icee machine is stocked, all BIBs are working, the soda drain isn't overflowing with ice, the dispensers are wiped down, and all paper products (lids, straws, forks, knives, napkins, etc.) are stocked.",
   },
   {
     heading: "Trash Cans",
@@ -1294,7 +1294,7 @@ const AMBASSADOR_VISUAL_CHECKS = [
     rightText: "All patio tables are wiped down and clean, the floors are swept, chairs are pushed in with tables aligned neatly, and the umbrellas are up.",
     wrongImg: "/patio-wrong.jpg", rightImg: "/patio-right.jpg",
   },
-].map(section => ({ wrongImg: "", rightImg: "", extraRightImgs: [], ...section }));
+].map(section => ({ wrongImg: "", rightImg: "", extraRightImgs: [], extraRightText: "", ...section }));
 
 // ─── Current Sterling Focus (update monthly) ──────────────────────────────────
 // Drives both the "Current Sterling Focus" resource tile title and the
@@ -1768,6 +1768,9 @@ function PositionTracker({ user, onPositionPass, setActivePdf }) {
                           </div>
                         );
                       })}
+                      {section.extraRightText && (
+                        <p style={{ gridColumn: "1 / -1", margin: 0, fontSize: 13, color: "#ccc", lineHeight: 1.5, fontFamily: "Calibri, sans-serif" }}>{section.extraRightText}</p>
+                      )}
                     </div>
                   </div>
                 ))}

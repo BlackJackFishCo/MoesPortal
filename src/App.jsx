@@ -1253,6 +1253,7 @@ const AMBASSADOR_VISUAL_CHECKS = [
     heading: "Register Area",
     wrongText: "The register area is cluttered with extra cups, bags, and supplies piled up, and it's overstocked well beyond what's needed for the shift.",
     rightText: "The register area is clutter-free and stocked only with what's needed for the shift, keeping the space organized and easy for the team to work in.",
+    wrongImg: "/register-area-wrong.jpg", rightImg: "/register-area-right.jpg",
   },
   {
     heading: "Salsa Bar",

@@ -1266,6 +1266,7 @@ const AMBASSADOR_VISUAL_CHECKS = [
     wrongText: "The beverage bar has spills that haven't been cleaned up, the bubblers or teas are running low or empty, the Icee machine is out, a BIB isn't working, ice is overflowing in the soda drain, the dispensers are sticky, and paper products like lids, straws, or napkins are missing.",
     rightText: "The beverage bar is free of spills, the bubblers and teas are fully stocked, the Icee machine is stocked, all BIBs are working, the soda drain isn't overflowing with ice, the dispensers are wiped down, and all paper products (lids, straws, forks, knives, napkins, etc.) are stocked.",
     wrongImg: "/beverage-bar-wrong.jpg", rightImg: "/beverage-bar-right.jpg",
+    extraRightImgs: ["/beverage-bar-right-2.jpg", "/beverage-bar-right-3.jpg"],
   },
   {
     heading: "Trash Cans",
@@ -1291,7 +1292,7 @@ const AMBASSADOR_VISUAL_CHECKS = [
     rightText: "All patio tables are wiped down and clean, the floors are swept, chairs are pushed in with tables aligned neatly, and the umbrellas are up.",
     wrongImg: "/patio-wrong.jpg", rightImg: "/patio-right.jpg",
   },
-].map(section => ({ wrongImg: "", rightImg: "", ...section }));
+].map(section => ({ wrongImg: "", rightImg: "", extraRightImgs: [], ...section }));
 
 // ─── Current Sterling Focus (update monthly) ──────────────────────────────────
 // Drives both the "Current Sterling Focus" resource tile title and the
@@ -1756,6 +1757,12 @@ function PositionTracker({ user, onPositionPass, setActivePdf }) {
                           <p style={{ margin: "10px 0 0", fontSize: 13, color: "#ccc", lineHeight: 1.5, fontFamily: "Calibri, sans-serif" }}>{section.rightText}</p>
                         )}
                       </div>
+                      {section.extraRightImgs.map((img, j) => (
+                        <div key={j}>
+                          <div style={{ fontSize: 13, fontWeight: 700, color: MOE.teal, textTransform: "uppercase", letterSpacing: 1, marginBottom: 6, fontFamily: "Calibri, sans-serif" }}>✓ Right</div>
+                          <img src={img} alt={`${section.heading} — right`} style={{ width: "100%", height: 180, objectFit: "cover", borderRadius: 10, border: `2px solid ${MOE.teal}`, display: "block" }} />
+                        </div>
+                      ))}
                     </div>
                   </div>
                 ))}

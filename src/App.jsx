@@ -1266,6 +1266,7 @@ const AMBASSADOR_VISUAL_CHECKS = [
   {
     heading: "Beverage Bar",
     wrongText: "Utensils are almost out and storage crates are dirty and full of crumbs.",
+    rightText: "Utensils stocked and storage crates are clean and labeled.",
     wrongImg: "/beverage-bar-wrong.jpg", rightImg: "/beverage-bar-right.jpg",
     extraRightImgs: ["/beverage-bar-right-2.jpg", "/beverage-bar-right-3.jpg"],
     extraRightText: "The beverage bar is free of spills, the bubblers and teas are fully stocked, the Icee machine is stocked, all BIBs are working, the soda drain isn't overflowing with ice, the dispensers are wiped down, and all paper products (lids, straws, forks, knives, napkins, etc.) are stocked.",

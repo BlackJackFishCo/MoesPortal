@@ -1236,6 +1236,7 @@ const AMBASSADOR_VISUAL_CHECKS = [
     heading: "Parking Lot & Exterior",
     wrongText: "Trash is scattered across the parking lot, sidewalks, or entrance, the marketing signs are crooked or full of bubbles, the exterior windows and sills are dirty, or the exterior sign isn't lit correctly at night. If any of this is wrong, correct what you can or let a manager know right away so we can get it fixed.",
     rightText: "Each employee entering the building checks for trash on the way in to make sure the sidewalks and entrance look clean. The marketing signs are straight and not full of bubbles, the exterior windows and sills are clean, and at night the exterior sign is lit correctly — this is our first impression from the guest!",
+    wrongImg: "/parking-lot-wrong.jpg", rightImg: "/parking-lot-right.jpg",
   },
   {
     heading: "Front Door",

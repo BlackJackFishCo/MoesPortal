@@ -1282,6 +1282,7 @@ const AMBASSADOR_VISUAL_CHECKS = [
     heading: "Restrooms",
     wrongText: "The restrooms are dirty and out of paper products like toilet paper, paper towels, or soap, the trash is overflowing, and a toilet is unflushed or not working properly.",
     rightText: "The restrooms are clean and fully stocked with paper products (toilet paper, paper towels, and soap), the trash is not overflowing, and the toilets are flushed and in working order.",
+    wrongImg: "/restrooms-wrong.jpg", rightImg: "/restrooms-right.jpg",
   },
   {
     heading: "Patio",

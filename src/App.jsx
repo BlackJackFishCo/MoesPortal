@@ -1259,6 +1259,7 @@ const AMBASSADOR_VISUAL_CHECKS = [
     heading: "Salsa Bar",
     wrongText: "The sneeze guard is dirty, salsa spills are left uncleaned, the bar is running low, spoodles are crusted with old salsa, and souffle cups or lids are out of stock.",
     rightText: "The sneeze guard is clean, the bar is free of spills and fully stocked, the spoodles are clean, and souffle cups and lids are stocked and ready for guests.",
+    wrongImg: "/salsa-bar-wrong.jpg", rightImg: "/salsa-bar-right.jpg",
   },
   {
     heading: "Beverage Bar",

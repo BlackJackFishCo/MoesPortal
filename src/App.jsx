@@ -1599,6 +1599,7 @@ function PositionTracker({ user, onPositionPass, setActivePdf }) {
   const [posProg, setPosProg] = useState(() => getPositionProgress(user?.id));
   const [checklistProg, setChecklistProg] = useState(() => getChecklistProgress(user?.id));
   const [activePos, setActivePos] = useState(null);
+  const [lightboxImg, setLightboxImg] = useState(null);
 
   const toggleChecklistItem = (posId, i) => {
     const key = `${posId}-${i}`;
@@ -1734,7 +1735,7 @@ function PositionTracker({ user, onPositionPass, setActivePdf }) {
                       {section.wrongImg && (
                         <div>
                           <div style={{ fontSize: 13, fontWeight: 700, color: "#D9342B", textTransform: "uppercase", letterSpacing: 1, marginBottom: 6, fontFamily: "Calibri, sans-serif" }}>✕ Wrong</div>
-                          <img src={section.wrongImg} alt={`${section.heading} — wrong`} style={{ width: "100%", height: 180, objectFit: "cover", borderRadius: 10, border: "2px solid #D9342B", display: "block" }} />
+                          <img src={section.wrongImg} alt={`${section.heading} — wrong`} onClick={() => setLightboxImg(section.wrongImg)} style={{ width: "100%", height: 180, objectFit: "cover", borderRadius: 10, border: "2px solid #D9342B", display: "block", cursor: "zoom-in" }} />
                           {section.wrongText && (
                             <p style={{ margin: "10px 0 0", fontSize: 13, color: "#ccc", lineHeight: 1.5, fontFamily: "Calibri, sans-serif" }}>{section.wrongText}</p>
                           )}
@@ -1743,7 +1744,7 @@ function PositionTracker({ user, onPositionPass, setActivePdf }) {
                       <div>
                         <div style={{ fontSize: 13, fontWeight: 700, color: MOE.teal, textTransform: "uppercase", letterSpacing: 1, marginBottom: 6, fontFamily: "Calibri, sans-serif" }}>✓ Right</div>
                         {section.rightImg ? (
-                          <img src={section.rightImg} alt={`${section.heading} — right`} style={{ width: "100%", height: 180, objectFit: "cover", borderRadius: 10, border: `2px solid ${MOE.teal}`, display: "block" }} />
+                          <img src={section.rightImg} alt={`${section.heading} — right`} onClick={() => setLightboxImg(section.rightImg)} style={{ width: "100%", height: 180, objectFit: "cover", borderRadius: 10, border: `2px solid ${MOE.teal}`, display: "block", cursor: "zoom-in" }} />
                         ) : (
                           <div style={{ height: 180, background: "#000", border: `2px dashed ${MOE.teal}`, borderRadius: 10, display: "flex", alignItems: "center", justifyContent: "center", flexDirection: "column", gap: 6, color: "#666", fontFamily: "Calibri, sans-serif" }}>
                             <div style={{ fontSize: 28 }}>📷</div>
@@ -1757,12 +1758,28 @@ function PositionTracker({ user, onPositionPass, setActivePdf }) {
                       {section.extraRightImgs.map((img, j) => (
                         <div key={j}>
                           <div style={{ fontSize: 13, fontWeight: 700, color: MOE.teal, textTransform: "uppercase", letterSpacing: 1, marginBottom: 6, fontFamily: "Calibri, sans-serif" }}>✓ Right</div>
-                          <img src={img} alt={`${section.heading} — right`} style={{ width: "100%", height: 180, objectFit: "cover", borderRadius: 10, border: `2px solid ${MOE.teal}`, display: "block" }} />
+                          <img src={img} alt={`${section.heading} — right`} onClick={() => setLightboxImg(img)} style={{ width: "100%", height: 180, objectFit: "cover", borderRadius: 10, border: `2px solid ${MOE.teal}`, display: "block", cursor: "zoom-in" }} />
                         </div>
                       ))}
                     </div>
                   </div>
                 ))}
+              </div>
+            )}
+
+            {/* Enlarged photo lightbox (Guest Line of Sight) */}
+            {lightboxImg && (
+              <div
+                onClick={() => setLightboxImg(null)}
+                style={{ position: "fixed", inset: 0, background: "rgba(0,0,0,0.9)", zIndex: 2000, display: "flex", alignItems: "center", justifyContent: "center", padding: 24, cursor: "zoom-out" }}
+              >
+                <button
+                  onClick={() => setLightboxImg(null)}
+                  style={{ position: "absolute", top: 20, right: 20, background: "rgba(255,255,255,0.15)", color: "#fff", border: "none", borderRadius: 8, padding: "10px 16px", fontSize: 16, cursor: "pointer", fontFamily: "Calibri, sans-serif" }}
+                >
+                  ✕ Close
+                </button>
+                <img src={lightboxImg} alt="Enlarged" onClick={e => e.stopPropagation()} style={{ maxWidth: "100%", maxHeight: "90vh", objectFit: "contain", borderRadius: 10, cursor: "default" }} />
               </div>
             )}
 

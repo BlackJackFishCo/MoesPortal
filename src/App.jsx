@@ -1287,6 +1287,7 @@ const AMBASSADOR_VISUAL_CHECKS = [
     heading: "Patio",
     wrongText: "Patio tables are left dirty, the floor is littered with trash or debris, chairs are scattered with tables misaligned, and the umbrellas are left down.",
     rightText: "All patio tables are wiped down and clean, the floors are swept, chairs are pushed in with tables aligned neatly, and the umbrellas are up.",
+    wrongImg: "/patio-wrong.jpg", rightImg: "/patio-right.jpg",
   },
 ].map(section => ({ wrongImg: "", rightImg: "", ...section }));
 

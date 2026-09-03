@@ -1730,21 +1730,16 @@ function PositionTracker({ user, onPositionPass, setActivePdf }) {
                     <div style={{ fontSize: 15, fontWeight: 700, color: "#fff", fontFamily: "Calibri, sans-serif", marginBottom: 12 }}>
                       {i + 1}. {section.heading}
                     </div>
-                    <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))", gap: 16 }}>
-                      <div>
-                        <div style={{ fontSize: 13, fontWeight: 700, color: "#D9342B", textTransform: "uppercase", letterSpacing: 1, marginBottom: 6, fontFamily: "Calibri, sans-serif" }}>✕ Wrong</div>
-                        {section.wrongImg ? (
+                    <div className="wrong-right-grid">
+                      {section.wrongImg && (
+                        <div>
+                          <div style={{ fontSize: 13, fontWeight: 700, color: "#D9342B", textTransform: "uppercase", letterSpacing: 1, marginBottom: 6, fontFamily: "Calibri, sans-serif" }}>✕ Wrong</div>
                           <img src={section.wrongImg} alt={`${section.heading} — wrong`} style={{ width: "100%", height: 180, objectFit: "cover", borderRadius: 10, border: "2px solid #D9342B", display: "block" }} />
-                        ) : (
-                          <div style={{ height: 180, background: "#000", border: "2px dashed #D9342B", borderRadius: 10, display: "flex", alignItems: "center", justifyContent: "center", flexDirection: "column", gap: 6, color: "#666", fontFamily: "Calibri, sans-serif" }}>
-                            <div style={{ fontSize: 28 }}>📷</div>
-                            <div style={{ fontSize: 13 }}>Photo placeholder</div>
-                          </div>
-                        )}
-                        {section.wrongText && (
-                          <p style={{ margin: "10px 0 0", fontSize: 13, color: "#ccc", lineHeight: 1.5, fontFamily: "Calibri, sans-serif" }}>{section.wrongText}</p>
-                        )}
-                      </div>
+                          {section.wrongText && (
+                            <p style={{ margin: "10px 0 0", fontSize: 13, color: "#ccc", lineHeight: 1.5, fontFamily: "Calibri, sans-serif" }}>{section.wrongText}</p>
+                          )}
+                        </div>
+                      )}
                       <div>
                         <div style={{ fontSize: 13, fontWeight: 700, color: MOE.teal, textTransform: "uppercase", letterSpacing: 1, marginBottom: 6, fontFamily: "Calibri, sans-serif" }}>✓ Right</div>
                         {section.rightImg ? (

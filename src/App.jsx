@@ -1240,7 +1240,7 @@ const AMBASSADOR_VISUAL_CHECKS = [
   },
   {
     heading: "Front Door",
-    wrongText: "The door glass is smudged with fingerprints and dirt, and the floor mats are stained, worn, or covered in mud and debris tracked in from outside.",
+    wrongText: "The door glass is smudged with fingerprints and the floor mats have dirt and debris tracked in from outside.",
     rightText: "The door glass is streak-free and clear, and the floor mats are clean and laying flat, giving guests a bright, welcoming entrance.",
     wrongImg: "/front-door-wrong.jpg", rightImg: "/front-door-right.jpg",
   },

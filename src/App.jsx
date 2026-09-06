@@ -1287,6 +1287,10 @@ const AMBASSADOR_VISUAL_CHECKS = [
     wrongText: "Tables are left dirty with crumbs or spills, the floors haven't been swept, and chairs are pulled out with tables sitting crooked and unaligned.",
     rightText: "All tables are wiped down and clean, the floors are swept, and the chairs are pushed in with tables aligned neatly for a tidy dining room.",
     wrongImg: "/dining-room-wrong.jpg", rightImg: "/dining-room-right.jpg",
+    extraImgs: [
+      { img: "/dining-room-wrong-2.jpg", wrong: true },
+      { img: "/dining-room-right-2.jpg", wrong: false },
+    ],
   },
   {
     heading: "Restrooms",

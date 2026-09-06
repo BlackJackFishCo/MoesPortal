@@ -10,6 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: write
+      actions: write
     steps:
       - uses: actions/checkout@v4
         with:
@@ -23,3 +24,12 @@ jobs:
           git checkout main
           git merge --no-ff ${{ github.ref_name }} -m "Auto-merge ${{ github.ref_name }} into main"
           git push origin main
+
+      # A push made with the built-in GITHUB_TOKEN doesn't trigger other
+      # workflows' `on: push` events (GitHub's loop-prevention rule), so the
+      # Pages deploy workflow would otherwise never run after this merge.
+      # Kick it off explicitly instead.
+      - name: Trigger Pages deploy
+        run: gh workflow run deploy.yml --ref main
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

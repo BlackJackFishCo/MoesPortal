@@ -1249,7 +1249,10 @@ const AMBASSADOR_VISUAL_CHECKS = [
     wrongText: "The sneeze guards are smudged and splattered, the line is cluttered with extra pans and tools, and Stir, Flip, Wipe isn't being practiced during down time.",
     rightText: "The sneeze guards are spotless, the line is free of clutter and not over stocked with paper products or excessive tortillas.",
     rightImg: "/down-the-line-right.jpg",
-    extraRightImgs: [{ img: "/down-the-line-right-2.jpg", text: "The line is stocked and clean. Team is actively practicing STIR, FLIP, WIPE to keep food fresh and hot!" }],
+    extraImgs: [
+      { img: "", wrong: true },
+      { img: "/down-the-line-right-2.jpg", wrong: false, text: "The line is stocked and clean. Team is actively practicing STIR, FLIP, WIPE to keep food fresh and hot!" },
+    ],
   },
   {
     heading: "Register Area",
@@ -1268,8 +1271,10 @@ const AMBASSADOR_VISUAL_CHECKS = [
     wrongText: "Utensils are almost out and storage crates are dirty and full of crumbs.",
     rightText: "Utensils stocked and storage crates are clean and labeled.",
     wrongImg: "/beverage-bar-wrong.jpg", rightImg: "/beverage-bar-right.jpg",
-    extraRightImgs: ["/beverage-bar-right-2.jpg", "/beverage-bar-right-3.jpg"],
-    extraRightText: "The beverage bar is free of spills, the bubblers and teas are fully stocked, the Icee machine is stocked, all BIBs are working, the soda drain isn't overflowing with ice, the dispensers are wiped down, and all paper products (lids, straws, forks, knives, napkins, etc.) are stocked.",
+    extraImgs: [
+      { img: "/beverage-bar-wrong-2.jpg", wrong: true },
+      { img: "/beverage-bar-right-2.jpg", wrong: false },
+    ],
   },
   {
     heading: "Trash Cans",
@@ -1295,7 +1300,7 @@ const AMBASSADOR_VISUAL_CHECKS = [
     rightText: "All patio tables are wiped down and clean, the floors are swept, chairs are pushed in with tables aligned neatly, and the umbrellas are up.",
     wrongImg: "/patio-wrong.jpg", rightImg: "/patio-right.jpg",
   },
-].map(section => ({ wrongImg: "", rightImg: "", extraRightImgs: [], extraRightText: "", ...section }));
+].map(section => ({ wrongImg: "", rightImg: "", extraImgs: [], ...section }));
 
 // ─── Current Sterling Focus (update monthly) ──────────────────────────────────
 // Drives both the "Current Sterling Focus" resource tile title and the
@@ -1733,15 +1738,20 @@ function PositionTracker({ user, onPositionPass, setActivePdf }) {
                       {i + 1}. {section.heading}
                     </div>
                     <div className="wrong-right-grid">
-                      {section.wrongImg && (
-                        <div>
-                          <div style={{ fontSize: 13, fontWeight: 700, color: "#D9342B", textTransform: "uppercase", letterSpacing: 1, marginBottom: 6, fontFamily: "Calibri, sans-serif" }}>✕ Wrong</div>
+                      <div>
+                        <div style={{ fontSize: 13, fontWeight: 700, color: "#D9342B", textTransform: "uppercase", letterSpacing: 1, marginBottom: 6, fontFamily: "Calibri, sans-serif" }}>✕ Wrong</div>
+                        {section.wrongImg ? (
                           <img src={section.wrongImg} alt={`${section.heading} — wrong`} onClick={() => setLightboxImg(section.wrongImg)} style={{ width: "100%", height: 180, objectFit: "cover", borderRadius: 10, border: "2px solid #D9342B", display: "block", cursor: "zoom-in" }} />
-                          {section.wrongText && (
-                            <p style={{ margin: "10px 0 0", fontSize: 13, color: "#ccc", lineHeight: 1.5, fontFamily: "Calibri, sans-serif" }}>{section.wrongText}</p>
-                          )}
-                        </div>
-                      )}
+                        ) : (
+                          <div style={{ height: 180, background: "#000", border: "2px dashed #D9342B", borderRadius: 10, display: "flex", alignItems: "center", justifyContent: "center", flexDirection: "column", gap: 6, color: "#666", fontFamily: "Calibri, sans-serif" }}>
+                            <div style={{ fontSize: 28 }}>📷</div>
+                            <div style={{ fontSize: 13 }}>Photo placeholder</div>
+                          </div>
+                        )}
+                        {section.wrongText && (
+                          <p style={{ margin: "10px 0 0", fontSize: 13, color: "#ccc", lineHeight: 1.5, fontFamily: "Calibri, sans-serif" }}>{section.wrongText}</p>
+                        )}
+                      </div>
                       <div>
                         <div style={{ fontSize: 13, fontWeight: 700, color: MOE.teal, textTransform: "uppercase", letterSpacing: 1, marginBottom: 6, fontFamily: "Calibri, sans-serif" }}>✓ Right</div>
                         {section.rightImg ? (
@@ -1756,22 +1766,27 @@ function PositionTracker({ user, onPositionPass, setActivePdf }) {
                           <p style={{ margin: "10px 0 0", fontSize: 13, color: "#ccc", lineHeight: 1.5, fontFamily: "Calibri, sans-serif" }}>{section.rightText}</p>
                         )}
                       </div>
-                      {section.extraRightImgs.map((entry, j) => {
-                        const img = typeof entry === "string" ? entry : entry.img;
-                        const text = typeof entry === "string" ? null : entry.text;
+                      {section.extraImgs.map((entry, j) => {
+                        const color = entry.wrong ? "#D9342B" : MOE.teal;
                         return (
                           <div key={j}>
-                            <div style={{ fontSize: 13, fontWeight: 700, color: MOE.teal, textTransform: "uppercase", letterSpacing: 1, marginBottom: 6, fontFamily: "Calibri, sans-serif" }}>✓ Right</div>
-                            <img src={img} alt={`${section.heading} — right`} onClick={() => setLightboxImg(img)} style={{ width: "100%", height: 180, objectFit: "cover", borderRadius: 10, border: `2px solid ${MOE.teal}`, display: "block", cursor: "zoom-in" }} />
-                            {text && (
-                              <p style={{ margin: "10px 0 0", fontSize: 13, color: "#ccc", lineHeight: 1.5, fontFamily: "Calibri, sans-serif" }}>{text}</p>
+                            <div style={{ fontSize: 13, fontWeight: 700, color, textTransform: "uppercase", letterSpacing: 1, marginBottom: 6, fontFamily: "Calibri, sans-serif" }}>
+                              {entry.wrong ? "✕ Wrong" : "✓ Right"}
+                            </div>
+                            {entry.img ? (
+                              <img src={entry.img} alt={`${section.heading} — ${entry.wrong ? "wrong" : "right"}`} onClick={() => setLightboxImg(entry.img)} style={{ width: "100%", height: 180, objectFit: "cover", borderRadius: 10, border: `2px solid ${color}`, display: "block", cursor: "zoom-in" }} />
+                            ) : (
+                              <div style={{ height: 180, background: "#000", border: `2px dashed ${color}`, borderRadius: 10, display: "flex", alignItems: "center", justifyContent: "center", flexDirection: "column", gap: 6, color: "#666", fontFamily: "Calibri, sans-serif" }}>
+                                <div style={{ fontSize: 28 }}>📷</div>
+                                <div style={{ fontSize: 13 }}>Photo placeholder</div>
+                              </div>
+                            )}
+                            {entry.text && (
+                              <p style={{ margin: "10px 0 0", fontSize: 13, color: "#ccc", lineHeight: 1.5, fontFamily: "Calibri, sans-serif" }}>{entry.text}</p>
                             )}
                           </div>
                         );
                       })}
-                      {section.extraRightText && (
-                        <p style={{ gridColumn: "1 / -1", margin: 0, fontSize: 13, color: "#ccc", lineHeight: 1.5, fontFamily: "Calibri, sans-serif" }}>{section.extraRightText}</p>
-                      )}
                     </div>
                   </div>
                 ))}

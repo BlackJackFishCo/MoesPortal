@@ -1219,6 +1219,11 @@ const POSITION_DOCS = {
     { title: "Meal Kits",                url: "/meal-kits.pdf" },
     { title: "Meal Kits XL",             url: "/meal-kits-xl.pdf" },
     { title: "SW Salad",                 url: "/sw-salad.pdf" },
+    { title: "Value Pack",               url: "/value-pack.pdf" },
+    { title: "Value Pack Cheat Sheet",   url: "/value-packs-cheat-sheet.pdf" },
+    { title: "Burrito-Taco Pack",        url: "/burrito-taco-pack.pdf" },
+    { title: "Taco Pack",                url: "/taco-pack.pdf" },
+    { title: "Burrito Pack",             url: "/burrito-pack.pdf" },
   ],
   catering: [
     { title: "Catering Pan Weights",     url: "/catering-pan-weights.pdf" },

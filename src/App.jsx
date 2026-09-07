@@ -1248,9 +1248,9 @@ const AMBASSADOR_VISUAL_CHECKS = [
     heading: "Down the Line",
     wrongText: "The sneeze guards are smudged and splattered, the line is cluttered with extra pans and tools, and Stir, Flip, Wipe isn't being practiced during down time.",
     rightText: "The sneeze guards are spotless, the line is free of clutter and not over stocked with paper products or excessive tortillas.",
-    rightImg: "/down-the-line-right.jpg",
+    wrongImg: "/down-the-line-wrong.jpg", rightImg: "/down-the-line-right.jpg",
     extraImgs: [
-      { img: "", wrong: true },
+      { img: "/down-the-line-wrong-2.jpg", wrong: true },
       { img: "/down-the-line-right-2.jpg", wrong: false, text: "The line is stocked and clean. Team is actively practicing STIR, FLIP, WIPE to keep food fresh and hot!" },
     ],
   },

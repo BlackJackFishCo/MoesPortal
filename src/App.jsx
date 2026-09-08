@@ -1634,7 +1634,7 @@ function ResourceLinks({ setActivePdf }) {
           <div style={{ flex: 1, overflowY: "auto", padding: 24 }}>
             <div style={{ maxWidth: 700, margin: "0 auto", display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(180px, 1fr))", gap: 16 }}>
               {activeGallery.gallery.map((item, i) => (
-                <a key={i} href={item.url} onClick={e => { e.preventDefault(); setActiveGallery(null); setActivePdf(item); }}
+                <a key={i} href={cacheBust(item.url)} target="_blank" rel="noreferrer"
                   style={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", textAlign: "center", gap: 6, background: "#111", border: "1.5px solid #333", borderRadius: 10, padding: "18px 20px", textDecoration: "none", color: "#fff", fontFamily: "Calibri, sans-serif", fontSize: 17, fontWeight: 600, cursor: "pointer" }}
                 >
                   <div style={{ fontSize: 17, fontWeight: 700 }}>{item.title}</div>
@@ -1657,7 +1657,7 @@ function ResourceLinks({ setActivePdf }) {
           innerFill="#000"
           innerTextColor="#fff"
           title={`This Month's Sterling Focus: ${focusWords.join(", ")}`}
-          onOpen={() => setActivePdf({ title: "Sterling Focus", url: "/sterling-focus.pdf" })}
+          onOpen={() => window.open(cacheBust("/sterling-focus.pdf"), "_blank", "noopener,noreferrer")}
         />
         <FocusBadge
           rimText="THIS MONTH'S STERLING"
@@ -1677,7 +1677,7 @@ function ResourceLinks({ setActivePdf }) {
           innerFill="#000"
           innerTextColor="#fff"
           title="This Month's Sterling: Marketing Calendar"
-          onOpen={() => setActivePdf({ title: "Current Month Offer Calendar", url: "/marketing-calendar-sept-dec-2026.pdf" })}
+          onOpen={() => window.open(cacheBust("/marketing-calendar-sept-dec-2026.pdf"), "_blank", "noopener,noreferrer")}
         />
       </div>
 
@@ -1699,8 +1699,13 @@ function ResourceLinks({ setActivePdf }) {
                     // url is pointed at a real file above, this automatically
                     // reverts to the normal outline look — no flag to unset.
                     const isMissing = !link.gallery && link.url === "#";
+                    const isRealDoc = !link.gallery && !isMissing;
                     return (
-                      <a key={i} href={link.url} onClick={e => { e.preventDefault(); link.gallery ? setActiveGallery(link) : setActivePdf(link); }}
+                      <a key={i}
+                        href={isRealDoc ? cacheBust(link.url) : link.url}
+                        target={isRealDoc ? "_blank" : undefined}
+                        rel={isRealDoc ? "noreferrer" : undefined}
+                        onClick={isRealDoc ? undefined : e => { e.preventDefault(); link.gallery ? setActiveGallery(link) : setActivePdf(link); }}
                         style={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", textAlign: "center", gap: 6, background: isMissing ? section.color : "#000", border: `2px solid ${section.color}`, borderRadius: 10, padding: "18px 20px", textDecoration: "none", color: isMissing ? "#000" : "#fff", fontFamily: "Calibri, sans-serif", fontSize: 17, fontWeight: 600, cursor: "pointer" }}
                       >
                         <div style={{ fontSize: 17, fontWeight: 700 }}>{link.title}</div>
@@ -1972,8 +1977,14 @@ function PositionTracker({ user, onPositionPass, setActivePdf }) {
                   Documents
                 </h3>
                 <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(220px, 1fr))", gap: 16, marginBottom: 24 }}>
-                  {docs.map((pdf, i) => (
-                    <a key={i} href={pdf.url} onClick={e => { e.preventDefault(); setActivePdf(pdf); }}
+                  {docs.map((pdf, i) => {
+                    const isMissing = pdf.url === "#";
+                    return (
+                    <a key={i}
+                      href={isMissing ? pdf.url : cacheBust(pdf.url)}
+                      target={isMissing ? undefined : "_blank"}
+                      rel={isMissing ? undefined : "noreferrer"}
+                      onClick={isMissing ? e => { e.preventDefault(); setActivePdf(pdf); } : undefined}
                       style={pos.id === "menu"
                         ? { display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", textAlign: "center", gap: 6, background: "#000", border: `2px solid ${MOE.orange}`, borderRadius: 10, padding: "18px 20px", textDecoration: "none", color: "#fff", fontFamily: "Calibri, sans-serif", fontSize: 17, fontWeight: 600, cursor: "pointer" }
                         : { display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", textAlign: "center", gap: 6, background: "#111", border: "1.5px solid #333", borderRadius: 10, padding: "18px 20px", textDecoration: "none", color: "#fff", fontFamily: "Calibri, sans-serif", fontSize: 17, fontWeight: 600, cursor: "pointer" }}
@@ -1981,7 +1992,8 @@ function PositionTracker({ user, onPositionPass, setActivePdf }) {
                       <div style={{ fontSize: 17, fontWeight: 700 }}>{pdf.title}</div>
                       <div style={{ fontSize: 14, color: pos.id === "menu" ? MOE.orange : pos.color, marginTop: 4 }}>Click to open →</div>
                     </a>
-                  ))}
+                    );
+                  })}
                 </div>
               </>
             )}
@@ -2116,35 +2128,17 @@ function PageContent({ page, isCompleted, onComplete, progress, user }) {
           >
             ← Back to Portal
           </button>
-          {activePdf.url !== "#" && (
-            <a href={cacheBust(activePdf.url)} target="_blank" rel="noreferrer" style={{ color: MOE.teal, fontFamily: "Calibri, sans-serif", fontSize: 14, fontWeight: 600, textDecoration: "none", whiteSpace: "nowrap", order: 2, marginLeft: "auto" }}>
-              Open in new tab ↗
-            </a>
-          )}
-          <div style={{ color: "#fff", fontFamily: "Calibri, sans-serif", fontSize: 16, fontWeight: 600, textAlign: "center", flexBasis: "100%", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap", order: 3 }}>
+          <div style={{ color: "#fff", fontFamily: "Calibri, sans-serif", fontSize: 16, fontWeight: 600, textAlign: "center", flex: 1, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
             {activePdf.title}
           </div>
         </div>
-        {activePdf.url === "#" ? (
-          <div style={{ flex: 1, display: "flex", alignItems: "center", justifyContent: "center", padding: 24 }}>
-            <p style={{ color: "#888", fontFamily: "Calibri, sans-serif", fontSize: 18, textAlign: "center" }}>
-              This document hasn't been added yet. Check back soon.
-            </p>
-          </div>
-        ) : activePdf.url.toLowerCase().endsWith(".pdf") ? (
-          <iframe src={cacheBust(activePdf.url)} title={activePdf.title} style={{ flex: 1, border: "none", background: "#fff" }} />
-        ) : (
-          <div style={{ flex: 1, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: 20, padding: 24 }}>
-            <p style={{ color: "#ccc", fontFamily: "Calibri, sans-serif", fontSize: 18, textAlign: "center", maxWidth: 420 }}>
-              This document opens on an outside site and can't be shown here directly.
-            </p>
-            <a href={activePdf.url} target="_blank" rel="noreferrer"
-              style={{ background: MOE.teal, color: "#fff", border: "none", borderRadius: 10, padding: "16px 32px", fontSize: 18, fontWeight: 700, fontFamily: "Calibri, sans-serif", textDecoration: "none" }}
-            >
-              Open Document ↗
-            </a>
-          </div>
-        )}
+        {/* Real documents now open directly in a new tab, so this modal only
+            ever shows the "not added yet" placeholder for url === "#". */}
+        <div style={{ flex: 1, display: "flex", alignItems: "center", justifyContent: "center", padding: 24 }}>
+          <p style={{ color: "#888", fontFamily: "Calibri, sans-serif", fontSize: 18, textAlign: "center" }}>
+            This document hasn't been added yet. Check back soon.
+          </p>
+        </div>
       </div>
     )}
     <div style={{ maxWidth: 900, margin: "0 auto", padding: "24px 16px" }}>
@@ -2227,14 +2221,21 @@ function PageContent({ page, isCompleted, onComplete, progress, user }) {
             Documents
           </h2>
           <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(220px, 1fr))", gap: 16 }}>
-            {page.pdfs.map((pdf, i) => (
-              <a key={i} href={pdf.url} onClick={e => { e.preventDefault(); setActivePdf(pdf); }}
+            {page.pdfs.map((pdf, i) => {
+              const isMissing = pdf.url === "#";
+              return (
+              <a key={i}
+                href={isMissing ? pdf.url : cacheBust(pdf.url)}
+                target={isMissing ? undefined : "_blank"}
+                rel={isMissing ? undefined : "noreferrer"}
+                onClick={isMissing ? e => { e.preventDefault(); setActivePdf(pdf); } : undefined}
                 style={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", textAlign: "center", gap: 6, background: "#000", border: `2px solid ${page.color}`, borderRadius: 10, padding: "18px 20px", textDecoration: "none", color: "#fff", fontFamily: "Calibri, sans-serif", fontSize: 17, fontWeight: 600, cursor: "pointer" }}
               >
                 <div style={{ fontSize: 17, fontWeight: 700 }}>{pdf.title}</div>
                 <div style={{ fontSize: 14, color: page.color, marginTop: 4 }}>Click to open →</div>
               </a>
-            ))}
+              );
+            })}
           </div>
         </section>
       )}

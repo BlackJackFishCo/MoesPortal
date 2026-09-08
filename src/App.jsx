@@ -533,7 +533,8 @@ function PrintTracker({ user, progress }) {
 
 // ─── Admin Panel ──────────────────────────────────────────────────────────────
 function AdminPanel({ onExit }) {
-  const [authed, setAuthed] = useState(false);
+  const [role, setRole] = useState(null); // "full" | "viewer" | null (not logged in)
+  const isFullAdmin = role === "full";
   const [pw, setPw] = useState("");
   const [pwError, setPwError] = useState("");
   const [users, setUsers] = useState([]);
@@ -547,24 +548,25 @@ function AdminPanel({ onExit }) {
   const [printPreview, setPrintPreview] = useState(null); // { html, title } for print modal
   const [reportError, setReportError] = useState(""); // inline error instead of alert()
 
-  function login() {
-    if (pw === "burrito") {
-      setAuthed(true);
-      getAllUsersFromFirestore().then(fsUsers => {
-        if (fsUsers.length > 0) setUsers(fsUsers);
-        else setUsers(getAllUsers());
-      }).catch(() => setUsers(getAllUsers()));
-    } else { setPwError("Incorrect password."); }
-  }
-
-  function refreshUsers() {
+  function loadUsers() {
     getAllUsersFromFirestore().then(fsUsers => {
       if (fsUsers.length > 0) setUsers(fsUsers);
       else setUsers(getAllUsers());
     }).catch(() => setUsers(getAllUsers()));
   }
 
+  function login() {
+    if (pw === "burrito") { setRole("full"); loadUsers(); }
+    else if (pw === "Sterling1") { setRole("viewer"); loadUsers(); }
+    else { setPwError("Incorrect password."); }
+  }
+
+  function refreshUsers() {
+    loadUsers();
+  }
+
   function handleReset(userId, name) {
+    if (!isFullAdmin) return;
     resetUserProgress(userId);
     setConfirmReset(null);
     setResetMsg(`✅ Progress reset for ${name}.`);
@@ -573,6 +575,7 @@ function AdminPanel({ onExit }) {
   }
 
   function handleRemove(userId, name) {
+    if (!isFullAdmin) return;
     removeUser(userId);
     setConfirmRemove(null);
     setResetMsg(`🗑️ ${name} has been removed.`);
@@ -689,7 +692,7 @@ function AdminPanel({ onExit }) {
   const inputS = { padding: "12px 14px", fontSize: 16, borderRadius: 8, border: "1.5px solid #444", background: "#1A1A1A", color: "#fff", fontFamily: "Calibri, sans-serif", width: "100%", boxSizing: "border-box" };
   const btnS = (bg) => ({ background: bg, color: "#fff", border: "none", borderRadius: 8, padding: "10px 18px", fontSize: 15, fontWeight: 700, cursor: "pointer", fontFamily: "Calibri, sans-serif" });
 
-  if (!authed) return (
+  if (!role) return (
     <div style={{ minHeight: "100vh", background: "#000", display: "flex", alignItems: "center", justifyContent: "center", fontFamily: "Calibri, sans-serif" }}>
       <div style={{ background: "#1A1A1A", border: `2px solid ${MOE.teal}`, borderRadius: 16, padding: "32px 24px", maxWidth: 420, width: "100%", boxShadow: "0 8px 40px rgba(0,0,0,0.6)" }}>
         <div style={{ textAlign: "center", marginBottom: 32 }}>
@@ -713,6 +716,9 @@ function AdminPanel({ onExit }) {
           <div style={{ display: "flex", alignItems: "center", gap: 10, flexWrap: "wrap" }}>
             <div style={{ fontSize: 18, fontWeight: 800, color: MOE.orange, textTransform: "uppercase", letterSpacing: 1 }}>⚙ Admin Panel</div>
             <div style={{ fontSize: 13, color: "#888" }}>Sterling Restaurants</div>
+            <div style={{ fontSize: 11, fontWeight: 700, color: isFullAdmin ? MOE.teal : "#999", background: isFullAdmin ? "#0D2B22" : "#222", border: `1px solid ${isFullAdmin ? MOE.teal : "#555"}`, borderRadius: 6, padding: "3px 8px", textTransform: "uppercase", letterSpacing: 0.5 }}>
+              {isFullAdmin ? "Full Access" : "View Only"}
+            </div>
           </div>
           <div style={{ display: "flex", gap: 8 }}>
             <button onClick={refreshUsers} style={{ ...btnS(MOE.teal), padding: "8px 14px", fontSize: 14 }}>↻ Refresh</button>
@@ -835,8 +841,10 @@ function AdminPanel({ onExit }) {
                         <td style={{ border: "1px solid #222", padding: "6px 6px", textAlign: "center" }}>
                           <div style={{ display: "flex", gap: 4, justifyContent: "center" }}>
                             <button onClick={() => printReport([u], u.name)} style={{ ...btnS(MOE.teal), padding: "4px 8px", fontSize: 11 }}>🖨️</button>
-                            <button onClick={() => setConfirmReset({ id: u.id, name: u.name })} style={{ ...btnS("#8B1A1A"), padding: "4px 8px", fontSize: 11 }}>⟳</button>
-                            <button onClick={() => setConfirmRemove({ id: u.id, name: u.name })} style={{ ...btnS("#555"), padding: "4px 8px", fontSize: 11 }}>🗑️</button>
+                            {isFullAdmin && (<>
+                              <button onClick={() => setConfirmReset({ id: u.id, name: u.name })} style={{ ...btnS("#8B1A1A"), padding: "4px 8px", fontSize: 11 }}>⟳</button>
+                              <button onClick={() => setConfirmRemove({ id: u.id, name: u.name })} style={{ ...btnS("#555"), padding: "4px 8px", fontSize: 11 }}>🗑️</button>
+                            </>)}
                           </div>
                         </td>
                       </tr>

@@ -625,61 +625,116 @@ function AdminPanel({ onExit }) {
   });
 
   // Build Excel-like report rows
-  function exportExcel(userList, title) {
+  function exportExcel(userList, title, { condensed = false } = {}) {
     const rows = [];
-    // Header row
-    rows.push(["Employee Name", "Email", "Store", "Module", "Status", "Date Completed", "Overall %"]);
-    userList.forEach(u => {
-      const prog = getUserProgress(u.id, u.progress);
-      const completed = ordered.filter(p => prog[p.id]).length;
-      const pct = Math.round((completed / ordered.length) * 100);
-      ordered.forEach((p, i) => {
-        rows.push([
-          i === 0 ? u.name : "",
-          i === 0 ? u.email : "",
-          i === 0 ? u.store : "",
-          p.label,
-          prog[p.id] ? "COMPLETE" : "PENDING",
-          prog[p.id] ? (prog[p.id + "_date"] || "—") : "—",
-          i === 0 ? pct + "%" : "",
-        ]);
-      });
-      rows.push(["", "", "", "", "", "", ""]); // spacer row between employees
-    });
-
-    const ws = XLSX.utils.aoa_to_sheet(rows);
-    // Column widths
-    ws["!cols"] = [
-      { wch: 28 }, { wch: 32 }, { wch: 36 }, { wch: 22 },
-      { wch: 12 }, { wch: 18 }, { wch: 12 },
-    ];
     const wb = XLSX.utils.book_new();
-    XLSX.utils.book_append_sheet(wb, ws, "Training Progress");
+
+    if (condensed) {
+      // One row per employee (sorted by store, then name) instead of one row
+      // per module -- keeps a 100+ person, multi-store report to a sheet
+      // that's actually skimmable, and the Store column groups naturally.
+      rows.push(["Store", "Employee Name", "Email", "Modules Completed", "Overall %"]);
+      [...userList].sort((a, b) => a.store.localeCompare(b.store) || a.name.localeCompare(b.name)).forEach(u => {
+        const prog = getUserProgress(u.id, u.progress);
+        const completed = ordered.filter(p => prog[p.id]).length;
+        const pct = Math.round((completed / ordered.length) * 100);
+        rows.push([u.store, u.name, u.email, `${completed}/${ordered.length}`, pct + "%"]);
+      });
+      const ws = XLSX.utils.aoa_to_sheet(rows);
+      ws["!cols"] = [{ wch: 36 }, { wch: 28 }, { wch: 32 }, { wch: 16 }, { wch: 12 }];
+      XLSX.utils.book_append_sheet(wb, ws, "Training Progress");
+    } else {
+      rows.push(["Employee Name", "Email", "Store", "Module", "Status", "Date Completed", "Overall %"]);
+      userList.forEach(u => {
+        const prog = getUserProgress(u.id, u.progress);
+        const completed = ordered.filter(p => prog[p.id]).length;
+        const pct = Math.round((completed / ordered.length) * 100);
+        ordered.forEach((p, i) => {
+          rows.push([
+            i === 0 ? u.name : "",
+            i === 0 ? u.email : "",
+            i === 0 ? u.store : "",
+            p.label,
+            prog[p.id] ? "COMPLETE" : "PENDING",
+            prog[p.id] ? (prog[p.id + "_date"] || "—") : "—",
+            i === 0 ? pct + "%" : "",
+          ]);
+        });
+        rows.push(["", "", "", "", "", "", ""]); // spacer row between employees
+      });
+      const ws = XLSX.utils.aoa_to_sheet(rows);
+      ws["!cols"] = [
+        { wch: 28 }, { wch: 32 }, { wch: 36 }, { wch: 22 },
+        { wch: 12 }, { wch: 18 }, { wch: 12 },
+      ];
+      XLSX.utils.book_append_sheet(wb, ws, "Training Progress");
+    }
+
     const safeTitle = title.replace(/[\/*?:\[\]]/g, "_").slice(0, 30);
     XLSX.writeFile(wb, `${safeTitle}_Progress_${new Date().toISOString().slice(0,10)}.xlsx`);
   }
 
-  function printReport(userList, title) {
-    const rows = userList.map(u => {
-      const prog = getUserProgress(u.id, u.progress);
-      const completed = ordered.filter(p => prog[p.id]).length;
-      const pct = Math.round((completed / ordered.length) * 100);
-      const moduleRows = ordered.map(p => `
-        <tr>
-          <td style="border:1px solid #ccc;padding:6px 10px"></td>
-          <td style="border:1px solid #ccc;padding:6px 10px;padding-left:24px;color:#555">${p.label}</td>
-          <td style="border:1px solid #ccc;padding:6px 10px;text-align:center;color:${prog[p.id] ? "green" : "#c44"};font-weight:700">${prog[p.id] ? "✓ COMPLETE" : "○ PENDING"}</td>
-          <td style="border:1px solid #ccc;padding:6px 10px;text-align:center">${prog[p.id] ? (prog[p.id + "_date"] || "—") : "—"}</td>
-        </tr>`).join("");
-      return `
-        <tr style="background:#2C2C2C;color:#fff">
-          <td colspan="4" style="border:1px solid #999;padding:10px 12px;font-size:15px;font-weight:700">
-            ${u.name} &nbsp;|&nbsp; ${u.store} &nbsp;|&nbsp; ${u.email} &nbsp;|&nbsp; Overall: ${pct}%
-          </td>
-        </tr>
-        ${moduleRows}
-        <tr><td colspan="4" style="padding:6px"></td></tr>`;
-    }).join("");
+  function printReport(userList, title, { condensed = false } = {}) {
+    let theadHtml, rows;
+
+    if (condensed) {
+      // One summary row per employee, grouped under a store header, instead
+      // of a full module-by-module breakdown -- keeps a 100+ person,
+      // multi-store report to something printable/skimmable.
+      const byStore = {};
+      userList.forEach(u => { (byStore[u.store] ||= []).push(u); });
+      theadHtml = `
+          <th>Employee</th>
+          <th>Email</th>
+          <th style="width:130px;text-align:center">Modules Completed</th>
+          <th style="width:100px;text-align:center">Overall %</th>`;
+      rows = Object.keys(byStore).sort().map(store => {
+        const storeUsers = [...byStore[store]].sort((a, b) => a.name.localeCompare(b.name));
+        const employeeRows = storeUsers.map(u => {
+          const prog = getUserProgress(u.id, u.progress);
+          const completed = ordered.filter(p => prog[p.id]).length;
+          const pct = Math.round((completed / ordered.length) * 100);
+          return `
+            <tr>
+              <td style="border:1px solid #ccc;padding:5px 10px">${u.name}</td>
+              <td style="border:1px solid #ccc;padding:5px 10px">${u.email}</td>
+              <td style="border:1px solid #ccc;padding:5px 10px;text-align:center">${completed}/${ordered.length}</td>
+              <td style="border:1px solid #ccc;padding:5px 10px;text-align:center;color:${pct === 100 ? "green" : "#c44"};font-weight:700">${pct}%</td>
+            </tr>`;
+        }).join("");
+        return `
+          <tr style="background:#2C2C2C;color:#fff">
+            <td colspan="4" style="border:1px solid #999;padding:8px 12px;font-size:14px;font-weight:700">${store} &nbsp;(${storeUsers.length})</td>
+          </tr>
+          ${employeeRows}`;
+      }).join("");
+    } else {
+      theadHtml = `
+          <th style="width:30px">#</th>
+          <th>Employee / Module</th>
+          <th style="width:140px;text-align:center">Status</th>
+          <th style="width:120px;text-align:center">Date Completed</th>`;
+      rows = userList.map(u => {
+        const prog = getUserProgress(u.id, u.progress);
+        const completed = ordered.filter(p => prog[p.id]).length;
+        const pct = Math.round((completed / ordered.length) * 100);
+        const moduleRows = ordered.map(p => `
+          <tr>
+            <td style="border:1px solid #ccc;padding:6px 10px"></td>
+            <td style="border:1px solid #ccc;padding:6px 10px;padding-left:24px;color:#555">${p.label}</td>
+            <td style="border:1px solid #ccc;padding:6px 10px;text-align:center;color:${prog[p.id] ? "green" : "#c44"};font-weight:700">${prog[p.id] ? "✓ COMPLETE" : "○ PENDING"}</td>
+            <td style="border:1px solid #ccc;padding:6px 10px;text-align:center">${prog[p.id] ? (prog[p.id + "_date"] || "—") : "—"}</td>
+          </tr>`).join("");
+        return `
+          <tr style="background:#2C2C2C;color:#fff">
+            <td colspan="4" style="border:1px solid #999;padding:10px 12px;font-size:15px;font-weight:700">
+              ${u.name} &nbsp;|&nbsp; ${u.store} &nbsp;|&nbsp; ${u.email} &nbsp;|&nbsp; Overall: ${pct}%
+            </td>
+          </tr>
+          ${moduleRows}
+          <tr><td colspan="4" style="padding:6px"></td></tr>`;
+      }).join("");
+    }
 
     const html = `<!DOCTYPE html><html><head><title>${title}</title>
       <style>
@@ -698,12 +753,7 @@ function AdminPanel({ onExit }) {
         </div>
       </div>
       <table>
-        <thead><tr>
-          <th style="width:30px">#</th>
-          <th>Employee / Module</th>
-          <th style="width:140px;text-align:center">Status</th>
-          <th style="width:120px;text-align:center">Date Completed</th>
-        </tr></thead>
+        <thead><tr>${theadHtml}</tr></thead>
         <tbody>${rows}</tbody>
       </table>
       <div style="margin-top:40px;border-top:2px solid #2C2C2C;padding-top:16px;display:flex;justify-content:space-between;font-size:12px">
@@ -946,7 +996,7 @@ function AdminPanel({ onExit }) {
                 const district = DISTRICTS.find(d => d.name === sel);
                 const districtUsers = users.filter(u => district.storeLabels.includes(u.store));
                 if (districtUsers.length === 0) { setReportError("No employees found for this district."); return; }
-                setReportError(""); printReport(districtUsers, `${sel} District`);
+                setReportError(""); printReport(districtUsers, `${sel} District`, { condensed: true });
               }} style={btnS(MOE.orange)}>🖨️ Print Report</button>
               <button onClick={() => {
                 const sel = document.getElementById("districtReport").value;
@@ -954,7 +1004,7 @@ function AdminPanel({ onExit }) {
                 const district = DISTRICTS.find(d => d.name === sel);
                 const districtUsers = users.filter(u => district.storeLabels.includes(u.store));
                 if (districtUsers.length === 0) { setReportError("No employees found for this district."); return; }
-                setReportError(""); exportExcel(districtUsers, `${sel}_District`);
+                setReportError(""); exportExcel(districtUsers, `${sel}_District`, { condensed: true });
               }} style={btnS(MOE.teal)}>📊 Export to Excel</button>
               {reportError && <div style={{ color: MOE.orange, fontSize: 14, alignSelf: "center" }}>⚠️ {reportError}</div>}
             </div>

@@ -121,6 +121,35 @@ const STORES = [
   "Store #124 – Zelda Road",
 ];
 
+// Maps a bare store number (from the lists below) to its full "Store #NNN – Name"
+// label as it appears in STORES / on each employee's profile.
+const STORE_BY_NUMBER = Object.fromEntries(
+  STORES.map(s => [Number(s.match(/#(\d+)/)[1]), s])
+);
+
+// ─── Districts (group of stores reporting to one District Manager) ───────────
+const DISTRICTS = [
+  { name: "Justin Untz",        stores: [170, 254, 266, 296, 701, 845] },
+  { name: "Rainey Faglie",      stores: [1069, 116, 2430, 2604, 2605, 927] },
+  { name: "Justin Wardally",    stores: [101, 117, 139, 253, 447] },
+  { name: "Ray Bly",            stores: [124, 183, 2560, 374, 512, 627] },
+  { name: "Steven Pack",        stores: [2682, 2684, 2687, 3767, 385, 6462, 6465] },
+  { name: "Michael Owens",      stores: [110, 133, 142, 230, 2685, 445] },
+  { name: "John Perdue",        stores: [136, 1535, 177] },
+  { name: "William Hurtado",    stores: [1284, 189, 258, 858] },
+  // Source list had store "14356" for this district, which doesn't match any
+  // store number below -- used 1435 (Palm Bay) since every other store here
+  // (Deland, Ormond, Port Orange, Viera, Orange City) is the same Central
+  // Florida cluster. Please confirm/correct if that's not the right store.
+  { name: "Jason Stelmacki",    stores: [1435, 217, 334, 417, 427, 446] },
+  { name: "Randy Flowers",      stores: [203, 3661, 3662, 6014, 6016, 876] },
+  { name: "Tracy Schultz",      stores: [223, 343, 5028, 6679] },
+  { name: "Jacob Smith",        stores: [132, 140, 3871, 449] },
+  { name: "Carolina Araya",     stores: [101956, 102801, 2704, 2710, 521, 628, 708] },
+  { name: "Mario Segarra",      stores: [102802, 233, 279, 425, 480, 528, 596] },
+  { name: "Santos Hernandez",   stores: [100718, 1693, 324, 3796, 3810, 587, 743, 952, 953] },
+].map(d => ({ ...d, storeLabels: d.stores.map(n => STORE_BY_NUMBER[n]).filter(Boolean) }));
+
 // ─── No fixed user list — anyone can sign in with name + email + store ────────
 
 // ─── Pages config ─────────────────────────────────────────────────────────────
@@ -899,6 +928,37 @@ function AdminPanel({ onExit }) {
                 const storeUsers = users.filter(u => u.store === sel);
                 if (storeUsers.length === 0) { setReportError("No employees found for this store."); return; }
                 setReportError(""); exportExcel(storeUsers, sel);
+              }} style={btnS(MOE.teal)}>📊 Export to Excel</button>
+              {reportError && <div style={{ color: MOE.orange, fontSize: 14, alignSelf: "center" }}>⚠️ {reportError}</div>}
+            </div>
+          </div>
+
+          {/* By District */}
+          <div style={{ background: "#1A1A1A", border: "1px solid #333", borderRadius: 12, padding: "24px 28px", marginBottom: 20 }}>
+            <div style={{ fontSize: 18, fontWeight: 700, color: "#fff", marginBottom: 8 }}>Report by District</div>
+            <div style={{ color: "#888", fontSize: 15, marginBottom: 16 }}>Select a district to print a progress report for every employee across all of that district's stores (each employee still shows their individual store).</div>
+            <div style={{ display: "flex", gap: 10, flexWrap: "wrap", alignItems: "flex-end" }}>
+              <div style={{ flex: 1, minWidth: 0 }}>
+                <select id="districtReport" style={{ ...inputS, cursor: "pointer" }}>
+                  <option value="">Select a district...</option>
+                  {DISTRICTS.map(d => <option key={d.name} value={d.name}>{d.name}</option>)}
+                </select>
+              </div>
+              <button onClick={() => {
+                const sel = document.getElementById("districtReport").value;
+                if (!sel) { setReportError("Please select a district."); return; }
+                const district = DISTRICTS.find(d => d.name === sel);
+                const districtUsers = users.filter(u => district.storeLabels.includes(u.store));
+                if (districtUsers.length === 0) { setReportError("No employees found for this district."); return; }
+                setReportError(""); printReport(districtUsers, `${sel} District`);
+              }} style={btnS(MOE.orange)}>🖨️ Print Report</button>
+              <button onClick={() => {
+                const sel = document.getElementById("districtReport").value;
+                if (!sel) { setReportError("Please select a district."); return; }
+                const district = DISTRICTS.find(d => d.name === sel);
+                const districtUsers = users.filter(u => district.storeLabels.includes(u.store));
+                if (districtUsers.length === 0) { setReportError("No employees found for this district."); return; }
+                setReportError(""); exportExcel(districtUsers, `${sel}_District`);
               }} style={btnS(MOE.teal)}>📊 Export to Excel</button>
               {reportError && <div style={{ color: MOE.orange, fontSize: 14, alignSelf: "center" }}>⚠️ {reportError}</div>}
             </div>

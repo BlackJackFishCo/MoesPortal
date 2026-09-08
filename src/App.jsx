@@ -1336,6 +1336,8 @@ const POSITION_DOCS = {
     { title: "Chicken Club Quesadilla",  url: "/chicken-club-quesadilla.pdf" },
     { title: "BYO Tacos",                url: "/byo-tacos.pdf" },
     { title: "Stack",                    url: "/stack.pdf" },
+    { title: "Moe Protein Bowl",         url: "/moe-protein-bowl.pdf" },
+    { title: "Moe Protein Burrito",      url: "/moe-protein-burrito.pdf" },
     { title: "BYO Jr Burrito",           url: "/byo-jr-burrito.pdf" },
     { title: "Kids Burrito",             url: "/kids-burrito.pdf" },
     { title: "Kids Quesadilla",          url: "/kids-quesadilla.pdf" },

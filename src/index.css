@@ -48,19 +48,24 @@ iframe {
   border-radius: 3px;
 }
 
-/* Position training tiles - a row of 4, then the remaining positions centered underneath */
+/* Position training tiles - a row of 4, then the remaining positions
+   underneath. Both rows share an 8-column grid so the 3 tiles in the
+   shorter row can be centered exactly under the gaps between the 4 tiles
+   above them (each spans 2 of the same columns, offset by one). */
 .position-row {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-evenly;
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
   gap: 12px;
 }
 
-/* Rows with fewer than 4 tiles group together in the middle instead of
-   spreading edge to edge */
-.position-row-compact {
-  justify-content: center;
+.position-row > .position-tile {
+  grid-column: span 2;
+  justify-self: center;
 }
+
+.position-row-compact > .position-tile:nth-child(1) { grid-column: 2 / span 2; }
+.position-row-compact > .position-tile:nth-child(2) { grid-column: 4 / span 2; }
+.position-row-compact > .position-tile:nth-child(3) { grid-column: 6 / span 2; }
 
 .position-circle {
   width: clamp(72px, 14vw, 124px);
@@ -75,10 +80,16 @@ iframe {
     justify-items: center;
   }
 
+  .position-row > .position-tile {
+    grid-column: auto;
+    justify-self: center;
+  }
+
   /* A short row switches to flex so an odd tile left over after pairs of 2
      centers itself on its own line instead of sitting flush left */
   .position-row-compact {
     display: flex;
+    flex-wrap: wrap;
     justify-content: center;
   }
 

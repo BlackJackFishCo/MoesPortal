@@ -1329,6 +1329,7 @@ const POSITION_DOCS = {
   menu: [
     { title: "BYO Burrito",              url: "/byo-burrito.pdf" },
     { title: "Homewrecker",              url: "/homewrecker.pdf" },
+    { title: "Homewrecker Bowl",         url: "/homewrecker-bowl.pdf" },
     { title: "BYO Salads",               url: "/byo-salads.pdf" },
     { title: "BYO Nachos",               url: "/byo-nachos.pdf" },
     { title: "BYO Quesadilla",           url: "/byo-quesadilla.pdf" },

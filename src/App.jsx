@@ -582,7 +582,7 @@ function AdminPanel({ onExit }) {
 
   function login() {
     if (pw === "burrito") { setRole("full"); loadUsers(); }
-    else if (pw === "Sterling1") { setRole("viewer"); loadUsers(); }
+    else if (pw === "sterling1") { setRole("viewer"); loadUsers(); }
     else { setPwError("Incorrect password."); }
   }
 

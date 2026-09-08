@@ -137,11 +137,7 @@ const DISTRICTS = [
   { name: "Michael Owens",      stores: [110, 133, 142, 230, 2685, 445] },
   { name: "John Perdue",        stores: [136, 1535, 177] },
   { name: "William Hurtado",    stores: [1284, 189, 258, 858] },
-  // Source list had store "14356" for this district, which doesn't match any
-  // store number below -- used 1435 (Palm Bay) since every other store here
-  // (Deland, Ormond, Port Orange, Viera, Orange City) is the same Central
-  // Florida cluster. Please confirm/correct if that's not the right store.
-  { name: "Jason Stelmacki",    stores: [1435, 217, 334, 417, 427, 446] },
+  { name: "Jason Stelmacki",    stores: [1435, 217, 334, 417, 427, 446] }, // 1435 = Palm Bay
   { name: "Randy Flowers",      stores: [203, 3661, 3662, 6014, 6016, 876] },
   { name: "Tracy Schultz",      stores: [223, 343, 5028, 6679] },
   { name: "Jacob Smith",        stores: [132, 140, 3871, 449] },

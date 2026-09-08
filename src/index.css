@@ -48,12 +48,18 @@ iframe {
   border-radius: 3px;
 }
 
-/* Position training tiles - grouped rows: Menu/Ambassador, Hot/Cold/Swing/Ring, Linebacker/Catering */
+/* Position training tiles - a row of 4, then the remaining positions centered underneath */
 .position-row {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-evenly;
   gap: 12px;
+}
+
+/* Rows with fewer than 4 tiles group together in the middle instead of
+   spreading edge to edge */
+.position-row-compact {
+  justify-content: center;
 }
 
 .position-circle {
@@ -67,6 +73,17 @@ iframe {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     justify-items: center;
+  }
+
+  /* A short row switches to flex so an odd tile left over after pairs of 2
+     centers itself on its own line instead of sitting flush left */
+  .position-row-compact {
+    display: flex;
+    justify-content: center;
+  }
+
+  .position-row-compact .position-tile {
+    flex: 0 0 calc(50% - 6px);
   }
 
   .position-circle {

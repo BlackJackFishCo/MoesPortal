@@ -1282,15 +1282,14 @@ const POSITIONS = [
   { id: "cold",     label: "Cold",     icon: "❄️",  color: "#E8541A" },
   { id: "swing",    label: "Swing",    icon: "🔄",  color: "#E8541A" },
   { id: "ring",     label: "Ring",     icon: "💵",  color: "#E8541A" },
-  { id: "prep",     label: "Linebacker", icon: "🔪",  color: "#E8541A" },
   { id: "ambassador", label: "Guest Line of Sight", icon: "👀", color: "#E8541A" },
   { id: "catering", label: "Catering", icon: "🚐", color: "#E8541A" },
 ];
 
-// Star Tracker layout: 4 per row, same order as before (Menu, Guest Line of Sight, Hot, Cold, Swing, Ring, Linebacker, Catering)
+// Star Tracker layout: 4 per row, then the remaining 3 centered underneath
 const POSITION_ROWS = [
   ["menu", "ambassador", "hot", "cold"],
-  ["swing", "ring", "prep", "catering"],
+  ["swing", "ring", "catering"],
 ];
 
 const POSITION_OVERVIEWS = {
@@ -1788,7 +1787,7 @@ function PositionTracker({ user, onPositionPass, setActivePdf }) {
       <div style={{ background: "#000000", border: `1.5px solid ${MOE.teal}`, borderRadius: 14, padding: "20px 16px", marginBottom: 24 }}>
         <div style={{ display: "flex", flexDirection: "column", gap: 20 }}>
           {POSITION_ROWS.map((row, r) => (
-            <div key={r} className="position-row">
+            <div key={r} className={`position-row${row.length < 4 ? " position-row-compact" : ""}`}>
               {row.map(id => {
                 const pos = POSITIONS.find(p => p.id === id);
                 const done = !!posProg[pos.id];

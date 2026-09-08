@@ -1204,7 +1204,7 @@ const POSITION_VIDEOS = {
   ],
   hot:      [{ title: "Hot Station Overview",        url: "https://www.youtube-nocookie.com/embed/m8druNKyL8o" }],
   cold:     [{ title: "Cold Station Deep Dive",        url: "https://www.youtube-nocookie.com/embed/uzaj2vCTMwc" }, { title: "Cold Station Overview",       url: "https://www.youtube-nocookie.com/embed/l9398Kjy7-4" }],
-  swing:    [{ title: "Swing Position Overview",     url: "https://www.youtube-nocookie.com/embed/dN3_JdrYRWE" }, { title: "Swing Position Deep Dive",      url: "https://www.youtube-nocookie.com/embed/dZdXE48ooq0" }],
+  swing:    [{ title: "Swing Position Deep Dive",      url: "https://www.youtube-nocookie.com/embed/dZdXE48ooq0" }],
   ring:     [{ title: "Ring / Cashier Overview",     url: "https://www.youtube-nocookie.com/embed/4vQev6t8ZmA" }],
   prep:     [],
   ambassador: [],

@@ -22,6 +22,15 @@ const MOE = {
   white: "#FFFFFF",
 };
 
+// Local documents (PDFs, etc.) keep the same URL when their content is
+// replaced, so browsers and the GitHub Pages CDN can keep serving a
+// cached, out-of-date copy after an update. Stamp the current build time
+// onto same-origin links so every deploy forces a fresh fetch.
+function cacheBust(url) {
+  if (!url || !url.startsWith("/") || typeof __BUILD_TIME__ === "undefined") return url;
+  return `${url}?v=${__BUILD_TIME__}`;
+}
+
 // ─── Store list ───────────────────────────────────────────────────────────────
 const STORES = [
   "Store #132 – Abercorn",
@@ -1994,7 +2003,7 @@ function PageContent({ page, isCompleted, onComplete, progress, user }) {
             ← Back to Portal
           </button>
           {activePdf.url !== "#" && (
-            <a href={activePdf.url} target="_blank" rel="noreferrer" style={{ color: MOE.teal, fontFamily: "Calibri, sans-serif", fontSize: 14, fontWeight: 600, textDecoration: "none", whiteSpace: "nowrap", order: 2, marginLeft: "auto" }}>
+            <a href={cacheBust(activePdf.url)} target="_blank" rel="noreferrer" style={{ color: MOE.teal, fontFamily: "Calibri, sans-serif", fontSize: 14, fontWeight: 600, textDecoration: "none", whiteSpace: "nowrap", order: 2, marginLeft: "auto" }}>
               Open in new tab ↗
             </a>
           )}
@@ -2009,7 +2018,7 @@ function PageContent({ page, isCompleted, onComplete, progress, user }) {
             </p>
           </div>
         ) : activePdf.url.toLowerCase().endsWith(".pdf") ? (
-          <iframe src={activePdf.url} title={activePdf.title} style={{ flex: 1, border: "none", background: "#fff" }} />
+          <iframe src={cacheBust(activePdf.url)} title={activePdf.title} style={{ flex: 1, border: "none", background: "#fff" }} />
         ) : (
           <div style={{ flex: 1, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: 20, padding: 24 }}>
             <p style={{ color: "#ccc", fontFamily: "Calibri, sans-serif", fontSize: 18, textAlign: "center", maxWidth: 420 }}>

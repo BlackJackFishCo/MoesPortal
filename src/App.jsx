@@ -1669,7 +1669,7 @@ function ResourceLinks({ setActivePdf }) {
           innerFill="#000"
           innerTextColor="#fff"
           title="This Month's Sterling: MLT Doc"
-          onOpen={() => setActivePdf({ title: "Latest MLT Document", url: "#" })}
+          onOpen={() => window.open(cacheBust("/the-snapshot.pdf"), "_blank", "noopener,noreferrer")}
         />
         <FocusBadge
           rimText="THIS MONTH'S STERLING"

@@ -149,6 +149,26 @@ const DISTRICTS = [
 
 // ─── No fixed user list — anyone can sign in with name + email + store ────────
 
+// ─── Food Safety state regulatory agency links ────────────────────────────────
+// State outline paths derived from US Census Bureau TIGER/Line shapefiles
+// (via the public-domain us-atlas dataset), simplified and fitted to a 0-100 viewBox.
+const FOOD_SAFETY_STATE_LINKS = [
+  { state: "Florida", abbr: "FL", url: "https://www.myfloridalicense.com/DBPR/hotels-restaurants/",
+    path: "M84.066,86.721L84.066,86.721L84.066,86.721ZM82.95,87.383L82.95,87.383L82.95,87.383ZM79.92,88.56L79.92,88.56L79.92,88.56ZM72.266,90.25L76.372,87.268L78.605,88.97ZM70.033,90.565L70.033,90.565L70.033,90.565ZM68.359,90.324L68.359,90.324L68.359,90.324ZM67.243,64.012L67.243,64.012L67.243,64.012ZM59.827,89.474L59.827,89.474L59.827,89.474ZM40.532,24.967L40.532,24.967L40.532,24.967ZM36.824,9.435L38.379,13.181L67.801,15.022L69.754,17.579L70.751,11.682L76.372,13.203L78.365,24.714L81.914,33.69L86.02,40.357L86.1,46.536L91.362,60.033L92,65.304L90.684,76.337L89.728,76.073L87.495,82.656L80.399,83.521L78.086,76.528L73.621,74.494L71.628,67.979L67.402,63.211L62.379,54.044L65.807,49.788L62.538,47.39L63.654,50.047L60.744,49.453L60.625,44.999L62.698,42.17L62.538,36.297L61.262,33.231L59.11,32.838L54.645,28.514L52.013,23.801L47.708,21.014L44.997,21.08L36.346,27.625L32.957,26.692L32.837,23.636L26.618,19.281L18.724,17.247L8.877,18.74L10.591,16.727L8,9.479Z" },
+  { state: "Georgia", abbr: "GA", url: "https://dph.georgia.gov/environmental-health/food-service",
+    path: "M13.985,8.304L33.595,8.224L52.109,8L48.603,13.926L55.669,17.748L60.544,27.561L70.349,36.779L72.924,42.252L76.813,44.677L78.018,51.759L80.045,52.911L82.564,60.886L86.015,62.309L82.291,67.914L79.826,77.151L78.182,78.438L77.525,85.987L69.802,83.897L68.432,92L65.748,88.486L25.323,85.957L23.187,80.81L21.599,77.503L22.53,71.593L21.106,65.816L24.885,58.175L20.394,47.192Z" },
+  { state: "Alabama", abbr: "AL", url: "https://www.statefoodsafety.com/food-handler/alabama/jefferson-county",
+    path: "M25.524,92L25.524,92L25.524,92ZM27.444,8L65.997,8.203L72.236,46.06L76.609,56.751L72.929,64.19L74.316,69.813L73.409,75.567L74.955,78.786L36.402,78.846L39.869,88.54L37.576,91.232L33.896,91.542L30.324,84.256L28.404,90.537L24.565,89.694L23.391,63.228L28.99,9.868Z" },
+  { state: "North Carolina", abbr: "NC", url: "https://www.ncdhhs.gov/food-protection",
+    path: "M92,41.53L92,41.53L92,41.53ZM89.194,51.945L89.194,51.945L89.194,51.945ZM33.849,33.628L47.352,34.161L90.632,34.088L88.914,34.569L90.071,37.801L82.741,41.541L91.193,41.25L91.509,45.823L87.932,48.832L79.304,46.597L84.74,49.645L81.864,53.707L85.056,52.068L86.529,53.513L84.073,57.661L82.706,56.417L79.233,56.794L74.113,59.688L71.447,62.696L70.149,66.351L64.503,66.372L53.42,55.088L42.442,54.904L40.057,50.98L27.851,50.385L19.855,52.755L8,52.898L8.316,50.076L10.946,49.161L13.366,46.029L16.172,45.957L28.588,38.831L30.412,39.184Z" },
+  { state: "South Carolina", abbr: "SC", url: "https://scdhec.gov/food-safety",
+    path: "M12.021,20.977L26.346,16.731L48.209,17.798L52.482,24.828L72.147,25.157L92,45.369L82.45,53.102L77.613,63.081L66.429,71.436L57.948,74.432L58.45,77.228L50.911,83.269L46.953,81.636L44.063,72.489L41.738,71.168L40.356,63.045L35.895,60.264L32.942,53.985L21.696,43.413L16.105,32.157L8,27.774Z" },
+  { state: "New York", abbr: "NY", url: "https://www.health.ny.gov/environmental/indoors/food_safety/",
+    path: "M92,72.603L92,72.603L92,72.603ZM90.83,74.873L90.83,74.873L90.83,74.873ZM90.049,73.646L90.049,73.646L90.049,73.646ZM69.878,81.159L67.81,83.434L69.878,81.159ZM44.83,33.937L44.83,33.937L44.83,33.937ZM43.972,33.691L43.972,33.691L43.972,33.691ZM8,57.818L14.672,53.644L17.91,50.24L15.53,43.126L21.85,41.444L30.278,42.215L32.229,43.536L38.549,42.998L44.362,39.245L46.352,39.129L47.405,33.029L44.83,31.563L45.494,29.027L49.863,26.47L56.418,19.309L61.646,16.566L77.798,16.632L77.291,22.385L78.345,25.359L76.745,31.368L78.813,38.756L78.657,50.8L76.238,61.042L75.536,72.019L74.365,76.507L85.484,76.544L88.528,74.266L91.259,76.408L79.242,81.59L71.283,82.844L70.151,80.741L71.673,76.322L63.09,71.123L58.954,67.521L58.564,64.106L55.872,61.784L8.039,61.797Z" },
+  { state: "New Jersey", abbr: "NJ", url: "https://www.nj.gov/health/eh/foodweb/",
+    path: "M28.03,68.332L29.364,66.406L31.842,62.401L50.334,50.195L41.374,41.074L37.466,31.435L39.277,21.546L51.001,8L71.97,20.7L68.253,31.496L67.586,32.518L62.534,38.075L70.255,42.631L66.919,63.766L60.532,75.165L43.661,92L45.949,84.539L28.697,74.16L28.125,69.161Z" },
+];
+
 // ─── Pages config ─────────────────────────────────────────────────────────────
 const PAGES = [
   {
@@ -2330,6 +2350,35 @@ function PageContent({ page, isCompleted, onComplete, progress, user }) {
           </>
         )}
       </section>}
+
+      {/* State Health Department Links - Food Safety page only */}
+      {page.id === "food-safety" && (
+        <section style={{ marginBottom: 40 }}>
+          <h2 style={{ fontSize: 24, fontWeight: 700, color: "#ffffff", fontFamily: "Calibri, sans-serif", marginBottom: 18, display: "flex", alignItems: "center", gap: 8, textTransform: "uppercase", letterSpacing: 1 }}>
+            {t("State Food Safety Resources")}
+          </h2>
+          <div style={{ display: "flex", flexWrap: "wrap", justifyContent: "center", gap: 22 }}>
+            {FOOD_SAFETY_STATE_LINKS.map(s => (
+              <a key={s.abbr} href={s.url} target="_blank" rel="noreferrer" title={s.state}
+                style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 8, textDecoration: "none", width: 92 }}>
+                <div style={{
+                  width: 72, height: 72, borderRadius: "50%",
+                  background: "#111", border: `3px solid ${page.color}`,
+                  display: "flex", alignItems: "center", justifyContent: "center",
+                  transition: "all 0.2s",
+                }}>
+                  <svg viewBox="0 0 100 100" width="46" height="46">
+                    <path d={s.path} fill="none" stroke={page.color} strokeWidth="3" strokeLinejoin="round" strokeLinecap="round" />
+                  </svg>
+                </div>
+                <div style={{ fontSize: 13, fontWeight: 600, color: "#bbb", fontFamily: "Calibri, sans-serif", textAlign: "center" }}>
+                  {s.abbr}
+                </div>
+              </a>
+            ))}
+          </div>
+        </section>
+      )}
 
 
       {page.id === "orientation" && (

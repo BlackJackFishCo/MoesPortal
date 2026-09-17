@@ -112,6 +112,7 @@ const ES = {
     "Sterling Restaurants, LLC es el franquiciado más grande de Moe's Southwest Grills. En julio de 2009, el CEO Mark Monroe fundó Sterling Restaurants y adquirió la primerísima ubicación de Moe's en el mundo! Peachtree — tienda #1 en Atlanta, GA. En 2016 Sterling fue nombrado \"Franquiciado del Año\" por la Asociación Internacional de Franquicias. Sterling luego emprendió una importante estrategia de adquisición en 2017 y 2018, comprando más de 30 ubicaciones adicionales en Florida, Georgia, y las Carolinas. En 2023, Sterling invirtió fuertemente en modernizaciones de tiendas, renovando las estaciones de bebidas con slushies y limonadas de temporada, nuevas salsas, y logrando comparables de ventas de dos dígitos. Sterling ha sido nombrado Franquicia del Año por Go To Food Brands durante los últimos 10 años. Hoy, Sterling posee y opera casi 90 ubicaciones de Moe's en Florida, Georgia, Alabama, Nueva Jersey, Nueva York, Carolina del Norte, y Carolina del Sur.",
   "Orientation Videos": "Videos de Orientación",
   "Food Safety Videos": "Videos de Seguridad Alimentaria",
+  "State Food Safety Resources": "Recursos Estatales de Seguridad Alimentaria",
   "Welcome To Moe's Videos": "Videos de Bienvenida a Moe's",
   "Additional Training Resources": "Recursos de Capacitación Adicionales",
   "Now playing — click to collapse": "Reproduciendo ahora — haz clic para contraer",

@@ -1466,7 +1466,7 @@ const AMBASSADOR_VISUAL_CHECKS = [
 // ─── Current Sterling Focus (update monthly) ──────────────────────────────────
 // Drives both the "Current Sterling Focus" resource tile title and the
 // Sterling Focus badge on the Resources page. Change the words here each month.
-const CURRENT_STERLING_FOCUS_WORDS = ["STIR", "FLIP", "WIPE"];
+const CURRENT_STERLING_FOCUS_WORDS = ["10/10", "FOOD"];
 
 // ─── Resource links (Resources page document library) ────────────────────────
 // Placeholder links laid out in the requested row order. Swap `url: "#"` for a

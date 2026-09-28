@@ -203,6 +203,16 @@ const PAGES = [
     ],
   },
   {
+    id: "culture",
+    label: "Culture",
+    icon: "🤝",
+    color: "#FFD23F",
+    alwaysAvailable: false,
+    description: "At Moe's, our culture is what sets us apart. It's the energy behind every \"Welcome to Moe's!\", the teamwork on the line, and the pride we take in serving our guests and each other. Take a look below at what makes our Sterling family unique.",
+    pdfs: [],
+    videos: [],
+  },
+  {
     id: "food-safety",
     label: "Food Safety",
     icon: "🛡️",
@@ -1384,6 +1394,11 @@ const POSITION_DOCS = {
   ],
 };
 
+// ─── Culture page — scrolling photo strip ─────────────────────────────────────
+// Empty for now; drop { src: "/photo.jpg", alt: "..." } entries in once photos
+// are ready and the strip on the Culture page will populate automatically.
+const CULTURE_PHOTOS = [];
+
 // ─── Guest Line of Sight (Ambassador) — Wrong vs. Right visual checklist ──────
 // Photos are placeholders for the areas not yet shot — drop actual wrong/right
 // photos in once they're ready. wrongText/rightText explain what's shown under
@@ -2222,6 +2237,27 @@ function PageContent({ page, isCompleted, onComplete, progress, user }) {
       {/* Position Tracker - Training page only */}
       {page.id === "training" && (
         <PositionTracker user={user} onPositionPass={handlePositionPass} setActivePdf={setActivePdf} />
+      )}
+
+      {/* Scrolling photo strip - Culture page only */}
+      {page.id === "culture" && (
+        <section style={{ marginBottom: 40 }}>
+          {CULTURE_PHOTOS.length > 0 ? (
+            <div style={{ display: "flex", gap: 16, overflowX: "auto", paddingBottom: 12 }}>
+              {CULTURE_PHOTOS.map((photo, i) => (
+                <img key={i} src={cacheBust(photo.src)} alt={photo.alt || ""}
+                  style={{ height: 260, width: "auto", flexShrink: 0, borderRadius: 12, objectFit: "cover", border: `2px solid ${page.color}` }}
+                />
+              ))}
+            </div>
+          ) : (
+            <div style={{ border: `2px dashed ${page.color}`, borderRadius: 12, padding: "32px 24px", textAlign: "center" }}>
+              <p style={{ color: "#888", fontFamily: "Calibri, sans-serif", fontSize: 17, margin: 0 }}>
+                {t("Photos coming soon.")}
+              </p>
+            </div>
+          )}
+        </section>
       )}
 
       {/* Orientation video - shown above documents */}

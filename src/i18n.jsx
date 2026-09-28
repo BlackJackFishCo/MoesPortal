@@ -86,6 +86,7 @@ const ES = {
   "Sign Out": "Cerrar Sesión",
   "History": "Historia",
   "Orientation": "Orientación",
+  "Culture": "Cultura",
   "Food Safety": "Seguridad Alimentaria",
   "Training": "Capacitación",
   "Resources": "Recursos",
@@ -99,6 +100,9 @@ const ES = {
     "¡Bienvenido a Moe's! ¡Felicidades! Estamos emocionados de que te unas a nuestro equipo. La página de Orientación te ayudará a orientarte en tu nuevo puesto en Moe's. Políticas, expectativas, código de vestimenta, horarios, y todo lo que necesitas antes de tu primer turno. Estos recursos siempre estarán disponibles aquí para consultarlos más adelante. Como empresa, nuestro PROPÓSITO es ayudar a las personas a realizar y alcanzar sus sueños. Nuestra Misión incluye Desarrollar a las Personas, Operar Excelentes Restaurantes, y Adquirir Restaurantes. Para lograr las tres, debemos ser EXCELENTES en la capacitación. Queremos ayudarte a crecer, y esta capacitación es el primer paso.",
   "This section will review food safety practices you will need to know before serving food to guests. Safety of our food, employees and guests is a top priority. Please review the videos below to complete this Food Safety module.":
     "Esta sección repasará las prácticas de seguridad alimentaria que necesitas conocer antes de servir comida a los clientes. La seguridad de nuestra comida, empleados y clientes es una prioridad absoluta. Por favor revisa los videos a continuación para completar este módulo de Seguridad Alimentaria.",
+  "At Moe's, our culture is what sets us apart. It's the energy behind every \"Welcome to Moe's!\", the teamwork on the line, and the pride we take in serving our guests and each other. Take a look below at what makes our Sterling family unique.":
+    "En Moe's, nuestra cultura es lo que nos distingue. Es la energía detrás de cada \"Welcome to Moe's!\", el trabajo en equipo en la línea, y el orgullo que sentimos al servir a nuestros clientes y a cada uno de nosotros. Echa un vistazo a continuación a lo que hace única a nuestra familia Sterling.",
+  "Photos coming soon.": "Fotos próximamente.",
   "Station-by-station training overview covering the Menu, Hot, Cold, Swing, Ring, and Station Prep positions. Complete the checklist after each section. This training material is always available for reference later. Have your manager verify you have mastered each position on shift to become Sterling Certified and earn your Blue Certification hat.":
     "Repaso de capacitación estación por estación que cubre los puestos de Menu, HOT, COLD, SWING, RING, y Station Prep. Completa la lista de verificación después de cada sección. Este material de capacitación siempre estará disponible para consultarlo más adelante. Pide a tu gerente que verifique que has dominado cada puesto en turno para convertirte en Sterling Certified y ganar tu gorra de Certificación Azul.",
   "Quick-access library for reference documents, contact lists, HR forms, and ongoing learning materials. Always available to you.":

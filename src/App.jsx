@@ -1478,7 +1478,7 @@ const RESOURCE_LINK_SECTIONS = [
     rows: [
       [
         { title: "Recipe Book", url: "https://tylerjohnson7.sharepoint.com/:b:/s/SterlingRestaurants/IQC0glsprOpgTald0QDtBFHCAeMBkOyNrGsjJXnAx-vO8cY?e=OclLrV" },
-        { title: CURRENT_STERLING_FOCUS_WORDS.join("-"), url: "/sterling-focus-current.pdf" },
+        { title: "STIR-FLIP-WIPE", url: "/sterling-focus-current.pdf" },
         { title: "All Hands on Deck", url: "/all-hands-on-deck.pdf" },
         { title: "10/10 Food Tasting", url: "/sterling-focus.pdf" },
       ],

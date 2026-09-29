@@ -1405,6 +1405,8 @@ const CULTURE_COLLAGES = [
   { id: "coth-al", heading: "2026 Church of the Highlands Catering - AL", accent: MOE.orange, photos: [
     { src: "/culture/coth-al/coth-al-1.jpg", alt: "Church of the Highlands catering setup" },
     { src: "/culture/coth-al/coth-al-2.jpg", alt: "Church of the Highlands catering setup" },
+    { src: "/culture/coth-al/coth-al-3.jpg", alt: "Church of the Highlands catering setup" },
+    { src: "/culture/coth-al/coth-al-4.jpg", alt: "Church of the Highlands catering setup" },
   ] },
   { id: "northpoint-fl", heading: "2026 North Point Church - FL", accent: MOE.orange, photos: [] },
   { id: "passion-fl", heading: "2026 Passion Camp - FL", accent: MOE.orange, photos: [] },

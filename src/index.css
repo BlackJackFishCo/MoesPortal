@@ -128,3 +128,24 @@ iframe {
     grid-template-columns: 1fr;
   }
 }
+
+/* Culture page photo collages - a continuous slow auto-scroll through every
+   photo in the group, with the strip duplicated back-to-back so the loop
+   (0 to -50% of the strip's own width) is seamless. */
+@keyframes culture-scroll {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+.culture-scroll-track {
+  display: flex;
+  gap: 14px;
+  width: max-content;
+  animation-name: culture-scroll;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
+.culture-scroll-container:hover .culture-scroll-track {
+  animation-play-state: paused;
+}

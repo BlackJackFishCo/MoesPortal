@@ -1414,32 +1414,25 @@ const CULTURE_COLLAGES = [
   { id: "street-teams", heading: "2026 Street Teams", accent: MOE.orange, photos: [] },
 ];
 
+// Photo tile size for the Culture page scroll strips -- fixed px (not a
+// percentage) so the duplicated-strip loop trick below has a real width to
+// animate against.
+const CULTURE_TILE_SIZE = 230;
+
 function CultureCollages() {
   const t = useT();
-  const [rotation, setRotation] = useState(() =>
-    CULTURE_COLLAGES.reduce((acc, c) => { acc[c.id] = 0; return acc; }, {})
-  );
   const [lightboxImg, setLightboxImg] = useState(null);
-
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setRotation(prev => {
-        const next = {};
-        CULTURE_COLLAGES.forEach(c => {
-          const groups = Math.max(1, Math.ceil(c.photos.length / 3));
-          next[c.id] = (prev[c.id] + 1) % groups;
-        });
-        return next;
-      });
-    }, 4500);
-    return () => clearInterval(timer);
-  }, []);
 
   return (
     <section style={{ marginBottom: 40, display: "flex", flexDirection: "column", gap: 48 }}>
       {CULTURE_COLLAGES.map(collage => {
-        const start = rotation[collage.id] * 3;
-        const shown = collage.photos.slice(start, start + 3);
+        const photos = collage.photos;
+        // Fewer photos than fit on screen at once -- no need to scroll.
+        const needsScroll = photos.length > 3;
+        const strip = needsScroll ? [...photos, ...photos] : photos;
+        // Roughly constant speed per photo, however many are in the group.
+        const durationSec = Math.max(12, photos.length * 5);
+
         return (
           <div key={collage.id}>
             <div style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 16 }}>
@@ -1448,15 +1441,23 @@ function CultureCollages() {
                 {t(collage.heading)}
               </h3>
             </div>
-            {shown.length > 0 ? (
-              <div style={{ display: "grid", gridTemplateColumns: "repeat(3, minmax(0, 1fr))", gap: 14 }}>
-                {shown.map((photo, i) => (
-                  <button key={i} onClick={() => setLightboxImg(cacheBust(photo.src))}
-                    style={{ background: "none", padding: 0, aspectRatio: "1", borderRadius: 10, border: `2px solid ${collage.accent}`, overflow: "hidden", cursor: "pointer" }}
-                  >
-                    <img src={cacheBust(photo.src)} alt={photo.alt || ""} style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} />
-                  </button>
-                ))}
+            {photos.length > 0 ? (
+              <div className={needsScroll ? "culture-scroll-container" : undefined} style={{ overflow: "hidden" }}>
+                <div
+                  className={needsScroll ? "culture-scroll-track" : undefined}
+                  style={needsScroll
+                    ? { animationDuration: `${durationSec}s` }
+                    : { display: "flex", gap: 14, justifyContent: photos.length < 3 ? "flex-start" : "center" }
+                  }
+                >
+                  {strip.map((photo, i) => (
+                    <button key={i} onClick={() => setLightboxImg(cacheBust(photo.src))}
+                      style={{ background: "none", padding: 0, width: CULTURE_TILE_SIZE, height: CULTURE_TILE_SIZE, flexShrink: 0, borderRadius: 10, border: `2px solid ${collage.accent}`, overflow: "hidden", cursor: "pointer" }}
+                    >
+                      <img src={cacheBust(photo.src)} alt={photo.alt || ""} style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} />
+                    </button>
+                  ))}
+                </div>
               </div>
             ) : (
               <div style={{ border: `2px dashed ${collage.accent}`, borderRadius: 12, padding: "28px 24px", textAlign: "center" }}>

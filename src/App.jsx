@@ -2234,6 +2234,11 @@ function PageContent({ page, isCompleted, onComplete, progress, user }) {
     if (page.id === "orientation" && !isCompleted && allNotesChecked) onComplete(page.id);
   }, [notesChecked]);
 
+  // Auto-complete Culture as soon as the page is opened -- no checkbox needed
+  useEffect(() => {
+    if (page.id === "culture" && !isCompleted) onComplete(page.id);
+  }, [page.id, isCompleted]);
+
   // Auto-complete history when the video ends (YouTube postMessage API)
   useEffect(() => {
     if (page.id !== "history" || isCompleted) return;
@@ -2543,7 +2548,7 @@ function PageContent({ page, isCompleted, onComplete, progress, user }) {
         </div>
       )}
 
-      {!page.alwaysAvailable && page.id !== "training" && page.id !== "orientation" && (
+      {!page.alwaysAvailable && page.id !== "training" && page.id !== "orientation" && page.id !== "culture" && (
         <div style={{ background: isCompleted ? MOE.teal : "#1A1A1A", border: `2px solid ${isCompleted ? MOE.teal : MOE.orange}`, borderRadius: 14, padding: "28px 32px" }}>
           {isCompleted ? (
             <div style={{ display: "flex", alignItems: "center", gap: 14 }}>

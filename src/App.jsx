@@ -206,7 +206,7 @@ const PAGES = [
     id: "culture",
     label: "Culture",
     icon: "🤝",
-    color: "#FFD23F",
+    color: MOE.orange,
     alwaysAvailable: false,
     description: "At Moe's, our culture is what sets us apart. It's the energy behind every \"Welcome to Moe's!\", the teamwork on the line, and the pride we take in serving our guests and each other. Take a look below at what makes our Sterling family unique.",
     pdfs: [],

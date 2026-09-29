@@ -1394,10 +1394,94 @@ const POSITION_DOCS = {
   ],
 };
 
-// ─── Culture page — scrolling photo strip ─────────────────────────────────────
-// Empty for now; drop { src: "/photo.jpg", alt: "..." } entries in once photos
-// are ready and the strip on the Culture page will populate automatically.
-const CULTURE_PHOTOS = [];
+// ─── Culture page — rotating photo collages ───────────────────────────────────
+// One entry per event/group. To add a new event, add one object here.
+// Each `photos` array is empty for now -- drop up to as many
+// { src: "/photo.jpg", alt: "..." } entries in as you have, and the section
+// below will automatically cycle through them in rotating groups of 3.
+const CULTURE_COLLAGES = [
+  { id: "challenge", heading: "10/10 Challenge", accent: "#FFD23F", photos: [] },
+  { id: "cinco", heading: "Cinco De Moe's", accent: MOE.orange, photos: [] },
+  { id: "coth-al", heading: "2026 Church of the Highlands Catering - AL", accent: MOE.teal, photos: [] },
+  { id: "northpoint-fl", heading: "2026 North Point Church - FL", accent: MOE.tealDark, photos: [] },
+  { id: "passion-fl", heading: "2026 Passion Camp - FL", accent: "#FFD23F", photos: [] },
+  { id: "remodel", heading: "Remodel Celebrations", accent: MOE.orange, photos: [] },
+  { id: "street-teams", heading: "2026 Street Teams", accent: MOE.teal, photos: [] },
+];
+
+function CultureCollages() {
+  const t = useT();
+  const [rotation, setRotation] = useState(() =>
+    CULTURE_COLLAGES.reduce((acc, c) => { acc[c.id] = 0; return acc; }, {})
+  );
+  const [lightboxImg, setLightboxImg] = useState(null);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setRotation(prev => {
+        const next = {};
+        CULTURE_COLLAGES.forEach(c => {
+          const groups = Math.max(1, Math.ceil(c.photos.length / 3));
+          next[c.id] = (prev[c.id] + 1) % groups;
+        });
+        return next;
+      });
+    }, 4500);
+    return () => clearInterval(timer);
+  }, []);
+
+  return (
+    <section style={{ marginBottom: 40, display: "flex", flexDirection: "column", gap: 48 }}>
+      {CULTURE_COLLAGES.map(collage => {
+        const start = rotation[collage.id] * 3;
+        const shown = collage.photos.slice(start, start + 3);
+        return (
+          <div key={collage.id}>
+            <div style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 16 }}>
+              <div style={{ width: 6, height: 26, background: collage.accent, borderRadius: 3, flexShrink: 0 }} />
+              <h3 style={{ margin: 0, fontSize: 20, fontWeight: 800, color: "#fff", fontFamily: "Calibri, sans-serif", textTransform: "uppercase", letterSpacing: 1 }}>
+                {t(collage.heading)}
+              </h3>
+            </div>
+            {shown.length > 0 ? (
+              <div style={{ display: "grid", gridTemplateColumns: "repeat(3, minmax(0, 1fr))", gap: 14 }}>
+                {shown.map((photo, i) => (
+                  <button key={i} onClick={() => setLightboxImg(cacheBust(photo.src))}
+                    style={{ background: "none", padding: 0, aspectRatio: "1", borderRadius: 10, border: `2px solid ${collage.accent}`, overflow: "hidden", cursor: "pointer" }}
+                  >
+                    <img src={cacheBust(photo.src)} alt={photo.alt || ""} style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} />
+                  </button>
+                ))}
+              </div>
+            ) : (
+              <div style={{ border: `2px dashed ${collage.accent}`, borderRadius: 12, padding: "28px 24px", textAlign: "center" }}>
+                <p style={{ color: "#888", fontFamily: "Calibri, sans-serif", fontSize: 16, margin: 0 }}>
+                  {t("Photos coming soon.")}
+                </p>
+              </div>
+            )}
+          </div>
+        );
+      })}
+
+      {/* Enlarged photo lightbox */}
+      {lightboxImg && (
+        <div
+          onClick={() => setLightboxImg(null)}
+          style={{ position: "fixed", inset: 0, background: "rgba(0,0,0,0.9)", zIndex: 2000, display: "flex", alignItems: "center", justifyContent: "center", padding: 24, cursor: "zoom-out" }}
+        >
+          <button
+            onClick={() => setLightboxImg(null)}
+            style={{ position: "absolute", top: 20, right: 20, background: "rgba(255,255,255,0.15)", color: "#fff", border: "none", borderRadius: 8, padding: "10px 16px", fontSize: 16, cursor: "pointer", fontFamily: "Calibri, sans-serif" }}
+          >
+            {t("✕ Close")}
+          </button>
+          <img src={lightboxImg} alt="Enlarged" onClick={e => e.stopPropagation()} style={{ maxWidth: "100%", maxHeight: "90vh", objectFit: "contain", borderRadius: 10, cursor: "default" }} />
+        </div>
+      )}
+    </section>
+  );
+}
 
 // ─── Guest Line of Sight (Ambassador) — Wrong vs. Right visual checklist ──────
 // Photos are placeholders for the areas not yet shot — drop actual wrong/right
@@ -2239,26 +2323,8 @@ function PageContent({ page, isCompleted, onComplete, progress, user }) {
         <PositionTracker user={user} onPositionPass={handlePositionPass} setActivePdf={setActivePdf} />
       )}
 
-      {/* Scrolling photo strip - Culture page only */}
-      {page.id === "culture" && (
-        <section style={{ marginBottom: 40 }}>
-          {CULTURE_PHOTOS.length > 0 ? (
-            <div style={{ display: "flex", gap: 16, overflowX: "auto", paddingBottom: 12 }}>
-              {CULTURE_PHOTOS.map((photo, i) => (
-                <img key={i} src={cacheBust(photo.src)} alt={photo.alt || ""}
-                  style={{ height: 260, width: "auto", flexShrink: 0, borderRadius: 12, objectFit: "cover", border: `2px solid ${page.color}` }}
-                />
-              ))}
-            </div>
-          ) : (
-            <div style={{ border: `2px dashed ${page.color}`, borderRadius: 12, padding: "32px 24px", textAlign: "center" }}>
-              <p style={{ color: "#888", fontFamily: "Calibri, sans-serif", fontSize: 17, margin: 0 }}>
-                {t("Photos coming soon.")}
-              </p>
-            </div>
-          )}
-        </section>
-      )}
+      {/* Rotating photo collages - Culture page only */}
+      {page.id === "culture" && <CultureCollages />}
 
       {/* Orientation video - shown above documents */}
       {page.id === "orientation" && (

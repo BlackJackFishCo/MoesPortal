@@ -1400,13 +1400,13 @@ const POSITION_DOCS = {
 // { src: "/photo.jpg", alt: "..." } entries in as you have, and the section
 // below will automatically cycle through them in rotating groups of 3.
 const CULTURE_COLLAGES = [
-  { id: "challenge", heading: "10/10 Challenge", accent: "#FFD23F", photos: [] },
+  { id: "challenge", heading: "10/10 Challenge", accent: MOE.orange, photos: [] },
   { id: "cinco", heading: "Cinco De Moe's", accent: MOE.orange, photos: [] },
-  { id: "coth-al", heading: "2026 Church of the Highlands Catering - AL", accent: MOE.teal, photos: [] },
-  { id: "northpoint-fl", heading: "2026 North Point Church - FL", accent: MOE.tealDark, photos: [] },
-  { id: "passion-fl", heading: "2026 Passion Camp - FL", accent: "#FFD23F", photos: [] },
+  { id: "coth-al", heading: "2026 Church of the Highlands Catering - AL", accent: MOE.orange, photos: [] },
+  { id: "northpoint-fl", heading: "2026 North Point Church - FL", accent: MOE.orange, photos: [] },
+  { id: "passion-fl", heading: "2026 Passion Camp - FL", accent: MOE.orange, photos: [] },
   { id: "remodel", heading: "Remodel Celebrations", accent: MOE.orange, photos: [] },
-  { id: "street-teams", heading: "2026 Street Teams", accent: MOE.teal, photos: [] },
+  { id: "street-teams", heading: "2026 Street Teams", accent: MOE.orange, photos: [] },
 ];
 
 function CultureCollages() {

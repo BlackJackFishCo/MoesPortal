@@ -1212,11 +1212,11 @@ function ProgressBar({ progress, activePage, onNavigate }) {
 
       {/* ── Step tracker ── */}
       <div style={{ maxWidth: 1100, margin: "0 auto", padding: "16px 16px 0" }}>
-        <div style={{ display: "flex", alignItems: "flex-start", justifyContent: "space-between", position: "relative" }}>
+        <div className="step-tracker-row" style={{ display: "flex", alignItems: "flex-start", justifyContent: "space-between", position: "relative", gap: 8, paddingBottom: 4 }}>
 
           {/* connecting line behind steps */}
-          <div style={{ position: "absolute", top: 19, left: 20, right: 20, height: 3, background: "#2a2a2a", zIndex: 0 }} />
-          <div style={{ position: "absolute", top: 19, left: 20, height: 3, width: `${pct}%`, background: `linear-gradient(90deg, ${MOE.teal}, ${MOE.orange})`, zIndex: 1, transition: "width 0.5s ease", borderRadius: 3, maxWidth: "calc(100% - 40px)" }} />
+          <div className="step-tracker-line" style={{ position: "absolute", top: 19, left: 20, right: 20, height: 3, background: "#2a2a2a", zIndex: 0 }} />
+          <div className="step-tracker-line" style={{ position: "absolute", top: 19, left: 20, height: 3, width: `${pct}%`, background: `linear-gradient(90deg, ${MOE.teal}, ${MOE.orange})`, zIndex: 1, transition: "width 0.5s ease", borderRadius: 3, maxWidth: "calc(100% - 40px)" }} />
 
           {/* ordered steps */}
           {ordered.map((page, idx) => {
@@ -1228,7 +1228,7 @@ function ProgressBar({ progress, activePage, onNavigate }) {
             const borderColor = isDone ? MOE.teal : isActive ? MOE.orange : isUnlocked ? "#555" : "#333";
 
             return (
-              <div key={page.id}
+              <div key={page.id} className="step-tracker-item"
                 onClick={() => isUnlocked && onNavigate(page.id)}
                 style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 6, cursor: isUnlocked ? "pointer" : "not-allowed", zIndex: 2, flex: 1, opacity: isUnlocked ? 1 : 0.4 }}
               >
@@ -1263,7 +1263,7 @@ function ProgressBar({ progress, activePage, onNavigate }) {
           {resourcePage && (() => {
             const isActive = activePage === resourcePage.id;
             return (
-              <div onClick={() => onNavigate(resourcePage.id)}
+              <div className="step-tracker-item" onClick={() => onNavigate(resourcePage.id)}
                 style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 6, cursor: "pointer", zIndex: 2, flex: 1 }}
               >
                 <div style={{
@@ -2459,7 +2459,7 @@ function PageContent({ page, isCompleted, onComplete, progress, user }) {
           </div>
         ) : (
           <>
-            <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))", gap: 16, marginBottom: 20 }}>
+            <div className="training-video-grid" style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))", gap: 16, marginBottom: 20 }}>
               {page.videos.map((video, i) => (
                 <div
                   key={i}

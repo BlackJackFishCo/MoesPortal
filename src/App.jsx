@@ -1448,7 +1448,13 @@ const CULTURE_COLLAGES = [
     { src: "/culture/remodel/remodel-4.jpg", alt: "Remodel celebration - Palm Bay, FL" },
     { src: "/culture/remodel/remodel-5.jpg", alt: "Remodel celebration - Viera, FL" },
   ] },
-  { id: "game-day", heading: "College Game Day", accent: MOE.orange, photos: [] },
+  { id: "game-day", heading: "College Game Day", accent: MOE.orange, photos: [
+    { src: "/culture/game-day/game-day-1.jpg", alt: "College Game Day photo" },
+    { src: "/culture/game-day/game-day-2.jpg", alt: "College Game Day photo" },
+    { src: "/culture/game-day/game-day-3.webp", alt: "College Game Day photo" },
+    { src: "/culture/game-day/game-day-4.jpg", alt: "College Game Day photo" },
+    { src: "/culture/game-day/game-day-5.jpg", alt: "College Game Day photo" },
+  ] },
 ];
 
 // Photo tile size for the Culture page scroll strips -- fixed px (not a

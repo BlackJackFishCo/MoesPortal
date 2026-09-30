@@ -1454,6 +1454,7 @@ const CULTURE_COLLAGES = [
     { src: "/culture/game-day/game-day-3.webp", alt: "College Game Day photo" },
     { src: "/culture/game-day/game-day-4.jpg", alt: "College Game Day photo" },
     { src: "/culture/game-day/game-day-5.jpg", alt: "College Game Day photo" },
+    { src: "/culture/game-day/game-day-6.jpg", alt: "College Game Day photo" },
   ] },
 ];
 

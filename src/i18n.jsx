@@ -57,8 +57,8 @@ function LanguageToggle({ compact }) {
   });
   return (
     <div style={{ display: "flex", gap: 6 }}>
-      <button type="button" onClick={() => setLang("en")} style={btn("en")}>EN</button>
-      <button type="button" onClick={() => setLang("es")} style={btn("es")}>ES</button>
+      <button type="button" onClick={() => setLang("en")} style={btn("en")}>ENGLISH</button>
+      <button type="button" onClick={() => setLang("es")} style={btn("es")}>SPANISH</button>
     </div>
   );
 }

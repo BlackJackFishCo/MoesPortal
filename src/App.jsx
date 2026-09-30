@@ -1427,14 +1427,14 @@ const CULTURE_COLLAGES = [
     { src: "/culture/coth-al/coth-al-3.jpg", alt: "Church of the Highlands catering setup" },
     { src: "/culture/coth-al/coth-al-4.jpg", alt: "Church of the Highlands catering setup" },
   ] },
-  { id: "northpoint-fl", heading: "North Point Church - FL", accent: MOE.orange, photos: [
+  { id: "northpoint-fl", heading: "North Pointe Camp Catering - FL", accent: MOE.orange, photos: [
     { src: "/culture/northpoint-fl/northpoint-fl-1.jpg", alt: "North Point Church catering photo" },
     { src: "/culture/northpoint-fl/northpoint-fl-2.jpg", alt: "North Point Church catering photo" },
     { src: "/culture/northpoint-fl/northpoint-fl-3.jpg", alt: "North Point Church catering photo" },
     { src: "/culture/northpoint-fl/northpoint-fl-4.jpg", alt: "North Point Church catering photo" },
     { src: "/culture/northpoint-fl/northpoint-fl-5.jpg", alt: "North Point Church catering photo" },
   ] },
-  { id: "passion-fl", heading: "Passion Camp - FL", accent: MOE.orange, photos: [
+  { id: "passion-fl", heading: "Passion Camp Catering - FL", accent: MOE.orange, photos: [
     { src: "/culture/passion-fl/passion-fl-1.jpg", alt: "Passion Camp catering photo" },
     { src: "/culture/passion-fl/passion-fl-2.jpg", alt: "Passion Camp catering photo" },
     { src: "/culture/passion-fl/passion-fl-3.jpg", alt: "Passion Camp catering photo" },
@@ -1448,7 +1448,7 @@ const CULTURE_COLLAGES = [
     { src: "/culture/remodel/remodel-4.jpg", alt: "Remodel celebration - Palm Bay, FL" },
     { src: "/culture/remodel/remodel-5.jpg", alt: "Remodel celebration - Viera, FL" },
   ] },
-  { id: "game-day", heading: "College Game Day", accent: MOE.orange, photos: [
+  { id: "game-day", heading: "College Game Days", accent: MOE.orange, photos: [
     { src: "/culture/game-day/game-day-1.jpg", alt: "College Game Day photo" },
     { src: "/culture/game-day/game-day-2.jpg", alt: "College Game Day photo" },
     { src: "/culture/game-day/game-day-3.webp", alt: "College Game Day photo" },

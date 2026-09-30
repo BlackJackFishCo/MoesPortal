@@ -1407,7 +1407,13 @@ const CULTURE_COLLAGES = [
     { src: "/culture/challenge/challenge-4.jpg", alt: "10/10 Challenge plate" },
     { src: "/culture/challenge/challenge-5.jpg", alt: "10/10 Challenge team photo" },
   ] },
-  { id: "cinco", heading: "Cinco De Moe's", accent: MOE.orange, photos: [] },
+  { id: "cinco", heading: "Cinco De Moe's", accent: MOE.orange, photos: [
+    { src: "/culture/cinco/cinco-1.jpg", alt: "Cinco De Moe's team photo" },
+    { src: "/culture/cinco/cinco-2.jpg", alt: "Cinco De Moe's team photo" },
+    { src: "/culture/cinco/cinco-3.jpg", alt: "Cinco De Moe's team photo" },
+    { src: "/culture/cinco/cinco-4.jpg", alt: "Cinco De Moe's team photo" },
+    { src: "/culture/cinco/cinco-5.jpg", alt: "Cinco De Moe's team photo" },
+  ] },
   { id: "coth-al", heading: "Church of the Highlands Catering - AL", accent: MOE.orange, photos: [
     { src: "/culture/coth-al/coth-al-1.jpg", alt: "Church of the Highlands catering setup" },
     { src: "/culture/coth-al/coth-al-2.jpg", alt: "Church of the Highlands catering setup" },

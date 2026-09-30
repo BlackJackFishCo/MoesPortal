@@ -1396,9 +1396,9 @@ const POSITION_DOCS = {
 
 // ─── Culture page — rotating photo collages ───────────────────────────────────
 // One entry per event/group. To add a new event, add one object here.
-// Each `photos` array is empty for now -- drop up to as many
-// { src: "/photo.jpg", alt: "..." } entries in as you have, and the section
-// below will automatically cycle through them in rotating groups of 3.
+// Each `photos` array holds up to 10 { src: "/photo.jpg", alt: "..." }
+// entries -- add more any time (only the first 10 are used). More than 3
+// photos auto-scrolls continuously through the whole set.
 const CULTURE_COLLAGES = [
   { id: "street-teams", heading: "Street Teams", accent: MOE.orange, photos: [
     { src: "/culture/street-teams/street-teams-1.jpg", alt: "Street Teams photo" },
@@ -1462,7 +1462,8 @@ function CultureCollages() {
   return (
     <section style={{ marginBottom: 40, display: "flex", flexDirection: "column", gap: 48 }}>
       {CULTURE_COLLAGES.map(collage => {
-        const photos = collage.photos;
+        // Cap at 10 photos per event so a strip never gets too long to scroll smoothly.
+        const photos = collage.photos.slice(0, 10);
         // Fewer photos than fit on screen at once -- no need to scroll.
         const needsScroll = photos.length > 3;
         const strip = needsScroll ? [...photos, ...photos] : photos;

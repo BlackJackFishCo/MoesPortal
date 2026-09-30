@@ -1448,6 +1448,7 @@ const CULTURE_COLLAGES = [
     { src: "/culture/remodel/remodel-4.jpg", alt: "Remodel celebration - Palm Bay, FL" },
     { src: "/culture/remodel/remodel-5.jpg", alt: "Remodel celebration - Viera, FL" },
   ] },
+  { id: "game-day", heading: "College Game Day", accent: MOE.orange, photos: [] },
 ];
 
 // Photo tile size for the Culture page scroll strips -- fixed px (not a

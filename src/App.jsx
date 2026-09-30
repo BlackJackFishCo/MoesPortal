@@ -1434,7 +1434,13 @@ const CULTURE_COLLAGES = [
     { src: "/culture/passion-fl/passion-fl-4.jpg", alt: "Passion Camp catering photo" },
     { src: "/culture/passion-fl/passion-fl-5.jpg", alt: "Passion Camp catering photo" },
   ] },
-  { id: "remodel", heading: "Remodel Celebrations", accent: MOE.orange, photos: [] },
+  { id: "remodel", heading: "Remodel Celebrations", accent: MOE.orange, photos: [
+    { src: "/culture/remodel/remodel-1.jpg", alt: "Remodel celebration - Port Orange, FL" },
+    { src: "/culture/remodel/remodel-2.jpg", alt: "Remodel celebration - Orange City, FL" },
+    { src: "/culture/remodel/remodel-3.jpg", alt: "Remodel celebration - Doral, FL" },
+    { src: "/culture/remodel/remodel-4.jpg", alt: "Remodel celebration - Palm Bay, FL" },
+    { src: "/culture/remodel/remodel-5.jpg", alt: "Remodel celebration - Viera, FL" },
+  ] },
   { id: "street-teams", heading: "Street Teams", accent: MOE.orange, photos: [
     { src: "/culture/street-teams/street-teams-1.jpg", alt: "Street Teams photo" },
     { src: "/culture/street-teams/street-teams-2.jpg", alt: "Street Teams photo" },

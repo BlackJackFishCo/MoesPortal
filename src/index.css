@@ -127,6 +127,12 @@ iframe {
   .wrong-right-grid {
     grid-template-columns: 1fr;
   }
+
+  /* Training/Food Safety video cards - single column on mobile instead of
+     squeezing two narrow columns in */
+  .training-video-grid {
+    grid-template-columns: 1fr !important;
+  }
 }
 
 /* Culture page photo collages - a continuous slow auto-scroll through every
@@ -148,4 +154,26 @@ iframe {
 
 .culture-scroll-container:hover .culture-scroll-track {
   animation-play-state: paused;
+}
+
+/* Header step tracker (History, Orientation, etc.) - on narrow phones there
+   isn't room to squeeze every label onto one line without them running into
+   each other, so wrap into two rows of 3 instead of compressing everything
+   onto one. The connecting progress line only makes sense for a single row,
+   so it's hidden here -- the % bar underneath still shows overall progress. */
+@media (max-width: 640px) {
+  .step-tracker-row {
+    flex-wrap: wrap !important;
+    justify-content: center !important;
+    row-gap: 18px;
+  }
+
+  .step-tracker-row > .step-tracker-line {
+    display: none;
+  }
+
+  .step-tracker-row > .step-tracker-item {
+    flex: 0 1 30% !important;
+    min-width: 88px;
+  }
 }

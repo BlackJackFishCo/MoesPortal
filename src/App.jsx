@@ -1421,7 +1421,12 @@ const CULTURE_COLLAGES = [
     { src: "/culture/northpoint-fl/northpoint-fl-4.jpg", alt: "North Point Church catering photo" },
     { src: "/culture/northpoint-fl/northpoint-fl-5.jpg", alt: "North Point Church catering photo" },
   ] },
-  { id: "passion-fl", heading: "2026 Passion Camp - FL", accent: MOE.orange, photos: [] },
+  { id: "passion-fl", heading: "2026 Passion Camp - FL", accent: MOE.orange, photos: [
+    { src: "/culture/passion-fl/passion-fl-1.jpg", alt: "Passion Camp catering photo" },
+    { src: "/culture/passion-fl/passion-fl-2.jpg", alt: "Passion Camp catering photo" },
+    { src: "/culture/passion-fl/passion-fl-3.jpg", alt: "Passion Camp catering photo" },
+    { src: "/culture/passion-fl/passion-fl-4.jpg", alt: "Passion Camp catering photo" },
+  ] },
   { id: "remodel", heading: "Remodel Celebrations", accent: MOE.orange, photos: [] },
   { id: "street-teams", heading: "2026 Street Teams", accent: MOE.orange, photos: [] },
 ];

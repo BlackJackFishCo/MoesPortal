@@ -1408,20 +1408,20 @@ const CULTURE_COLLAGES = [
     { src: "/culture/challenge/challenge-5.jpg", alt: "10/10 Challenge team photo" },
   ] },
   { id: "cinco", heading: "Cinco De Moe's", accent: MOE.orange, photos: [] },
-  { id: "coth-al", heading: "2026 Church of the Highlands Catering - AL", accent: MOE.orange, photos: [
+  { id: "coth-al", heading: "Church of the Highlands Catering - AL", accent: MOE.orange, photos: [
     { src: "/culture/coth-al/coth-al-1.jpg", alt: "Church of the Highlands catering setup" },
     { src: "/culture/coth-al/coth-al-2.jpg", alt: "Church of the Highlands catering setup" },
     { src: "/culture/coth-al/coth-al-3.jpg", alt: "Church of the Highlands catering setup" },
     { src: "/culture/coth-al/coth-al-4.jpg", alt: "Church of the Highlands catering setup" },
   ] },
-  { id: "northpoint-fl", heading: "2026 North Point Church - FL", accent: MOE.orange, photos: [
+  { id: "northpoint-fl", heading: "North Point Church - FL", accent: MOE.orange, photos: [
     { src: "/culture/northpoint-fl/northpoint-fl-1.jpg", alt: "North Point Church catering photo" },
     { src: "/culture/northpoint-fl/northpoint-fl-2.jpg", alt: "North Point Church catering photo" },
     { src: "/culture/northpoint-fl/northpoint-fl-3.jpg", alt: "North Point Church catering photo" },
     { src: "/culture/northpoint-fl/northpoint-fl-4.jpg", alt: "North Point Church catering photo" },
     { src: "/culture/northpoint-fl/northpoint-fl-5.jpg", alt: "North Point Church catering photo" },
   ] },
-  { id: "passion-fl", heading: "2026 Passion Camp - FL", accent: MOE.orange, photos: [
+  { id: "passion-fl", heading: "Passion Camp - FL", accent: MOE.orange, photos: [
     { src: "/culture/passion-fl/passion-fl-1.jpg", alt: "Passion Camp catering photo" },
     { src: "/culture/passion-fl/passion-fl-2.jpg", alt: "Passion Camp catering photo" },
     { src: "/culture/passion-fl/passion-fl-3.jpg", alt: "Passion Camp catering photo" },
@@ -1429,7 +1429,7 @@ const CULTURE_COLLAGES = [
     { src: "/culture/passion-fl/passion-fl-5.jpg", alt: "Passion Camp catering photo" },
   ] },
   { id: "remodel", heading: "Remodel Celebrations", accent: MOE.orange, photos: [] },
-  { id: "street-teams", heading: "2026 Street Teams", accent: MOE.orange, photos: [] },
+  { id: "street-teams", heading: "Street Teams", accent: MOE.orange, photos: [] },
 ];
 
 // Photo tile size for the Culture page scroll strips -- fixed px (not a

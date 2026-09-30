@@ -165,7 +165,8 @@ iframe {
   .step-tracker-row {
     flex-wrap: wrap !important;
     justify-content: center !important;
-    row-gap: 18px;
+    row-gap: 28px;
+    column-gap: 14px;
   }
 
   .step-tracker-row > .step-tracker-line {

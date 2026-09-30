@@ -1426,6 +1426,7 @@ const CULTURE_COLLAGES = [
     { src: "/culture/passion-fl/passion-fl-2.jpg", alt: "Passion Camp catering photo" },
     { src: "/culture/passion-fl/passion-fl-3.jpg", alt: "Passion Camp catering photo" },
     { src: "/culture/passion-fl/passion-fl-4.jpg", alt: "Passion Camp catering photo" },
+    { src: "/culture/passion-fl/passion-fl-5.jpg", alt: "Passion Camp catering photo" },
   ] },
   { id: "remodel", heading: "Remodel Celebrations", accent: MOE.orange, photos: [] },
   { id: "street-teams", heading: "2026 Street Teams", accent: MOE.orange, photos: [] },

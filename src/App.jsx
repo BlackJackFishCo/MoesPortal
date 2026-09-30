@@ -1400,7 +1400,13 @@ const POSITION_DOCS = {
 // { src: "/photo.jpg", alt: "..." } entries in as you have, and the section
 // below will automatically cycle through them in rotating groups of 3.
 const CULTURE_COLLAGES = [
-  { id: "challenge", heading: "10/10 Challenge", accent: MOE.orange, photos: [] },
+  { id: "challenge", heading: "10/10 Challenge", accent: MOE.orange, photos: [
+    { src: "/culture/challenge/challenge-1.jpg", alt: "10/10 Challenge team photo" },
+    { src: "/culture/challenge/challenge-2.jpg", alt: "10/10 Challenge team photo" },
+    { src: "/culture/challenge/challenge-3.jpg", alt: "10/10 Challenge team photo" },
+    { src: "/culture/challenge/challenge-4.jpg", alt: "10/10 Challenge plate" },
+    { src: "/culture/challenge/challenge-5.jpg", alt: "10/10 Challenge team photo" },
+  ] },
   { id: "cinco", heading: "Cinco De Moe's", accent: MOE.orange, photos: [] },
   { id: "coth-al", heading: "2026 Church of the Highlands Catering - AL", accent: MOE.orange, photos: [
     { src: "/culture/coth-al/coth-al-1.jpg", alt: "Church of the Highlands catering setup" },

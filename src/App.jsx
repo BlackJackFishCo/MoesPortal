@@ -1400,6 +1400,13 @@ const POSITION_DOCS = {
 // { src: "/photo.jpg", alt: "..." } entries in as you have, and the section
 // below will automatically cycle through them in rotating groups of 3.
 const CULTURE_COLLAGES = [
+  { id: "street-teams", heading: "Street Teams", accent: MOE.orange, photos: [
+    { src: "/culture/street-teams/street-teams-1.jpg", alt: "Street Teams photo" },
+    { src: "/culture/street-teams/street-teams-2.jpg", alt: "Street Teams photo" },
+    { src: "/culture/street-teams/street-teams-3.jpg", alt: "Street Teams photo" },
+    { src: "/culture/street-teams/street-teams-4.jpg", alt: "Street Teams photo" },
+    { src: "/culture/street-teams/street-teams-5.jpg", alt: "Street Teams photo" },
+  ] },
   { id: "challenge", heading: "10/10 Challenge", accent: MOE.orange, photos: [
     { src: "/culture/challenge/challenge-1.jpg", alt: "10/10 Challenge team photo" },
     { src: "/culture/challenge/challenge-2.jpg", alt: "10/10 Challenge team photo" },
@@ -1440,13 +1447,6 @@ const CULTURE_COLLAGES = [
     { src: "/culture/remodel/remodel-3.jpg", alt: "Remodel celebration - Doral, FL" },
     { src: "/culture/remodel/remodel-4.jpg", alt: "Remodel celebration - Palm Bay, FL" },
     { src: "/culture/remodel/remodel-5.jpg", alt: "Remodel celebration - Viera, FL" },
-  ] },
-  { id: "street-teams", heading: "Street Teams", accent: MOE.orange, photos: [
-    { src: "/culture/street-teams/street-teams-1.jpg", alt: "Street Teams photo" },
-    { src: "/culture/street-teams/street-teams-2.jpg", alt: "Street Teams photo" },
-    { src: "/culture/street-teams/street-teams-3.jpg", alt: "Street Teams photo" },
-    { src: "/culture/street-teams/street-teams-4.jpg", alt: "Street Teams photo" },
-    { src: "/culture/street-teams/street-teams-5.jpg", alt: "Street Teams photo" },
   ] },
 ];
 

@@ -1199,6 +1199,33 @@ function LoginScreen({ onLogin, onAdminClick }) {
   );
 }
 
+// Round step badge for the mobile header - same rim-text-plus-center-circle
+// style as the Resources page FocusBadge, just sized down to fit 2 per row.
+function StepCircleBadge({ rimText, centerText, outerFill, rimTextColor, innerTextColor, clickable, onClick, boxShadow, opacity }) {
+  const rimId = useId();
+  return (
+    <button onClick={onClick} disabled={!clickable} className="step-badge"
+      style={{ all: "unset", boxSizing: "border-box", display: "flex", alignItems: "center", justifyContent: "center", borderRadius: "50%", boxShadow, cursor: clickable ? "pointer" : "not-allowed", flexShrink: 0, opacity }}
+    >
+      <svg viewBox="0 0 200 200" width="100%" height="100%">
+        <defs>
+          <path id={rimId} d="M22,100 A78,78 0 1,1 178,100" fill="none" />
+        </defs>
+        <circle cx="100" cy="100" r="98" fill={outerFill} />
+        <text fill={rimTextColor} fontFamily="Calibri, sans-serif" fontWeight="800" fontSize="15" letterSpacing="0.3">
+          <textPath href={`#${rimId}`} startOffset="50%" textAnchor="middle">
+            {rimText}
+          </textPath>
+        </text>
+        <circle cx="100" cy="100" r="58" fill="#000" stroke="#fff" strokeWidth="2" />
+        <text x="100" y="104" textAnchor="middle" dominantBaseline="central" fill={innerTextColor} fontFamily="Calibri, sans-serif" fontWeight="800" fontSize="46">
+          {centerText}
+        </text>
+      </svg>
+    </button>
+  );
+}
+
 // ─── Progress Bar ─────────────────────────────────────────────────────────────
 function ProgressBar({ progress, activePage, onNavigate }) {
   const t = useT();
@@ -1289,6 +1316,44 @@ function ProgressBar({ progress, activePage, onNavigate }) {
               </div>
             );
           })()}
+        </div>
+
+        {/* Mobile-only: large rim-badge steps, 2 per row, instead of the
+            cramped small-circle row above */}
+        <div className="step-badges-mobile" style={{ flexWrap: "wrap", justifyContent: "center", gap: 16, paddingBottom: 8 }}>
+          {ordered.map((page, idx) => {
+            const prevDone = idx === 0 || !!progress[ordered[idx - 1]?.id];
+            const isUnlocked = idx === 0 || prevDone || !!progress[page.id];
+            const isDone = !!progress[page.id];
+            const isActive = activePage === page.id;
+            const outerFill = isDone ? MOE.teal : isActive ? MOE.orange : isUnlocked ? "#444" : "#222";
+            return (
+              <StepCircleBadge key={page.id}
+                rimText={t(page.label).toUpperCase()}
+                centerText={isDone ? "✓" : idx + 1}
+                outerFill={outerFill}
+                rimTextColor={isUnlocked ? "#fff" : "#777"}
+                innerTextColor={isDone ? MOE.teal : isActive ? MOE.orange : "#777"}
+                boxShadow={isActive ? `0 0 20px ${MOE.orange}88` : isDone ? `0 0 14px ${MOE.teal}66` : "none"}
+                opacity={isUnlocked ? 1 : 0.4}
+                clickable={isUnlocked}
+                onClick={() => onNavigate(page.id)}
+              />
+            );
+          })}
+          {resourcePage && (
+            <StepCircleBadge
+              rimText={t(resourcePage.label).toUpperCase()}
+              centerText="✓"
+              outerFill={MOE.orange}
+              rimTextColor="#fff"
+              innerTextColor="#fff"
+              boxShadow={activePage === resourcePage.id ? `0 0 20px ${MOE.orange}88` : "none"}
+              opacity={1}
+              clickable={true}
+              onClick={() => onNavigate(resourcePage.id)}
+            />
+          )}
         </div>
       </div>
 
@@ -2245,10 +2310,7 @@ function PageContent({ page, isCompleted, onComplete, progress, user }) {
   const [activeVideo, setActiveVideo] = useState(null);
   const [activePdf, setActivePdf] = useState(null);
   const [confirmed, setConfirmed] = useState(false);
-  const heroPhotoSrc = page.id === "culture" ? "/culture/bogo-sign-cutout.png"
-    : page.id === "food-safety" ? "/food-safety/thumbs-up-cutout.png"
-    : page.id === "training" ? "/training/taco-guy-cutout.png"
-    : null;
+  const heroPhotoSrc = page.id === "culture" ? "/culture/bogo-sign-cutout.png" : null;
   const hasHeroPhoto = !!heroPhotoSrc;
   const ORIENTATION_NOTES = [
     "Reviewed Sterling Handbook.",

@@ -1212,13 +1212,13 @@ function StepCircleBadge({ rimText, centerText, outerFill, rimTextColor, innerTe
           <path id={rimId} d="M22,100 A78,78 0 1,1 178,100" fill="none" />
         </defs>
         <circle cx="100" cy="100" r="98" fill={outerFill} />
-        <text fill={rimTextColor} fontFamily="Calibri, sans-serif" fontWeight="800" fontSize="15" letterSpacing="0.3">
+        <text fill={rimTextColor} fontFamily="Calibri, sans-serif" fontWeight="800" fontSize={rimText.length > 9 ? "16" : "19"} letterSpacing="0.2">
           <textPath href={`#${rimId}`} startOffset="50%" textAnchor="middle">
             {rimText}
           </textPath>
         </text>
         <circle cx="100" cy="100" r="58" fill="#000" stroke="#fff" strokeWidth="2" />
-        <text x="100" y="104" textAnchor="middle" dominantBaseline="central" fill={innerTextColor} fontFamily="Calibri, sans-serif" fontWeight="800" fontSize="46">
+        <text x="100" y="104" textAnchor="middle" dominantBaseline="central" fill={innerTextColor} fontFamily="Calibri, sans-serif" fontWeight="800" fontSize="56">
           {centerText}
         </text>
       </svg>

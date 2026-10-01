@@ -2787,7 +2787,10 @@ export default function App() {
     setProgress(updated);
     saveProgress(user.id, updated);
 
-    // Auto-advance to next page
+    // Auto-advance to next page -- skipped for Culture, which auto-completes
+    // the instant it's opened; without this it'd jump away before anyone
+    // actually sees the page.
+    if (pageId === "culture") return;
     const ordered = PAGES.filter(p => !p.alwaysAvailable);
     const idx = ordered.findIndex(p => p.id === pageId);
     if (idx < ordered.length - 1) {

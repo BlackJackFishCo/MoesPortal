@@ -1406,6 +1406,7 @@ const CULTURE_COLLAGES = [
     { src: "/culture/street-teams/street-teams-3.jpg", alt: "Street Teams photo" },
     { src: "/culture/street-teams/street-teams-4.jpg", alt: "Street Teams photo" },
     { src: "/culture/street-teams/street-teams-5.jpg", alt: "Street Teams photo" },
+    { src: "/culture/street-teams/street-teams-6.jpg", alt: "Street Teams photo" },
   ] },
   { id: "challenge", heading: "10/10 Challenge", accent: MOE.orange, photos: [
     { src: "/culture/challenge/challenge-1.jpg", alt: "10/10 Challenge team photo" },

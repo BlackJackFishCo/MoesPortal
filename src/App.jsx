@@ -2245,6 +2245,10 @@ function PageContent({ page, isCompleted, onComplete, progress, user }) {
   const [activeVideo, setActiveVideo] = useState(null);
   const [activePdf, setActivePdf] = useState(null);
   const [confirmed, setConfirmed] = useState(false);
+  const heroPhotoSrc = page.id === "culture" ? "/culture/bogo-sign-cutout.png"
+    : page.id === "food-safety" ? "/food-safety/thumbs-up-cutout.png"
+    : null;
+  const hasHeroPhoto = !!heroPhotoSrc;
   const ORIENTATION_NOTES = [
     "Reviewed Sterling Handbook.",
     "Received Swag Bag and Uniforms.",
@@ -2335,7 +2339,7 @@ function PageContent({ page, isCompleted, onComplete, progress, user }) {
     )}
     <div style={{ maxWidth: 900, margin: "0 auto", padding: "24px 16px" }}>
       {/* Header */}
-      <div className={page.id === "culture" ? "culture-hero" : undefined} style={{ marginBottom: page.id === "culture" ? 8 : 36, position: "relative" }}>
+      <div className={hasHeroPhoto ? "culture-hero" : undefined} style={{ marginBottom: hasHeroPhoto ? 8 : 36, position: "relative" }}>
         {/* Musicians Outlaws banner - History only */}
         {page.id === "history" && (
           <div style={{ borderRadius: 14, overflow: "hidden", marginBottom: 24, boxShadow: "0 4px 24px rgba(0,0,0,0.5)" }}>
@@ -2357,9 +2361,9 @@ function PageContent({ page, isCompleted, onComplete, progress, user }) {
             )}
           </div>
         </div>
-        <p className={page.id === "culture" ? "culture-hero-text" : undefined} style={{ fontSize: 19, color: "#bbb", lineHeight: 1.75, fontFamily: "Calibri, sans-serif", margin: 0, whiteSpace: "pre-line", textAlign: "justify" }}>{t(page.description)}</p>
-        {page.id === "culture" && (
-          <img className="culture-hero-img" src={cacheBust("/culture/bogo-sign-cutout.png")} alt=""
+        <p className={hasHeroPhoto ? "culture-hero-text" : undefined} style={{ fontSize: 19, color: "#bbb", lineHeight: 1.75, fontFamily: "Calibri, sans-serif", margin: 0, whiteSpace: "pre-line", textAlign: "justify" }}>{t(page.description)}</p>
+        {hasHeroPhoto && (
+          <img className="culture-hero-img" src={cacheBust(heroPhotoSrc)} alt=""
             style={{ position: "absolute", top: 0, right: -10, height: 230, filter: "drop-shadow(0 8px 20px rgba(0,0,0,0.6))" }}
           />
         )}

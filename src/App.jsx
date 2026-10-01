@@ -218,7 +218,7 @@ const PAGES = [
     icon: "🛡️",
     color: "#2E9898",
     alwaysAvailable: false,
-    description: "This section will review food safety practices you will need to know before serving food to guests. Safety of our food, employees and guests is a top priority. Please review the videos below to complete this Food Safety module.",
+    description: "This section will review the basic food safety practices you will need to know before serving food to guests. Safety of our food, employees and guests is a top priority. Please review the videos below to complete this Food Safety module.",
     pdfs: [],
     videos: [
       { title: "Handwashing", url: "https://www.youtube-nocookie.com/embed/7xYqa0FRNls" },

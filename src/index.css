@@ -187,9 +187,8 @@ iframe {
 }
 
 /* Culture page header photo - reserves room on the right of the intro text
-   for the cutout photo; shrinks on narrower screens so it doesn't crowd out
-   the heading/text. culture-hero's min-height keeps the divider below it
-   clear of the absolutely-positioned photo at every size. */
+   for the cutout photo; culture-hero's min-height keeps the divider below it
+   clear of the absolutely-positioned photo. */
 .culture-hero {
   min-height: 230px;
 }
@@ -198,26 +197,22 @@ iframe {
   padding-right: 280px;
 }
 
-@media (max-width: 760px) {
+/* On mobile there's no room for text beside the photo, so stack instead:
+   heading on top, photo on its own centered line, then text underneath. */
+@media (max-width: 640px) {
   .culture-hero {
-    min-height: 140px;
-  }
-  .culture-hero-text {
-    padding-right: 170px;
+    display: flex;
+    flex-direction: column;
+    min-height: auto;
   }
   .culture-hero-img {
-    height: 140px !important;
-  }
-}
-
-@media (max-width: 480px) {
-  .culture-hero {
-    min-height: 100px;
+    position: static !important;
+    order: 1;
+    height: 220px !important;
+    margin: 0 auto 16px;
   }
   .culture-hero-text {
-    padding-right: 120px;
-  }
-  .culture-hero-img {
-    height: 100px !important;
+    padding-right: 0 !important;
+    order: 2;
   }
 }

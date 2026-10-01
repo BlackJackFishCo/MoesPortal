@@ -87,6 +87,7 @@ const ES = {
   "History": "Historia",
   "Orientation": "Orientación",
   "Culture": "Cultura",
+  "Sterling Culture": "Cultura Sterling",
   "Food Safety": "Seguridad Alimentaria",
   "Training": "Capacitación",
   "Resources": "Recursos",

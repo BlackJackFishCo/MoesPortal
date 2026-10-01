@@ -2351,7 +2351,7 @@ function PageContent({ page, isCompleted, onComplete, progress, user }) {
         <div style={{ display: "flex", alignItems: "center", gap: 14, marginBottom: 14 }}>
           {page.id === "history" && <MoesLogo size={72} />}
           <div>
-            <h1 style={{ margin: 0, fontSize: "clamp(24px, 6vw, 42px)", fontWeight: 800, color: "#ffffff", fontFamily: "Calibri, sans-serif", textTransform: "uppercase", letterSpacing: 2 }}>{t(page.label)}</h1>
+            <h1 style={{ margin: 0, fontSize: "clamp(24px, 6vw, 42px)", fontWeight: 800, color: "#ffffff", fontFamily: "Calibri, sans-serif", textTransform: "uppercase", letterSpacing: 2 }}>{page.id === "culture" ? t("Sterling Culture") : t(page.label)}</h1>
             {page.alwaysAvailable && (
               <span style={{ background: MOE.teal, color: "#fff", borderRadius: 20, padding: "3px 14px", fontSize: 14, fontWeight: 700, fontFamily: "Calibri, sans-serif" }}>{t("ALWAYS AVAILABLE")}</span>
             )}

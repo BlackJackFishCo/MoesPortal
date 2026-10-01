@@ -2247,6 +2247,7 @@ function PageContent({ page, isCompleted, onComplete, progress, user }) {
   const [confirmed, setConfirmed] = useState(false);
   const heroPhotoSrc = page.id === "culture" ? "/culture/bogo-sign-cutout.png"
     : page.id === "food-safety" ? "/food-safety/thumbs-up-cutout.png"
+    : page.id === "training" ? "/training/taco-guy-cutout.png"
     : null;
   const hasHeroPhoto = !!heroPhotoSrc;
   const ORIENTATION_NOTES = [

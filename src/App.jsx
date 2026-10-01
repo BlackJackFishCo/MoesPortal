@@ -1468,7 +1468,6 @@ const CULTURE_COLLAGES = [
   { id: "street-teams", heading: "Street Teams", accent: MOE.orange, photos: [
     { src: "/culture/street-teams/street-teams-1.jpg", alt: "Street Teams photo" },
     { src: "/culture/street-teams/street-teams-2.jpg", alt: "Street Teams photo" },
-    { src: "/culture/street-teams/street-teams-3.jpg", alt: "Street Teams photo" },
     { src: "/culture/street-teams/street-teams-4.jpg", alt: "Street Teams photo" },
     { src: "/culture/street-teams/street-teams-5.jpg", alt: "Street Teams photo" },
     { src: "/culture/street-teams/street-teams-6.jpg", alt: "Street Teams photo" },

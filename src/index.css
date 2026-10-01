@@ -165,7 +165,7 @@ iframe {
   .step-tracker-row {
     flex-wrap: wrap !important;
     justify-content: center !important;
-    row-gap: 28px;
+    row-gap: 40px;
     column-gap: 14px;
   }
 
@@ -176,5 +176,41 @@ iframe {
   .step-tracker-row > .step-tracker-item {
     flex: 0 1 30% !important;
     min-width: 88px;
+  }
+}
+
+/* Culture page header photo - reserves room on the right of the intro text
+   for the cutout photo; shrinks on narrower screens so it doesn't crowd out
+   the heading/text. culture-hero's min-height keeps the divider below it
+   clear of the absolutely-positioned photo at every size. */
+.culture-hero {
+  min-height: 230px;
+}
+
+.culture-hero-text {
+  padding-right: 280px;
+}
+
+@media (max-width: 760px) {
+  .culture-hero {
+    min-height: 140px;
+  }
+  .culture-hero-text {
+    padding-right: 170px;
+  }
+  .culture-hero-img {
+    height: 140px !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .culture-hero {
+    min-height: 100px;
+  }
+  .culture-hero-text {
+    padding-right: 120px;
+  }
+  .culture-hero-img {
+    height: 100px !important;
   }
 }

@@ -156,26 +156,33 @@ iframe {
   animation-play-state: paused;
 }
 
-/* Header step tracker (History, Orientation, etc.) - on narrow phones there
-   isn't room to squeeze every label onto one line without them running into
-   each other, so wrap into two rows of 3 instead of compressing everything
-   onto one. The connecting progress line only makes sense for a single row,
-   so it's hidden here -- the % bar underneath still shows overall progress. */
+/* Header step tracker (History, Orientation, etc.) - on narrow phones the
+   small-circle single row is swapped for large rim-badge buttons (same style
+   as the Resources page badges), 2 per row, which is roomier to read and tap. */
+.step-badges-mobile {
+  display: none;
+}
+
+.step-badge {
+  width: 150px !important;
+  height: 150px !important;
+}
+
+/* Smaller phones can't fit two 150px badges plus gap side by side */
+@media (max-width: 380px) {
+  .step-badge {
+    width: 130px !important;
+    height: 130px !important;
+  }
+}
+
 @media (max-width: 640px) {
   .step-tracker-row {
-    flex-wrap: wrap !important;
-    justify-content: center !important;
-    row-gap: 40px;
-    column-gap: 14px;
+    display: none !important;
   }
 
-  .step-tracker-row > .step-tracker-line {
-    display: none;
-  }
-
-  .step-tracker-row > .step-tracker-item {
-    flex: 0 1 30% !important;
-    min-width: 88px;
+  .step-badges-mobile {
+    display: flex !important;
   }
 }
 

@@ -1739,6 +1739,7 @@ const RESOURCE_LINK_SECTIONS = [
       [
         { title: "Gift Card Process", url: "/gift-card-process.pdf" },
         { title: "Nutrition Chart", url: "/nutrition-chart.pdf" },
+        { title: "Rebel Service", url: "/rebel-service.pdf" },
       ],
     ],
   },

@@ -1701,7 +1701,14 @@ const RESOURCE_LINK_SECTIONS = [
         { title: "Recipe Book", url: "https://tylerjohnson7.sharepoint.com/:b:/s/SterlingRestaurants/IQC0glsprOpgTald0QDtBFHCAeMBkOyNrGsjJXnAx-vO8cY?e=OclLrV" },
         { title: "STIR-FLIP-WIPE", url: "/sterling-focus-current.pdf" },
         { title: "All Hands on Deck", url: "/all-hands-on-deck.pdf" },
-        { title: "10/10 Food Tasting", url: "/sterling-focus.pdf" },
+        {
+          title: "10/10 Food Tasting",
+          url: "#",
+          gallery: [
+            { title: "10/10 Food Tasting", url: "/sterling-focus.pdf" },
+            { title: "Perfect 10 Challenge", url: "/perfect-10-challenge.pdf" },
+          ],
+        },
       ],
       [
         {

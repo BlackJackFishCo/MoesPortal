@@ -1747,6 +1747,14 @@ const RESOURCE_LINK_SECTIONS = [
         { title: "Gift Card Process", url: "/gift-card-process.pdf" },
         { title: "Nutrition Chart", url: "/nutrition-chart.pdf" },
         { title: "Rebel Service", url: "/rebel-service.pdf" },
+        {
+          title: "Fryer Oil",
+          url: "#",
+          gallery: [
+            { title: "Fryer Oil Test Poster", url: "/fryer-oil-test-poster.pdf" },
+            { title: "Fryer Oil Change", url: "/fryer-oil-change.pdf" },
+          ],
+        },
       ],
     ],
   },

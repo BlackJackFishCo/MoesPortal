@@ -590,8 +590,11 @@ function PrintTracker({ user, progress }) {
 
 // ─── Admin Panel ──────────────────────────────────────────────────────────────
 function AdminPanel({ onExit }) {
-  const [role, setRole] = useState(null); // "full" | "viewer" | null (not logged in)
+  const [role, setRole] = useState(null); // "full" | "viewer" | "store" | null (not logged in)
   const isFullAdmin = role === "full";
+  const [scopedStore, setScopedStore] = useState(null); // store label when role === "store"
+  const isStoreAdmin = role === "store";
+  const canEdit = isFullAdmin || isStoreAdmin;
   const [pw, setPw] = useState("");
   const [pwError, setPwError] = useState("");
   const [users, setUsers] = useState([]);
@@ -613,8 +616,11 @@ function AdminPanel({ onExit }) {
   }
 
   function login() {
-    if (pw === "burrito") { setRole("full"); loadUsers(); }
-    else if (pw === "sterling1") { setRole("viewer"); loadUsers(); }
+    const entered = pw.trim();
+    const storeMatch = entered && STORES.find(s => s.match(/Store #(\S+)/)?.[1] === entered);
+    if (entered === "burrito") { setRole("full"); loadUsers(); }
+    else if (entered === "sterling1") { setRole("viewer"); loadUsers(); }
+    else if (storeMatch) { setRole("store"); setScopedStore(storeMatch); setFilterStore(storeMatch); loadUsers(); }
     else { setPwError("Incorrect password."); }
   }
 
@@ -623,7 +629,7 @@ function AdminPanel({ onExit }) {
   }
 
   function handleReset(userId, name) {
-    if (!isFullAdmin) return;
+    if (!canEdit) return;
     resetUserProgress(userId);
     setConfirmReset(null);
     setResetMsg(`✅ Progress reset for ${name}.`);
@@ -632,7 +638,7 @@ function AdminPanel({ onExit }) {
   }
 
   function handleRemove(userId, name) {
-    if (!isFullAdmin) return;
+    if (!canEdit) return;
     removeUser(userId);
     setConfirmRemove(null);
     setResetMsg(`🗑️ ${name} has been removed.`);
@@ -651,10 +657,13 @@ function AdminPanel({ onExit }) {
   );
 
   const filtered = users.filter(u => {
-    const matchStore = filterStore ? u.store === filterStore : true;
+    const matchStore = isStoreAdmin ? u.store === scopedStore : (filterStore ? u.store === filterStore : true);
     const matchSearch = search ? (u.name.toLowerCase().includes(search.toLowerCase()) || u.email.toLowerCase().includes(search.toLowerCase())) : true;
     return matchStore && matchSearch;
   });
+
+  // Store-scoped admins only ever see/report on their own store's employees
+  const visibleUsers = isStoreAdmin ? users.filter(u => u.store === scopedStore) : users;
 
   // Build Excel-like report rows
   function exportExcel(userList, title, { condensed = false } = {}) {
@@ -808,6 +817,7 @@ function AdminPanel({ onExit }) {
         </div>
         <label style={{ fontSize: 15, fontWeight: 700, color: "#ccc", display: "block", marginBottom: 8 }}>ADMIN PASSWORD</label>
         <input type="password" value={pw} onChange={e => setPw(e.target.value)} onKeyDown={e => e.key === "Enter" && login()} placeholder="Enter password" style={inputS} />
+        <div style={{ color: "#555", fontSize: 13, marginTop: 8 }}>Store managers: enter your store number (e.g. 132) to view and manage only your store.</div>
         {pwError && <div style={{ color: MOE.orange, fontSize: 14, marginTop: 10 }}>⚠️ {pwError}</div>}
         <button onClick={login} style={{ ...btnS(MOE.orange), width: "100%", padding: "16px 0", fontSize: 17, marginTop: 20 }}>ENTER →</button>
         <button onClick={onExit} style={{ ...btnS("transparent"), width: "100%", fontSize: 15, marginTop: 12, color: "#666" }}>← Back to Portal</button>
@@ -823,8 +833,8 @@ function AdminPanel({ onExit }) {
           <div style={{ display: "flex", alignItems: "center", gap: 10, flexWrap: "wrap" }}>
             <div style={{ fontSize: 18, fontWeight: 800, color: MOE.orange, textTransform: "uppercase", letterSpacing: 1 }}>⚙ Admin Panel</div>
             <div style={{ fontSize: 13, color: "#888" }}>Sterling Restaurants</div>
-            <div style={{ fontSize: 11, fontWeight: 700, color: isFullAdmin ? MOE.teal : "#999", background: isFullAdmin ? "#0D2B22" : "#222", border: `1px solid ${isFullAdmin ? MOE.teal : "#555"}`, borderRadius: 6, padding: "3px 8px", textTransform: "uppercase", letterSpacing: 0.5 }}>
-              {isFullAdmin ? "Full Access" : "View Only"}
+            <div style={{ fontSize: 11, fontWeight: 700, color: isFullAdmin ? MOE.teal : (isStoreAdmin ? MOE.orange : "#999"), background: isFullAdmin ? "#0D2B22" : (isStoreAdmin ? "#2B1A0D" : "#222"), border: `1px solid ${isFullAdmin ? MOE.teal : (isStoreAdmin ? MOE.orange : "#555")}`, borderRadius: 6, padding: "3px 8px", textTransform: "uppercase", letterSpacing: 0.5 }}>
+              {isFullAdmin ? "Full Access" : isStoreAdmin ? `Store Access — ${scopedStore}` : "View Only"}
             </div>
           </div>
           <div style={{ display: "flex", gap: 8 }}>
@@ -894,10 +904,14 @@ function AdminPanel({ onExit }) {
           {/* Filters */}
           <div style={{ display: "flex", gap: 14, marginBottom: 24, flexWrap: "wrap" }}>
             <input value={search} onChange={e => setSearch(e.target.value)} placeholder="Search by name or email..." style={{ ...inputS, maxWidth: 300 }} />
-            <select value={filterStore} onChange={e => setFilterStore(e.target.value)} style={{ ...inputS, maxWidth: 300, cursor: "pointer" }}>
-              <option value="">All Stores</option>
-              {STORES.map(s => <option key={s} value={s}>{s}</option>)}
-            </select>
+            {isStoreAdmin ? (
+              <div style={{ ...inputS, maxWidth: 300, color: "#999", cursor: "default" }}>{scopedStore}</div>
+            ) : (
+              <select value={filterStore} onChange={e => setFilterStore(e.target.value)} style={{ ...inputS, maxWidth: 300, cursor: "pointer" }}>
+                <option value="">All Stores</option>
+                {STORES.map(s => <option key={s} value={s}>{s}</option>)}
+              </select>
+            )}
             <div style={{ color: "#666", fontSize: 15, alignSelf: "center" }}>{filtered.length} employee{filtered.length !== 1 ? "s" : ""} found</div>
           </div>
 
@@ -950,7 +964,7 @@ function AdminPanel({ onExit }) {
                         <td style={{ border: "1px solid #222", padding: "6px 6px", textAlign: "center" }}>
                           <div style={{ display: "flex", gap: 4, justifyContent: "center" }}>
                             <button onClick={() => printReport([u], u.name)} style={{ ...btnS(MOE.teal), padding: "4px 8px", fontSize: 11 }}>🖨️</button>
-                            {isFullAdmin && (<>
+                            {canEdit && (<>
                               <button onClick={() => setConfirmReset({ id: u.id, name: u.name })} style={{ ...btnS("#8B1A1A"), padding: "4px 8px", fontSize: 11 }}>⟳</button>
                               <button onClick={() => setConfirmRemove({ id: u.id, name: u.name })} style={{ ...btnS("#555"), padding: "4px 8px", fontSize: 11 }}>🗑️</button>
                             </>)}
@@ -976,14 +990,15 @@ function AdminPanel({ onExit }) {
 
           {/* All Employees */}
           <div style={{ background: "#1A1A1A", border: "1px solid #333", borderRadius: 12, padding: "24px 28px", marginBottom: 20 }}>
-            <div style={{ fontSize: 18, fontWeight: 700, color: "#fff", marginBottom: 8 }}>All Employees</div>
-            <div style={{ color: "#888", fontSize: 15, marginBottom: 16 }}>Print a full report for every registered employee across all stores.</div>
+            <div style={{ fontSize: 18, fontWeight: 700, color: "#fff", marginBottom: 8 }}>{isStoreAdmin ? `All Employees — ${scopedStore}` : "All Employees"}</div>
+            <div style={{ color: "#888", fontSize: 15, marginBottom: 16 }}>{isStoreAdmin ? "Print a full report for every registered employee at your store." : "Print a full report for every registered employee across all stores."}</div>
             <div style={{ display: "flex", gap: 12, flexWrap: "wrap" }}>
-              <button onClick={() => printReport(users, "All Stores — All Employees")} style={btnS(MOE.orange)}>🖨️ Print Report</button>
-              <button onClick={() => exportExcel(users, "All_Stores")} style={btnS(MOE.teal)}>📊 Export to Excel</button>
+              <button onClick={() => printReport(visibleUsers, isStoreAdmin ? scopedStore : "All Stores — All Employees")} style={btnS(MOE.orange)}>🖨️ Print Report</button>
+              <button onClick={() => exportExcel(visibleUsers, isStoreAdmin ? scopedStore : "All_Stores")} style={btnS(MOE.teal)}>📊 Export to Excel</button>
             </div>
           </div>
 
+          {!isStoreAdmin && (<>
           {/* By Store */}
           <div style={{ background: "#1A1A1A", border: "1px solid #333", borderRadius: 12, padding: "24px 28px", marginBottom: 20 }}>
             <div style={{ fontSize: 18, fontWeight: 700, color: "#fff", marginBottom: 8 }}>Report by Store</div>
@@ -1043,6 +1058,7 @@ function AdminPanel({ onExit }) {
               {reportError && <div style={{ color: MOE.orange, fontSize: 14, alignSelf: "center" }}>⚠️ {reportError}</div>}
             </div>
           </div>
+          </>)}
 
           {/* Individual */}
           <div style={{ background: "#1A1A1A", border: "1px solid #333", borderRadius: 12, padding: "24px 28px" }}>
@@ -1050,23 +1066,23 @@ function AdminPanel({ onExit }) {
               <div style={{ fontSize: 18, fontWeight: 700, color: "#fff" }}>Individual Employee Report</div>
               <input
                 type="text"
-                placeholder="🔍  Search by name, email, or store..."
+                placeholder={isStoreAdmin ? "🔍  Search by name or email..." : "🔍  Search by name, email, or store..."}
                 value={indSearch}
                 onChange={e => setIndSearch(e.target.value)}
                 style={{ ...inputS, maxWidth: 320, fontSize: 14, padding: "8px 14px" }}
               />
             </div>
-            {users.length === 0 ? (
+            {visibleUsers.length === 0 ? (
               <div style={{ color: "#555", fontSize: 15 }}>No employees registered yet.</div>
             ) : (() => {
               const q = indSearch.trim().toLowerCase();
               const filtered = q
-                ? users.filter(u =>
+                ? visibleUsers.filter(u =>
                     u.name.toLowerCase().includes(q) ||
                     u.email.toLowerCase().includes(q) ||
                     (u.store || "").toLowerCase().includes(q)
                   )
-                : users;
+                : visibleUsers;
               return filtered.length === 0 ? (
                 <div style={{ color: "#555", fontSize: 15 }}>No employees match "{indSearch}".</div>
               ) : (

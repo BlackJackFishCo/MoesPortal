@@ -924,7 +924,6 @@ function AdminPanel({ onExit }) {
                 <thead>
                   <tr style={{ background: "#1A1A1A" }}>
                     <th style={{ border: "1px solid #333", padding: "8px 10px", color: "#ccc", fontWeight: 700, textAlign: "left", whiteSpace: "nowrap", width: 150 }}>Employee</th>
-                    <th style={{ border: "1px solid #333", padding: "8px 10px", color: "#ccc", fontWeight: 700, textAlign: "left", whiteSpace: "nowrap", width: 170 }}>Email</th>
                     <th style={{ border: "1px solid #333", padding: "8px 10px", color: "#ccc", fontWeight: 700, textAlign: "left", whiteSpace: "nowrap", width: 80 }}>Progress</th>
                     {tableColumns.map(col => (
                       <th key={col.key} title={col.label} style={{ border: "1px solid #333", padding: "6px 1px", color: "#ccc", fontWeight: 700, textAlign: "center", verticalAlign: "bottom", width: 32, height: 130 }}>
@@ -946,7 +945,6 @@ function AdminPanel({ onExit }) {
                           <div style={{ color: "#fff", fontWeight: 600, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{u.name}</div>
                           <div style={{ color: "#666", fontSize: 11, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{u.store}</div>
                         </td>
-                        <td style={{ border: "1px solid #222", padding: "8px 10px", color: "#aaa", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{u.email}</td>
                         <td style={{ border: "1px solid #222", padding: "8px 10px" }}>
                           <div style={{ background: "#222", borderRadius: 4, height: 8, overflow: "hidden" }}>
                             <div style={{ height: "100%", width: `${pct}%`, background: pct === 100 ? MOE.teal : MOE.orange, borderRadius: 4 }} />

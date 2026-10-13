@@ -973,11 +973,6 @@ function AdminPanel({ onExit }) {
                   })}
                 </tbody>
               </table>
-              <div style={{ display: "flex", flexWrap: "wrap", gap: "6px 16px", marginTop: 14, fontSize: 12, color: "#888" }}>
-                {tableColumns.map(col => (
-                  <span key={col.key}>{col.icon} {col.label}</span>
-                ))}
-              </div>
             </div>
           )}
         </>)}

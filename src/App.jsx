@@ -913,7 +913,9 @@ function AdminPanel({ onExit }) {
                     <th style={{ border: "1px solid #333", padding: "8px 10px", color: "#ccc", fontWeight: 700, textAlign: "left", whiteSpace: "nowrap", width: 170 }}>Email</th>
                     <th style={{ border: "1px solid #333", padding: "8px 10px", color: "#ccc", fontWeight: 700, textAlign: "left", whiteSpace: "nowrap", width: 80 }}>Progress</th>
                     {tableColumns.map(col => (
-                      <th key={col.key} title={col.label} style={{ border: "1px solid #333", padding: "8px 1px", color: "#ccc", fontWeight: 700, textAlign: "center", fontSize: 15, width: 32 }}>{col.icon}</th>
+                      <th key={col.key} title={col.label} style={{ border: "1px solid #333", padding: "6px 1px", color: "#ccc", fontWeight: 700, textAlign: "center", verticalAlign: "bottom", width: 32, height: 130 }}>
+                        <div style={{ writingMode: "vertical-rl", transform: "rotate(180deg)", whiteSpace: "nowrap", fontSize: 11, margin: "0 auto" }}>{col.label}</div>
+                      </th>
                     ))}
                     <th style={{ border: "1px solid #333", padding: "8px 8px", color: "#ccc", fontWeight: 700, textAlign: "center", whiteSpace: "nowrap", width: 100 }}>Actions</th>
                   </tr>

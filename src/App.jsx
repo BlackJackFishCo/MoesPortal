@@ -1821,7 +1821,16 @@ const RESOURCE_LINK_SECTIONS = [
             { title: "Sports", url: "/kef-coloring-sports.pdf" },
           ],
         },
-        { title: "Holiday Hour Notices", url: "#" },
+        {
+          title: "Holiday Hour Notices",
+          url: "#",
+          gallery: [
+            { title: "Easter 2027 Door Flyer", url: "/holiday-hours-easter-2027.pdf" },
+            { title: "July 4th 2027 Door Flyer", url: "/holiday-hours-july-4th-2027.pdf" },
+            { title: "Thanksgiving Door Flyer", url: "/holiday-hours-thanksgiving.pdf" },
+            { title: "Christmas & New Year's Door Flyer", url: "/holiday-hours-christmas-new-years.pdf" },
+          ],
+        },
       ],
     ],
   },

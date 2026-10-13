@@ -1955,7 +1955,7 @@ function ResourceLinks({ setActivePdf }) {
           innerFill="#000"
           innerTextColor="#fff"
           title="This Month's Sterling: MLT Doc"
-          onOpen={() => window.open(cacheBust("/the-snapshot.pdf"), "_blank", "noopener,noreferrer")}
+          onOpen={() => window.open("https://docs.google.com/spreadsheets/d/1AIKgmUP6TONX3XBHB5WPBtSrFfX4ehWE/edit?usp=sharing&ouid=114294634044995635475&rtpof=true&sd=true", "_blank", "noopener,noreferrer")}
         />
         <FocusBadge
           rimText="THIS MONTH'S STERLING"

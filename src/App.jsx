@@ -2711,19 +2711,17 @@ function PageContent({ page, isCompleted, onComplete, progress, user }) {
               )}
             </div>
 
-            <div className="resource-doc-grid" style={{ flex: "1 1 220px", display: "grid", gap: 16, alignContent: "center" }}>
-              {NY_NJ_SEXUAL_HARASSMENT_PDFS.map((pdf, i) => (
-                <a key={i}
-                  href={cacheBust(pdf.url)}
-                  target="_blank"
-                  rel="noreferrer"
-                  style={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", textAlign: "center", gap: 6, background: "#000", border: `2px solid ${page.color}`, borderRadius: 10, padding: "18px 20px", textDecoration: "none", color: "#fff", fontFamily: "Calibri, sans-serif", fontSize: 17, fontWeight: 600, cursor: "pointer" }}
-                >
-                  <div style={{ fontSize: 17, fontWeight: 700 }}>{pdf.title}</div>
-                  <div style={{ fontSize: 14, color: page.color, marginTop: 4 }}>{t("Click to open →")}</div>
-                </a>
-              ))}
-            </div>
+            {NY_NJ_SEXUAL_HARASSMENT_PDFS.map((pdf, i) => (
+              <a key={i}
+                href={cacheBust(pdf.url)}
+                target="_blank"
+                rel="noreferrer"
+                style={{ flex: "0 1 200px", maxWidth: 220, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", textAlign: "center", gap: 6, background: "#000", border: `2px solid ${page.color}`, borderRadius: 10, padding: "18px 20px", textDecoration: "none", color: "#fff", fontFamily: "Calibri, sans-serif", fontSize: 17, fontWeight: 600, cursor: "pointer" }}
+              >
+                <div style={{ fontSize: 17, fontWeight: 700 }}>{pdf.title}</div>
+                <div style={{ fontSize: 14, color: page.color, marginTop: 4 }}>{t("Click to open →")}</div>
+              </a>
+            ))}
           </div>
         </section>
       )}

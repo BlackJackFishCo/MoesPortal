@@ -2355,6 +2355,7 @@ function PageContent({ page, isCompleted, onComplete, progress, user }) {
   const t = useT();
   const { lang } = useLanguage();
   const [activeVideo, setActiveVideo] = useState(null);
+  const [nyNjVideoPlaying, setNyNjVideoPlaying] = useState(false);
   const [activePdf, setActivePdf] = useState(null);
   const [confirmed, setConfirmed] = useState(false);
   const heroPhotoSrc = page.id === "culture" ? "/culture/bogo-sign-cutout.png" : null;
@@ -2671,32 +2672,58 @@ function PageContent({ page, isCompleted, onComplete, progress, user }) {
           <h2 style={{ fontSize: 24, fontWeight: 700, color: "#ffffff", fontFamily: "Calibri, sans-serif", marginBottom: 18, display: "flex", alignItems: "center", gap: 8, textTransform: "uppercase", letterSpacing: 1 }}>
             {t("NY/NJ Only Videos")}
           </h2>
-          <div style={{ display: "flex", justifyContent: "center", marginBottom: 20 }}>
-            <div style={{ width: "100%", maxWidth: 600, borderRadius: 12, overflow: "hidden", background: "#000", border: `2px solid ${page.color}` }}>
-              <iframe
-                src={`${NY_NJ_SEXUAL_HARASSMENT_VIDEO.url}?enablejsapi=1&origin=${encodeURIComponent(window.location.origin)}&playsinline=1&rel=0`}
-                title={NY_NJ_SEXUAL_HARASSMENT_VIDEO.title}
-                width="100%"
-                height="340"
-                frameBorder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowFullScreen
-                style={{ display: "block" }}
-              />
+          <div style={{ display: "flex", flexWrap: "wrap", gap: 16, marginBottom: 20 }}>
+            <div style={{ flex: "0 1 300px", maxWidth: 300, borderRadius: 10, overflow: "hidden", border: `2px solid ${nyNjVideoPlaying ? page.color : "#333"}`, background: "#1A1A1A" }}>
+              {nyNjVideoPlaying ? (
+                <>
+                  <iframe
+                    src={`${NY_NJ_SEXUAL_HARASSMENT_VIDEO.url}?enablejsapi=1&origin=${encodeURIComponent(window.location.origin)}&playsinline=1&rel=0`}
+                    title={NY_NJ_SEXUAL_HARASSMENT_VIDEO.title}
+                    width="100%"
+                    height="220"
+                    frameBorder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
+                    style={{ display: "block" }}
+                  />
+                  <div onClick={() => setNyNjVideoPlaying(false)} style={{ padding: "12px 16px", cursor: "pointer" }}>
+                    <div style={{ fontFamily: "Calibri, sans-serif", fontSize: 17, fontWeight: 600, color: "#fff" }}>{NY_NJ_SEXUAL_HARASSMENT_VIDEO.title}</div>
+                    <div style={{ fontSize: 14, color: MOE.teal, marginTop: 5 }}>{t("Now playing — click to collapse")}</div>
+                  </div>
+                </>
+              ) : (
+                <div onClick={() => setNyNjVideoPlaying(true)} style={{ cursor: "pointer" }}>
+                  <div style={{ position: "relative", background: "#111", lineHeight: 0 }}>
+                    <img
+                      src={`https://img.youtube.com/vi/${NY_NJ_SEXUAL_HARASSMENT_VIDEO.url.split("/embed/")[1]?.split("?")[0]}/hqdefault.jpg`}
+                      alt={NY_NJ_SEXUAL_HARASSMENT_VIDEO.title}
+                      style={{ width: "100%", display: "block", objectFit: "cover", aspectRatio: "16/9" }}
+                    />
+                    <div style={{ position: "absolute", inset: 0, display: "flex", alignItems: "center", justifyContent: "center", background: "rgba(0,0,0,0.35)" }}>
+                      <div style={{ width: 52, height: 52, borderRadius: "50%", background: "rgba(0,0,0,0.7)", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 22 }}>▶️</div>
+                    </div>
+                  </div>
+                  <div style={{ padding: "14px 16px" }}>
+                    <div style={{ fontFamily: "Calibri, sans-serif", fontSize: 17, fontWeight: 600, color: "#fff" }}>{NY_NJ_SEXUAL_HARASSMENT_VIDEO.title}</div>
+                    <div style={{ fontSize: 14, color: MOE.teal, marginTop: 5 }}>{t("Click to watch")}</div>
+                  </div>
+                </div>
+              )}
             </div>
-          </div>
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(220px, 1fr))", gap: 16 }}>
-            {NY_NJ_SEXUAL_HARASSMENT_PDFS.map((pdf, i) => (
-              <a key={i}
-                href={cacheBust(pdf.url)}
-                target="_blank"
-                rel="noreferrer"
-                style={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", textAlign: "center", gap: 6, background: "#000", border: `2px solid ${page.color}`, borderRadius: 10, padding: "18px 20px", textDecoration: "none", color: "#fff", fontFamily: "Calibri, sans-serif", fontSize: 17, fontWeight: 600, cursor: "pointer" }}
-              >
-                <div style={{ fontSize: 17, fontWeight: 700 }}>{pdf.title}</div>
-                <div style={{ fontSize: 14, color: page.color, marginTop: 4 }}>{t("Click to open →")}</div>
-              </a>
-            ))}
+
+            <div style={{ flex: "1 1 220px", display: "flex", flexDirection: "column", gap: 10, justifyContent: "center" }}>
+              {NY_NJ_SEXUAL_HARASSMENT_PDFS.map((pdf, i) => (
+                <a key={i}
+                  href={cacheBust(pdf.url)}
+                  target="_blank"
+                  rel="noreferrer"
+                  style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: 10, background: "#000", border: `2px solid ${page.color}`, borderRadius: 8, padding: "10px 14px", textDecoration: "none", color: "#fff", fontFamily: "Calibri, sans-serif", fontSize: 14, fontWeight: 600, cursor: "pointer" }}
+                >
+                  <span>{pdf.title}</span>
+                  <span style={{ fontSize: 12, color: page.color, whiteSpace: "nowrap" }}>{t("Open →")}</span>
+                </a>
+              ))}
+            </div>
           </div>
         </section>
       )}

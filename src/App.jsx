@@ -1857,6 +1857,7 @@ const RESOURCE_LINK_SECTIONS = [
         },
         { title: "Workers Comp Reporting", url: "/workers-comp-claim-reporting.pdf" },
         { title: "Workers Comp Form", url: "/workers-comp-form.pdf" },
+        { title: "NY/NJ Sexual Harassment Form", url: "/nj-sexual-harassment-complaint-form.pdf" },
       ],
     ],
   },

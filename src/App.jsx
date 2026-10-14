@@ -176,7 +176,6 @@ const NY_NJ_SEXUAL_HARASSMENT_VIDEO = { title: "Sexual Harassment Prevention Tra
 const NY_NJ_SEXUAL_HARASSMENT_PDFS = [
   { title: "Sexual Harassment Training Video Recap (English)", url: "/ny-nj-sexual-harassment-english.pdf" },
   { title: "Sexual Harassment Training Video Recap (Spanish)", url: "/ny-nj-sexual-harassment-spanish.pdf" },
-  { title: "NJ Sexual Harassment Complaint Form", url: "/nj-sexual-harassment-complaint-form.pdf" },
 ];
 
 // ─── Pages config ─────────────────────────────────────────────────────────────
@@ -2673,7 +2672,7 @@ function PageContent({ page, isCompleted, onComplete, progress, user }) {
           <h2 style={{ fontSize: 24, fontWeight: 700, color: "#ffffff", fontFamily: "Calibri, sans-serif", marginBottom: 18, display: "flex", alignItems: "center", gap: 8, textTransform: "uppercase", letterSpacing: 1 }}>
             {t("NY/NJ - Additional Required Training Videos")}
           </h2>
-          <div style={{ display: "flex", flexWrap: "wrap", gap: 16, marginBottom: 20 }}>
+          <div style={{ display: "flex", flexWrap: "wrap", justifyContent: "center", gap: 16, marginBottom: 20 }}>
             <div style={{ flex: "0 1 300px", maxWidth: 300, borderRadius: 10, overflow: "hidden", border: `2px solid ${nyNjVideoPlaying ? page.color : "#333"}`, background: "#1A1A1A" }}>
               {nyNjVideoPlaying ? (
                 <>
@@ -2712,8 +2711,8 @@ function PageContent({ page, isCompleted, onComplete, progress, user }) {
               )}
             </div>
 
-            <div style={{ flex: "0 1 460px", display: "grid", gridTemplateColumns: "repeat(2, minmax(160px, 220px))", gap: 16 }}>
-              {[NY_NJ_SEXUAL_HARASSMENT_PDFS[0], NY_NJ_SEXUAL_HARASSMENT_PDFS[2], NY_NJ_SEXUAL_HARASSMENT_PDFS[1]].map((pdf, i) => (
+            <div style={{ flex: "0 1 460px", display: "grid", gridTemplateColumns: "repeat(2, minmax(160px, 220px))", gap: 16, justifyContent: "center" }}>
+              {NY_NJ_SEXUAL_HARASSMENT_PDFS.map((pdf, i) => (
                 <a key={i}
                   href={cacheBust(pdf.url)}
                   target="_blank"

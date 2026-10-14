@@ -174,8 +174,8 @@ const FOOD_SAFETY_STATE_LINKS = [
 // ─── NY/NJ-only sexual harassment training (Food Safety page) ─────────────────
 const NY_NJ_SEXUAL_HARASSMENT_VIDEO = { title: "Sexual Harassment Prevention Training", url: "https://www.youtube-nocookie.com/embed/cPyEJ_qqrGo" };
 const NY_NJ_SEXUAL_HARASSMENT_PDFS = [
-  { title: "Sexual Harassment (English)", url: "/ny-nj-sexual-harassment-english.pdf" },
-  { title: "Sexual Harassment (Spanish)", url: "/ny-nj-sexual-harassment-spanish.pdf" },
+  { title: "Sexual Harassment Training Video Recap (English)", url: "/ny-nj-sexual-harassment-english.pdf" },
+  { title: "Sexual Harassment Training Video Recap (Spanish)", url: "/ny-nj-sexual-harassment-spanish.pdf" },
   { title: "NJ Sexual Harassment Complaint Form", url: "/nj-sexual-harassment-complaint-form.pdf" },
 ];
 

@@ -2711,16 +2711,16 @@ function PageContent({ page, isCompleted, onComplete, progress, user }) {
               )}
             </div>
 
-            <div style={{ flex: "1 1 220px", display: "flex", flexDirection: "column", gap: 10, justifyContent: "center" }}>
+            <div className="resource-doc-grid" style={{ flex: "1 1 220px", display: "grid", gap: 16, alignContent: "center" }}>
               {NY_NJ_SEXUAL_HARASSMENT_PDFS.map((pdf, i) => (
                 <a key={i}
                   href={cacheBust(pdf.url)}
                   target="_blank"
                   rel="noreferrer"
-                  style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: 10, background: "#000", border: `2px solid ${page.color}`, borderRadius: 8, padding: "10px 14px", textDecoration: "none", color: "#fff", fontFamily: "Calibri, sans-serif", fontSize: 14, fontWeight: 600, cursor: "pointer" }}
+                  style={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", textAlign: "center", gap: 6, background: "#000", border: `2px solid ${page.color}`, borderRadius: 10, padding: "18px 20px", textDecoration: "none", color: "#fff", fontFamily: "Calibri, sans-serif", fontSize: 17, fontWeight: 600, cursor: "pointer" }}
                 >
-                  <span>{pdf.title}</span>
-                  <span style={{ fontSize: 12, color: page.color, whiteSpace: "nowrap" }}>{t("Open →")}</span>
+                  <div style={{ fontSize: 17, fontWeight: 700 }}>{pdf.title}</div>
+                  <div style={{ fontSize: 14, color: page.color, marginTop: 4 }}>{t("Click to open →")}</div>
                 </a>
               ))}
             </div>

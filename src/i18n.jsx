@@ -341,7 +341,6 @@ const ES = {
   "Payroll": "Nómina",
   "Documents": "Documentos",
   "Click to open →": "Haz clic para abrir →",
-  "Open →": "Abrir →",
   "Document needed": "Documento pendiente",
   "This document hasn't been added yet. Check back soon.": "Este documento aún no ha sido agregado. Vuelve a revisar pronto.",
   "sheets →": "hojas →",

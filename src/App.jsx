@@ -2712,29 +2712,19 @@ function PageContent({ page, isCompleted, onComplete, progress, user }) {
               )}
             </div>
 
-            <div style={{ flex: "0 1 200px", maxWidth: 220, display: "flex", flexDirection: "column", gap: 10 }}>
-              {NY_NJ_SEXUAL_HARASSMENT_PDFS.slice(0, 2).map((pdf, i) => (
+            <div style={{ flex: "0 1 460px", display: "grid", gridTemplateColumns: "repeat(2, minmax(160px, 220px))", gap: 16 }}>
+              {[NY_NJ_SEXUAL_HARASSMENT_PDFS[0], NY_NJ_SEXUAL_HARASSMENT_PDFS[2], NY_NJ_SEXUAL_HARASSMENT_PDFS[1]].map((pdf, i) => (
                 <a key={i}
                   href={cacheBust(pdf.url)}
                   target="_blank"
                   rel="noreferrer"
-                  style={{ flex: 1, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", textAlign: "center", gap: 6, background: "#000", border: `2px solid ${page.color}`, borderRadius: 10, padding: "18px 20px", textDecoration: "none", color: "#fff", fontFamily: "Calibri, sans-serif", fontSize: 17, fontWeight: 600, cursor: "pointer" }}
+                  style={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", textAlign: "center", gap: 6, background: "#000", border: `2px solid ${page.color}`, borderRadius: 10, padding: "18px 20px", textDecoration: "none", color: "#fff", fontFamily: "Calibri, sans-serif", fontSize: 17, fontWeight: 600, cursor: "pointer" }}
                 >
                   <div style={{ fontSize: 17, fontWeight: 700 }}>{pdf.title}</div>
                   <div style={{ fontSize: 14, color: page.color, marginTop: 4 }}>{t("Click to open →")}</div>
                 </a>
               ))}
             </div>
-
-            <a
-              href={cacheBust(NY_NJ_SEXUAL_HARASSMENT_PDFS[2].url)}
-              target="_blank"
-              rel="noreferrer"
-              style={{ flex: "0 1 200px", maxWidth: 220, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", textAlign: "center", gap: 6, background: "#000", border: `2px solid ${page.color}`, borderRadius: 10, padding: "18px 20px", textDecoration: "none", color: "#fff", fontFamily: "Calibri, sans-serif", fontSize: 17, fontWeight: 600, cursor: "pointer" }}
-            >
-              <div style={{ fontSize: 17, fontWeight: 700 }}>{NY_NJ_SEXUAL_HARASSMENT_PDFS[2].title}</div>
-              <div style={{ fontSize: 14, color: page.color, marginTop: 4 }}>{t("Click to open →")}</div>
-            </a>
           </div>
         </section>
       )}

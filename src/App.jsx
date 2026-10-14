@@ -2671,7 +2671,7 @@ function PageContent({ page, isCompleted, onComplete, progress, user }) {
       {page.id === "food-safety" && (
         <section style={{ marginBottom: 40 }}>
           <h2 style={{ fontSize: 24, fontWeight: 700, color: "#ffffff", fontFamily: "Calibri, sans-serif", marginBottom: 18, display: "flex", alignItems: "center", gap: 8, textTransform: "uppercase", letterSpacing: 1 }}>
-            {t("NY/NJ Additional Required Videos")}
+            {t("NY/NJ - Additional Required Training Videos")}
           </h2>
           <div style={{ display: "flex", flexWrap: "wrap", gap: 16, marginBottom: 20 }}>
             <div style={{ flex: "0 1 300px", maxWidth: 300, borderRadius: 10, overflow: "hidden", border: `2px solid ${nyNjVideoPlaying ? page.color : "#333"}`, background: "#1A1A1A" }}>

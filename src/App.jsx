@@ -2563,7 +2563,7 @@ function PageContent({ page, isCompleted, onComplete, progress, user }) {
 
       {page.id !== "training" && page.id !== "orientation" && page.videos.length > 0 && <section style={{ marginBottom: 40 }}>
         <h2 style={{ fontSize: 24, fontWeight: 700, color: "#ffffff", fontFamily: "Calibri, sans-serif", marginBottom: 18, display: "flex", alignItems: "center", gap: 8, textTransform: "uppercase", letterSpacing: 1 }}>
-          {t(page.id === "orientation" ? "Orientation Videos" : page.id === "food-safety" ? "Food Safety Videos" : page.id === "history" ? "Welcome To Moe's Videos" : "Additional Training Resources")}
+          {t(page.id === "orientation" ? "Orientation Videos" : page.id === "food-safety" ? "Required Food Safety Videos" : page.id === "history" ? "Welcome To Moe's Videos" : "Additional Training Resources")}
         </h2>
 
         {page.id === "orientation" || page.id === "history" ? (

@@ -116,8 +116,9 @@ const ES = {
   "Sterling Restaurants, LLC is the largest franchisee of Moe's Southwest Grills. In July 2009, CEO Mark Monroe founded Sterling Restaurants and acquired the very first Moe's location on earth! Peachtree – store #1 in Atlanta, GA. In 2016 Sterling was named \"Franchisee of the Year\" by the International Franchise Association. Sterling then embarked on a major acquisition strategy in 2017 and 2018, purchasing over 30 additional locations across Florida, Georgia, and the Carolinas. In 2023, Sterling invested heavily in store modernizations, revamping beverage stations with slushies and seasonal lemonades, new sauces, salsas, and driving double-digit sales comps. Sterling has been named Franchise of the Year from Go To Food Brands for the last 10 years. Today, Sterling owns and operates nearly 90 Moe's locations across Florida, Georgia, Alabama, New Jersey, New York, North Carolina, and South Carolina.":
     "Sterling Restaurants, LLC es el franquiciado más grande de Moe's Southwest Grills. En julio de 2009, el CEO Mark Monroe fundó Sterling Restaurants y adquirió la primerísima ubicación de Moe's en el mundo! Peachtree — tienda #1 en Atlanta, GA. En 2016 Sterling fue nombrado \"Franquiciado del Año\" por la Asociación Internacional de Franquicias. Sterling luego emprendió una importante estrategia de adquisición en 2017 y 2018, comprando más de 30 ubicaciones adicionales en Florida, Georgia, y las Carolinas. En 2023, Sterling invirtió fuertemente en modernizaciones de tiendas, renovando las estaciones de bebidas con slushies y limonadas de temporada, nuevas salsas, y logrando comparables de ventas de dos dígitos. Sterling ha sido nombrado Franquicia del Año por Go To Food Brands durante los últimos 10 años. Hoy, Sterling posee y opera casi 90 ubicaciones de Moe's en Florida, Georgia, Alabama, Nueva Jersey, Nueva York, Carolina del Norte, y Carolina del Sur.",
   "Orientation Videos": "Videos de Orientación",
-  "Food Safety Videos": "Videos de Seguridad Alimentaria",
+  "Required Food Safety Videos": "Videos Obligatorios de Seguridad Alimentaria",
   "State Food Safety Resources": "Recursos Estatales de Seguridad Alimentaria",
+  "NY/NJ Only Videos": "Videos Solo para NY/NJ",
   "Welcome To Moe's Videos": "Videos de Bienvenida a Moe's",
   "Additional Training Resources": "Recursos de Capacitación Adicionales",
   "Now playing — click to collapse": "Reproduciendo ahora — haz clic para contraer",
@@ -340,6 +341,7 @@ const ES = {
   "Payroll": "Nómina",
   "Documents": "Documentos",
   "Click to open →": "Haz clic para abrir →",
+  "Open →": "Abrir →",
   "Document needed": "Documento pendiente",
   "This document hasn't been added yet. Check back soon.": "Este documento aún no ha sido agregado. Vuelve a revisar pronto.",
   "sheets →": "hojas →",

@@ -171,6 +171,14 @@ const FOOD_SAFETY_STATE_LINKS = [
     path: "M28.03,68.332L29.364,66.406L31.842,62.401L50.334,50.195L41.374,41.074L37.466,31.435L39.277,21.546L51.001,8L71.97,20.7L68.253,31.496L67.586,32.518L62.534,38.075L70.255,42.631L66.919,63.766L60.532,75.165L43.661,92L45.949,84.539L28.697,74.16L28.125,69.161Z" },
 ];
 
+// ─── NY/NJ-only sexual harassment training (Food Safety page) ─────────────────
+const NY_NJ_SEXUAL_HARASSMENT_VIDEO = { title: "Sexual Harassment Prevention Training", url: "https://www.youtube-nocookie.com/embed/cPyEJ_qqrGo" };
+const NY_NJ_SEXUAL_HARASSMENT_PDFS = [
+  { title: "Sexual Harassment (English)", url: "/ny-nj-sexual-harassment-english.pdf" },
+  { title: "Sexual Harassment (Spanish)", url: "/ny-nj-sexual-harassment-spanish.pdf" },
+  { title: "NJ Sexual Harassment Complaint Form", url: "/nj-sexual-harassment-complaint-form.pdf" },
+];
+
 // ─── Pages config ─────────────────────────────────────────────────────────────
 const PAGES = [
   {
@@ -2657,6 +2665,41 @@ function PageContent({ page, isCompleted, onComplete, progress, user }) {
         </section>
       )}
 
+      {/* NY/NJ-only sexual harassment training - Food Safety page only */}
+      {page.id === "food-safety" && (
+        <section style={{ marginBottom: 40 }}>
+          <h2 style={{ fontSize: 24, fontWeight: 700, color: "#ffffff", fontFamily: "Calibri, sans-serif", marginBottom: 18, display: "flex", alignItems: "center", gap: 8, textTransform: "uppercase", letterSpacing: 1 }}>
+            {t("NY/NJ Only Videos")}
+          </h2>
+          <div style={{ display: "flex", justifyContent: "center", marginBottom: 20 }}>
+            <div style={{ width: "100%", maxWidth: 600, borderRadius: 12, overflow: "hidden", background: "#000", border: `2px solid ${page.color}` }}>
+              <iframe
+                src={`${NY_NJ_SEXUAL_HARASSMENT_VIDEO.url}?enablejsapi=1&origin=${encodeURIComponent(window.location.origin)}&playsinline=1&rel=0`}
+                title={NY_NJ_SEXUAL_HARASSMENT_VIDEO.title}
+                width="100%"
+                height="340"
+                frameBorder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+                style={{ display: "block" }}
+              />
+            </div>
+          </div>
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(220px, 1fr))", gap: 16 }}>
+            {NY_NJ_SEXUAL_HARASSMENT_PDFS.map((pdf, i) => (
+              <a key={i}
+                href={cacheBust(pdf.url)}
+                target="_blank"
+                rel="noreferrer"
+                style={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", textAlign: "center", gap: 6, background: "#000", border: `2px solid ${page.color}`, borderRadius: 10, padding: "18px 20px", textDecoration: "none", color: "#fff", fontFamily: "Calibri, sans-serif", fontSize: 17, fontWeight: 600, cursor: "pointer" }}
+              >
+                <div style={{ fontSize: 17, fontWeight: 700 }}>{pdf.title}</div>
+                <div style={{ fontSize: 14, color: page.color, marginTop: 4 }}>{t("Click to open →")}</div>
+              </a>
+            ))}
+          </div>
+        </section>
+      )}
 
       {page.id === "orientation" && (
         <section style={{ marginBottom: 40 }}>

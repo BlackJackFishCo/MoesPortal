@@ -118,7 +118,7 @@ const ES = {
   "Orientation Videos": "Videos de Orientación",
   "Required Food Safety Videos": "Videos Obligatorios de Seguridad Alimentaria",
   "State Food Safety Resources": "Recursos Estatales de Seguridad Alimentaria",
-  "NY/NJ Only Videos": "Videos Solo para NY/NJ",
+  "NY/NJ Additional Required Videos": "Videos Adicionales Obligatorios para NY/NJ",
   "Welcome To Moe's Videos": "Videos de Bienvenida a Moe's",
   "Additional Training Resources": "Recursos de Capacitación Adicionales",
   "Now playing — click to collapse": "Reproduciendo ahora — haz clic para contraer",

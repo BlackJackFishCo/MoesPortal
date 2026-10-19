@@ -1503,6 +1503,8 @@ const CULTURE_COLLAGES = [
     { src: "/culture/challenge/challenge-10.jpg", alt: "10/10 Challenge team photo" },
     { src: "/culture/challenge/challenge-11.jpg", alt: "10/10 Challenge team photo" },
     { src: "/culture/challenge/challenge-12.jpg", alt: "10/10 Challenge team photo" },
+    { src: "/culture/challenge/challenge-13.jpg", alt: "10/10 Challenge team photo" },
+    { src: "/culture/challenge/challenge-14.jpg", alt: "10/10 Challenge team photo" },
   ] },
   { id: "cinco", heading: "Cinco De Moe's", accent: MOE.orange, photos: [
     { src: "/culture/cinco/cinco-1.jpg", alt: "Cinco De Moe's team photo" },

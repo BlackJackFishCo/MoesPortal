@@ -1724,6 +1724,8 @@ const RESOURCE_LINK_SECTIONS = [
     rows: [
       [
         { title: "Recipe Book", url: "https://tylerjohnson7.sharepoint.com/:b:/s/SterlingRestaurants/IQC0glsprOpgTald0QDtBFHCAeMBkOyNrGsjJXnAx-vO8cY?e=OclLrV" },
+      ],
+      [
         { title: "STIR-FLIP-WIPE", url: "/sterling-focus-current.pdf" },
         { title: "All Hands on Deck", url: "/all-hands-on-deck.pdf" },
         {
@@ -1734,6 +1736,7 @@ const RESOURCE_LINK_SECTIONS = [
             { title: "Perfect 10 Challenge", url: "/perfect-10-challenge.pdf" },
           ],
         },
+        { title: "VIBE Check", url: "/vibe-check.pdf" },
       ],
       [
         {

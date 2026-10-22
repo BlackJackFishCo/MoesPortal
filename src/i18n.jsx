@@ -340,6 +340,7 @@ const ES = {
   "Accidents & Injuries": "Accidentes y Lesiones",
   "Payroll": "Nómina",
   "Documents": "Documentos",
+  "Documents open in a new tab — swipe up or tap your browser's tabs icon to come back.": "Los documentos se abren en una pestaña nueva — desliza hacia arriba o toca el ícono de pestañas de tu navegador para regresar.",
   "Click to open →": "Haz clic para abrir →",
   "Document needed": "Documento pendiente",
   "This document hasn't been added yet. Check back soon.": "Este documento aún no ha sido agregado. Vuelve a revisar pronto.",

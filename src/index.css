@@ -116,6 +116,17 @@ iframe {
   }
 }
 
+/* Reminder that documents open in a new tab, shown only on mobile where
+   switching back to the original tab isn't as obvious as on desktop. */
+.pdf-mobile-hint {
+  display: none;
+}
+@media (max-width: 640px) {
+  .pdf-mobile-hint {
+    display: block;
+  }
+}
+
 /* Wrong vs. Right guest area visuals - fixed 2 columns so photos stay full size and stack (2x2, etc.) instead of shrinking to fit extra photos */
 .wrong-right-grid {
   display: grid;

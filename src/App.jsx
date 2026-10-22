@@ -1987,9 +1987,12 @@ function ResourceLinks({ setActivePdf }) {
         />
       </div>
 
-      <h2 style={{ fontSize: 24, fontWeight: 700, color: "#ffffff", fontFamily: "Calibri, sans-serif", marginBottom: 18, textTransform: "uppercase", letterSpacing: 1 }}>
+      <h2 style={{ fontSize: 24, fontWeight: 700, color: "#ffffff", fontFamily: "Calibri, sans-serif", marginBottom: 8, textTransform: "uppercase", letterSpacing: 1 }}>
         {t("Document Library")}
       </h2>
+      <p className="pdf-mobile-hint" style={{ color: "#888", fontFamily: "Calibri, sans-serif", fontSize: 13, marginTop: 0, marginBottom: 18 }}>
+        📄 {t("Documents open in a new tab — swipe up or tap your browser's tabs icon to come back.")}
+      </p>
       <div style={{ display: "flex", flexDirection: "column", gap: 28 }}>
         {RESOURCE_LINK_SECTIONS.map((section, s) => (
           <div key={s}>
@@ -2280,9 +2283,12 @@ function PositionTracker({ user, onPositionPass, setActivePdf }) {
             {/* Documents */}
             {docs.length > 0 && (
               <>
-                <h3 style={{ fontSize: 18, fontWeight: 700, color: "#ffffff", fontFamily: "Calibri, sans-serif", marginBottom: 14, textTransform: "uppercase", letterSpacing: 1 }}>
+                <h3 style={{ fontSize: 18, fontWeight: 700, color: "#ffffff", fontFamily: "Calibri, sans-serif", marginBottom: 6, textTransform: "uppercase", letterSpacing: 1 }}>
                   {t("Documents")}
                 </h3>
+                <p className="pdf-mobile-hint" style={{ color: "#888", fontFamily: "Calibri, sans-serif", fontSize: 13, marginTop: 0, marginBottom: 14 }}>
+                  📄 {t("Documents open in a new tab — swipe up or tap your browser's tabs icon to come back.")}
+                </p>
                 <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(220px, 1fr))", gap: 16, marginBottom: 24 }}>
                   {docs.map((pdf, i) => {
                     const isMissing = pdf.url === "#";
@@ -2545,9 +2551,12 @@ function PageContent({ page, isCompleted, onComplete, progress, user }) {
       {/* PDFs - only shown when pdfs exist and not on history or training page */}
       {page.pdfs.length > 0 && page.id !== "history" && page.id !== "training" && (
         <section style={{ marginBottom: 40 }}>
-          <h2 style={{ fontSize: 24, fontWeight: 700, color: "#ffffff", fontFamily: "Calibri, sans-serif", marginBottom: 18, display: "flex", alignItems: "center", gap: 8, textTransform: "uppercase", letterSpacing: 1 }}>
+          <h2 style={{ fontSize: 24, fontWeight: 700, color: "#ffffff", fontFamily: "Calibri, sans-serif", marginBottom: 8, display: "flex", alignItems: "center", gap: 8, textTransform: "uppercase", letterSpacing: 1 }}>
             {t("Documents")}
           </h2>
+          <p className="pdf-mobile-hint" style={{ color: "#888", fontFamily: "Calibri, sans-serif", fontSize: 13, marginTop: 0, marginBottom: 18 }}>
+            📄 {t("Documents open in a new tab — swipe up or tap your browser's tabs icon to come back.")}
+          </p>
           <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(220px, 1fr))", gap: 16 }}>
             {page.pdfs.map((pdf, i) => {
               const isMissing = pdf.url === "#";
@@ -2679,9 +2688,12 @@ function PageContent({ page, isCompleted, onComplete, progress, user }) {
       {/* NY/NJ-only sexual harassment training - Food Safety page only */}
       {page.id === "food-safety" && (
         <section style={{ marginBottom: 40 }}>
-          <h2 style={{ fontSize: 24, fontWeight: 700, color: "#ffffff", fontFamily: "Calibri, sans-serif", marginBottom: 18, display: "flex", alignItems: "center", gap: 8, textTransform: "uppercase", letterSpacing: 1 }}>
+          <h2 style={{ fontSize: 24, fontWeight: 700, color: "#ffffff", fontFamily: "Calibri, sans-serif", marginBottom: 8, display: "flex", alignItems: "center", gap: 8, textTransform: "uppercase", letterSpacing: 1 }}>
             {t("NY/NJ - Additional Required Training Videos")}
           </h2>
+          <p className="pdf-mobile-hint" style={{ color: "#888", fontFamily: "Calibri, sans-serif", fontSize: 13, marginTop: 0, marginBottom: 18 }}>
+            📄 {t("Documents open in a new tab — swipe up or tap your browser's tabs icon to come back.")}
+          </p>
           <div style={{ display: "flex", flexWrap: "wrap", justifyContent: "center", gap: 16, marginBottom: 20 }}>
             <div style={{ flex: "0 1 300px", maxWidth: 300, borderRadius: 10, overflow: "hidden", border: `2px solid ${nyNjVideoPlaying ? page.color : "#333"}`, background: "#1A1A1A" }}>
               {nyNjVideoPlaying ? (

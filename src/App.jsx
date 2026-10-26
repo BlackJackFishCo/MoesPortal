@@ -1709,11 +1709,6 @@ const AMBASSADOR_VISUAL_CHECKS = [
   },
 ].map(section => ({ wrongImg: "", rightImg: "", extraImgs: [], ...section }));
 
-// ─── Current Sterling Focus (update monthly) ──────────────────────────────────
-// Drives both the "Current Sterling Focus" resource tile title and the
-// Sterling Focus badge on the Resources page. Change the words here each month.
-const CURRENT_STERLING_FOCUS_WORDS = ["10/10", "FOOD"];
-
 // ─── Resource links (Resources page document library) ────────────────────────
 // Placeholder links laid out in the requested row order. Swap `url: "#"` for a
 // real file (drop it in /public) once each document is ready.
@@ -1728,14 +1723,6 @@ const RESOURCE_LINK_SECTIONS = [
       [
         { title: "STIR-FLIP-WIPE", url: "/sterling-focus-current.pdf" },
         { title: "All Hands on Deck", url: "/all-hands-on-deck.pdf" },
-        {
-          title: "10/10 Food Tasting",
-          url: "#",
-          gallery: [
-            { title: "10/10 Food Tasting", url: "/sterling-focus.pdf" },
-            { title: "Perfect 10 Challenge", url: "/perfect-10-challenge.pdf" },
-          ],
-        },
         { title: "VIBE Check", url: "/vibe-check.pdf" },
       ],
       [
@@ -1920,7 +1907,6 @@ function FocusBadge({ rimText, innerLines, outerFill, rimTextColor, innerFill, i
 
 function ResourceLinks({ setActivePdf }) {
   const t = useT();
-  const focusWords = CURRENT_STERLING_FOCUS_WORDS;
   const [activeGallery, setActiveGallery] = useState(null);
   return (
     <section style={{ marginBottom: 40 }}>
@@ -1956,14 +1942,14 @@ function ResourceLinks({ setActivePdf }) {
       </h2>
       <div style={{ display: "flex", flexWrap: "wrap", justifyContent: "center", gap: 32, marginBottom: 36 }}>
         <FocusBadge
-          rimText="THIS MONTH'S STERLING FOCUS"
-          innerLines={focusWords}
+          rimText="THIS MONTH'S STERLING"
+          innerLines={["VIBE", "CHECK"]}
           outerFill={MOE.orange}
           rimTextColor="#fff"
           innerFill="#000"
           innerTextColor="#fff"
-          title={`This Month's Sterling Focus: ${focusWords.join(", ")}`}
-          onOpen={() => window.open(cacheBust("/sterling-focus.pdf"), "_blank", "noopener,noreferrer")}
+          title="This Month's Sterling: VIBE Check"
+          onOpen={() => window.open(cacheBust("/vibe-check.pdf"), "_blank", "noopener,noreferrer")}
         />
         <FocusBadge
           rimText="THIS MONTH'S STERLING"

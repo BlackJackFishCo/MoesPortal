@@ -1942,7 +1942,7 @@ function ResourceLinks({ setActivePdf }) {
       </h2>
       <div style={{ display: "flex", flexWrap: "wrap", justifyContent: "center", gap: 32, marginBottom: 36 }}>
         <FocusBadge
-          rimText="THIS MONTH'S STERLING"
+          rimText="THIS MONTH'S STERLING FOCUS"
           innerLines={["VIBE", "CHECK"]}
           outerFill={MOE.orange}
           rimTextColor="#fff"

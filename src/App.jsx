@@ -2738,6 +2738,11 @@ function PageContent({ page, isCompleted, onComplete, progress, user }) {
 
       {page.id === "orientation" && (
         <section style={{ marginBottom: 40 }}>
+          <div style={{ textAlign: "center", marginBottom: 28 }}>
+            <div style={{ display: "inline-block", background: MOE.orange, color: "#fff", fontFamily: "Calibri, sans-serif", fontSize: 20, fontWeight: 800, letterSpacing: 1, textTransform: "uppercase", borderRadius: 10, padding: "14px 28px" }}>
+              {t("Goal: Best First Day Ever!")}
+            </div>
+          </div>
           <h2 style={{ fontSize: 24, fontWeight: 700, color: "#ffffff", fontFamily: "Calibri, sans-serif", marginBottom: 8, display: "flex", alignItems: "center", gap: 8, textTransform: "uppercase", letterSpacing: 1 }}>
             {t("Notes")}
           </h2>

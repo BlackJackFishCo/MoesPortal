@@ -2738,11 +2738,9 @@ function PageContent({ page, isCompleted, onComplete, progress, user }) {
 
       {page.id === "orientation" && (
         <section style={{ marginBottom: 40 }}>
-          <div style={{ textAlign: "center", marginBottom: 28 }}>
-            <div style={{ display: "inline-block", background: MOE.orange, color: "#fff", fontFamily: "Calibri, sans-serif", fontSize: 20, fontWeight: 800, letterSpacing: 1, textTransform: "uppercase", borderRadius: 10, padding: "14px 28px" }}>
-              {t("Goal: Best First Day Ever!")}
-            </div>
-          </div>
+          <h1 style={{ margin: "0 0 28px", textAlign: "center", fontSize: "clamp(24px, 6vw, 42px)", fontWeight: 800, color: "#ffffff", fontFamily: "Calibri, sans-serif", textTransform: "uppercase", letterSpacing: 2 }}>
+            {t("Goal: Best First Day Ever!")}
+          </h1>
           <h2 style={{ fontSize: 24, fontWeight: 700, color: "#ffffff", fontFamily: "Calibri, sans-serif", marginBottom: 8, display: "flex", alignItems: "center", gap: 8, textTransform: "uppercase", letterSpacing: 1 }}>
             {t("Notes")}
           </h2>

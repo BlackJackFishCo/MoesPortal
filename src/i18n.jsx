@@ -136,6 +136,7 @@ const ES = {
   "You can always review this content.": "Siempre puedes repasar este contenido.",
 
   // ── Orientation notes ────────────────────────────────────────────────────
+  "Goal: Best First Day Ever!": "Meta: ¡El Mejor Primer Día!",
   "Notes": "Notas",
   "Check each box as your trainer reviews it with you. All": "Marca cada casilla mientras tu capacitador la repasa contigo. Se deben marcar las",
   "must be checked to complete this module.": "para completar este módulo.",

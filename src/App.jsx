@@ -1777,7 +1777,13 @@ const RESOURCE_LINK_SECTIONS = [
   {
     label: "Inspections",
     color: "#2ECC71",
-    rows: [],
+    rows: [
+      [
+        { title: "ECOsure Self Audit", url: "#" },
+        { title: "Sterling Facility Audit", url: "#" },
+        { title: "QSC", url: "#" },
+      ],
+    ],
   },
   {
     label: "Orientation",

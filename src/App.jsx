@@ -1775,6 +1775,11 @@ const RESOURCE_LINK_SECTIONS = [
     ],
   },
   {
+    label: "Inspections",
+    color: "#2ECC71",
+    rows: [],
+  },
+  {
     label: "Orientation",
     color: MOE.orange,
     rows: [

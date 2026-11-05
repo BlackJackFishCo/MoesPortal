@@ -1782,7 +1782,7 @@ const RESOURCE_LINK_SECTIONS = [
       [
         { title: "ECOsure Self Audit", url: "/ecosure-self-audit.pdf" },
         { title: "Sterling Facility Audit", url: "#" },
-        { title: "QSC", url: "#" },
+        { title: "QSC", url: "/qsc-self-audit-checklist.pdf" },
       ],
     ],
   },

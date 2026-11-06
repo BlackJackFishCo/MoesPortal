@@ -1781,7 +1781,7 @@ const RESOURCE_LINK_SECTIONS = [
     rows: [
       [
         { title: "ECOsure Self Audit", url: "/ecosure-self-audit.pdf" },
-        { title: "Sterling Facility Audit", url: "#" },
+        { title: "Sterling Facility Audit", url: "/sterling-facility-audit.xlsx" },
         { title: "QSC", url: "/qsc-self-audit-checklist.pdf" },
       ],
     ],

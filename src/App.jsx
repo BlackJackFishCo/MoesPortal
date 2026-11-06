@@ -1720,17 +1720,7 @@ const RESOURCE_LINK_SECTIONS = [
       [
         { title: "Recipe Book", url: "https://tylerjohnson7.sharepoint.com/:b:/s/SterlingRestaurants/IQC0glsprOpgTald0QDtBFHCAeMBkOyNrGsjJXnAx-vO8cY?e=OclLrV" },
         { title: "Menu Build Sheets", url: "#", gallery: POSITION_DOCS.menu },
-        {
-          title: "Queso Birria",
-          url: "#",
-          color: MOE.orange,
-          gallery: [
-            { title: "Queso Birria Taco", url: "/queso-birria-taco.pdf" },
-            { title: "Queso Birria Taco - Flattop", url: "/queso-birria-taco-flattop.pdf" },
-            { title: "Queso Birria Quesadilla - Flattop", url: "/queso-birria-quesadilla-flattop.pdf" },
-            { title: "Queso Birria Quesadilla - Split Press", url: "/queso-birria-quesadilla-split-press.pdf" },
-          ],
-        },
+        { title: "Queso Birria", url: "#", color: MOE.orange },
       ],
       [
         { title: "STIR-FLIP-WIPE", url: "/sterling-focus-current.pdf" },

@@ -32,6 +32,15 @@ function cacheBust(url) {
   return `${url}?v=${__BUILD_TIME__}`;
 }
 
+// Picks readable text (black or white) against a solid-filled hex background.
+function textOnColor(hex) {
+  const c = (hex || "").replace("#", "");
+  if (c.length !== 6) return "#fff";
+  const r = parseInt(c.slice(0, 2), 16), g = parseInt(c.slice(2, 4), 16), b = parseInt(c.slice(4, 6), 16);
+  const luminance = (0.299 * r + 0.587 * g + 0.114 * b) / 255;
+  return luminance > 0.6 ? "#000" : "#fff";
+}
+
 // ─── Store list ───────────────────────────────────────────────────────────────
 const STORES = [
   "Store #132 – Abercorn",
@@ -1723,7 +1732,7 @@ const RESOURCE_LINK_SECTIONS = [
         {
           title: "Queso Birria Test",
           url: "#",
-          color: MOE.orange,
+          color: MOE.teal,
           solid: true,
           gallery: [
             { title: "Queso Birria Ops Test", url: "/queso-birria-ops-test.pdf" },
@@ -1861,7 +1870,7 @@ const RESOURCE_LINK_SECTIONS = [
             { title: "Christmas & New Year's Door Flyer", url: "/holiday-hours-christmas-new-years.pdf" },
           ],
         },
-        { title: "Gift Card Promo 2026", url: "/gift-card-promo-2026.pdf", color: MOE.orange, solid: true },
+        { title: "Gift Card Promo 2026", url: "/gift-card-promo-2026.pdf", color: "#ffffff", solid: true },
       ],
     ],
   },
@@ -2024,16 +2033,17 @@ function ResourceLinks({ setActivePdf }) {
                     const isRealDoc = !link.gallery && !isMissing;
                     const btnColor = link.color || section.color;
                     const filled = isMissing || link.solid;
+                    const fillTextColor = textOnColor(btnColor);
                     return (
                       <a key={i}
                         href={isRealDoc ? cacheBust(link.url) : link.url}
                         target={isRealDoc ? "_blank" : undefined}
                         rel={isRealDoc ? "noreferrer" : undefined}
                         onClick={isRealDoc ? undefined : e => { e.preventDefault(); link.gallery ? setActiveGallery(link) : setActivePdf(link); }}
-                        style={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", textAlign: "center", gap: 6, background: filled ? btnColor : "#000", border: `2px solid ${btnColor}`, borderRadius: 10, padding: "18px 20px", textDecoration: "none", color: isMissing ? "#000" : "#fff", fontFamily: "Calibri, sans-serif", fontSize: 17, fontWeight: 600, cursor: "pointer" }}
+                        style={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", textAlign: "center", gap: 6, background: filled ? btnColor : "#000", border: `2px solid ${btnColor}`, borderRadius: 10, padding: "18px 20px", textDecoration: "none", color: filled ? fillTextColor : "#fff", fontFamily: "Calibri, sans-serif", fontSize: 17, fontWeight: 600, cursor: "pointer" }}
                       >
                         <div style={{ fontSize: 17, fontWeight: 700 }}>{link.title}</div>
-                        <div style={{ fontSize: 14, color: isMissing ? "#000" : (link.solid ? "#fff" : btnColor), marginTop: 4, opacity: isMissing ? 0.7 : (link.solid ? 0.85 : 1) }}>
+                        <div style={{ fontSize: 14, color: filled ? fillTextColor : btnColor, marginTop: 4, opacity: filled ? 0.75 : 1 }}>
                           {link.gallery ? `${link.gallery.length} ${t("sheets →")}` : isMissing ? t("Document needed") : t("Click to open →")}
                         </div>
                       </a>

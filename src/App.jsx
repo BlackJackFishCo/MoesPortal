@@ -1724,6 +1724,7 @@ const RESOURCE_LINK_SECTIONS = [
           title: "Queso Birria Test",
           url: "#",
           color: MOE.orange,
+          solid: true,
           gallery: [
             { title: "Queso Birria Ops Test", url: "/queso-birria-ops-test.pdf" },
             { title: "Queso Birria Taco", url: "/queso-birria-taco.pdf" },
@@ -2021,16 +2022,17 @@ function ResourceLinks({ setActivePdf }) {
                     const isMissing = !link.gallery && link.url === "#";
                     const isRealDoc = !link.gallery && !isMissing;
                     const btnColor = link.color || section.color;
+                    const filled = isMissing || link.solid;
                     return (
                       <a key={i}
                         href={isRealDoc ? cacheBust(link.url) : link.url}
                         target={isRealDoc ? "_blank" : undefined}
                         rel={isRealDoc ? "noreferrer" : undefined}
                         onClick={isRealDoc ? undefined : e => { e.preventDefault(); link.gallery ? setActiveGallery(link) : setActivePdf(link); }}
-                        style={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", textAlign: "center", gap: 6, background: isMissing ? btnColor : "#000", border: `2px solid ${btnColor}`, borderRadius: 10, padding: "18px 20px", textDecoration: "none", color: isMissing ? "#000" : "#fff", fontFamily: "Calibri, sans-serif", fontSize: 17, fontWeight: 600, cursor: "pointer" }}
+                        style={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", textAlign: "center", gap: 6, background: filled ? btnColor : "#000", border: `2px solid ${btnColor}`, borderRadius: 10, padding: "18px 20px", textDecoration: "none", color: isMissing ? "#000" : "#fff", fontFamily: "Calibri, sans-serif", fontSize: 17, fontWeight: 600, cursor: "pointer" }}
                       >
                         <div style={{ fontSize: 17, fontWeight: 700 }}>{link.title}</div>
-                        <div style={{ fontSize: 14, color: isMissing ? "#000" : btnColor, marginTop: 4, opacity: isMissing ? 0.7 : 1 }}>
+                        <div style={{ fontSize: 14, color: isMissing ? "#000" : (link.solid ? "#fff" : btnColor), marginTop: 4, opacity: isMissing ? 0.7 : (link.solid ? 0.85 : 1) }}>
                           {link.gallery ? `${link.gallery.length} ${t("sheets →")}` : isMissing ? t("Document needed") : t("Click to open →")}
                         </div>
                       </a>

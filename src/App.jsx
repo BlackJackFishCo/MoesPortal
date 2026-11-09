@@ -1721,7 +1721,7 @@ const RESOURCE_LINK_SECTIONS = [
         { title: "Recipe Book", url: "https://tylerjohnson7.sharepoint.com/:b:/s/SterlingRestaurants/IQC0glsprOpgTald0QDtBFHCAeMBkOyNrGsjJXnAx-vO8cY?e=OclLrV" },
         { title: "Menu Build Sheets", url: "#", gallery: POSITION_DOCS.menu },
         {
-          title: "Queso Birria",
+          title: "Queso Birria Test",
           url: "#",
           color: MOE.orange,
           gallery: [

@@ -1861,6 +1861,7 @@ const RESOURCE_LINK_SECTIONS = [
             { title: "Christmas & New Year's Door Flyer", url: "/holiday-hours-christmas-new-years.pdf" },
           ],
         },
+        { title: "Gift Card Promo 2026", url: "/gift-card-promo-2026.pdf", color: MOE.orange, solid: true },
       ],
     ],
   },

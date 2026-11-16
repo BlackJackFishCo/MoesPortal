@@ -1898,6 +1898,7 @@ const RESOURCE_LINK_SECTIONS = [
     rows: [
       [
         { title: "Sterling TIP Worksheet", url: "/sterling-tip-worksheet.xlsb" },
+        { title: "Referral Bonus Form", url: "/sterling-referral-bonus-form.pdf" },
       ],
     ],
   },

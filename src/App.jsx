@@ -1747,6 +1747,7 @@ const RESOURCE_LINK_SECTIONS = [
         { title: "STIR-FLIP-WIPE", url: "/sterling-focus-current.pdf" },
         { title: "All Hands on Deck", url: "/all-hands-on-deck.pdf" },
         { title: "VIBE Check", url: "/vibe-check.pdf" },
+        { title: "PACK IT RIGHT", url: "/pack-it-right.pdf" },
       ],
       [
         {

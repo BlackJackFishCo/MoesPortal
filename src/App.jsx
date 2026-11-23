@@ -1979,13 +1979,13 @@ function ResourceLinks({ setActivePdf }) {
       <div style={{ display: "flex", flexWrap: "wrap", justifyContent: "center", gap: 32, marginBottom: 36 }}>
         <FocusBadge
           rimText="THIS MONTH'S STERLING FOCUS"
-          innerLines={["VIBE", "CHECK"]}
+          innerLines={["PACK IT", "RIGHT"]}
           outerFill={MOE.orange}
           rimTextColor="#fff"
           innerFill="#000"
           innerTextColor="#fff"
-          title="This Month's Sterling: VIBE Check"
-          onOpen={() => window.open(cacheBust("/vibe-check.pdf"), "_blank", "noopener,noreferrer")}
+          title="This Month's Sterling: Pack It Right"
+          onOpen={() => window.open(cacheBust("/pack-it-right.pdf"), "_blank", "noopener,noreferrer")}
         />
         <FocusBadge
           rimText="THIS MONTH'S STERLING"
